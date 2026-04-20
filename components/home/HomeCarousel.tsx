@@ -1,0 +1,391 @@
+"use client";
+
+import Image from "next/image";
+import type { FormEvent, TouchEvent } from "react";
+import { useEffect, useState } from "react";
+
+type Slide = {
+  desktopSrc: string;
+  mobileSrc: string;
+  productName: string;
+  title: string;
+};
+
+type ConsultationState = {
+  message: string;
+  name: string;
+  phone: string;
+  submittedName: string;
+  submittedPhone: string;
+};
+
+const AUTO_ADVANCE_MS = 5000;
+const SWIPE_THRESHOLD = 48;
+
+const slides: Slide[] = [
+  {
+    desktopSrc: "/images/cover-trao-yeu-thuong-large.jpg",
+    mobileSrc: "/images/cover-trao-yeu-thuong-mb.jpg",
+    productName: "Giỏ Quà Kính Viếng",
+    title: "Giỏ Quà Kính Viếng"
+  },
+  {
+    desktopSrc: "/images/cover-kinh-vieng-large.jpg",
+    mobileSrc: "/images/cover-kinh-vieng-mb.jpg",
+    productName: "Giỏ Quà Trao Yêu Thương",
+    title: "Giỏ Quà Trao Yêu Thương"
+  },
+  {
+    desktopSrc: "/images/cover-tuoi-ngon-large.jpg",
+    mobileSrc: "/images/cover-tuoi-ngon-mb.jpg",
+    productName: "Giỏ Quà Tươi Ngon",
+    title: "Giỏ Quà Tươi Ngon"
+  }
+];
+
+const defaultConsultationState: ConsultationState = {
+  message: "",
+  name: "",
+  phone: "",
+  submittedName: "",
+  submittedPhone: ""
+};
+
+function getConsultationMessage(productName: string): string {
+  return productName ? `Tôi muốn tư vấn về sản phẩm: ${productName}` : "";
+}
+
+function getNextIndex(currentIndex: number, direction: 1 | -1): number {
+  return (currentIndex + direction + slides.length) % slides.length;
+}
+
+function XMarkIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className="h-4 w-4">
+      <path
+        d="M6 6 18 18M18 6 6 18"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeWidth="2"
+      />
+    </svg>
+  );
+}
+
+function ChevronIcon({ direction }: Readonly<{ direction: "left" | "right" }>) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      className={`h-5 w-5 ${direction === "left" ? "" : "rotate-180"}`}
+    >
+      <path
+        d="m15 5-7 7 7 7"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+      />
+    </svg>
+  );
+}
+
+function SeedlingIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className="h-10 w-10">
+      <path
+        d="M12 21v-7m0 0c-4.2 0-6.8-2.4-7.6-6.7C8.7 7.2 11 9 12 14Zm0 0c4.2 0 6.8-2.4 7.6-6.7C15.3 7.2 13 9 12 14Z"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="1.8"
+      />
+    </svg>
+  );
+}
+
+export default function HomeCarousel() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isSubmitSuccess, setIsSubmitSuccess] = useState(false);
+  const [consultation, setConsultation] = useState<ConsultationState>(defaultConsultationState);
+  const [touchStartX, setTouchStartX] = useState<number | null>(null);
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setCurrentIndex((value) => getNextIndex(value, 1));
+    }, AUTO_ADVANCE_MS);
+
+    return () => {
+      window.clearInterval(timer);
+    };
+  }, [currentIndex]);
+
+  useEffect(() => {
+    if (!isModalOpen) {
+      return;
+    }
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    function handleEscape(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        setIsModalOpen(false);
+      }
+    }
+
+    document.addEventListener("keydown", handleEscape);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, [isModalOpen]);
+
+  function openConsultation(productName: string) {
+    setConsultation({
+      ...defaultConsultationState,
+      message: getConsultationMessage(productName)
+    });
+    setIsSubmitSuccess(false);
+    setIsModalOpen(true);
+  }
+
+  function closeConsultation() {
+    setIsModalOpen(false);
+  }
+
+  function goToSlide(index: number) {
+    setCurrentIndex(index);
+  }
+
+  function moveSlide(direction: 1 | -1) {
+    setCurrentIndex((value) => getNextIndex(value, direction));
+  }
+
+  function handleConsultationSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    if (!consultation.name.trim() || !consultation.phone.trim()) {
+      return;
+    }
+
+    setConsultation((currentValue) => ({
+      ...currentValue,
+      submittedName: currentValue.name.trim(),
+      submittedPhone: currentValue.phone.trim(),
+      name: "",
+      phone: "",
+      message: currentValue.message.trim()
+    }));
+    setIsSubmitSuccess(true);
+  }
+
+  function handleTouchStart(event: TouchEvent<HTMLDivElement>) {
+    setTouchStartX(event.touches[0]?.clientX ?? null);
+  }
+
+  function handleTouchEnd(event: TouchEvent<HTMLDivElement>) {
+    if (touchStartX === null) {
+      return;
+    }
+
+    const touchEndX = event.changedTouches[0]?.clientX ?? touchStartX;
+    const deltaX = touchEndX - touchStartX;
+    setTouchStartX(null);
+
+    if (Math.abs(deltaX) < SWIPE_THRESHOLD) {
+      return;
+    }
+
+    moveSlide(deltaX > 0 ? -1 : 1);
+  }
+
+  return (
+    <>
+      <section className="relative w-full overflow-hidden bg-[#f4f7f2]">
+        <div
+          className="carousel"
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+          aria-roledescription="carousel"
+          aria-label="Bộ sưu tập nổi bật Green Market"
+        >
+          <div
+            className="carousel-inner"
+            style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+          >
+            {slides.map((slide) => (
+              <button
+                key={slide.desktopSrc}
+                type="button"
+                className="carousel-item"
+                title={slide.title}
+                onClick={() => openConsultation(slide.productName)}
+              >
+                <span className="sr-only">{slide.title}</span>
+                <div className="relative aspect-[4/5] w-full md:aspect-[16/5]">
+                  <Image
+                    src={slide.mobileSrc}
+                    alt={slide.title}
+                    fill
+                    priority={slide === slides[0]}
+                    sizes="100vw"
+                    className="object-cover md:hidden"
+                  />
+                  <Image
+                    src={slide.desktopSrc}
+                    alt={slide.title}
+                    fill
+                    priority={slide === slides[0]}
+                    sizes="100vw"
+                    className="hidden object-cover md:block"
+                  />
+                </div>
+              </button>
+            ))}
+          </div>
+
+          <button
+            type="button"
+            className="carousel-control control-prev"
+            onClick={() => moveSlide(-1)}
+            aria-label="Ảnh trước"
+          >
+            <ChevronIcon direction="left" />
+          </button>
+          <button
+            type="button"
+            className="carousel-control control-next"
+            onClick={() => moveSlide(1)}
+            aria-label="Ảnh tiếp theo"
+          >
+            <ChevronIcon direction="right" />
+          </button>
+
+          <div className="carousel-indicators" role="tablist" aria-label="Chọn slide">
+            {slides.map((slide, index) => (
+              <button
+                key={slide.desktopSrc}
+                type="button"
+                className={`carousel-indicator ${index === currentIndex ? "active" : ""}`}
+                aria-label={`Chuyển đến ${slide.title}`}
+                aria-pressed={index === currentIndex}
+                onClick={() => goToSlide(index)}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {isModalOpen ? (
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 p-4">
+          <div className="relative w-full max-w-md overflow-hidden rounded-3xl bg-white shadow-2xl">
+            <button
+              type="button"
+              onClick={closeConsultation}
+              className="absolute right-3 top-3 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-black/20 text-white transition hover:bg-red-500"
+              aria-label="Đóng tư vấn"
+            >
+              <XMarkIcon />
+            </button>
+
+            <div className="bg-primary p-8 text-center text-white">
+              <div className="mx-auto mb-3 flex h-16 w-16 items-center justify-center rounded-2xl bg-white/10">
+                <SeedlingIcon />
+              </div>
+              <h2 className="serif text-2xl font-bold uppercase tracking-[0.28em]">Nhận Tư Vấn</h2>
+              <p className="mt-2 text-xs font-medium text-white/90">
+                Để lại thông tin, chúng tôi sẽ gọi lại ngay.
+              </p>
+            </div>
+
+            {isSubmitSuccess ? (
+              <div className="space-y-5 p-8">
+                <div className="rounded-2xl border border-green-100 bg-green-50 px-5 py-4 text-sm leading-7 text-gray-700">
+                  <p className="font-bold text-primary">Gửi thành công</p>
+                  <p className="mt-2">
+                    Cảm ơn <strong>{consultation.submittedName}</strong>. Green Market sẽ liên hệ qua số{" "}
+                    <strong>{consultation.submittedPhone}</strong> trong ít phút tới để tư vấn.
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={closeConsultation}
+                  className="w-full rounded-xl bg-[#c48e58] py-4 text-sm font-black uppercase tracking-[0.24em] text-white transition hover:bg-black"
+                >
+                  Đóng
+                </button>
+              </div>
+            ) : (
+              <form className="space-y-5 p-8" onSubmit={handleConsultationSubmit}>
+                <div>
+                  <label className="mb-1.5 block text-xs font-bold text-gray-700">Họ và tên *</label>
+                  <input
+                    type="text"
+                    required
+                    value={consultation.name}
+                    onChange={(event) =>
+                      setConsultation((currentValue) => ({
+                        ...currentValue,
+                        name: event.target.value
+                      }))
+                    }
+                    placeholder="Nhập tên của bạn..."
+                    className="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm transition-all focus:border-transparent focus:outline-none focus:ring-2 focus:ring-primary"
+                  />
+                </div>
+                <div>
+                  <label className="mb-1.5 block text-xs font-bold text-gray-700">
+                    Số điện thoại (Zalo) *
+                  </label>
+                  <input
+                    type="tel"
+                    required
+                    pattern="[0-9]{10,11}"
+                    value={consultation.phone}
+                    onChange={(event) =>
+                      setConsultation((currentValue) => ({
+                        ...currentValue,
+                        phone: event.target.value
+                      }))
+                    }
+                    placeholder="Ví dụ: 0973074063"
+                    className="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm transition-all focus:border-transparent focus:outline-none focus:ring-2 focus:ring-primary"
+                  />
+                </div>
+                <div>
+                  <label className="mb-1.5 block text-xs font-bold text-gray-700">
+                    Lời nhắn (Không bắt buộc)
+                  </label>
+                  <textarea
+                    rows={3}
+                    value={consultation.message}
+                    onChange={(event) =>
+                      setConsultation((currentValue) => ({
+                        ...currentValue,
+                        message: event.target.value
+                      }))
+                    }
+                    placeholder="Sản phẩm bạn đang quan tâm..."
+                    className="w-full resize-none rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm transition-all focus:border-transparent focus:outline-none focus:ring-2 focus:ring-primary"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="mt-4 w-full rounded-xl bg-[#c48e58] py-4 text-sm font-black uppercase tracking-[0.24em] text-white transition hover:bg-black"
+                >
+                  Gửi thông tin
+                </button>
+              </form>
+            )}
+          </div>
+        </div>
+      ) : null}
+    </>
+  );
+}

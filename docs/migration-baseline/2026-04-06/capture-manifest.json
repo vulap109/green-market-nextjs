@@ -1,0 +1,99 @@
+{
+  "baselineDate": "2026-04-06",
+  "capturedAt": "2026-04-06T07:29:00.482Z",
+  "commitSha": "ff6eb0c9c21ad09fb4e66fe743ea2f173ba8c6ed",
+  "browserPath": "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe",
+  "baseUrl": "http://127.0.0.1:4173",
+  "screenshots": [
+    {
+      "fileName": "01-home.png",
+      "relativePath": "docs/migration-baseline/2026-04-06/screenshots/01-home.png",
+      "url": "http://127.0.0.1:4173/",
+      "description": "Home",
+      "viewport": {
+        "width": 1440,
+        "height": 2600
+      }
+    },
+    {
+      "fileName": "02-all-products-fruit-basket.png",
+      "relativePath": "docs/migration-baseline/2026-04-06/screenshots/02-all-products-fruit-basket.png",
+      "url": "http://127.0.0.1:4173/all-products.html?q=gio-qua-trai-cay",
+      "description": "All products by category",
+      "viewport": {
+        "width": 1440,
+        "height": 2600
+      }
+    },
+    {
+      "fileName": "03-all-products-search-keyword.png",
+      "relativePath": "docs/migration-baseline/2026-04-06/screenshots/03-all-products-search-keyword.png",
+      "url": "http://127.0.0.1:4173/all-products.html?keyword=banh%20kem",
+      "description": "All products by keyword search",
+      "viewport": {
+        "width": 1440,
+        "height": 2600
+      }
+    },
+    {
+      "fileName": "04-product-detail-fruit-basket.png",
+      "relativePath": "docs/migration-baseline/2026-04-06/screenshots/04-product-detail-fruit-basket.png",
+      "url": "http://127.0.0.1:4173/product.html?slug=gio-trai-cay-tk181",
+      "description": "Product detail - fruit basket",
+      "viewport": {
+        "width": 1440,
+        "height": 2300
+      }
+    },
+    {
+      "fileName": "05-product-detail-cream-cake.png",
+      "relativePath": "docs/migration-baseline/2026-04-06/screenshots/05-product-detail-cream-cake.png",
+      "url": "http://127.0.0.1:4173/product.html?slug=banh-kem-lq03",
+      "description": "Product detail - cream cake",
+      "viewport": {
+        "width": 1440,
+        "height": 2400
+      }
+    },
+    {
+      "fileName": "06-cart-with-items.png",
+      "relativePath": "docs/migration-baseline/2026-04-06/screenshots/06-cart-with-items.png",
+      "url": "http://127.0.0.1:4173/__baseline__/seed-cart?next=%2Fcart.html",
+      "description": "Cart with seeded items",
+      "viewport": {
+        "width": 1440,
+        "height": 2200
+      }
+    },
+    {
+      "fileName": "07-checkout-with-items.png",
+      "relativePath": "docs/migration-baseline/2026-04-06/screenshots/07-checkout-with-items.png",
+      "url": "http://127.0.0.1:4173/__baseline__/seed-cart?next=%2Fcheck-out.html",
+      "description": "Checkout with seeded items",
+      "viewport": {
+        "width": 1440,
+        "height": 2600
+      }
+    },
+    {
+      "fileName": "08-news-detail.png",
+      "relativePath": "docs/migration-baseline/2026-04-06/screenshots/08-news-detail.png",
+      "url": "http://127.0.0.1:4173/news.html?slug=gio-trai-cay-tu-200k-den-500k",
+      "description": "News detail",
+      "viewport": {
+        "width": 1440,
+        "height": 2600
+      }
+    },
+    {
+      "fileName": "09-order-success-cod.png",
+      "relativePath": "docs/migration-baseline/2026-04-06/screenshots/09-order-success-cod.png",
+      "url": "http://127.0.0.1:4173/__baseline__/seed-order-success?next=%2Forder-success.html%3Fcode%3DGMBASELINE20260406001",
+      "description": "Order success",
+      "viewport": {
+        "width": 1440,
+        "height": 2600
+      }
+    }
+  ]
+}

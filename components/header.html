@@ -1,0 +1,138 @@
+<header class="sticky top-0 z-[100] bg-white border-b border-gray-100 shadow-sm">
+    <div class="bg-[#004e29] text-white py-2 px-4 text-[11px] font-bold">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex gap-6">
+                <span><i class="fa-solid fa-phone mr-1"></i> Hotline: <a href="tel:0973074063">0973 074 063</a></span>
+                <span><i class="fa-solid fa-truck mr-1"></i> Giao hàng trong ngày — Đặt trước 14h</span>
+            </div>
+            <div class="flex gap-4 items-center">
+                <span><i class="fa-solid fa-location-dot mr-1"></i> TP. Hồ Chí Minh</span>
+                <span class="border-l border-white/20 pl-4 uppercase">VI | EN</span>
+            </div>
+        </div>
+    </div>
+    <div class="max-w-7xl mx-auto px-4 py-3 md:h-24 sm:py-0 flex flex-wrap md:flex-nowrap justify-between items-center gap-4">
+        <div id="mobile-header-menu-wrap" class="relative z-30 flex items-center gap-3">
+            <button id="header-menu-mobile-toggle" type="button" onclick="toggleHeaderMenu('mobile')"
+                class="lg:hidden inline-flex h-11 w-11 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-700 shadow-sm transition hover:border-primary hover:text-primary"
+                aria-label="Mở danh mục sản phẩm" aria-controls="header-category-menu" aria-expanded="false">
+                <i id="header-menu-mobile-open-icon" class="fa-solid fa-bars text-base"></i>
+                <i id="header-menu-mobile-close-icon" class="fa-solid fa-xmark hidden text-lg"></i>
+            </button>
+            <a href="/" class="flex items-center group">
+                <div class="p-2 rounded-lg group-hover:rotate-[360deg] duration-500 transition-all">
+                     <img src="../images/logo_1.png" alt="logo_1" />
+                </div>
+                <div class="leading-none">
+                     <img src="../images/logo_2.png" alt="logo_2" />
+                </div>
+            </a>
+            <button id="header-menu-desktop-toggle" type="button" onclick="toggleHeaderMenu('desktop')"
+                class="hidden h-12 items-center gap-3 rounded-xl bg-primary px-4 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-[#004e29] lg:inline-flex"
+                aria-label="Mở danh mục sản phẩm" aria-controls="header-category-menu" aria-expanded="false">
+                <span class="relative flex h-5 w-5 items-center justify-center">
+                    <i id="header-menu-desktop-open-icon" class="fa-solid fa-bars-staggered text-sm"></i>
+                    <i id="header-menu-desktop-close-icon" class="fa-solid fa-xmark hidden text-base"></i>
+                </span>
+                <span>Danh mục</span>
+            </button>
+            <div id="header-category-menu"
+                class="invisible pointer-events-none fixed z-30 w-[min(92vw,340px)] max-w-[calc(100vw-2rem)] origin-top-left -translate-y-2 scale-95 rounded-2xl border border-gray-100 bg-white p-4 opacity-0 shadow-2xl shadow-black/10 transition duration-200"
+                style="top: 0; left: 0;">
+                <nav class="flex flex-col gap-1.5">
+                    <a href="all-products.html" onclick="closeHeaderMenu()"
+                        class="group flex items-center gap-4 rounded-2xl border border-transparent px-4 text-sm font-semibold text-gray-700 transition hover:border-green-100 hover:bg-green-50/80 hover:text-primary">
+                        <span class="flex h-10 w-10 items-center justify-center rounded-2xl bg-green-50 text-primary transition group-hover:bg-white">
+                            <i class="fa-solid fa-border-all"></i>
+                        </span>
+                        <span class="flex-1">Tất cả sản phẩm</span>
+                        <i class="fa-solid fa-angle-right text-xs text-gray-400 transition group-hover:text-primary"></i>
+                    </a>
+                    <a href="all-products.html?q=ban-chay-nhat" onclick="closeHeaderMenu()"
+                        class="group flex items-center gap-4 rounded-2xl border border-transparent px-4 text-sm font-semibold text-gray-700 transition hover:border-red-100 hover:bg-red-50/80 hover:text-red-600">
+                        <span class="flex h-10 w-10 items-center justify-center rounded-2xl bg-red-50 text-red-500 transition group-hover:bg-white">
+                            <i class="fa-solid fa-bolt"></i>
+                        </span>
+                        <span class="flex-1">Sản phẩm bán chạy</span>
+                        <i class="fa-solid fa-angle-right text-xs text-gray-400 transition group-hover:text-red-500"></i>
+                    </a>
+                    <a href="all-products.html?q=gio-qua-trai-cay" onclick="closeHeaderMenu()"
+                        class="group flex items-center gap-4 rounded-2xl border border-transparent px-4 text-sm font-semibold text-gray-700 transition hover:border-green-100 hover:bg-green-50/80 hover:text-primary">
+                        <span class="flex h-10 w-10 items-center justify-center rounded-2xl bg-green-50 text-primary transition group-hover:bg-white">
+                            <i class="fa-solid fa-gift"></i>
+                        </span>
+                        <span class="flex-1">Giỏ quà trái cây</span>
+                        <i class="fa-solid fa-angle-right text-xs text-gray-400 transition group-hover:text-primary"></i>
+                    </a>
+                    <a href="all-products.html?q=trai-cay-nhap-khau" onclick="closeHeaderMenu()"
+                        class="group flex items-center gap-4 rounded-2xl border border-transparent px-4 text-sm font-semibold text-gray-700 transition hover:border-emerald-100 hover:bg-emerald-50/80 hover:text-emerald-700">
+                        <span class="flex h-10 w-10 items-center justify-center rounded-2xl bg-emerald-50 text-emerald-600 transition group-hover:bg-white">
+                            <i class="fa-solid fa-apple-whole"></i>
+                        </span>
+                        <span class="flex-1">Trái cây nhập khẩu</span>
+                        <i class="fa-solid fa-angle-right text-xs text-gray-400 transition group-hover:text-emerald-600"></i>
+                    </a>
+                    <a href="all-products.html?q=banh-kem" onclick="closeHeaderMenu()"
+                        class="group flex items-center gap-4 rounded-2xl border border-transparent px-4 text-sm font-semibold text-gray-700 transition hover:border-amber-100 hover:bg-amber-50/80 hover:text-amber-700">
+                        <span class="flex h-10 w-10 items-center justify-center rounded-2xl bg-amber-50 text-amber-600 transition group-hover:bg-white">
+                            <i class="fa-solid fa-cake-candles"></i>
+                        </span>
+                        <span class="flex-1">Bánh kem thiết kế<span class="bg-red-500 text-white ml-1 pl-1 pr-2 rounded italic font-semibold">New</span></span>
+                        <i class="fa-solid fa-angle-right text-xs text-gray-400 transition group-hover:text-amber-600"></i>
+                    </a>
+                    <a href="all-products.html?q=hoa-tuoi" onclick="closeHeaderMenu()"
+                        class="group flex items-center gap-4 rounded-2xl border border-transparent px-4 text-sm font-semibold text-gray-700 transition hover:border-pink-100 hover:bg-pink-50/80 hover:text-pink-600">
+                        <span class="flex h-10 w-10 items-center justify-center rounded-2xl bg-pink-50 text-pink-500 transition group-hover:bg-white">
+                            <i class="fa-solid fa-spa"></i>
+                        </span>
+                        <span class="flex-1">Hoa tươi nghệ thuật</span>
+                        <i class="fa-solid fa-angle-right text-xs text-gray-400 transition group-hover:text-pink-500"></i>
+                    </a>
+                </nav>
+            </div>
+        </div>
+        <div id="header-product-search" class="order-3 w-full md:order-none md:flex-1 lg:max-w-xl">
+            <form id="header-product-search-form" class="relative">
+                <div class="flex items-center gap-3 rounded-2xl border border-gray-200 bg-gray-50/90 px-4 py-2 shadow-sm transition focus-within:border-primary focus-within:bg-white focus-within:shadow-md">
+                    <i class="fa-solid fa-magnifying-glass text-sm text-gray-400"></i>
+                    <input id="header-product-search-input" type="search" placeholder="Tim san pham theo ten..."
+                        class="min-w-0 flex-1 bg-transparent text-base text-gray-700 outline-none placeholder:text-gray-400 sm:text-sm"
+                        autocomplete="off" aria-label="Tim san pham" aria-expanded="false"
+                        aria-controls="header-product-search-dropdown">
+                </div>
+                <div id="header-product-search-dropdown"
+                    class="hidden absolute left-0 right-0 top-[calc(100%+0.75rem)] z-40 overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-2xl shadow-black/10">
+                    <div id="header-product-search-results" class="max-h-[320px] overflow-y-auto"></div>
+                    <p id="header-product-search-empty" class="hidden px-4 py-5 text-sm text-gray-500">
+                        Khong tim thay san pham phu hop.
+                    </p>
+                    <a id="header-product-search-view-all" href="/all-products.html"
+                        class="hidden flex items-center justify-center gap-2 border-t border-gray-100 px-4 py-3 text-xs font-black uppercase tracking-[0.2em] text-primary transition hover:bg-green-50">
+                        <span>Xem tat ca</span>
+                        <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                    </a>
+                </div>
+            </form>
+        </div>
+
+        <div class="flex shrink-0 items-center gap-4 text-gray-600 md:gap-6">
+            <div onclick="appNotify('Mở tài khoản')"
+                class="flex items-center gap-2 cursor-pointer hover:text-primary transition">
+                <i class="fa-regular fa-user text-xl"></i>
+                <span class="text-[10px] font-black uppercase hidden md:block">Tài
+                    khoản</span>
+            </div>
+            <div onclick="redirectToCart()"
+                class="relative flex items-center gap-2 cursor-pointer group hover:text-primary transition">
+                <i class="fa-solid fa-basket-shopping text-2xl"></i>
+                <span id="cart-badge"
+                    class="cart-badge hidden absolute -top-2 -right-2 bg-red-500 text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center border-2 border-white">0</span>
+                <span class="text-[10px] font-black uppercase hidden md:block">Giỏ
+                    hàng</span>
+            </div>
+        </div>
+    </div>
+    <div id="header-category-overlay" onclick="closeHeaderMenus()"
+        class="pointer-events-none absolute inset-x-0 top-full z-20 h-screen bg-slate-950/35 opacity-0 backdrop-blur-[2px] transition duration-200"
+        aria-hidden="true"></div>
+</header>

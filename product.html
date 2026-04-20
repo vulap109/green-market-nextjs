@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Green Market - Thông Tin Sản Phẩm</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/png" href="/images/logo_1.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 relative">
+    <script>
+        let currentProduct = null;
+        const CREAM_CAKE_SIZES = {
+            ll: [
+                { value: "12cm", label: "12cm", price: 129000 },
+                { value: "14cm", label: "14cm", price: 210000 },
+                { value: "16cm", label: "16cm", price: 250000 },
+                { value: "18cm", label: "18cm", price: 320000 },
+                { value: "20cm", label: "20cm", price: 350000 }
+            ],
+            ht: [
+                { value: "14cm", label: "14cm", price: 310000 },
+                { value: "16cm", label: "16cm", price: 350000 },
+                { value: "18cm", label: "18cm", price: 420000 },
+                { value: "20cm", label: "20cm", price: 450000 }
+            ],
+            lq: [
+                { value: "14cm", label: "14cm", price: 330000 },
+                { value: "16cm", label: "16cm", price: 370000 },
+                { value: "18cm", label: "18cm", price: 440000 },
+                { value: "20cm", label: "20cm", price: 470000 }
+            ],
+            qd: [
+                { value: "14cm", label: "14cm", price: 350000 },
+                { value: "16cm", label: "16cm", price: 390000 },
+                { value: "18cm", label: "18cm", price: 460000 },
+                { value: "20cm", label: "20cm", price: 490000 }
+            ],
+            yv: [
+                { value: "12cm", label: "12cm", price: 129000 },
+                { value: "14cm", label: "14cm", price: 210000 },
+                { value: "16cm", label: "16cm", price: 250000 },
+                { value: "18cm", label: "18cm", price: 320000 },
+                { value: "20cm", label: "20cm", price: 350000 }
+            ]
+        };
+
+        function getCreamCakeSizeOptions(product) {
+            if (!product || product.category !== "cream-cake") {
+                return [];
+            }
+
+            const subcategory = String(product.subcategory || "").toLowerCase();
+            return CREAM_CAKE_SIZES[subcategory] || CREAM_CAKE_SIZES.ll;
+        }
+
+        function appNotify(msg) {
+            Swal.fire({
+                text: msg,
+                icon: "success",
+                timer: 1500,
+                showConfirmButton: false,
+                toast: true,
+                position: "top-end"
+            });
+        }
+
+        function getSelectedQty() {
+            const input = document.getElementById("productQty");
+            let qty = Number(input.value);
+
+            if (!Number.isFinite(qty) || qty < 1) {
+                qty = 1;
+            }
+
+            qty = Math.floor(qty);
+            input.value = qty;
+            return qty;
+        }
+
+        function handleAddToCart() {
+            if (!currentProduct) {
+                Swal.fire({
+                    text: "Không tải được thông tin sản phẩm.",
+                    icon: "error",
+                    confirmButtonColor: "#006b38"
+                });
+                return false;
+            }
+
+            const qty = getSelectedQty();
+            const selectedCakeSize = getSelectedCakeSize();
+            const selectedPrice = selectedCakeSize ? selectedCakeSize.price : Number(currentProduct.finalprice || 0);
+
+            addToCart({
+                id: currentProduct.id,
+                qty: qty,
+                priceSnapshot: selectedPrice,
+                ...(selectedCakeSize ? { size: selectedCakeSize.label } : {})
+            });
+
+            appNotify("đã thêm " + qty + " sản phẩm vào giỏ hàng!");
+            return true;
+        }
+
+        function buyNow() {
+            if (!handleAddToCart()) return;
+            window.location.href = "cart.html";
+        }
+
+        function decreaseQty() {
+            const input = document.getElementById("productQty");
+            const val = Number(input.value) || 1;
+            if (val > 1) input.value = val - 1;
+        }
+
+        function increaseQty() {
+            const input = document.getElementById("productQty");
+            const val = Number(input.value) || 1;
+            input.value = val + 1;
+        }
+
+        function getSelectedCakeSize() {
+            const section = document.getElementById("cakeSizeSection");
+            if (!section || section.classList.contains("hidden")) {
+                return null;
+            }
+
+            const selectedSize = document.querySelector('input[name="cake-size"]:checked');
+            if (!selectedSize) {
+                return null;
+            }
+
+            return {
+                value: selectedSize.value,
+                label: selectedSize.getAttribute("data-label") || selectedSize.value,
+                price: Number(selectedSize.getAttribute("data-price")) || 0
+            };
+        }
+
+        function updateDisplayedPrice(product) {
+            const priceElement = document.getElementById("productPrice");
+            const ogrPriceElement = document.getElementById("productOgrPrice");
+            if (!priceElement || !ogrPriceElement || !product) return;
+
+            if (product.category === "cream-cake") {
+                const sizeOptions = getCreamCakeSizeOptions(product);
+                const selectedCakeSize = getSelectedCakeSize() || sizeOptions[0];
+                const selectedPrice = selectedCakeSize ? selectedCakeSize.price : Number(product.finalprice || 0);
+                priceElement.innerText = formatProductMoney(selectedPrice);
+                ogrPriceElement.innerText = "";
+                ogrPriceElement.classList.add("hidden");
+                return;
+            }
+
+            const finalPrice = Number(product.finalprice || product.price || 0);
+            const ogPrice = Number(product.price || 0);
+
+            priceElement.innerText = formatProductMoney(finalPrice);
+            if (ogPrice >= finalPrice) {
+                ogrPriceElement.innerText = formatProductMoney(ogPrice);
+                ogrPriceElement.classList.remove("hidden");
+            } else {
+                ogrPriceElement.innerText = "";
+                ogrPriceElement.classList.add("hidden");
+            }
+        }
+
+        function handleCakeSizeChange() {
+            if (!currentProduct || currentProduct.category !== "cream-cake") return;
+            updateDisplayedPrice(currentProduct);
+        }
+
+        function renderCakeOptions(product) {
+            const section = document.getElementById("cakeSizeSection");
+            if (!section) return;
+
+            const sizeOptions = getCreamCakeSizeOptions(product);
+
+            if (!product || product.category !== "cream-cake" || !sizeOptions.length) {
+                section.innerHTML = "";
+                section.classList.add("hidden");
+                return;
+            }
+
+            section.classList.remove("hidden");
+            section.innerHTML = `
+                <p class="text-sm font-bold text-gray-700 mb-3">Kích thước:</p>
+                <div class="grid grid-cols-2 sm:grid-cols-5 gap-3">
+                    ${sizeOptions.map(function (size, index) {
+                return `
+                            <label class="cursor-pointer">
+                                <input
+                                    type="radio"
+                                    name="cake-size"
+                                    value="${size.value}"
+                                    data-label="${size.label}"
+                                    data-price="${size.price}"
+                                    onchange="handleCakeSizeChange()"
+                                    class="peer sr-only"
+                                    ${index === 0 ? "checked" : ""}>
+                                <span class="flex h-11 items-center justify-center rounded-lg border border-gray-300 bg-white text-sm font-semibold text-gray-700 transition-all peer-checked:border-orange-600">
+                                    ${size.label}
+                                </span>
+                            </label>
+                        `;
+            }).join("")}
+                </div>
+            `;
+        }
+    </script>
+
+    <div id="header"></div>
+
+    <div class="bg-gray-50 py-3">
+        <div class="max-w-7xl mx-auto px-4 text-xs text-gray-500">
+            <a href="/" class="hover:text-primary transition">Trang Chủ</a>
+            <span class="mx-2">/</span>
+            <a href="all-products.html" class="hover:text-primary transition">Sản Phẩm</a>
+            <span class="mx-2">/</span>
+            <span id="breadcrumbProductName" class="text-gray-800 font-medium">Chi tiet san pham</span>
+        </div>
+    </div>
+
+    <main class="flex-1 max-w-7xl mx-auto px-4 py-8 w-full">
+        <div
+            class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 md:p-8 flex flex-col md:flex-row gap-10 relative">
+
+            <div class="w-full md:w-5/12 flex flex-col gap-4">
+                <div
+                    class="w-full aspect-square border border-gray-200 rounded-lg overflow-hidden relative group cursor-crosshair">
+                    <img id="productImg" src="" alt="San pham"
+                        class="img-cover transition-transform duration-500 group-hover:scale-110">
+                </div>
+                <div class="flex gap-2">
+                    <div class="w-20 h-20 border-2 border-primary rounded cursor-pointer overflow-hidden opacity-100">
+                        <img id="imgCover" src="" alt="Anh nho san pham" class="img-cover">
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full md:w-4/12 flex flex-col">
+                <h1 id="productName" class="text-2xl font-bold text-gray-800 mb-2 leading-tight"></h1>
+
+                <div class="text-xs text-gray-500 mb-4 flex gap-4 border-b border-gray-100 pb-4">
+                    <span>SKU: <span id="productSku" class="text-gray-800">N/A</span></span>
+                    <span class="border-l border-gray-300 pl-4">
+                        Tình trạng: <span class="text-primary font-medium">Còn hàng</span>
+                    </span>
+                </div>
+
+                <div class="bg-gray-50 p-4 rounded-lg mb-6">
+                    <div class="flex items-end gap-3 mb-1">
+                        <span id="productPrice" class="text-3xl font-black text-red-600">0 đ</span>
+                        <span id="productOgrPrice" class="text-lg text-gray-400 line-through font-medium mb-1">0
+                            đ</span>
+                    </div>
+                    <div class="text-red-500 font-bold text-xs flex items-center gap-1 mt-2">
+                        <i class="fa-solid fa-fire text-orange-500"></i> SẢN PHẨM FLASH SALE
+                    </div>
+                </div>
+
+                <!-- option-cake -->
+                <div id="cakeSizeSection" class="mb-6 hidden"></div>
+
+                <div class="mb-6">
+                    <p class="text-sm font-bold text-gray-700 mb-2">Số lượng:</p>
+                    <div class="flex items-center border border-gray-300 rounded w-fit h-10 overflow-hidden">
+                        <button onclick="decreaseQty()"
+                            class="w-10 h-full bg-gray-50 hover:bg-gray-200 text-gray-600 font-bold transition flex items-center justify-center">-</button>
+                        <input type="number" id="productQty" value="1" min="1"
+                            class="w-12 h-full text-center border-x border-gray-300 text-sm font-bold text-gray-800 focus:outline-none">
+                        <button onclick="increaseQty()"
+                            class="w-10 h-full bg-gray-50 hover:bg-gray-200 text-gray-600 font-bold transition flex items-center justify-center">+</button>
+                    </div>
+                </div>
+
+                <div class="flex gap-3 mt-auto">
+                    <button onclick="handleAddToCart()"
+                        class="flex-1 bg-primary hover:bg-primary-dark text-white font-bold py-3.5 rounded text-sm uppercase transition shadow-md hover:shadow-lg flex justify-center items-center gap-2">
+                        THÊM VÀO GIỎ
+                    </button>
+                    <button onclick="buyNow()"
+                        class="flex-1 bg-primary hover:bg-primary-dark text-white font-bold py-3.5 rounded text-sm uppercase transition shadow-md hover:shadow-lg flex justify-center items-center gap-2">
+                        MUA NGAY
+                    </button>
+                </div>
+            </div>
+
+            <div class="w-full md:w-3/12">
+                <div class="border border-primary rounded-lg p-5 bg-white h-full">
+                    <h3 class="font-bold text-gray-800 mb-5 border-b border-gray-100 pb-2">Tiêu chuẩn dịch vụ</h3>
+                    <ul class="space-y-5 text-sm text-gray-600">
+                        <li class="flex gap-3 items-start">
+                            <span class="text-primary text-xl mt-0.5"><i class="fa-solid fa-basket-wheat"></i></span>
+                            <span class="leading-snug text-xs">
+                                Giỏ trái cây mix tone màu theo yêu cầu để phù hợp với từng dịp đặc biệt
+                            </span>
+                        </li>
+                        <li class="flex gap-3 items-start">
+                            <span class="text-primary text-xl mt-0.5"><i
+                                    class="fa-solid fa-envelope-open-text"></i></span>
+                            <span class="leading-snug text-xs">Tặng kèm banner và thiệp chúc mừng thiết kế theo yêu
+                                cầu</span>
+                        </li>
+                        <li class="flex gap-3 items-start">
+                            <span class="text-red-500 text-xl mt-0.5"><i
+                                    class="fa-solid fa-file-invoice-dollar"></i></span>
+                            <span class="leading-snug text-xs">Hỗ trợ xuất hoá đơn VAT cho doanh nghiệp</span>
+                        </li>
+                        <li class="flex gap-3 items-start">
+                            <span class="text-yellow-500 text-xl mt-0.5"><i class="fa-solid fa-truck-fast"></i></span>
+                            <span class="leading-snug text-xs">Giao hàng nhanh chóng, đảm bảo chất lượng</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="mt-8 bg-white p-6 md:p-8 rounded-xl shadow-sm border border-gray-100">
+            <h3 class="text-lg font-bold text-gray-800 mb-4 border-b border-primary inline-block pb-2">Mô tả sản phẩm
+            </h3>
+            <div class="mt-4">
+                <div id="productDescriptionWrapper"
+                    class="relative overflow-hidden transition-all duration-300 ease-in-out">
+                    <div id="productDescriptionContent" class="text-sm text-gray-600 leading-relaxed space-y-4"></div>
+                    <div id="productDescriptionFade"
+                        class="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-white to-transparent hidden">
+                    </div>
+                </div>
+                <button id="productDescriptionToggle" type="button" onclick="toggleProductDescription()"
+                    class="mt-4 hidden items-center gap-2 rounded-lg border border-primary px-4 py-2 text-sm font-semibold text-primary transition hover:bg-green-50"
+                    aria-expanded="false">
+                    <span id="productDescriptionToggleLabel">Xem them</span>
+                    <i id="productDescriptionToggleIcon" class="fa-solid fa-angle-down text-xs"></i>
+                </button>
+            </div>
+        </div>
+
+        <section id="similarProductsSection" class="mt-8 hidden">
+            <div class="bg-white p-6 md:p-8 rounded-xl shadow-sm border border-gray-100">
+                <div class="flex items-center justify-between gap-4 border-b border-gray-100 pb-4">
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-800">Sản phẩm tương tự</h3>
+                    </div>
+                    <a href="/all-products.html" class="text-xs font-bold text-primary hover:underline">Xem tất cả</a>
+                </div>
+
+                <div id="similarProductsList" class="grid grid-cols-2 lg:grid-cols-5 gap-6 mt-6"></div>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer"></div>
+    <div id="contact-pop"></div>
+
+    <script src="/js/cart.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/product-card.js"></script>
+    <script>
+        const PRODUCT_DESCRIPTION_DATA_URL = "data/product-descriptions.json";
+        const PRODUCT_DESCRIPTION_COLLAPSED_HEIGHT = 260;
+        let productDescriptionsPromise = null;
+        let isProductDescriptionExpanded = false;
+
+        function getProductDescriptionData() {
+            if (!productDescriptionsPromise) {
+                productDescriptionsPromise = fetch(PRODUCT_DESCRIPTION_DATA_URL)
+                    .then(function (res) {
+                        if (!res.ok) {
+                            throw new Error("Can not load product-descriptions.json");
+                        }
+
+                        return res.json();
+                    })
+                    .then(function (descriptions) {
+                        return Array.isArray(descriptions) ? descriptions : [];
+                    })
+                    .catch(function (error) {
+                        console.error("getProductDescriptionData error:", error);
+                        productDescriptionsPromise = null;
+                        return [];
+                    });
+            }
+
+            return productDescriptionsPromise;
+        }
+
+        function applyProductDescriptionState() {
+            const wrapper = document.getElementById("productDescriptionWrapper");
+            const content = document.getElementById("productDescriptionContent");
+            const fade = document.getElementById("productDescriptionFade");
+            const toggle = document.getElementById("productDescriptionToggle");
+            const toggleLabel = document.getElementById("productDescriptionToggleLabel");
+            const toggleIcon = document.getElementById("productDescriptionToggleIcon");
+
+            if (!wrapper || !content || !fade || !toggle || !toggleLabel || !toggleIcon) {
+                return;
+            }
+
+            const contentHeight = content.scrollHeight;
+            const shouldCollapse = contentHeight > PRODUCT_DESCRIPTION_COLLAPSED_HEIGHT + 24;
+
+            if (!shouldCollapse) {
+                wrapper.style.maxHeight = "none";
+                fade.classList.add("hidden");
+                toggle.classList.add("hidden");
+                toggle.classList.remove("inline-flex");
+                toggle.setAttribute("aria-expanded", "false");
+                isProductDescriptionExpanded = false;
+                return;
+            }
+
+            toggle.classList.remove("hidden");
+            toggle.classList.add("inline-flex");
+            toggleLabel.textContent = isProductDescriptionExpanded ? "Thu gon" : "Xem them";
+            toggleIcon.classList.toggle("fa-angle-down", !isProductDescriptionExpanded);
+            toggleIcon.classList.toggle("fa-angle-up", isProductDescriptionExpanded);
+            toggle.setAttribute("aria-expanded", String(isProductDescriptionExpanded));
+            wrapper.style.maxHeight = isProductDescriptionExpanded
+                ? `${contentHeight}px`
+                : `${PRODUCT_DESCRIPTION_COLLAPSED_HEIGHT}px`;
+            fade.classList.toggle("hidden", isProductDescriptionExpanded);
+        }
+
+        function refreshProductDescriptionState() {
+            window.requestAnimationFrame(applyProductDescriptionState);
+        }
+
+        function toggleProductDescription() {
+            isProductDescriptionExpanded = !isProductDescriptionExpanded;
+            applyProductDescriptionState();
+        }
+
+        function renderProductDescription(product, descriptions) {
+            const descriptionContainer = document.getElementById("productDescriptionContent");
+            if (!descriptionContainer || !product) {
+                return;
+            }
+
+            const descriptionItems = Array.isArray(descriptions) ? descriptions : [];
+            const matchedDescription = descriptionItems.find(function (item) {
+                return item && item.category === product.category;
+            });
+            const fallbackDescription = descriptionItems[0] || null;
+            const selectedDescription = matchedDescription || fallbackDescription;
+            const descriptionHtml = selectedDescription && selectedDescription.descriptionhtml
+                ? selectedDescription.descriptionhtml
+                : "";
+
+            isProductDescriptionExpanded = false;
+            descriptionContainer.innerHTML = descriptionHtml;
+            refreshProductDescriptionState();
+        }
+
+        function renderSimilarProducts(product, products) {
+            const section = document.getElementById("similarProductsSection");
+            if (!section || typeof renderProducts !== "function" || !product || !Array.isArray(products)) {
+                return;
+            }
+
+            const similarProducts = products
+                .filter(function (item) {
+                    return item.category === product.category && item.id !== product.id;
+                })
+                .slice(0, 5)
+                .map(function (item) {
+                    return {
+                        ...item,
+                        discount: getProductDiscount(item)
+                    };
+                });
+
+            if (!similarProducts.length) {
+                section.classList.add("hidden");
+                return;
+            }
+
+            renderProducts(similarProducts, "similarProductsList");
+            section.classList.remove("hidden");
+        }
+
+        function renderProduct(product) {
+            currentProduct = product;
+
+            document.getElementById("productName").innerText = product.name;
+            document.getElementById("breadcrumbProductName").innerText = product.name;
+            document.getElementById("productSku").innerText = product.sku || product.SKU || "N/A";
+            document.getElementById("productImg").src = product.img;
+            document.getElementById("imgCover").src = product.img;
+            document.title = product.name + " | Gio Qua Tuoi";
+            renderCakeOptions(product);
+            updateDisplayedPrice(product);
+        }
+
+        function loadProduct() {
+            const params = new URLSearchParams(window.location.search);
+            const productSlug = params.get("slug") ? params.get("slug").toLowerCase() : null;
+            const productId = params.get("id");
+
+            if (!productSlug && !productId) {
+                window.location.href = "/";
+                return;
+            }
+
+            const productsPromise = typeof getAllProductsData === "function"
+                ? getAllProductsData()
+                : fetch("data/products.json")
+                    .then(function (res) {
+                        if (!res.ok) {
+                            throw new Error("Can not load products.json");
+                        }
+
+                        return res.json();
+                    })
+                    .then(function (products) {
+                        return Array.isArray(products) ? products : [];
+                    });
+
+            Promise.all([productsPromise, getProductDescriptionData()])
+                .then(function (result) {
+                    const products = result[0];
+                    const descriptions = result[1];
+                    const product = products.find(function (item) {
+                        if (productSlug) {
+                            return item.slug === productSlug;
+                        }
+
+                        return String(item.id) === String(productId);
+                    });
+
+                    if (!product) {
+                        Swal.fire({
+                            text: "Không tìm thấy sản phẩm.",
+                            icon: "error",
+                            confirmButtonColor: "#006b38"
+                        }).then(function () {
+                            window.location.href = "/all-products.html";
+                        });
+                        return;
+                    }
+
+                    renderProduct(product);
+                    renderProductDescription(product, descriptions);
+                    renderSimilarProducts(product, products);
+                })
+                .catch(function (error) {
+                    console.error("loadProduct error:", error);
+                    Swal.fire({
+                        text: "Không tải được dữ liệu sản phẩm.",
+                        icon: "error",
+                        confirmButtonColor: "#006b38"
+                    });
+                });
+        }
+
+        loadProduct();
+        window.addEventListener("resize", refreshProductDescriptionState);
+    </script>
+</body>
+
+</html>
