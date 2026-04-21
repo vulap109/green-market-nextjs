@@ -1,5 +1,4 @@
 import Link from "next/link";
-import type { ReactNode } from "react";
 import ProductCard from "@/components/catalog/ProductCard";
 import HomeCarousel from "@/components/home/HomeCarousel";
 import NewsCard from "@/components/news/NewsCard";
@@ -19,7 +18,7 @@ type HomeShelfConfig = {
 
 type BenefitItem = {
   description: string;
-  icon: ReactNode;
+  iconClassName: string;
   title: string;
 };
 
@@ -61,22 +60,22 @@ const benefitItems: BenefitItem[] = [
   {
     title: "Trái Cây Tươi Mới",
     description: "Trái cây mùa tuyển chọn, đảm bảo độ tươi ngon nhất.",
-    icon: <LeafIcon />
+    iconClassName: "fa-solid fa-leaf"
   },
   {
     title: "Đóng Gói Thủ Công",
     description: "Mỗi giỏ quà đều được trang trí thủ công tỉ mỉ.",
-    icon: <HeartHandsIcon />
+    iconClassName: "fa-solid fa-hand-holding-heart"
   },
   {
     title: "Giao Hàng Hỏa Tốc",
     description: "Giao hỏa tốc trong ngày tại TP. Hồ Chí Minh.",
-    icon: <TruckIcon />
+    iconClassName: "fa-solid fa-truck-fast"
   },
   {
     title: "Quà Tặng Sang Trọng",
     description: "Phù hợp cho mọi dịp lễ, sinh nhật, thăm hỏi.",
-    icon: <GiftIcon />
+    iconClassName: "fa-solid fa-gift"
   }
 ];
 
@@ -97,66 +96,6 @@ const testimonials: Testimonial[] = [
     quote: "Dịch vụ chuyên nghiệp, giao hàng đúng giờ. Quả cherry Úc rất giòn."
   }
 ];
-
-function LeafIcon() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" className="h-7 w-7">
-      <path
-        d="M12 21v-7m0 0c-4.2 0-6.8-2.4-7.6-6.7C8.7 7.2 11 9 12 14Zm0 0c4.2 0 6.8-2.4 7.6-6.7C15.3 7.2 13 9 12 14Z"
-        fill="none"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="1.8"
-      />
-    </svg>
-  );
-}
-
-function HeartHandsIcon() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" className="h-7 w-7">
-      <path
-        d="M7 11.5 4.8 9.3a2.8 2.8 0 1 1 4-4L12 8.5l3.2-3.2a2.8 2.8 0 0 1 4 4L17 11.5M7 11.5v5.2A2.3 2.3 0 0 0 9.3 19h5.4a2.3 2.3 0 0 0 2.3-2.3v-5.2M7 11.5h10"
-        fill="none"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="1.8"
-      />
-    </svg>
-  );
-}
-
-function TruckIcon() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" className="h-7 w-7">
-      <path
-        d="M3 7.5h11v7H3Zm11 1.5h3.5l2 2.5v3H14Zm-7.5 8a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3Zm10 0a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3Z"
-        fill="none"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="1.8"
-      />
-    </svg>
-  );
-}
-
-function GiftIcon() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" className="h-7 w-7">
-      <path
-        d="M4 10.5h16v9H4Zm0 0h16V7H4Zm8 0v9m-4.5-12h9M9.3 7A1.8 1.8 0 1 1 12 4.8 1.8 1.8 0 0 1 14.7 7"
-        fill="none"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="1.8"
-      />
-    </svg>
-  );
-}
 
 function SectionHeading({
   title,
@@ -184,7 +123,7 @@ function SectionHeading({
         className="flex items-center gap-2 text-xs font-bold uppercase text-primary hover:text-red-600"
       >
         {ctaLabel}
-        <span aria-hidden="true">→</span>
+        <i className="fa-solid fa-arrow-right text-[10px]" aria-hidden="true" />
       </Link>
     </div>
   );
@@ -263,7 +202,7 @@ export default async function HomePage() {
                 className="group rounded-2xl bg-white p-8 text-center shadow-sm transition-all hover:bg-primary"
               >
                 <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-green-50 text-primary transition-all group-hover:bg-white/20 group-hover:text-white">
-                  {item.icon}
+                  <i className={`${item.iconClassName} text-2xl`} aria-hidden="true" />
                 </div>
                 <h3 className="mb-3 text-xs font-bold uppercase group-hover:text-white">{item.title}</h3>
                 <p className="text-[11px] font-medium leading-relaxed text-gray-500 group-hover:text-white/80">

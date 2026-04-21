@@ -32,89 +32,6 @@ type OrderSuccessPageClientProps = Readonly<{
   expectedCode: string;
 }>;
 
-function SuccessIcon() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" className="h-8 w-8">
-      <path
-        d="m5 12 4.2 4.2L19 6.5"
-        fill="none"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2.4"
-      />
-    </svg>
-  );
-}
-
-function EmptyFolderIcon() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" className="h-8 w-8">
-      <path
-        d="M3 7.5A2.5 2.5 0 0 1 5.5 5H10l2 2h6.5A2.5 2.5 0 0 1 21 9.5v7A2.5 2.5 0 0 1 18.5 19h-13A2.5 2.5 0 0 1 3 16.5Z"
-        fill="none"
-        stroke="currentColor"
-        strokeLinejoin="round"
-        strokeWidth="1.8"
-      />
-    </svg>
-  );
-}
-
-function BankIcon() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" className="h-4 w-4">
-      <path
-        d="M3 10h18M5 10v7m4-7v7m6-7v7m4-7v7M2 21h20M12 3 3 7v2h18V7Z"
-        fill="none"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="1.8"
-      />
-    </svg>
-  );
-}
-
-function PhoneIcon() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" className="h-4 w-4">
-      <path
-        d="M6.7 4.8A2 2 0 0 1 8.5 4h1.4a2 2 0 0 1 2 1.7l.4 2.9a2 2 0 0 1-.6 1.7l-1.5 1.4a14.8 14.8 0 0 0 2 2.1 14.8 14.8 0 0 0 2.1 2l1.4-1.5a2 2 0 0 1 1.7-.6l2.9.4a2 2 0 0 1 1.7 2v1.4a2 2 0 0 1-.8 1.8l-1.1.8a3 3 0 0 1-2.7.4A19.1 19.1 0 0 1 4.5 8.6a3 3 0 0 1 .4-2.7Z"
-        fill="none"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="1.6"
-      />
-    </svg>
-  );
-}
-
-function MailIcon() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" className="h-4 w-4">
-      <path
-        d="M4 6h16v12H4Zm0 1.5 8 5 8-5"
-        fill="none"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="1.8"
-      />
-    </svg>
-  );
-}
-
-function InfoIcon() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" className="h-4 w-4">
-      <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" strokeWidth="1.8" />
-      <path d="M12 10v5m0-8h.01" fill="none" stroke="currentColor" strokeLinecap="round" strokeWidth="1.8" />
-    </svg>
-  );
-}
-
 function parseOrderSnapshot(snapshot: string, expectedCode: string): CheckoutOrder | null {
   if (!snapshot) {
     return null;
@@ -241,7 +158,7 @@ export default function OrderSuccessPageClient({ expectedCode }: OrderSuccessPag
           <div className="border-b border-gray-100 bg-gradient-to-r from-gray-50 via-white to-gray-50 px-6 py-8 md:px-8">
             <div className="flex items-start gap-4">
               <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gray-100 text-gray-500">
-                <EmptyFolderIcon />
+                <i className="fa-regular fa-folder-open text-xl" aria-hidden="true" />
               </span>
               <div>
                 <p className="text-sm font-black uppercase tracking-[0.22em] text-gray-400">Order Status</p>
@@ -258,12 +175,14 @@ export default function OrderSuccessPageClient({ expectedCode }: OrderSuccessPag
               href={ALL_PRODUCTS_ROUTE}
               className="inline-flex items-center justify-center gap-2 rounded-2xl bg-primary px-6 py-3 text-sm font-bold text-white transition hover:opacity-90"
             >
+              <i className="fa-solid fa-bag-shopping" aria-hidden="true" />
               Tiếp tục mua hàng
             </Link>
             <Link
               href={CART_ROUTE}
               className="inline-flex items-center justify-center gap-2 rounded-2xl border border-gray-200 px-6 py-3 text-sm font-bold text-gray-700 transition hover:border-primary hover:text-primary"
             >
+              <i className="fa-solid fa-cart-shopping" aria-hidden="true" />
               Quay lại giỏ hàng
             </Link>
           </div>
@@ -292,7 +211,7 @@ export default function OrderSuccessPageClient({ expectedCode }: OrderSuccessPag
                 <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
                   <div className="flex gap-4">
                     <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-3xl bg-white text-emerald-600 shadow-sm ring-1 ring-emerald-100">
-                      <SuccessIcon />
+                      <i className="fa-solid fa-check text-2xl" aria-hidden="true" />
                     </span>
                     <div>
                       <p className="text-sm font-black uppercase tracking-[0.24em] text-emerald-700">
@@ -364,12 +283,14 @@ export default function OrderSuccessPageClient({ expectedCode }: OrderSuccessPag
                     href={HOME_ROUTE}
                     className="inline-flex items-center justify-center gap-2 rounded-2xl bg-primary px-6 py-3 text-sm font-bold text-white transition hover:opacity-90"
                   >
+                    <i className="fa-solid fa-bag-shopping" aria-hidden="true" />
                     Tiếp tục mua hàng
                   </Link>
                   <a
                     href="tel:0973074063"
                     className="inline-flex items-center justify-center gap-2 rounded-2xl border border-gray-200 px-6 py-3 text-sm font-bold text-gray-700 transition hover:border-primary hover:text-primary"
                   >
+                    <i className="fa-solid fa-headset" aria-hidden="true" />
                     Gọi hỗ trợ
                   </a>
                   {isBankPayment ? (
@@ -378,7 +299,7 @@ export default function OrderSuccessPageClient({ expectedCode }: OrderSuccessPag
                       onClick={handleOpenBankModal}
                       className="inline-flex items-center justify-center gap-2 rounded-2xl border border-sky-200 bg-sky-50 px-6 py-3 text-sm font-bold text-sky-700 transition hover:bg-sky-100"
                     >
-                      <BankIcon />
+                      <i className="fa-solid fa-building-columns" aria-hidden="true" />
                       Hiển thị thông tin chuyển khoản
                     </button>
                   ) : null}
@@ -397,15 +318,17 @@ export default function OrderSuccessPageClient({ expectedCode }: OrderSuccessPag
               <div className="space-y-4 border-b border-gray-100 px-6 py-5">
                 {order.items.map((item) => (
                   <article key={`${item.id}-${item.size}`} className="flex items-start gap-4">
-                    <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-2xl border border-gray-200 bg-gray-50">
-                      <Image
-                        src={item.image || "/images/sp1.jpg"}
-                        alt={item.name}
-                        fill
-                        sizes="80px"
-                        className="object-cover"
-                      />
-                      <span className="absolute right-2 top-2 inline-flex min-h-6 min-w-6 items-center justify-center rounded-full bg-gray-900 px-1.5 text-[11px] font-bold text-white">
+                    <div className="relative h-20 w-20 shrink-0">
+                      <div className="absolute inset-0 overflow-hidden rounded-2xl border border-gray-200 bg-gray-50">
+                        <Image
+                          src={item.image || "/images/sp1.jpg"}
+                          alt={item.name}
+                          fill
+                          sizes="80px"
+                          className="object-cover"
+                        />
+                      </div>
+                      <span className="absolute -right-2 -top-2 inline-flex min-h-6 min-w-6 items-center justify-center rounded-full bg-gray-900 px-1.5 text-[11px] font-bold text-white shadow-sm">
                         {item.qty}
                       </span>
                     </div>
@@ -485,7 +408,7 @@ export default function OrderSuccessPageClient({ expectedCode }: OrderSuccessPag
                 className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-gray-200 text-lg text-gray-600 transition hover:border-primary hover:text-primary"
                 aria-label="Đóng popup chuyển khoản"
               >
-                ×
+                <i className="fa-solid fa-xmark" aria-hidden="true" />
               </button>
             </div>
 
@@ -511,6 +434,7 @@ export default function OrderSuccessPageClient({ expectedCode }: OrderSuccessPag
                     download={`vietqr-${bankTransferContent || "green-market"}.png`}
                     className="mt-4 inline-flex items-center justify-center gap-2 rounded-2xl border border-sky-200 bg-sky-50 px-2 py-1 text-xs font-normal text-sky-700"
                   >
+                    <i className="fa-solid fa-download" aria-hidden="true" />
                     Tải xuống
                   </a>
                   <p className="mt-4 text-xs text-gray-600">45 app ngân hàng hỗ trợ quét mã VietQR.</p>
@@ -579,21 +503,15 @@ export default function OrderSuccessPageClient({ expectedCode }: OrderSuccessPag
                   </p>
                   <div className="mt-4 space-y-2 text-sm text-gray-600">
                     <p className="flex items-start gap-2">
-                      <span className="mt-0.5 text-primary">
-                        <PhoneIcon />
-                      </span>
+                      <i className="fa-solid fa-phone mt-0.5 text-primary" aria-hidden="true" />
                       Hotline: 0973 074 063
                     </p>
                     <p className="flex items-start gap-2">
-                      <span className="mt-0.5 text-primary">
-                        <MailIcon />
-                      </span>
+                      <i className="fa-solid fa-envelope mt-0.5 text-primary" aria-hidden="true" />
                       Email: contact@greenmarket.com.vn
                     </p>
                     <p className="flex items-start gap-2">
-                      <span className="mt-0.5 text-primary">
-                        <InfoIcon />
-                      </span>
+                      <i className="fa-solid fa-circle-info mt-0.5 text-primary" aria-hidden="true" />
                       Sau khi chuyển khoản, bạn có thể gửi ảnh biên nhận qua Zalo hoặc hotline để shop xử lý
                       nhanh hơn.
                     </p>

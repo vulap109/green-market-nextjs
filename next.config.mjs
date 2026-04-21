@@ -1,3 +1,7 @@
+const requestedBuildCpus = Number.parseInt(process.env.NEXT_BUILD_CPUS || "", 10);
+const buildCpus =
+  Number.isFinite(requestedBuildCpus) && requestedBuildCpus > 0 ? requestedBuildCpus : undefined;
+
 const nextConfig = {
   images: {
     remotePatterns: [
@@ -8,6 +12,14 @@ const nextConfig = {
       }
     ]
   },
+  ...(buildCpus
+    ? {
+        experimental: {
+          cpus: buildCpus,
+          staticGenerationMaxConcurrency: buildCpus
+        }
+      }
+    : {}),
   async redirects() {
     return [
       {

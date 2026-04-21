@@ -20,7 +20,7 @@ import {
   subscribeWindowEvents
 } from "@/lib/browser-store";
 import { formatProductMoney } from "@/lib/format";
-import { ALL_PRODUCTS_ROUTE, CHECKOUT_ROUTE, HOME_ROUTE } from "@/lib/routes";
+import { CHECKOUT_ROUTE, HOME_ROUTE } from "@/lib/routes";
 import type { CartItem, ProductRecord } from "@/lib/types";
 
 type CartPageClientProps = Readonly<{
@@ -31,36 +31,6 @@ type FeedbackState = {
   tone: "error" | "success";
   text: string;
 };
-
-function SpinnerIcon() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" className="h-8 w-8 animate-spin text-gray-300">
-      <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" strokeOpacity="0.2" strokeWidth="3" />
-      <path
-        d="M21 12a9 9 0 0 0-9-9"
-        fill="none"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeWidth="3"
-      />
-    </svg>
-  );
-}
-
-function CartIcon() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" className="h-10 w-10 text-gray-300">
-      <path
-        d="M3 5h2l1.6 8.3a2 2 0 0 0 2 1.7h7.9a2 2 0 0 0 2-1.6L20 8H7.2M9 20a1 1 0 1 0 0 2 1 1 0 0 0 0-2Zm8 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2Z"
-        fill="none"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="1.8"
-      />
-    </svg>
-  );
-}
 
 function parseCartSnapshot(snapshot: string): CartItem[] {
   try {
@@ -196,7 +166,7 @@ export default function CartPageClient({ products }: CartPageClientProps) {
               {!isHydrated ? (
                 <div className="p-10 text-center text-gray-400">
                   <div className="mb-3 inline-flex justify-center">
-                    <SpinnerIcon />
+                    <i className="fa-solid fa-spinner animate-spin text-2xl" aria-hidden="true" />
                   </div>
                   <p className="text-sm">Đang tải giỏ hàng...</p>
                 </div>
@@ -209,7 +179,7 @@ export default function CartPageClient({ products }: CartPageClientProps) {
                       className="absolute left-2 top-2 z-10 flex h-5 w-5 items-center justify-center rounded-full bg-gray-400 text-[10px] text-white transition-colors hover:bg-red-500"
                       aria-label="Xóa sản phẩm"
                     >
-                      ×
+                      <i className="fa-solid fa-xmark" aria-hidden="true" />
                     </button>
 
                     <Link href={item.productHref} className="relative ml-1 mt-1 block h-24 w-24 flex-shrink-0">
@@ -273,14 +243,15 @@ export default function CartPageClient({ products }: CartPageClientProps) {
               ) : (
                 <div className="p-10 text-center text-gray-500">
                   <div className="mb-3 inline-flex justify-center">
-                    <CartIcon />
+                    <i className="fa-solid fa-cart-shopping text-4xl text-gray-300" aria-hidden="true" />
                   </div>
                   <p className="font-semibold text-gray-700">Giỏ hàng của bạn đang trống</p>
                   <p className="mt-1 text-sm">Hãy chọn thêm sản phẩm để tiếp tục mua sắm.</p>
                   <Link
-                    href={ALL_PRODUCTS_ROUTE}
+                    href={HOME_ROUTE}
                     className="mt-5 inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-white transition hover:bg-primary-dark"
                   >
+                    <i className="fa-solid fa-bag-shopping" aria-hidden="true" />
                     Tiếp tục mua hàng
                   </Link>
                 </div>
@@ -289,7 +260,7 @@ export default function CartPageClient({ products }: CartPageClientProps) {
 
             <div className="group flex w-max cursor-pointer items-center gap-2">
               <div className="flex h-5 w-5 items-center justify-center rounded-full border border-gray-300 bg-gray-100 text-white transition-colors group-hover:border-primary">
-                <span className="text-[10px] opacity-0">✓</span>
+                <i className="fa-solid fa-check text-[10px] opacity-0" aria-hidden="true" />
               </div>
               <span className="select-none text-sm font-medium text-gray-700">Xuất hóa đơn cho đơn hàng</span>
             </div>
@@ -331,22 +302,28 @@ export default function CartPageClient({ products }: CartPageClientProps) {
                 <div className="mb-4 flex items-center justify-between">
                   <h2 className="text-base font-bold text-gray-800">Khuyến mãi dành cho bạn</h2>
                   <div className="flex gap-2 text-gray-400">
-                    <span>←</span>
-                    <span>→</span>
+                    <button type="button" className="transition-colors hover:text-black" aria-label="Khuyến mãi trước">
+                      <i className="fa-solid fa-arrow-left-long" aria-hidden="true" />
+                    </button>
+                    <button type="button" className="transition-colors hover:text-black" aria-label="Khuyến mãi tiếp theo">
+                      <i className="fa-solid fa-arrow-right-long" aria-hidden="true" />
+                    </button>
                   </div>
                 </div>
 
                 <div className="relative flex gap-3 overflow-hidden rounded-lg border border-gray-200 p-3">
                   <div className="absolute bottom-0 left-[60px] top-0 border-l border-dashed border-gray-200" />
                   <div className="flex w-12 flex-shrink-0 items-center justify-center text-[#ed1b24]">
-                    <span className="text-3xl">↗</span>
+                    <i className="fa-solid fa-truck-fast text-3xl" aria-hidden="true" />
                   </div>
                   <div className="flex-1">
                     <div className="flex items-start justify-between">
                       <h3 className="text-sm font-bold text-gray-800">Miễn phí vận chuyển</h3>
-                      <span className="cursor-pointer text-xs text-gray-400" title="Chi tiết điều kiện">
-                        i
-                      </span>
+                      <i
+                        className="fa-solid fa-circle-info cursor-pointer text-xs text-gray-400"
+                        title="Chi tiết điều kiện"
+                        aria-hidden="true"
+                      />
                     </div>
                     <p className="mt-0.5 text-[11px] text-gray-500">Đơn hàng từ 599K, giảm tối đa 20K</p>
 

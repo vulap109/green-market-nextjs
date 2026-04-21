@@ -26,14 +26,14 @@ const slides: Slide[] = [
   {
     desktopSrc: "/images/cover-trao-yeu-thuong-large.jpg",
     mobileSrc: "/images/cover-trao-yeu-thuong-mb.jpg",
-    productName: "Giỏ Quà Kính Viếng",
-    title: "Giỏ Quà Kính Viếng"
+    productName: "Giỏ Quà Trao Yêu Thương",
+    title: "Giỏ Quà Trao Yêu Thương"
   },
   {
     desktopSrc: "/images/cover-kinh-vieng-large.jpg",
     mobileSrc: "/images/cover-kinh-vieng-mb.jpg",
-    productName: "Giỏ Quà Trao Yêu Thương",
-    title: "Giỏ Quà Trao Yêu Thương"
+    productName: "Giỏ Quà Kính Viếng",
+    title: "Giỏ Quà Kính Viếng"
   },
   {
     desktopSrc: "/images/cover-tuoi-ngon-large.jpg",
@@ -57,54 +57,6 @@ function getConsultationMessage(productName: string): string {
 
 function getNextIndex(currentIndex: number, direction: 1 | -1): number {
   return (currentIndex + direction + slides.length) % slides.length;
-}
-
-function XMarkIcon() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" className="h-4 w-4">
-      <path
-        d="M6 6 18 18M18 6 6 18"
-        fill="none"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeWidth="2"
-      />
-    </svg>
-  );
-}
-
-function ChevronIcon({ direction }: Readonly<{ direction: "left" | "right" }>) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-      className={`h-5 w-5 ${direction === "left" ? "" : "rotate-180"}`}
-    >
-      <path
-        d="m15 5-7 7 7 7"
-        fill="none"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2"
-      />
-    </svg>
-  );
-}
-
-function SeedlingIcon() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" className="h-10 w-10">
-      <path
-        d="M12 21v-7m0 0c-4.2 0-6.8-2.4-7.6-6.7C8.7 7.2 11 9 12 14Zm0 0c4.2 0 6.8-2.4 7.6-6.7C15.3 7.2 13 9 12 14Z"
-        fill="none"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="1.8"
-      />
-    </svg>
-  );
 }
 
 export default function HomeCarousel() {
@@ -228,24 +180,28 @@ export default function HomeCarousel() {
                 onClick={() => openConsultation(slide.productName)}
               >
                 <span className="sr-only">{slide.title}</span>
-                <div className="relative aspect-[4/5] w-full md:aspect-[16/5]">
+                <span className="block md:hidden">
                   <Image
                     src={slide.mobileSrc}
                     alt={slide.title}
-                    fill
+                    width={400}
+                    height={400}
                     priority={slide === slides[0]}
                     sizes="100vw"
-                    className="object-cover md:hidden"
+                    className="h-auto w-full select-none"
                   />
+                </span>
+                <span className="hidden md:block">
                   <Image
                     src={slide.desktopSrc}
                     alt={slide.title}
-                    fill
+                    width={1911}
+                    height={553}
                     priority={slide === slides[0]}
                     sizes="100vw"
-                    className="hidden object-cover md:block"
+                    className="h-auto w-full select-none"
                   />
-                </div>
+                </span>
               </button>
             ))}
           </div>
@@ -256,7 +212,7 @@ export default function HomeCarousel() {
             onClick={() => moveSlide(-1)}
             aria-label="Ảnh trước"
           >
-            <ChevronIcon direction="left" />
+            <i className="fa-solid fa-chevron-left text-sm" aria-hidden="true" />
           </button>
           <button
             type="button"
@@ -264,7 +220,7 @@ export default function HomeCarousel() {
             onClick={() => moveSlide(1)}
             aria-label="Ảnh tiếp theo"
           >
-            <ChevronIcon direction="right" />
+            <i className="fa-solid fa-chevron-right text-sm" aria-hidden="true" />
           </button>
 
           <div className="carousel-indicators" role="tablist" aria-label="Chọn slide">
@@ -291,12 +247,12 @@ export default function HomeCarousel() {
               className="absolute right-3 top-3 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-black/20 text-white transition hover:bg-red-500"
               aria-label="Đóng tư vấn"
             >
-              <XMarkIcon />
+              <i className="fa-solid fa-xmark text-sm" aria-hidden="true" />
             </button>
 
             <div className="bg-primary p-8 text-center text-white">
               <div className="mx-auto mb-3 flex h-16 w-16 items-center justify-center rounded-2xl bg-white/10">
-                <SeedlingIcon />
+                <i className="fa-solid fa-seedling text-4xl" aria-hidden="true" />
               </div>
               <h2 className="serif text-2xl font-bold uppercase tracking-[0.28em]">Nhận Tư Vấn</h2>
               <p className="mt-2 text-xs font-medium text-white/90">

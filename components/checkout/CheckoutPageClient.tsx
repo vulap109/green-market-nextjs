@@ -170,7 +170,7 @@ async function getEmailJsBrowser(): Promise<EmailJsBrowser> {
 function SelectChevron() {
   return (
     <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-500">
-      <span className="text-xs">▾</span>
+      <i className="fa-solid fa-chevron-down text-xs" aria-hidden="true" />
     </span>
   );
 }
@@ -588,15 +588,17 @@ export default function CheckoutPageClient({ addressData, products }: CheckoutPa
                   resolvedItems.map((item) => (
                     <article key={item.key} className="flex items-center justify-between gap-4">
                       <div className="min-w-0 flex items-center gap-4">
-                        <div className="relative h-14 w-14 flex-shrink-0 overflow-hidden rounded border border-gray-200">
-                          <Image
-                            src={item.image}
-                            alt={item.name}
-                            fill
-                            sizes="56px"
-                            className="rounded object-cover p-0.5"
-                          />
-                          <span className="absolute -right-2 -top-2 z-10 flex h-5 w-5 items-center justify-center rounded-full bg-gray-600 text-[10px] font-bold text-white shadow-sm">
+                        <div className="relative h-14 w-14 flex-shrink-0">
+                          <div className="absolute inset-0 overflow-hidden rounded border border-gray-200">
+                            <Image
+                              src={item.image}
+                              alt={item.name}
+                              fill
+                              sizes="56px"
+                              className="rounded object-cover p-0.5"
+                            />
+                          </div>
+                          <span className="absolute -right-2 -top-2 z-10 flex min-h-5 min-w-5 items-center justify-center rounded-full bg-gray-600 px-1 text-[10px] font-bold text-white shadow-sm">
                             {item.qty}
                           </span>
                         </div>
@@ -614,12 +616,14 @@ export default function CheckoutPageClient({ addressData, products }: CheckoutPa
                   ))
                 ) : (
                   <div className="py-4 text-center">
+                    <i className="fa-solid fa-cart-shopping mb-3 text-3xl text-gray-300" aria-hidden="true" />
                     <p className="text-sm font-semibold text-gray-700">Giỏ hàng của bạn đang trống</p>
                     <Link
                       href={ALL_PRODUCTS_ROUTE}
                       className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-red-600 transition-colors hover:text-red-700"
                     >
-                      ← Quay lại mua hàng
+                      <i className="fa-solid fa-arrow-left" aria-hidden="true" />
+                      Quay lại mua hàng
                     </Link>
                   </div>
                 )}

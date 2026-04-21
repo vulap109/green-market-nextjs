@@ -30,44 +30,6 @@ type CatalogUrlState = {
   subcategory: string;
 };
 
-function ChevronDownIcon({ isOpen }: Readonly<{ isOpen: boolean }>) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-      className={`h-4 w-4 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
-    >
-      <path
-        d="m6 9 6 6 6-6"
-        fill="none"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2"
-      />
-    </svg>
-  );
-}
-
-function ChevronIcon({ direction }: Readonly<{ direction: "left" | "right" }>) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-      className={`h-3.5 w-3.5 ${direction === "left" ? "" : "rotate-180"}`}
-    >
-      <path
-        d="m15 5-7 7 7 7"
-        fill="none"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2"
-      />
-    </svg>
-  );
-}
-
 function FilterOptionButton({
   active,
   label,
@@ -240,7 +202,12 @@ export default function AllProductsCatalog({
             >
               <span>Bộ lọc</span>
               <span className="lg:hidden">
-                <ChevronDownIcon isOpen={isMobileFilterOpen} />
+                <i
+                  className={`fa-solid fa-chevron-down text-xs transition-transform duration-300 ${
+                    isMobileFilterOpen ? "rotate-180" : ""
+                  }`}
+                  aria-hidden="true"
+                />
               </span>
             </button>
 
@@ -339,7 +306,7 @@ export default function AllProductsCatalog({
                 }`}
                 aria-label="Trang trước"
               >
-                <ChevronIcon direction="left" />
+                <i className="fa-solid fa-chevron-left text-xs" aria-hidden="true" />
               </button>
 
               {visiblePages[0] > 1 ? (
@@ -392,7 +359,7 @@ export default function AllProductsCatalog({
                 }`}
                 aria-label="Trang sau"
               >
-                <ChevronIcon direction="right" />
+                <i className="fa-solid fa-chevron-right text-xs" aria-hidden="true" />
               </button>
             </div>
           ) : null}
