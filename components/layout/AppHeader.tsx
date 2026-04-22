@@ -132,6 +132,22 @@ export default function AppHeader() {
     };
   }, []);
 
+  useEffect(() => {
+    if (!isMenuOpen) {
+      return;
+    }
+
+    const previousBodyOverflow = document.body.style.overflow;
+    const previousDocumentOverflow = document.documentElement.style.overflow;
+    document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = previousBodyOverflow;
+      document.documentElement.style.overflow = previousDocumentOverflow;
+    };
+  }, [isMenuOpen]);
+
   function handleSearchSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     router.push(buildProductSearchUrl(searchKeyword));
@@ -355,7 +371,9 @@ export default function AppHeader() {
       <button
         type="button"
         aria-label="Đóng danh mục sản phẩm"
-        className={`absolute inset-x-0 top-full z-20 h-screen bg-slate-950/35 backdrop-blur-[2px] transition duration-200 ${isMenuOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
+        aria-hidden={!isMenuOpen}
+        tabIndex={isMenuOpen ? 0 : -1}
+        className={`fixed inset-0 z-20 h-screen bg-slate-950/35 backdrop-blur-[2px] transition duration-200 ${isMenuOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
           }`}
         onClick={() => setIsMenuOpen(false)}
       />

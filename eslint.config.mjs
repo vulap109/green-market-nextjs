@@ -10,10 +10,7 @@ const eslintConfig = defineConfig([
     "next-env.d.ts",
     "data/**",
     "docs/**",
-    "images/**",
-    "js/**",
-    "components/**/*.html",
-    "**/*.html"
+    "images/**"
   ])
 ]);
 

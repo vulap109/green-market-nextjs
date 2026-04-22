@@ -8,8 +8,7 @@
     "build:local": "set NEXT_BUILD_CPUS=4&& next build",
     "start": "next start",
     "lint": "eslint .",
-    "check:utf8": "node scripts/verify-utf8.mjs",
-    "capture:baseline": "node scripts/capture-baseline.mjs"
+    "check:utf8": "node scripts/verify-utf8.mjs"
   },
   "engines": {
     "node": ">=20.11.0"

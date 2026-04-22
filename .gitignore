@@ -14,5 +14,3 @@ pnpm-debug.log*
 .env.development.local
 .env.test.local
 .env.production.local
-
-docs/migration-baseline/**/.tmp/

@@ -396,7 +396,7 @@ export default function CheckoutPageClient({ addressData, products }: CheckoutPa
   }
 
   return (
-    <div className="bg-gray-50 pb-20">
+    <div className="bg-gray-50 pb-10">
       {feedback ? (
         <div
           className={`fixed right-4 top-24 z-[150] rounded-xl px-4 py-3 text-sm font-semibold text-white shadow-2xl ${
