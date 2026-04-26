@@ -8,7 +8,7 @@ BEGIN;
 -- 1) USERS & CUSTOMER DATA
 -- =========================================================
 
-CREATE TABLE IF NOT EXISTS users (
+CREATE TABLE IF NOT EXISTS user (
     id                  BIGSERIAL PRIMARY KEY,
     full_name           VARCHAR(150) NOT NULL,
     email               VARCHAR(255) UNIQUE,
@@ -47,9 +47,9 @@ CREATE TABLE IF NOT EXISTS users (
 -- fruit-basket (parent_id = null)
 --   - box   (parent_id = fruit-basket.id)
 --   - fresh (parent_id = fruit-basket.id)
-CREATE TABLE IF NOT EXISTS categories (
+CREATE TABLE IF NOT EXISTS category (
     id                  BIGSERIAL PRIMARY KEY,
-    parent_id           BIGINT REFERENCES categories(id) ON DELETE SET NULL,
+    parent_id           BIGINT REFERENCES category(id) ON DELETE SET NULL,
     name                VARCHAR(150) NOT NULL,
     slug                VARCHAR(180) NOT NULL UNIQUE,
     description         TEXT,
@@ -62,9 +62,9 @@ CREATE TABLE IF NOT EXISTS categories (
     updated_at          TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
-CREATE TABLE IF NOT EXISTS products (
+CREATE TABLE IF NOT EXISTS product (
     id                  BIGSERIAL PRIMARY KEY,
-    category_id         BIGINT REFERENCES categories(id) ON DELETE SET NULL,
+    category_id         BIGINT REFERENCES category(id) ON DELETE SET NULL,
     name                VARCHAR(255) NOT NULL,
     slug                VARCHAR(255) NOT NULL UNIQUE,
     sku                 VARCHAR(100) NOT NULL UNIQUE,
@@ -85,9 +85,9 @@ CREATE TABLE IF NOT EXISTS products (
     updated_at          TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
-CREATE TABLE IF NOT EXISTS product_images (
+CREATE TABLE IF NOT EXISTS product_image (
     id                  BIGSERIAL PRIMARY KEY,
-    product_id          BIGINT NOT NULL REFERENCES products(id) ON DELETE CASCADE,
+    product_id          BIGINT NOT NULL REFERENCES product(id) ON DELETE CASCADE,
     image_url           TEXT NOT NULL,
     alt_text            VARCHAR(255),
     sort_order          INTEGER NOT NULL DEFAULT 0,
@@ -162,10 +162,9 @@ CREATE TABLE IF NOT EXISTS product_images (
 --    updated_at          TIMESTAMPTZ NOT NULL DEFAULT NOW()
 --);
 
-CREATE TABLE IF NOT EXISTS news_posts (
+CREATE TABLE IF NOT EXISTS news_post (
     id                  BIGSERIAL PRIMARY KEY,
-    news_category_id    BIGINT REFERENCES news_categories(id) ON DELETE SET NULL,
-    author_id           BIGINT REFERENCES users(id) ON DELETE SET NULL,
+    author_id           BIGINT REFERENCES user(id) ON DELETE SET NULL,
     title               VARCHAR(255) NOT NULL,
     slug                VARCHAR(255) NOT NULL UNIQUE,
     excerpt             TEXT,
@@ -186,9 +185,9 @@ CREATE TABLE IF NOT EXISTS news_posts (
 -- Supports logged-in users AND guests.
 -- user_id: for logged-in users
 -- session_id: for guest users
-CREATE TABLE IF NOT EXISTS carts (
+CREATE TABLE IF NOT EXISTS cart (
     id                  BIGSERIAL PRIMARY KEY,
-    user_id             BIGINT REFERENCES users(id) ON DELETE CASCADE,
+    user_id             BIGINT REFERENCES user(id) ON DELETE CASCADE,
     session_id          VARCHAR(255),
     status              VARCHAR(30) NOT NULL DEFAULT 'active' CHECK (status IN ('active', 'converted', 'abandoned')),
     created_at          TIMESTAMPTZ NOT NULL DEFAULT NOW(),
@@ -198,14 +197,13 @@ CREATE TABLE IF NOT EXISTS carts (
 
 CREATE TABLE IF NOT EXISTS cart_items (
     id                  BIGSERIAL PRIMARY KEY,
-    cart_id             BIGINT NOT NULL REFERENCES carts(id) ON DELETE CASCADE,
-    product_id          BIGINT NOT NULL REFERENCES products(id) ON DELETE CASCADE,
-    product_variant_id  BIGINT REFERENCES product_variants(id) ON DELETE SET NULL,
+    cart_id             BIGINT NOT NULL REFERENCES cart(id) ON DELETE CASCADE,
+    product_id          BIGINT NOT NULL REFERENCES product(id) ON DELETE CASCADE,
     quantity            INTEGER NOT NULL CHECK (quantity > 0),
     unit_price          NUMERIC(12,0) NOT NULL DEFAULT 0,
     created_at          TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     updated_at          TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-    UNIQUE (cart_id, product_id, product_variant_id)
+    UNIQUE (cart_id, product_id)
 );
 
 -- =========================================================
@@ -233,11 +231,10 @@ CREATE TABLE IF NOT EXISTS cart_items (
 -- 6) ORDERS & PAYMENTS
 -- =========================================================
 
-CREATE TABLE IF NOT EXISTS orders (
+CREATE TABLE IF NOT EXISTS order (
     id                      BIGSERIAL PRIMARY KEY,
     order_code              VARCHAR(50) NOT NULL UNIQUE,
-    user_id                 BIGINT REFERENCES users(id) ON DELETE SET NULL,
-    coupon_id               BIGINT REFERENCES coupons(id) ON DELETE SET NULL,
+    user_id                 BIGINT REFERENCES user(id) ON DELETE SET NULL,
 
     -- customer snapshot at time of purchase
     customer_name           VARCHAR(150) NOT NULL,
@@ -268,11 +265,10 @@ CREATE TABLE IF NOT EXISTS orders (
     updated_at              TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
-CREATE TABLE IF NOT EXISTS order_items (
+CREATE TABLE IF NOT EXISTS order_item (
     id                      BIGSERIAL PRIMARY KEY,
-    order_id                BIGINT NOT NULL REFERENCES orders(id) ON DELETE CASCADE,
-    product_id              BIGINT REFERENCES products(id) ON DELETE SET NULL,
-    product_variant_id      BIGINT REFERENCES product_variants(id) ON DELETE SET NULL,
+    order_id                BIGINT NOT NULL REFERENCES order(id) ON DELETE CASCADE,
+    product_id              BIGINT REFERENCES product(id) ON DELETE SET NULL,
     product_name            VARCHAR(255) NOT NULL,
     product_sku             VARCHAR(100),
     unit_price              NUMERIC(12,0) NOT NULL DEFAULT 0,
@@ -281,9 +277,9 @@ CREATE TABLE IF NOT EXISTS order_items (
     created_at              TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
-CREATE TABLE IF NOT EXISTS payments (
+CREATE TABLE IF NOT EXISTS payment (
     id                      BIGSERIAL PRIMARY KEY,
-    order_id                BIGINT NOT NULL REFERENCES orders(id) ON DELETE CASCADE,
+    order_id                BIGINT NOT NULL REFERENCES order(id) ON DELETE CASCADE,
     payment_method          VARCHAR(30) NOT NULL,
     provider                VARCHAR(50),
     provider_transaction_id VARCHAR(150),
@@ -321,7 +317,7 @@ CREATE TABLE IF NOT EXISTS payments (
 --    updated_at          TIMESTAMPTZ NOT NULL DEFAULT NOW()
 --);
 
-CREATE TABLE IF NOT EXISTS banners (
+CREATE TABLE IF NOT EXISTS banner (
     id                  BIGSERIAL PRIMARY KEY,
     title               VARCHAR(255),
     image_url           TEXT NOT NULL,

@@ -8,12 +8,15 @@
     "build:local": "set NEXT_BUILD_CPUS=4&& next build",
     "start": "next start",
     "lint": "eslint .",
-    "check:utf8": "node scripts/verify-utf8.mjs"
+    "check:utf8": "node scripts/verify-utf8.mjs",
+    "seed:categories": "tsx prisma/seed.ts"
   },
   "engines": {
     "node": ">=20.11.0"
   },
   "dependencies": {
+    "@prisma/adapter-neon": "^7.8.0",
+    "@prisma/client": "^7.8.0",
     "next": "^16.2.2",
     "react": "^19.2.4",
     "react-dom": "^19.2.4"
@@ -26,7 +29,9 @@
     "eslint": "^9.39.4",
     "eslint-config-next": "^16.2.2",
     "postcss": "^8.5.8",
+    "prisma": "^7.8.0",
     "tailwindcss": "^4.2.2",
+    "tsx": "^4.21.0",
     "typescript": "^6.0.2"
   }
 }
