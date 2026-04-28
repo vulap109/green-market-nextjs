@@ -8,7 +8,7 @@ import {
   getCreamCakeSizeOptions,
   getProductDisplayPricing,
   getSelectedCakeSizeOption
-} from "@/lib/product-detail";
+} from "@/lib/product-options";
 import { CART_ROUTE } from "@/lib/routes";
 import type { ProductRecord } from "@/lib/types";
 
@@ -56,7 +56,7 @@ export default function ProductPurchasePanel({ product }: ProductPurchasePanelPr
   }
 
   function handleAddToCart(): boolean {
-    const productId = product.id ?? product.Id;
+    const productId = product.id;
     if (productId === undefined || productId === null) {
       return false;
     }

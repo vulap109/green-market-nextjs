@@ -3,10 +3,11 @@ import path from "node:path";
 import { cache } from "react";
 import type {
   NewsArticle,
-  ProductDescriptionRecord,
   ProductRecord,
   ProvinceRecord
 } from "@/lib/types";
+import { prisma } from "@/lib/prisma";
+import { getProductRecordSelect, mapProductRecord } from "@/lib/product-record";
 
 async function readPublicJson<T>(relativePath: string): Promise<T> {
   const absolutePath = path.join(process.cwd(), "public", relativePath);
@@ -15,18 +16,22 @@ async function readPublicJson<T>(relativePath: string): Promise<T> {
 }
 
 export const getProductsData = cache(async (): Promise<ProductRecord[]> => {
-  const data = await readPublicJson<unknown>("data/products.json");
-  return Array.isArray(data) ? (data as ProductRecord[]) : [];
+  const products = await prisma.product.findMany({
+    where: {
+      status: "active"
+    },
+    select: getProductRecordSelect(),
+    orderBy: {
+      id: "asc"
+    }
+  });
+
+  return products.map((product) => mapProductRecord(product));
 });
 
 export const getNewsData = cache(async (): Promise<NewsArticle[]> => {
   const data = await readPublicJson<unknown>("data/news.json");
   return Array.isArray(data) ? (data as NewsArticle[]) : [];
-});
-
-export const getProductDescriptionsData = cache(async (): Promise<ProductDescriptionRecord[]> => {
-  const data = await readPublicJson<unknown>("data/product-descriptions.json");
-  return Array.isArray(data) ? (data as ProductDescriptionRecord[]) : [];
 });
 
 export const getVietnamAddressData = cache(async (): Promise<ProvinceRecord[]> => {

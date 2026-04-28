@@ -15,6 +15,7 @@ import {
   CART_ROUTE,
   HOME_ROUTE
 } from "@/lib/routes";
+import { getProductFinalPrice, getProductId } from "@/lib/products";
 import { buildProductSearchUrl, filterProductsByKeyword } from "@/lib/search";
 import type { ProductRecord } from "@/lib/types";
 
@@ -294,16 +295,15 @@ export default function AppHeader() {
                     searchResults.map((product) => {
                       const imageSrc = resolveAssetPath(product.img) || "/images/sp1.jpg";
                       const productName = product.name || "Sản phẩm";
-                      const price = formatProductMoney(
-                        product.finalprice || product.price || product.Price || 0
-                      );
+                      const price = formatProductMoney(getProductFinalPrice(product));
+                      const productId = getProductId(product);
 
                       return (
                         <Link
-                          key={String(product.id ?? product.Id ?? product.slug)}
+                          key={productId || String(product.slug)}
                           href={buildProductDetailUrl({
                             slug: product.slug,
-                            id: String(product.id ?? product.Id ?? "")
+                            id: productId
                           })}
                           onClick={() => setIsSearchOpen(false)}
                           className="flex items-center gap-3 px-4 py-3 transition hover:bg-gray-50"

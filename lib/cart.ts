@@ -1,5 +1,5 @@
 import { resolveAssetPath } from "@/lib/assets";
-import { getProductSlug } from "@/lib/products";
+import { getProductFinalPrice, getProductSlug } from "@/lib/products";
 import { buildProductDetailUrl } from "@/lib/routes";
 import type { CartItem, ProductRecord, ResolvedCartItem } from "@/lib/types";
 
@@ -146,7 +146,7 @@ function getCartItemPrice(product: ProductRecord | undefined, cartItem: CartItem
     return Number(cartItem.priceSnapshot) || 0;
   }
 
-  return Number(product?.price ?? product?.Price ?? 0);
+  return getProductFinalPrice(product);
 }
 
 export function findCartProduct(
@@ -154,7 +154,7 @@ export function findCartProduct(
   cartItem?: Partial<CartItem> | null
 ): ProductRecord | undefined {
   return productsData.find(
-    (productItem) => String(productItem.id ?? productItem.Id) === String(cartItem?.id || "")
+    (productItem) => String(productItem.id ?? "") === String(cartItem?.id || "")
   );
 }
 
@@ -189,7 +189,7 @@ export function resolveCartItems(
     const unitPrice = getCartItemUnitPrice(product, cartItem);
     const lineTotal = unitPrice * qty;
     const name = product?.name || `Sản phẩm #${id}`;
-    const sku = String(product?.sku ?? product?.SKU ?? "N/A");
+    const sku = String(product?.sku ?? "N/A");
     const image = resolveAssetPath(product?.img) || "/images/sp1.jpg";
     const productHref = product ? buildProductDetailUrl({ slug: getProductSlug(product) }) : "#";
 

@@ -279,7 +279,7 @@ export default function AllProductsCatalog({
           <div className="grid grid-cols-2 gap-4 sm:gap-6 xl:grid-cols-3">
             {catalogResult.items.length ? (
               catalogResult.items.map((product) => (
-                <ProductCard key={String(product.id ?? product.Id ?? product.slug)} product={product} />
+                <ProductCard key={String(product.id ?? product.slug)} product={product} />
               ))
             ) : (
               <div className="col-span-full rounded-2xl border border-dashed border-gray-200 bg-white px-6 py-12 text-center text-sm text-gray-500">

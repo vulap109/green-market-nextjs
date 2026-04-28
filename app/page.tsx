@@ -158,7 +158,7 @@ export default async function HomePage() {
             {shelf.items.length ? (
               <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
                 {shelf.items.map((product) => (
-                  <ProductCard key={String(product.id ?? product.Id ?? product.slug)} product={product} />
+                  <ProductCard key={String(product.id ?? product.slug)} product={product} />
                 ))}
               </div>
             ) : (

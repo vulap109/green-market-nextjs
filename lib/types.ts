@@ -1,16 +1,14 @@
 export type PrimitiveId = number | string;
 
 export type ProductRecord = {
-  Id?: PrimitiveId;
-  SKU?: string;
   category?: string;
+  description?: string;
   discount?: number | string;
   finalprice?: number;
   id?: PrimitiveId;
   img?: string;
   name?: string;
   price?: number;
-  Price?: number;
   sku?: string;
   slug?: string;
   subcategory?: string;
@@ -60,11 +58,6 @@ export type NewsArticle = {
   thumbnail?: string;
   thumbnailAlt?: string;
   title?: string;
-};
-
-export type ProductDescriptionRecord = {
-  category?: string;
-  descriptionhtml?: string;
 };
 
 export type CheckoutOrderItem = {

@@ -40,14 +40,14 @@ npm run check:utf8   # Verify UTF-8 content
 - `app/` - Next.js App Router pages, layout, metadata, and global CSS.
 - `components/` - UI and page-level React components.
 - `lib/` - Shared data loaders, cart logic, formatting, routes, and helpers.
-- `public/data/` - Product, news, address, and product-description data.
+- `public/data/` - News and address data.
 - `public/images/` - Static image assets used by products, banners, and articles.
 - `scripts/` - Maintenance scripts.
 
 ## Data Notes
 
-Product and catalog data are stored in `public/data/products.json`.
-Product descriptions are stored in `public/data/product-descriptions.json`.
+Product and catalog data are loaded from the database.
+Product descriptions are stored in the `Product.description` database field.
 News metadata is stored in `public/data/news.json`.
 News article bodies are stored in `public/data/news/*.html` and are loaded by
 the Next.js news routes.

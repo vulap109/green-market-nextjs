@@ -1,8 +1,8 @@
 import { filterProductsByKeyword } from "@/lib/search";
 import type { PageInfo, PrimitiveId, ProductQueryOptions, ProductRecord } from "@/lib/types";
 
-export function getProductIdentifier(product?: ProductRecord | null): string {
-  return String(product?.id ?? product?.Id ?? "");
+export function getProductId(product?: ProductRecord | null): string {
+  return String(product?.id ?? "");
 }
 
 export function getProductSlug(product?: ProductRecord | null): string {
@@ -19,7 +19,7 @@ export function getProductSlug(product?: ProductRecord | null): string {
 }
 
 export function getProductPrice(product?: ProductRecord | null): number {
-  return Number(product?.price ?? product?.Price ?? 0);
+  return Number(product?.price ?? 0);
 }
 
 export function getProductFinalPrice(product?: ProductRecord | null): number {
@@ -75,7 +75,7 @@ export function filterProducts(
 
   if (Array.isArray(options.ids) && options.ids.length > 0) {
     matches = options.ids
-      .map((id) => products.find((product) => getProductIdentifier(product) === String(id)))
+      .map((id) => products.find((product) => getProductId(product) === String(id)))
       .filter((product): product is ProductRecord => Boolean(product));
   }
 

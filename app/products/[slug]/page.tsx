@@ -7,10 +7,8 @@ import ProductDescription from "@/components/product/ProductDescription";
 import ProductPurchasePanel from "@/components/product/ProductPurchasePanel";
 import { resolveAssetPath } from "@/lib/assets";
 import { resolveCatalogLinkByCategory } from "@/lib/catalog";
-import { getProductDescriptionsData, getProductsData } from "@/lib/data";
 import {
-  findProductBySlugOrId,
-  getProductDescriptionHtml,
+  findProductBySlug,
   getSimilarProducts
 } from "@/lib/product-detail";
 import { HOME_ROUTE } from "@/lib/routes";
@@ -46,10 +44,7 @@ function ServiceItem({
 
 export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
   const routeParams = await params;
-  const products = await getProductsData();
-  const product = findProductBySlugOrId(products, {
-    slug: getRouteParamValue(routeParams.slug).toLowerCase()
-  });
+  const product = await findProductBySlug(getRouteParamValue(routeParams.slug));
 
   return {
     title: product?.name || "Thông Tin Sản Phẩm"
@@ -64,19 +59,15 @@ export default async function ProductPage({ params }: ProductPageProps) {
     notFound();
   }
 
-  const [products, descriptions] = await Promise.all([getProductsData(), getProductDescriptionsData()]);
-  const product = findProductBySlugOrId(products, {
-    slug: productSlug
-  });
+  const product = await findProductBySlug(productSlug);
 
   if (!product) {
     notFound();
   }
 
   const productImage = resolveAssetPath(product.img) || "/images/sp1.jpg";
-  const descriptionHtml =
-    getProductDescriptionHtml(product, descriptions) || "<p>Đang cập nhật mô tả sản phẩm.</p>";
-  const similarProducts = getSimilarProducts(product, products, 5);
+  const descriptionHtml = product.description?.trim() || "<p>Đang cập nhật mô tả sản phẩm.</p>";
+  const similarProducts = await getSimilarProducts(product, 5);
   const categoryCatalogLink = resolveCatalogLinkByCategory(product.category);
 
   return (
@@ -176,7 +167,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
               <div className="mt-6 grid grid-cols-2 gap-6 lg:grid-cols-5">
                 {similarProducts.map((similarProduct) => (
                   <ProductCard
-                    key={String(similarProduct.id ?? similarProduct.Id ?? similarProduct.slug)}
+                    key={String(similarProduct.id ?? similarProduct.slug)}
                     product={similarProduct}
                   />
                 ))}
