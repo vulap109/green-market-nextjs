@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS product (
     thumbnail           TEXT,
     meta_title          VARCHAR(255),
     meta_description    TEXT,
-    is_featured         BOOLEAN NOT NULL DEFAULT FALSE,
+    featured            VARCHAR(30) NOT NULL DEFAULT '',
     status              VARCHAR(30) NOT NULL DEFAULT 'draft' CHECK (status IN ('draft', 'active', 'out_of_stock', 'hidden')),
     published_at        TIMESTAMPTZ,
     created_at          TIMESTAMPTZ NOT NULL DEFAULT NOW(),

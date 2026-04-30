@@ -33,7 +33,7 @@ const homeShelfConfigs: HomeShelfConfig[] = [
     title: "Sản Phẩm Bán Chạy",
     badge: "HOT",
     ctaLabel: "Xem tất cả",
-    ctaHref: buildCollectionUrl({ category: "ban-chay-nhat" }),
+    ctaHref: buildCollectionUrl({ category: "ban-chay" }),
     ids: [19, 162, 1, 149, 105, 8, 13, 66]
   },
   {

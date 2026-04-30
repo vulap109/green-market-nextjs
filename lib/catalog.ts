@@ -10,8 +10,8 @@ export type CatalogFilterOption = {
   value: string;
 };
 
-export type ProductStatusCatalog = {
-  status: string;
+export type ProductFeaturedCatalog = {
+  featured: string;
   title: string;
 };
 
@@ -61,13 +61,13 @@ const subcategoryFilterByCategory: Record<string, CatalogFilterOption[]> = {
   ]
 };
 
-const productStatusCatalogByRouteCategory: Record<string, ProductStatusCatalog> = {
-  "ban-chay-nhat": {
-    status: "ban-chay-nhat",
+const productFeaturedCatalogByRouteCategory: Record<string, ProductFeaturedCatalog> = {
+  "ban-chay": {
+    featured: "ban-chay",
     title: "Sản Phẩm Bán Chạy"
   },
-  "khuyen-mai": {
-    status: "khuyen-mai",
+  "khuyen-mai-hot": {
+    featured: "khuyen-mai-hot",
     title: "Khuyến Mãi Hot"
   }
 };
@@ -130,14 +130,10 @@ export function getCatalogBanner(category?: string | null): CatalogBanner {
   return bannerImageByCategory[String(category || "").trim()] || defaultBanner;
 }
 
-export function getProductStatusCatalog(category?: string | null): ProductStatusCatalog | null {
+export function getProductFeaturedCatalog(category?: string | null): ProductFeaturedCatalog | null {
   const routeCategory = getCatalogRouteCategory(category);
-  const statusCatalog = productStatusCatalogByRouteCategory[routeCategory];
-  return statusCatalog ? { ...statusCatalog } : null;
-}
-
-export function getVisibleProductStatuses(): string[] {
-  return ["active", ...Object.values(productStatusCatalogByRouteCategory).map((catalog) => catalog.status)];
+  const featuredCatalog = productFeaturedCatalogByRouteCategory[routeCategory];
+  return featuredCatalog ? { ...featuredCatalog } : null;
 }
 
 export function buildCollectionUrl(options: CollectionUrlOptions = {}): string {

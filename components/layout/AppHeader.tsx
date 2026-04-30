@@ -30,7 +30,7 @@ type HeaderMenuItem = {
 
 const headerMenuItems: HeaderMenuItem[] = [
   {
-    href: buildCollectionUrl({ category: "ban-chay-nhat" }),
+    href: buildCollectionUrl({ category: "ban-chay" }),
     label: "Sản phẩm bán chạy",
     iconClassName: "fa-solid fa-bolt",
     itemClassName: "hover:border-red-100 hover:bg-red-50/80 hover:text-red-600",

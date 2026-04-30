@@ -1,6 +1,5 @@
 import { cache } from "react";
 import { prisma } from "@/lib/prisma";
-import { getVisibleProductStatuses } from "@/lib/catalog";
 import { getProductRecordSelect, mapProductRecord } from "@/lib/product-record";
 import { getProductId } from "@/lib/products";
 import type { Prisma } from "@/generated/prisma/client";
@@ -63,9 +62,7 @@ export const findProductBySlug = cache(async (slug?: string | null): Promise<Pro
   const product = await prisma.product.findFirst({
     where: {
       slug: productSlug,
-      status: {
-        in: getVisibleProductStatuses()
-      }
+      status: "active"
     },
     select: getProductRecordSelect({ includeCategoryName: true, includeDescription: true })
   });
@@ -78,9 +75,7 @@ export const findProductBySlug = cache(async (slug?: string | null): Promise<Pro
 export const findProductByCategory = cache(async (category?: string | null): Promise<ProductRecord[]> => {
   const productCategory = String(category || "").trim().toLowerCase();
   const where: Prisma.ProductWhereInput = {
-    status: {
-      in: getVisibleProductStatuses()
-    }
+    status: "active"
   };
 
   if (productCategory) {
@@ -109,16 +104,17 @@ export const findProductByCategory = cache(async (category?: string | null): Pro
   return products.map((product) => mapProductRecord(product));
 });
 
-export const findProductsByStatus = cache(async (status?: string | null): Promise<ProductRecord[]> => {
-  const productStatus = String(status || "").trim().toLowerCase();
+export const findProductsByFeatured = cache(async (featured?: string | null): Promise<ProductRecord[]> => {
+  const productFeatured = String(featured || "").trim().toLowerCase();
 
-  if (!productStatus) {
+  if (!productFeatured) {
     return [];
   }
 
   const products = await prisma.product.findMany({
     where: {
-      status: productStatus
+      featured: productFeatured,
+      status: "active"
     },
     select: getProductRecordSelect(),
     orderBy: {
@@ -139,9 +135,7 @@ export const getSimilarProducts = cache(async (product: ProductRecord | null, li
 
   const currentProductId = getProductId(product);
   const where: Prisma.ProductWhereInput = {
-    status: {
-      in: getVisibleProductStatuses()
-    },
+    status: "active",
     id: {
       not: currentProductId
     },

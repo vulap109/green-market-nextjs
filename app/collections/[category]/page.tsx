@@ -6,7 +6,7 @@ import {
   type CatalogFilterOption,
   getCatalogRouteCategory,
   getCatalogBanner,
-  getProductStatusCatalog,
+  getProductFeaturedCatalog,
   getSearchParamValue,
   sanitizeCatalogPage,
   sanitizeCatalogPriceRange,
@@ -16,7 +16,7 @@ import {
   type CategoryCatalogRecord,
   findCategoryBySlug,
   findProductByCategory,
-  findProductsByStatus
+  findProductsByFeatured
 } from "@/lib/product-detail";
 import { HOME_ROUTE } from "@/lib/routes";
 
@@ -44,21 +44,21 @@ function getSubcategoryOptions(category?: CategoryCatalogRecord | null): Catalog
 
 type CategoryPageContext = {
   productCategory: string;
-  productStatus: string;
+  productFeatured: string;
   routeCategory: string;
   subcategoryOptions: CatalogFilterOption[];
   title: string;
 };
 
 async function resolveCategoryPageContext(routeCategory: string): Promise<CategoryPageContext | null> {
-  const statusCatalog = getProductStatusCatalog(routeCategory);
-  if (statusCatalog) {
+  const featuredCatalog = getProductFeaturedCatalog(routeCategory);
+  if (featuredCatalog) {
     return {
       productCategory: "",
-      productStatus: statusCatalog.status,
+      productFeatured: featuredCatalog.featured,
       routeCategory,
       subcategoryOptions: getSubcategoryOptions(),
-      title: statusCatalog.title
+      title: featuredCatalog.title
     };
   }
 
@@ -69,7 +69,7 @@ async function resolveCategoryPageContext(routeCategory: string): Promise<Catego
 
   return {
     productCategory: category.slug,
-    productStatus: "",
+    productFeatured: "",
     routeCategory: category.slug,
     subcategoryOptions: getSubcategoryOptions(category),
     title: category.name
@@ -96,8 +96,8 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
 
   const [paramsValue, products] = await Promise.all([
     searchParams,
-    catalogContext.productStatus
-      ? findProductsByStatus(catalogContext.productStatus)
+    catalogContext.productFeatured
+      ? findProductsByFeatured(catalogContext.productFeatured)
       : findProductByCategory(catalogContext.productCategory)
   ]);
   const initialSubcategory = sanitizeCatalogSubcategoryValue(
