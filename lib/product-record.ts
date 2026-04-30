@@ -3,7 +3,9 @@ import type { ProductRecord } from "@/lib/types";
 
 type ProductRecordSource = Readonly<{
   category?: {
+    name?: string | null;
     parent?: {
+      name?: string | null;
       slug?: string | null;
     } | null;
     slug?: string | null;
@@ -22,6 +24,7 @@ type ProductRecordSource = Readonly<{
 }>;
 
 type MapProductRecordOptions = Readonly<{
+  includeCategoryName?: boolean;
   includeDescription?: boolean;
 }>;
 
@@ -37,9 +40,11 @@ export function getProductRecordSelect(options: MapProductRecordOptions = {}) {
     ...(options.includeDescription ? { description: true } : {}),
     category: {
       select: {
+        ...(options.includeCategoryName ? { name: true } : {}),
         slug: true,
         parent: {
           select: {
+            ...(options.includeCategoryName ? { name: true } : {}),
             slug: true
           }
         }
@@ -69,6 +74,7 @@ export function mapProductRecord(
   options: MapProductRecordOptions = {}
 ): ProductRecord {
   const category = product.category?.parent?.slug || product.category?.slug;
+  const categoryName = product.category?.parent?.name || product.category?.name;
   const subcategory = product.category?.slug;
   const price = Number(product.price ?? 0);
   const finalprice = Number(product.salePrice ?? product.price ?? 0);
@@ -83,6 +89,7 @@ export function mapProductRecord(
     finalprice,
     img: image || undefined,
     category: category || undefined,
+    ...(options.includeCategoryName ? { categoryName: categoryName || undefined } : {}),
     subcategory: subcategory || undefined,
     ...(options.includeDescription ? { description: product.description || undefined } : {})
   };

@@ -67,10 +67,12 @@ export const findProductBySlug = cache(async (slug?: string | null): Promise<Pro
         in: getVisibleProductStatuses()
       }
     },
-    select: getProductRecordSelect({ includeDescription: true })
+    select: getProductRecordSelect({ includeCategoryName: true, includeDescription: true })
   });
 
-  return product ? mapProductRecord(product, { includeDescription: true }) : null;
+  return product
+    ? mapProductRecord(product, { includeCategoryName: true, includeDescription: true })
+    : null;
 });
 
 export const findProductByCategory = cache(async (category?: string | null): Promise<ProductRecord[]> => {

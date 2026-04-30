@@ -8,7 +8,6 @@ import ProductPurchasePanel from "@/components/product/ProductPurchasePanel";
 import { resolveAssetPath } from "@/lib/assets";
 import { buildCollectionUrl } from "@/lib/catalog";
 import {
-  findCategoryBySlug,
   findProductBySlug,
   getSimilarProducts
 } from "@/lib/product-detail";
@@ -67,13 +66,10 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
   const productImage = resolveAssetPath(product.img);
   const descriptionHtml = product.description?.trim() || "<p>Đang cập nhật mô tả sản phẩm.</p>";
-  const [similarProducts, category] = await Promise.all([
-    getSimilarProducts(product, 5),
-    findCategoryBySlug(product.category)
-  ]);
+  const similarProducts = await getSimilarProducts(product, 5);
   const categoryCatalogLink = {
-    href: buildCollectionUrl({ category: category?.slug || product.category }),
-    title: category?.name || "Sản phẩm"
+    href: buildCollectionUrl({ category: product.category }),
+    title: product.categoryName || "Sản phẩm"
   };
 
   return (

@@ -2,6 +2,7 @@ export type PrimitiveId = number | string;
 
 export type ProductRecord = {
   category?: string;
+  categoryName?: string;
   description?: string;
   discount?: number | string;
   finalprice?: number;
