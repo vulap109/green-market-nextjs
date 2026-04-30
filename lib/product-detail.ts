@@ -1,18 +1,57 @@
 import { cache } from "react";
 import { prisma } from "@/lib/prisma";
+import { getVisibleProductStatuses } from "@/lib/catalog";
 import { getProductRecordSelect, mapProductRecord } from "@/lib/product-record";
 import { getProductId } from "@/lib/products";
 import type { Prisma } from "@/generated/prisma/client";
 import type { ProductRecord } from "@/lib/types";
 
-function toBigIntId(id?: string | number | null): bigint | null {
-  const idValue = String(id ?? "").trim();
-  if (!/^\d+$/.test(idValue)) {
+export type CategoryCatalogRecord = {
+  children: Array<{
+    name: string;
+    slug: string;
+  }>;
+  name: string;
+  slug: string;
+};
+
+export const findCategoryBySlug = cache(async (slug?: string | null): Promise<CategoryCatalogRecord | null> => {
+  const categorySlug = String(slug || "").trim().toLowerCase();
+
+  if (!categorySlug) {
     return null;
   }
 
-  return BigInt(idValue);
-}
+  const category = await prisma.category.findFirst({
+    where: {
+      isActive: true,
+      slug: categorySlug
+    },
+    select: {
+      children: {
+        where: {
+          isActive: true
+        },
+        select: {
+          name: true,
+          slug: true
+        },
+        orderBy: [
+          {
+            sortOrder: "asc"
+          },
+          {
+            id: "asc"
+          }
+        ]
+      },
+      name: true,
+      slug: true
+    }
+  });
+
+  return category;
+});
 
 export const findProductBySlug = cache(async (slug?: string | null): Promise<ProductRecord | null> => {
   const productSlug = String(slug || "").trim().toLowerCase();
@@ -24,12 +63,68 @@ export const findProductBySlug = cache(async (slug?: string | null): Promise<Pro
   const product = await prisma.product.findFirst({
     where: {
       slug: productSlug,
-      status: "active"
+      status: {
+        in: getVisibleProductStatuses()
+      }
     },
     select: getProductRecordSelect({ includeDescription: true })
   });
 
   return product ? mapProductRecord(product, { includeDescription: true }) : null;
+});
+
+export const findProductByCategory = cache(async (category?: string | null): Promise<ProductRecord[]> => {
+  const productCategory = String(category || "").trim().toLowerCase();
+  const where: Prisma.ProductWhereInput = {
+    status: {
+      in: getVisibleProductStatuses()
+    }
+  };
+
+  if (productCategory) {
+    where.category = {
+      OR: [
+        {
+          slug: productCategory
+        },
+        {
+          parent: {
+            slug: productCategory
+          }
+        }
+      ]
+    };
+  }
+
+  const products = await prisma.product.findMany({
+    where,
+    select: getProductRecordSelect(),
+    orderBy: {
+      id: "asc"
+    }
+  });
+
+  return products.map((product) => mapProductRecord(product));
+});
+
+export const findProductsByStatus = cache(async (status?: string | null): Promise<ProductRecord[]> => {
+  const productStatus = String(status || "").trim().toLowerCase();
+
+  if (!productStatus) {
+    return [];
+  }
+
+  const products = await prisma.product.findMany({
+    where: {
+      status: productStatus
+    },
+    select: getProductRecordSelect(),
+    orderBy: {
+      id: "asc"
+    }
+  });
+
+  return products.map((product) => mapProductRecord(product));
 });
 
 export const getSimilarProducts = cache(async (product: ProductRecord | null, limit = 5): Promise<ProductRecord[]> => {
@@ -40,16 +135,14 @@ export const getSimilarProducts = cache(async (product: ProductRecord | null, li
     return [];
   }
 
-  const currentProductId = toBigIntId(getProductId(product));
+  const currentProductId = getProductId(product);
   const where: Prisma.ProductWhereInput = {
-    status: "active",
-    ...(currentProductId
-      ? {
-          id: {
-            not: currentProductId
-          }
-        }
-      : {}),
+    status: {
+      in: getVisibleProductStatuses()
+    },
+    id: {
+      not: currentProductId
+    },
     category: {
       OR: [
         {

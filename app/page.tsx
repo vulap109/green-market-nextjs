@@ -2,10 +2,10 @@ import Link from "next/link";
 import ProductCard from "@/components/catalog/ProductCard";
 import HomeCarousel from "@/components/home/HomeCarousel";
 import NewsCard from "@/components/news/NewsCard";
+import { buildCollectionUrl } from "@/lib/catalog";
 import { getNewsData, getProductsData } from "@/lib/data";
 import { sortHighlightedNews } from "@/lib/news";
 import { queryProducts } from "@/lib/products";
-import { ALL_PRODUCTS_ROUTE } from "@/lib/routes";
 
 type HomeShelfConfig = {
   ctaHref: string;
@@ -33,25 +33,25 @@ const homeShelfConfigs: HomeShelfConfig[] = [
     title: "Sản Phẩm Bán Chạy",
     badge: "HOT",
     ctaLabel: "Xem tất cả",
-    ctaHref: `${ALL_PRODUCTS_ROUTE}?q=ban-chay-nhat`,
+    ctaHref: buildCollectionUrl({ category: "ban-chay-nhat" }),
     ids: [19, 162, 1, 149, 105, 8, 13, 66]
   },
   {
     title: "Giỏ Quà Trái Cây",
     ctaLabel: "Xem tất cả",
-    ctaHref: `${ALL_PRODUCTS_ROUTE}?q=gio-qua-trai-cay`,
+    ctaHref: buildCollectionUrl({ category: "fruit-basket" }),
     category: "fruit-basket"
   },
   {
     title: "Trái Cây Nhập Khẩu",
     ctaLabel: "Xem tất cả",
-    ctaHref: `${ALL_PRODUCTS_ROUTE}?q=trai-cay-nhap-khau`,
+    ctaHref: buildCollectionUrl({ category: "imported-fruits" }),
     category: "imported-fruits"
   },
   {
     title: "Bánh Kem",
     ctaLabel: "Xem tất cả",
-    ctaHref: `${ALL_PRODUCTS_ROUTE}?q=banh-kem`,
+    ctaHref: buildCollectionUrl({ category: "cream-cake" }),
     category: "cream-cake"
   }
 ];

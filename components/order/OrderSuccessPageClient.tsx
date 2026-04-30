@@ -20,7 +20,7 @@ import {
   ORDER_SUCCESS_STORAGE_KEY,
   ORDER_SUCCESS_UPDATED_EVENT
 } from "@/lib/order";
-import { ALL_PRODUCTS_ROUTE, CART_ROUTE, HOME_ROUTE } from "@/lib/routes";
+import { CART_ROUTE, HOME_ROUTE } from "@/lib/routes";
 import type { CheckoutOrder } from "@/lib/types";
 
 type FeedbackState = {
@@ -172,7 +172,7 @@ export default function OrderSuccessPageClient({ expectedCode }: OrderSuccessPag
           </div>
           <div className="flex flex-col gap-3 px-6 py-6 md:flex-row md:px-8">
             <Link
-              href={ALL_PRODUCTS_ROUTE}
+              href={HOME_ROUTE}
               className="inline-flex items-center justify-center gap-2 rounded-2xl bg-primary px-6 py-3 text-sm font-bold text-white transition hover:opacity-90"
             >
               <i className="fa-solid fa-bag-shopping" aria-hidden="true" />

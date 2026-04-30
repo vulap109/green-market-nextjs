@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ALL_PRODUCTS_ROUTE, HOME_ROUTE } from "@/lib/routes";
+import { HOME_ROUTE } from "@/lib/routes";
 
 export default function NotFoundPage() {
   return (
@@ -29,7 +29,7 @@ export default function NotFoundPage() {
                   Về trang chủ
                 </Link>
                 <Link
-                  href={ALL_PRODUCTS_ROUTE}
+                  href={HOME_ROUTE}
                   className="inline-flex items-center justify-center rounded-full border border-primary px-6 py-3 text-sm font-bold text-primary transition hover:bg-green-50"
                 >
                   Xem sản phẩm

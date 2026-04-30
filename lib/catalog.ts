@@ -1,5 +1,4 @@
-import type { PrimitiveId } from "@/lib/types";
-import { ALL_PRODUCTS_ROUTE } from "@/lib/routes";
+import { COLLECTIONS_ROUTE } from "@/lib/routes";
 
 export type CatalogBanner = {
   desktop: string;
@@ -11,24 +10,19 @@ export type CatalogFilterOption = {
   value: string;
 };
 
-type CatalogPreset = {
-  category?: string;
-  ids?: PrimitiveId[];
+export type ProductStatusCatalog = {
+  status: string;
   title: string;
 };
 
-type AllProductsUrlOptions = {
-  keyword?: string | null;
+type CollectionUrlOptions = {
+  category?: string | null;
   page?: number | null;
   priceRange?: string | null;
-  q?: string | null;
   subcategory?: string | null;
 };
 
-const DEFAULT_TITLE = "Tất Cả Sản Phẩm";
-const SEARCH_RESULT_TITLE = "Kết quả tìm kiếm";
-
-export const ALL_PRODUCTS_PAGE_SIZE = 9;
+export const CATALOG_PAGE_SIZE = 9;
 
 export const catalogPriceFilters: CatalogFilterOption[] = [
   { value: "", label: "Tất cả mức giá" },
@@ -67,34 +61,14 @@ const subcategoryFilterByCategory: Record<string, CatalogFilterOption[]> = {
   ]
 };
 
-const catalogPresetByQuery: Record<string, CatalogPreset> = {
+const productStatusCatalogByRouteCategory: Record<string, ProductStatusCatalog> = {
   "ban-chay-nhat": {
-    title: "Sản Phẩm Bán Chạy",
-    ids: [142, 3, 165, 157, 9, 11, 158, 15, 17, 18, 19, 162, 151, 149, 105, 8, 13, 66]
+    status: "ban-chay-nhat",
+    title: "Sản Phẩm Bán Chạy"
   },
   "khuyen-mai": {
-    title: "Khuyến Mãi Hot",
-    ids: [2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22]
-  },
-  "gio-qua-trai-cay": {
-    title: "Giỏ Quà Tặng Trái Cây",
-    category: "fruit-basket"
-  },
-  "qua-tang-thuc-pham": {
-    title: "Giỏ Quà Tặng Thực Phẩm",
-    category: "gift-box"
-  },
-  "trai-cay-nhap-khau": {
-    title: "Trái Cây Nhập Khẩu",
-    category: "imported-fruits"
-  },
-  "banh-kem": {
-    title: "Bánh Kem Thiết Kế",
-    category: "cream-cake"
-  },
-  "hoa-tuoi": {
-    title: "Hoa Tươi Nghệ Thuật",
-    category: "flowers"
+    status: "khuyen-mai",
+    title: "Khuyến Mãi Hot"
   }
 };
 
@@ -122,14 +96,19 @@ export function getCatalogSubcategoryOptions(category?: string | null): CatalogF
 }
 
 export function sanitizeCatalogSubcategory(category?: string | null, subcategory?: string | null): string {
+  return sanitizeCatalogSubcategoryValue(getCatalogSubcategoryOptions(category), subcategory);
+}
+
+export function sanitizeCatalogSubcategoryValue(
+  options: CatalogFilterOption[],
+  subcategory?: string | null
+): string {
   const requestedSubcategory = String(subcategory || "").trim();
   if (!requestedSubcategory) {
     return "";
   }
 
-  return getCatalogSubcategoryOptions(category).some((option) => option.value === requestedSubcategory)
-    ? requestedSubcategory
-    : "";
+  return options.some((option) => option.value === requestedSubcategory) ? requestedSubcategory : "";
 }
 
 export function sanitizeCatalogPriceRange(priceRange?: string | null): string {
@@ -143,53 +122,30 @@ export function sanitizeCatalogPriceRange(priceRange?: string | null): string {
     : "";
 }
 
-export function resolveCatalogContext(query?: string | null, keyword?: string | null) {
-  const normalizedQuery = String(query || "").trim().toLowerCase();
-  const normalizedKeyword = String(keyword || "").trim();
-  const preset = catalogPresetByQuery[normalizedQuery];
-  const category = String(preset?.category || "").trim();
-  const title = normalizedKeyword ? SEARCH_RESULT_TITLE : preset?.title || DEFAULT_TITLE;
-
-  return {
-    banner: bannerImageByCategory[category] || defaultBanner,
-    category,
-    ids: preset?.ids || null,
-    query: normalizedQuery,
-    subcategoryOptions: getCatalogSubcategoryOptions(category),
-    title
-  };
+export function getCatalogRouteCategory(category?: string | null): string {
+  return String(category || "").trim().toLowerCase();
 }
 
-export function resolveCatalogLinkByCategory(category?: string | null) {
-  const normalizedCategory = String(category || "").trim();
-  const matchedPresetEntry = Object.entries(catalogPresetByQuery).find(
-    ([, preset]) => String(preset.category || "").trim() === normalizedCategory
-  );
-  const query = matchedPresetEntry?.[0] || "";
-  const title = matchedPresetEntry?.[1]?.title || DEFAULT_TITLE;
-
-  return {
-    href: buildAllProductsUrl(query ? { q: query } : {}),
-    query,
-    title
-  };
+export function getCatalogBanner(category?: string | null): CatalogBanner {
+  return bannerImageByCategory[String(category || "").trim()] || defaultBanner;
 }
 
-export function buildAllProductsUrl(options: AllProductsUrlOptions = {}): string {
+export function getProductStatusCatalog(category?: string | null): ProductStatusCatalog | null {
+  const routeCategory = getCatalogRouteCategory(category);
+  const statusCatalog = productStatusCatalogByRouteCategory[routeCategory];
+  return statusCatalog ? { ...statusCatalog } : null;
+}
+
+export function getVisibleProductStatuses(): string[] {
+  return ["active", ...Object.values(productStatusCatalogByRouteCategory).map((catalog) => catalog.status)];
+}
+
+export function buildCollectionUrl(options: CollectionUrlOptions = {}): string {
   const params = new URLSearchParams();
-  const requestedQuery = String(options.q || "").trim();
-  const requestedKeyword = String(options.keyword || "").trim();
+  const requestedCategory = getCatalogRouteCategory(options.category);
   const requestedSubcategory = String(options.subcategory || "").trim();
   const requestedPriceRange = String(options.priceRange || "").trim();
   const requestedPage = sanitizeCatalogPage(options.page);
-
-  if (requestedQuery) {
-    params.set("q", requestedQuery);
-  }
-
-  if (requestedKeyword) {
-    params.set("keyword", requestedKeyword);
-  }
 
   if (requestedSubcategory) {
     params.set("subcategory", requestedSubcategory);
@@ -204,5 +160,7 @@ export function buildAllProductsUrl(options: AllProductsUrlOptions = {}): string
   }
 
   const queryString = params.toString();
-  return `${ALL_PRODUCTS_ROUTE}${queryString ? `?${queryString}` : ""}`;
+  const pathname = `${COLLECTIONS_ROUTE}/${encodeURIComponent(requestedCategory)}`;
+
+  return `${pathname}${queryString ? `?${queryString}` : ""}`;
 }

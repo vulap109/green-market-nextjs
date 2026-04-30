@@ -6,8 +6,9 @@ import ProductCard from "@/components/catalog/ProductCard";
 import ProductDescription from "@/components/product/ProductDescription";
 import ProductPurchasePanel from "@/components/product/ProductPurchasePanel";
 import { resolveAssetPath } from "@/lib/assets";
-import { resolveCatalogLinkByCategory } from "@/lib/catalog";
+import { buildCollectionUrl } from "@/lib/catalog";
 import {
+  findCategoryBySlug,
   findProductBySlug,
   getSimilarProducts
 } from "@/lib/product-detail";
@@ -60,15 +61,20 @@ export default async function ProductPage({ params }: ProductPageProps) {
   }
 
   const product = await findProductBySlug(productSlug);
-
   if (!product) {
     notFound();
   }
 
-  const productImage = resolveAssetPath(product.img) || "/images/sp1.jpg";
+  const productImage = resolveAssetPath(product.img);
   const descriptionHtml = product.description?.trim() || "<p>Đang cập nhật mô tả sản phẩm.</p>";
-  const similarProducts = await getSimilarProducts(product, 5);
-  const categoryCatalogLink = resolveCatalogLinkByCategory(product.category);
+  const [similarProducts, category] = await Promise.all([
+    getSimilarProducts(product, 5),
+    findCategoryBySlug(product.category)
+  ]);
+  const categoryCatalogLink = {
+    href: buildCollectionUrl({ category: category?.slug || product.category }),
+    title: category?.name || "Sản phẩm"
+  };
 
   return (
     <>

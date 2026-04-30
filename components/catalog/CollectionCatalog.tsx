@@ -4,29 +4,27 @@ import { useMemo, useRef, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import ProductCard from "@/components/catalog/ProductCard";
 import {
-  ALL_PRODUCTS_PAGE_SIZE,
-  buildAllProductsUrl,
+  CATALOG_PAGE_SIZE,
+  buildCollectionUrl,
   catalogPriceFilters,
-  resolveCatalogContext
+  type CatalogFilterOption
 } from "@/lib/catalog";
 import { queryProducts } from "@/lib/products";
 import type { ProductRecord } from "@/lib/types";
 
-type AllProductsCatalogProps = Readonly<{
-  initialKeyword: string;
+type CollectionCatalogProps = Readonly<{
   initialPage: number;
   initialPriceRange: string;
-  initialQuery: string;
   initialSubcategory: string;
   products: ProductRecord[];
+  routeCategory: string;
+  subcategoryOptions: CatalogFilterOption[];
   title: string;
 }>;
 
 type CatalogUrlState = {
-  keyword: string;
   page: number;
   priceRange: string;
-  queryValue: string;
   subcategory: string;
 };
 
@@ -77,40 +75,31 @@ function buildVisiblePages(currentPage: number, totalPages: number): number[] {
   return Array.from({ length: endPage - startPage + 1 }, (_, index) => startPage + index);
 }
 
-export default function AllProductsCatalog({
-  initialKeyword,
+export default function CollectionCatalog({
   initialPage,
   initialPriceRange,
-  initialQuery,
   initialSubcategory,
   products,
+  routeCategory,
+  subcategoryOptions,
   title
-}: AllProductsCatalogProps) {
+}: CollectionCatalogProps) {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
-  const [queryValue, setQueryValue] = useState(initialQuery);
-  const [keyword, setKeyword] = useState(initialKeyword);
   const [subcategory, setSubcategory] = useState(initialSubcategory);
   const [priceRange, setPriceRange] = useState(initialPriceRange);
   const [page, setPage] = useState(initialPage);
   const productListRef = useRef<HTMLDivElement | null>(null);
-  const catalogContext = useMemo(
-    () => resolveCatalogContext(queryValue, keyword),
-    [keyword, queryValue]
-  );
   const catalogResult = useMemo(
     () =>
       queryProducts(products, {
-        category: catalogContext.category,
-        ids: catalogContext.ids,
-        keyword,
-        limit: ALL_PRODUCTS_PAGE_SIZE,
+        limit: CATALOG_PAGE_SIZE,
         page,
         priceRange,
         subcategory
       }),
-    [catalogContext.category, catalogContext.ids, keyword, page, priceRange, products, subcategory]
+    [page, priceRange, products, subcategory]
   );
   const visiblePages = useMemo(
     () => buildVisiblePages(catalogResult.pageInfo.currentPage, catalogResult.pageInfo.totalPages),
@@ -131,30 +120,24 @@ export default function AllProductsCatalog({
     options: Readonly<{ replace?: boolean; scrollToList?: boolean }> = {}
   ) {
     const resolvedState: CatalogUrlState = {
-      keyword,
       page,
       priceRange,
-      queryValue,
       subcategory,
       ...nextState
     };
-    const nextUrl = buildAllProductsUrl({
-      keyword: resolvedState.keyword,
+    const nextUrl = buildCollectionUrl({
+      category: routeCategory,
       page: resolvedState.page,
       priceRange: resolvedState.priceRange,
-      q: resolvedState.queryValue,
       subcategory: resolvedState.subcategory
     });
-    const currentUrl = buildAllProductsUrl({
-      keyword,
+    const currentUrl = buildCollectionUrl({
+      category: routeCategory,
       page,
       priceRange,
-      q: queryValue,
       subcategory
     });
 
-    setQueryValue(resolvedState.queryValue);
-    setKeyword(resolvedState.keyword);
     setSubcategory(resolvedState.subcategory);
     setPriceRange(resolvedState.priceRange);
     setPage(resolvedState.page);
@@ -221,8 +204,8 @@ export default function AllProductsCatalog({
             >
               <div className="overflow-hidden px-6 lg:overflow-visible">
                 <ul className="space-y-3 pb-2 pt-2 text-xs font-bold text-gray-600">
-                  {catalogContext.subcategoryOptions.map((option) => (
-                    <li key={option.value || "all-products"}>
+                  {subcategoryOptions.map((option) => (
+                    <li key={option.value || "all-subcategories"}>
                       <FilterOptionButton
                         active={subcategory === option.value}
                         label={option.label}

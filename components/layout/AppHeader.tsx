@@ -7,11 +7,10 @@ import { useEffect, useRef, useState, type FormEvent } from "react";
 import productsData from "@/public/data/products.json";
 import { resolveAssetPath } from "@/lib/assets";
 import { CART_UPDATED_EVENT, getCart, getCartCount } from "@/lib/cart";
+import { buildCollectionUrl } from "@/lib/catalog";
 import { formatProductMoney } from "@/lib/format";
 import {
-  ALL_PRODUCTS_ROUTE,
   buildProductDetailUrl,
-  buildUrlWithQuery,
   CART_ROUTE,
   HOME_ROUTE
 } from "@/lib/routes";
@@ -31,15 +30,7 @@ type HeaderMenuItem = {
 
 const headerMenuItems: HeaderMenuItem[] = [
   {
-    href: ALL_PRODUCTS_ROUTE,
-    label: "Tất cả sản phẩm",
-    iconClassName: "fa-solid fa-border-all",
-    itemClassName: "hover:border-green-100 hover:bg-green-50/80 hover:text-primary",
-    iconWrapperClassName: "bg-green-50 text-primary group-hover:bg-white",
-    arrowHoverClassName: "group-hover:text-primary"
-  },
-  {
-    href: buildUrlWithQuery(ALL_PRODUCTS_ROUTE, { q: "ban-chay-nhat" }),
+    href: buildCollectionUrl({ category: "ban-chay-nhat" }),
     label: "Sản phẩm bán chạy",
     iconClassName: "fa-solid fa-bolt",
     itemClassName: "hover:border-red-100 hover:bg-red-50/80 hover:text-red-600",
@@ -47,7 +38,7 @@ const headerMenuItems: HeaderMenuItem[] = [
     arrowHoverClassName: "group-hover:text-red-500"
   },
   {
-    href: buildUrlWithQuery(ALL_PRODUCTS_ROUTE, { q: "gio-qua-trai-cay" }),
+    href: buildCollectionUrl({ category: "fruit-basket" }),
     label: "Giỏ quà trái cây",
     iconClassName: "fa-solid fa-gift",
     itemClassName: "hover:border-green-100 hover:bg-green-50/80 hover:text-primary",
@@ -55,7 +46,7 @@ const headerMenuItems: HeaderMenuItem[] = [
     arrowHoverClassName: "group-hover:text-primary"
   },
   {
-    href: buildUrlWithQuery(ALL_PRODUCTS_ROUTE, { q: "trai-cay-nhap-khau" }),
+    href: buildCollectionUrl({ category: "imported-fruits" }),
     label: "Trái cây nhập khẩu",
     iconClassName: "fa-solid fa-apple-whole",
     itemClassName: "hover:border-emerald-100 hover:bg-emerald-50/80 hover:text-emerald-700",
@@ -63,7 +54,7 @@ const headerMenuItems: HeaderMenuItem[] = [
     arrowHoverClassName: "group-hover:text-emerald-600"
   },
   {
-    href: buildUrlWithQuery(ALL_PRODUCTS_ROUTE, { q: "banh-kem" }),
+    href: buildCollectionUrl({ category: "cream-cake" }),
     label: "Bánh kem thiết kế",
     iconClassName: "fa-solid fa-cake-candles",
     itemClassName: "hover:border-amber-100 hover:bg-amber-50/80 hover:text-amber-700",
@@ -72,7 +63,7 @@ const headerMenuItems: HeaderMenuItem[] = [
     badge: "New"
   },
   {
-    href: buildUrlWithQuery(ALL_PRODUCTS_ROUTE, { q: "hoa-tuoi" }),
+    href: buildCollectionUrl({ category: "flowers" }),
     label: "Hoa tươi nghệ thuật",
     iconClassName: "fa-solid fa-spa",
     itemClassName: "hover:border-pink-100 hover:bg-pink-50/80 hover:text-pink-600",

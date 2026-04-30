@@ -28,7 +28,7 @@ function normalizeNewsContentHtml(contentHtml: string): string {
   return contentHtml
     .replace(/\s+onclick="toggleTOC\(\)"/g, ' data-news-action="toggle-toc"')
     .replace(
-      /\s+onclick="showAllProductsPage\('([^']+)'\)"/g,
+      /\s+onclick="showCollectionPage\('([^']+)'\)"/g,
       ' data-news-action="open-catalog" data-news-category="$1"'
     );
 }

@@ -1,8 +1,9 @@
 type QueryValue = string | number | null | undefined;
 
 export const HOME_ROUTE = "/";
-export const ALL_PRODUCTS_ROUTE = "/all-products";
+export const COLLECTIONS_ROUTE = "/collections";
 export const PRODUCT_ROUTE = "/products";
+export const SEARCH_ROUTE = "/search";
 export const CART_ROUTE = "/cart";
 export const CHECKOUT_ROUTE = "/check-out";
 export const ORDER_SUCCESS_ROUTE = "/order-success";

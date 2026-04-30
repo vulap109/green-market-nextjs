@@ -1,8 +1,8 @@
 import { filterProductsByKeyword } from "@/lib/search";
 import type { PageInfo, PrimitiveId, ProductQueryOptions, ProductRecord } from "@/lib/types";
 
-export function getProductId(product?: ProductRecord | null): string {
-  return String(product?.id ?? "");
+export function getProductId(product?: ProductRecord | null): number {
+  return Number(product?.id ?? 0);
 }
 
 export function getProductSlug(product?: ProductRecord | null): string {
@@ -75,7 +75,7 @@ export function filterProducts(
 
   if (Array.isArray(options.ids) && options.ids.length > 0) {
     matches = options.ids
-      .map((id) => products.find((product) => getProductId(product) === String(id)))
+      .map((id) => products.find((product) => getProductId(product) === id))
       .filter((product): product is ProductRecord => Boolean(product));
   }
 

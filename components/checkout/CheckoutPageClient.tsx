@@ -28,7 +28,7 @@ import {
   generateOrderCode,
   saveSuccessfulOrder
 } from "@/lib/order";
-import { ALL_PRODUCTS_ROUTE, CART_ROUTE, HOME_ROUTE } from "@/lib/routes";
+import { CART_ROUTE, HOME_ROUTE } from "@/lib/routes";
 import type {
   CartItem,
   CheckoutOrder,
@@ -619,7 +619,7 @@ export default function CheckoutPageClient({ addressData, products }: CheckoutPa
                     <i className="fa-solid fa-cart-shopping mb-3 text-3xl text-gray-300" aria-hidden="true" />
                     <p className="text-sm font-semibold text-gray-700">Giỏ hàng của bạn đang trống</p>
                     <Link
-                      href={ALL_PRODUCTS_ROUTE}
+                      href={HOME_ROUTE}
                       className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-red-600 transition-colors hover:text-red-700"
                     >
                       <i className="fa-solid fa-arrow-left" aria-hidden="true" />

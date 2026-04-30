@@ -5,7 +5,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { resolveNewsAssetPath } from "@/lib/assets";
-import { ALL_PRODUCTS_ROUTE, HOME_ROUTE, NEWS_ROUTE } from "@/lib/routes";
+import { buildCollectionUrl } from "@/lib/catalog";
+import { HOME_ROUTE, NEWS_ROUTE } from "@/lib/routes";
 import type { NewsArticle } from "@/lib/types";
 
 type FeedbackState = {
@@ -74,7 +75,7 @@ export default function NewsArticleClient({ article, contentHtml }: NewsArticleC
 
       if (action === "open-catalog") {
         const category = String(actionElement.dataset.newsCategory || "").trim();
-        router.push(`${ALL_PRODUCTS_ROUTE}?q=${encodeURIComponent(category)}`);
+        router.push(buildCollectionUrl({ category }));
       }
     }
 

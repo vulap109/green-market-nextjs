@@ -1,4 +1,4 @@
-import { ALL_PRODUCTS_ROUTE } from "@/lib/routes";
+import { SEARCH_ROUTE } from "@/lib/routes";
 import type { ProductRecord } from "@/lib/types";
 
 export const HEADER_SEARCH_DEBOUNCE_MS = 500;
@@ -42,5 +42,5 @@ export function buildProductSearchUrl(keyword?: string | null): string {
   }
 
   const queryString = params.toString();
-  return `${ALL_PRODUCTS_ROUTE}${queryString ? `?${queryString}` : ""}`;
+  return `${SEARCH_ROUTE}${queryString ? `?${queryString}` : ""}`;
 }
