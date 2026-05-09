@@ -1,9 +1,9 @@
 import { cache } from "react";
 import { prisma } from "@/lib/prisma";
 import { getProductRecordSelect, mapProductRecord } from "@/lib/product-record";
-import { getProductId } from "@/lib/products";
+import { getProductDiscount, getProductId } from "@/lib/products";
 import type { Prisma } from "@/generated/prisma/client";
-import type { ProductRecord } from "@/lib/types";
+import type { ProductCatalogResult, ProductRecord } from "@/lib/types";
 
 export type CategoryCatalogRecord = {
   children: Array<{
@@ -14,9 +14,146 @@ export type CategoryCatalogRecord = {
   slug: string;
 };
 
+type ProductCatalogQueryOptions = Readonly<{
+  category?: string | null;
+  featured?: string | null;
+  page?: number | null;
+  pageSize?: number | null;
+  priceRange?: string | null;
+  subcategory?: string | null;
+}>;
+
 function sanitizeProductTake(limit?: number | null): number | undefined {
   const take = Math.floor(Number(limit));
   return Number.isFinite(take) && take > 0 ? take : undefined;
+}
+
+function sanitizeProductPage(page?: number | null): number {
+  const requestedPage = Math.floor(Number(page) || 1);
+  return Number.isFinite(requestedPage) && requestedPage > 0 ? requestedPage : 1;
+}
+
+function normalizeCatalogValue(value?: string | null): string {
+  return String(value || "").trim().toLowerCase();
+}
+
+function applyProductCategoryWhere(
+  where: Prisma.ProductWhereInput,
+  category?: string | null,
+  subcategory?: string | null
+) {
+  const productCategory = normalizeCatalogValue(category);
+  const productSubcategory = normalizeCatalogValue(subcategory);
+
+  if (productSubcategory) {
+    where.category = productCategory
+      ? {
+          parent: {
+            slug: productCategory
+          },
+          slug: productSubcategory
+        }
+      : {
+          slug: productSubcategory
+        };
+    return;
+  }
+
+  if (productCategory) {
+    where.category = {
+      OR: [
+        {
+          slug: productCategory
+        },
+        {
+          parent: {
+            slug: productCategory
+          }
+        }
+      ]
+    };
+  }
+}
+
+function buildFinalPriceComparisonWhere(
+  minExclusive?: number,
+  maxInclusive?: number
+): Prisma.ProductWhereInput {
+  const comparison = {
+    ...(minExclusive === undefined ? {} : { gt: minExclusive }),
+    ...(maxInclusive === undefined ? {} : { lte: maxInclusive })
+  };
+
+  return {
+    OR: [
+      {
+        salePrice: {
+          not: null,
+          ...comparison
+        }
+      },
+      {
+        price: comparison,
+        salePrice: null
+      }
+    ]
+  };
+}
+
+function buildFinalPriceRangeWhere(priceRange?: string | null): Prisma.ProductWhereInput | null {
+  switch (String(priceRange || "").trim()) {
+    case "0-500k":
+      return buildFinalPriceComparisonWhere(undefined, 500000);
+    case "500k-1m":
+      return buildFinalPriceComparisonWhere(500000, 1000000);
+    case "1m-1_5m":
+      return buildFinalPriceComparisonWhere(1000000, 1500000);
+    case "1_5m-2m":
+      return buildFinalPriceComparisonWhere(1500000, 2000000);
+    case "2m-3m":
+      return buildFinalPriceComparisonWhere(2000000, 3000000);
+    case "3m-plus":
+      return buildFinalPriceComparisonWhere(3000000);
+    default:
+      return null;
+  }
+}
+
+function buildProductCatalogWhere(options: ProductCatalogQueryOptions): Prisma.ProductWhereInput {
+  const where: Prisma.ProductWhereInput = {
+    status: "active"
+  };
+  const productFeatured = normalizeCatalogValue(options.featured);
+  const priceRangeWhere = buildFinalPriceRangeWhere(options.priceRange);
+
+  if (productFeatured) {
+    where.featured = productFeatured;
+  }
+
+  applyProductCategoryWhere(where, options.category, options.subcategory);
+
+  if (priceRangeWhere) {
+    where.AND = [priceRangeWhere];
+  }
+
+  return where;
+}
+
+function buildProductPageInfo(
+  totalProducts: number,
+  options: Pick<ProductCatalogQueryOptions, "page" | "pageSize">
+) {
+  const pageSize = sanitizeProductTake(options.pageSize) ?? totalProducts;
+  const totalPages = totalProducts === 0 ? 0 : pageSize > 0 ? Math.ceil(totalProducts / pageSize) : 1;
+  const requestedPage = sanitizeProductPage(options.page);
+  const currentPage = totalPages === 0 ? 1 : Math.min(requestedPage, totalPages);
+
+  return {
+    currentPage,
+    pageSize,
+    totalPages,
+    totalProducts
+  };
 }
 
 export const findCategoryBySlug = cache(async (slug?: string | null): Promise<CategoryCatalogRecord | null> => {
@@ -79,26 +216,12 @@ export const findProductBySlug = cache(async (slug?: string | null): Promise<Pro
 
 export const findProductByCategory = cache(
   async (category?: string | null, limit?: number | null): Promise<ProductRecord[]> => {
-    const productCategory = String(category || "").trim().toLowerCase();
     const take = sanitizeProductTake(limit);
     const where: Prisma.ProductWhereInput = {
       status: "active"
     };
 
-    if (productCategory) {
-      where.category = {
-        OR: [
-          {
-            slug: productCategory
-          },
-          {
-            parent: {
-              slug: productCategory
-            }
-          }
-        ]
-      };
-    }
+    applyProductCategoryWhere(where, category);
 
     const products = await prisma.product.findMany({
       where,
@@ -110,6 +233,40 @@ export const findProductByCategory = cache(
     });
 
     return products.map((product) => mapProductRecord(product));
+  }
+);
+
+export const findProductCatalog = cache(
+  async (options: ProductCatalogQueryOptions = {}): Promise<ProductCatalogResult> => {
+    const where = buildProductCatalogWhere(options);
+    const totalProducts = await prisma.product.count({ where });
+    const pageInfo = buildProductPageInfo(totalProducts, options);
+    const products = totalProducts
+      ? await prisma.product.findMany({
+          where,
+          select: getProductRecordSelect(),
+          orderBy: {
+            id: "asc"
+          },
+          ...(pageInfo.pageSize > 0
+            ? {
+                skip: (pageInfo.currentPage - 1) * pageInfo.pageSize,
+                take: pageInfo.pageSize
+              }
+            : {})
+        })
+      : [];
+
+    return {
+      items: products.map((product) => {
+        const productRecord = mapProductRecord(product);
+        return {
+          ...productRecord,
+          discount: getProductDiscount(productRecord)
+        };
+      }),
+      pageInfo
+    };
   }
 );
 

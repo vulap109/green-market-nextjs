@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import CollectionCatalog from "@/components/catalog/CollectionCatalog";
 import {
+  CATALOG_PAGE_SIZE,
   type CatalogFilterOption,
   getCatalogRouteCategory,
   getCatalogBanner,
@@ -15,8 +16,7 @@ import {
 import {
   type CategoryCatalogRecord,
   findCategoryBySlug,
-  findProductByCategory,
-  findProductsByFeatured
+  findProductCatalog
 } from "@/lib/product-detail";
 import { HOME_ROUTE } from "@/lib/routes";
 
@@ -94,23 +94,26 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
     notFound();
   }
 
-  const [paramsValue, products] = await Promise.all([
-    searchParams,
-    catalogContext.productFeatured
-      ? findProductsByFeatured(catalogContext.productFeatured)
-      : findProductByCategory(catalogContext.productCategory)
-  ]);
+  const paramsValue = await searchParams;
   const initialSubcategory = sanitizeCatalogSubcategoryValue(
     catalogContext.subcategoryOptions,
     getSearchParamValue(paramsValue.subcategory)
   );
   const initialPriceRange = sanitizeCatalogPriceRange(getSearchParamValue(paramsValue.price));
   const initialPage = sanitizeCatalogPage(getSearchParamValue(paramsValue.page));
+  const catalogResult = await findProductCatalog({
+    category: catalogContext.productCategory,
+    featured: catalogContext.productFeatured,
+    page: initialPage,
+    pageSize: CATALOG_PAGE_SIZE,
+    priceRange: initialPriceRange,
+    subcategory: initialSubcategory
+  });
   const catalogStateKey = [
     catalogContext.routeCategory,
     initialSubcategory,
     initialPriceRange,
-    initialPage
+    catalogResult.pageInfo.currentPage
   ].join("|");
   const catalogBanner = getCatalogBanner(catalogContext.productCategory);
 
@@ -139,11 +142,11 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
 
       <CollectionCatalog
         key={catalogStateKey}
-        initialPage={initialPage}
+        catalogResult={catalogResult}
+        initialPage={catalogResult.pageInfo.currentPage}
         initialPriceRange={initialPriceRange}
         routeCategory={catalogContext.routeCategory}
         initialSubcategory={initialSubcategory}
-        products={products}
         subcategoryOptions={catalogContext.subcategoryOptions}
         title={catalogContext.title}
       />

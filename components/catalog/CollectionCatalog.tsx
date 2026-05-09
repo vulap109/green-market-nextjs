@@ -4,19 +4,17 @@ import { useMemo, useRef, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import ProductCard from "@/components/catalog/ProductCard";
 import {
-  CATALOG_PAGE_SIZE,
   buildCollectionUrl,
   catalogPriceFilters,
   type CatalogFilterOption
 } from "@/lib/catalog";
-import { queryProducts } from "@/lib/products";
-import type { ProductRecord } from "@/lib/types";
+import type { ProductCatalogResult } from "@/lib/types";
 
 type CollectionCatalogProps = Readonly<{
+  catalogResult: ProductCatalogResult;
   initialPage: number;
   initialPriceRange: string;
   initialSubcategory: string;
-  products: ProductRecord[];
   routeCategory: string;
   subcategoryOptions: CatalogFilterOption[];
   title: string;
@@ -76,10 +74,10 @@ function buildVisiblePages(currentPage: number, totalPages: number): number[] {
 }
 
 export default function CollectionCatalog({
+  catalogResult,
   initialPage,
   initialPriceRange,
   initialSubcategory,
-  products,
   routeCategory,
   subcategoryOptions,
   title
@@ -91,16 +89,6 @@ export default function CollectionCatalog({
   const [priceRange, setPriceRange] = useState(initialPriceRange);
   const [page, setPage] = useState(initialPage);
   const productListRef = useRef<HTMLDivElement | null>(null);
-  const catalogResult = useMemo(
-    () =>
-      queryProducts(products, {
-        limit: CATALOG_PAGE_SIZE,
-        page,
-        priceRange,
-        subcategory
-      }),
-    [page, priceRange, products, subcategory]
-  );
   const visiblePages = useMemo(
     () => buildVisiblePages(catalogResult.pageInfo.currentPage, catalogResult.pageInfo.totalPages),
     [catalogResult.pageInfo.currentPage, catalogResult.pageInfo.totalPages]

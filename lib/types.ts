@@ -1,12 +1,10 @@
-export type PrimitiveId = number | string;
-
 export type ProductRecord = {
   category?: string;
   categoryName?: string;
   description?: string;
   discount?: number | string;
   finalprice?: number;
-  id?: PrimitiveId;
+  id?: number | string;
   img?: string;
   name?: string;
   price?: number;
@@ -54,7 +52,7 @@ export type NewsArticle = {
   featured?: boolean;
   hero?: string;
   heroAlt?: string;
-  id?: PrimitiveId;
+  id?: number | string;
   slug?: string;
   thumbnail?: string;
   thumbnailAlt?: string;
@@ -115,12 +113,7 @@ export type PageInfo = {
   totalProducts: number;
 };
 
-export type ProductQueryOptions = {
-  category?: string | null;
-  ids?: PrimitiveId[] | null;
-  keyword?: string | null;
-  limit?: number | null;
-  page?: number | null;
-  priceRange?: string | null;
-  subcategory?: string | null;
+export type ProductCatalogResult = {
+  items: ProductRecord[];
+  pageInfo: PageInfo;
 };

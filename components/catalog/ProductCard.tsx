@@ -42,7 +42,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             alt="Flash sale"
             width={80}
             height={30}
-            className="absolute right-2 top-0 h-8 w-20 object-contain"
+            className="absolute right-2 top-0 object-contain"
           />
         ) : null}
       </Link>
