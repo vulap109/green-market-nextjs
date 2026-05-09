@@ -3,18 +3,27 @@ import ProductCard from "@/components/catalog/ProductCard";
 import HomeCarousel from "@/components/home/HomeCarousel";
 import NewsCard from "@/components/news/NewsCard";
 import { buildCollectionUrl } from "@/lib/catalog";
-import { getNewsData, getProductsData } from "@/lib/data";
+import { getNewsData } from "@/lib/data";
 import { sortHighlightedNews } from "@/lib/news";
-import { queryProducts } from "@/lib/products";
+import { findProductByCategory, findProductsByFeatured } from "@/lib/product-detail";
+import type { ProductRecord } from "@/lib/types";
 
-type HomeShelfConfig = {
+const HOME_SHELF_LIMIT = 8;
+
+type HomeShelfConfig = Readonly<{
   ctaHref: string;
-  ctaLabel: string;
-  ids?: number[];
-  category?: string;
   title: string;
   badge?: string;
-};
+} & (
+  | {
+      category: string;
+      featured?: never;
+    }
+  | {
+      category?: never;
+      featured: string;
+    }
+)>;
 
 type BenefitItem = {
   description: string;
@@ -32,29 +41,33 @@ const homeShelfConfigs: HomeShelfConfig[] = [
   {
     title: "Sản Phẩm Bán Chạy",
     badge: "HOT",
-    ctaLabel: "Xem tất cả",
     ctaHref: buildCollectionUrl({ category: "ban-chay" }),
-    ids: [19, 162, 1, 149, 105, 8, 13, 66]
+    featured: "ban-chay"
   },
   {
     title: "Giỏ Quà Trái Cây",
-    ctaLabel: "Xem tất cả",
     ctaHref: buildCollectionUrl({ category: "fruit-basket" }),
     category: "fruit-basket"
   },
   {
     title: "Trái Cây Nhập Khẩu",
-    ctaLabel: "Xem tất cả",
     ctaHref: buildCollectionUrl({ category: "imported-fruits" }),
     category: "imported-fruits"
   },
   {
     title: "Bánh Kem",
-    ctaLabel: "Xem tất cả",
     ctaHref: buildCollectionUrl({ category: "cream-cake" }),
     category: "cream-cake"
   }
 ];
+
+async function getHomeShelfProducts(config: HomeShelfConfig): Promise<ProductRecord[]> {
+  if (config.featured) {
+    return findProductsByFeatured(config.featured, HOME_SHELF_LIMIT);
+  }
+
+  return findProductByCategory(config.category, HOME_SHELF_LIMIT);
+}
 
 const benefitItems: BenefitItem[] = [
   {
@@ -100,12 +113,10 @@ const testimonials: Testimonial[] = [
 function SectionHeading({
   title,
   ctaHref,
-  ctaLabel,
   badge
 }: Readonly<{
   badge?: string;
   ctaHref: string;
-  ctaLabel: string;
   title: string;
 }>) {
   return (
@@ -122,7 +133,7 @@ function SectionHeading({
         href={ctaHref}
         className="flex items-center gap-2 text-xs font-bold uppercase text-primary hover:text-red-600"
       >
-        {ctaLabel}
+        Xem tất cả
         <i className="fa-solid fa-arrow-right text-[10px]" aria-hidden="true" />
       </Link>
     </div>
@@ -130,17 +141,16 @@ function SectionHeading({
 }
 
 export default async function HomePage() {
-  const allProducts = await getProductsData();
-  const newsItems = await getNewsData();
+  const [newsItems, homeShelves] = await Promise.all([
+    getNewsData(),
+    Promise.all(
+      homeShelfConfigs.map(async (config) => ({
+        ...config,
+        items: await getHomeShelfProducts(config)
+      }))
+    )
+  ]);
   const homeNewsItems = sortHighlightedNews(newsItems).slice(0, 3);
-  const homeShelves = homeShelfConfigs.map((config) => ({
-    ...config,
-    items: queryProducts(allProducts, {
-      ids: config.ids,
-      category: config.category,
-      limit: 8
-    }).items
-  }));
 
   return (
     <main className="pb-24">
@@ -153,7 +163,6 @@ export default async function HomePage() {
               title={shelf.title}
               badge={shelf.badge}
               ctaHref={shelf.ctaHref}
-              ctaLabel={shelf.ctaLabel}
             />
             {shelf.items.length ? (
               <div className="grid grid-cols-2 gap-6 md:grid-cols-4">

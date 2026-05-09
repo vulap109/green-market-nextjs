@@ -14,6 +14,11 @@ export type CategoryCatalogRecord = {
   slug: string;
 };
 
+function sanitizeProductTake(limit?: number | null): number | undefined {
+  const take = Math.floor(Number(limit));
+  return Number.isFinite(take) && take > 0 ? take : undefined;
+}
+
 export const findCategoryBySlug = cache(async (slug?: string | null): Promise<CategoryCatalogRecord | null> => {
   const categorySlug = String(slug || "").trim().toLowerCase();
 
@@ -72,58 +77,66 @@ export const findProductBySlug = cache(async (slug?: string | null): Promise<Pro
     : null;
 });
 
-export const findProductByCategory = cache(async (category?: string | null): Promise<ProductRecord[]> => {
-  const productCategory = String(category || "").trim().toLowerCase();
-  const where: Prisma.ProductWhereInput = {
-    status: "active"
-  };
-
-  if (productCategory) {
-    where.category = {
-      OR: [
-        {
-          slug: productCategory
-        },
-        {
-          parent: {
-            slug: productCategory
-          }
-        }
-      ]
-    };
-  }
-
-  const products = await prisma.product.findMany({
-    where,
-    select: getProductRecordSelect(),
-    orderBy: {
-      id: "asc"
-    }
-  });
-
-  return products.map((product) => mapProductRecord(product));
-});
-
-export const findProductsByFeatured = cache(async (featured?: string | null): Promise<ProductRecord[]> => {
-  const productFeatured = String(featured || "").trim().toLowerCase();
-
-  if (!productFeatured) {
-    return [];
-  }
-
-  const products = await prisma.product.findMany({
-    where: {
-      featured: productFeatured,
+export const findProductByCategory = cache(
+  async (category?: string | null, limit?: number | null): Promise<ProductRecord[]> => {
+    const productCategory = String(category || "").trim().toLowerCase();
+    const take = sanitizeProductTake(limit);
+    const where: Prisma.ProductWhereInput = {
       status: "active"
-    },
-    select: getProductRecordSelect(),
-    orderBy: {
-      id: "asc"
-    }
-  });
+    };
 
-  return products.map((product) => mapProductRecord(product));
-});
+    if (productCategory) {
+      where.category = {
+        OR: [
+          {
+            slug: productCategory
+          },
+          {
+            parent: {
+              slug: productCategory
+            }
+          }
+        ]
+      };
+    }
+
+    const products = await prisma.product.findMany({
+      where,
+      select: getProductRecordSelect(),
+      orderBy: {
+        id: "asc"
+      },
+      ...(take ? { take } : {})
+    });
+
+    return products.map((product) => mapProductRecord(product));
+  }
+);
+
+export const findProductsByFeatured = cache(
+  async (featured?: string | null, limit?: number | null): Promise<ProductRecord[]> => {
+    const productFeatured = String(featured || "").trim().toLowerCase();
+    const take = sanitizeProductTake(limit);
+
+    if (!productFeatured) {
+      return [];
+    }
+
+    const products = await prisma.product.findMany({
+      where: {
+        featured: productFeatured,
+        status: "active"
+      },
+      select: getProductRecordSelect(),
+      orderBy: {
+        id: "asc"
+      },
+      ...(take ? { take } : {})
+    });
+
+    return products.map((product) => mapProductRecord(product));
+  }
+);
 
 export const getSimilarProducts = cache(async (product: ProductRecord | null, limit = 5): Promise<ProductRecord[]> => {
   const category = String(product?.category || "").trim();

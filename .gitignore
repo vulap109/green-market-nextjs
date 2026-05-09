@@ -16,3 +16,4 @@ pnpm-debug.log*
 .env.production.local
 
 /generated/prisma
+*.tsbuildinfo
