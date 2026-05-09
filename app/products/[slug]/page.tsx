@@ -75,7 +75,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
   return (
     <>
-      <div className="bg-gray-50 py-3">
+      <div className="py-3">
         <div className="mx-auto max-w-7xl px-4 text-xs text-gray-500">
           <Link href={HOME_ROUTE} className="transition hover:text-primary">
             Trang Chủ
@@ -89,7 +89,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
         </div>
       </div>
 
-      <main className="mx-auto flex w-full max-w-7xl flex-1 flex-col px-4 py-8">
+      <main className="mx-auto flex w-full max-w-7xl flex-1 flex-col px-4 pb-8">
         <div className="relative flex flex-col gap-10 rounded-xl border border-gray-100 bg-white p-6 shadow-sm md:flex-row md:p-8">
           <div className="flex w-full flex-col gap-4 md:w-5/12">
             <div className="group relative aspect-square w-full cursor-crosshair overflow-hidden rounded-lg border border-gray-200">

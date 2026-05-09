@@ -42,7 +42,7 @@ const homeShelfConfigs: HomeShelfConfig[] = [
     title: "Sản Phẩm Bán Chạy",
     badge: "HOT",
     ctaHref: buildCollectionUrl({ category: "ban-chay" }),
-    featured: "ban-chay"
+    featured: "ban-chay1"
   },
   {
     title: "Giỏ Quà Trái Cây",
@@ -171,7 +171,7 @@ export default async function HomePage() {
                 ))}
               </div>
             ) : (
-              <div className="rounded-2xl border border-dashed border-gray-200 bg-gray-50 px-6 py-12 text-center text-sm text-gray-500">
+              <div className="rounded-2xl border border-dashed border-gray-200 bg-white px-6 py-12 text-center text-sm text-gray-500">
                 Chưa có sản phẩm để hiển thị.
               </div>
             )}
@@ -191,14 +191,14 @@ export default async function HomePage() {
               ))}
             </div>
           ) : (
-            <div className="rounded-2xl border border-dashed border-gray-200 bg-gray-50 px-6 py-12 text-center text-sm text-gray-500">
+            <div className="rounded-2xl border border-dashed border-gray-200 bg-white px-6 py-12 text-center text-sm text-gray-500">
               Chưa có bài viết nào để hiển thị.
             </div>
           )}
         </div>
       </section>
 
-      <section className="bg-gray-50 py-24">
+      <section className="py-24">
         <div className="mx-auto max-w-7xl px-4">
           <h2 className="mb-16 text-center text-2xl font-black uppercase tracking-[0.24em] text-primary">
             Tại Sao Chọn Chúng Tôi?

@@ -79,7 +79,7 @@ export default function StaticPageShell({
 }: StaticPageShellProps) {
   return (
     <>
-      <div className="border-b border-gray-200 bg-gray-50 py-3">
+      <div className="border-b border-gray-200 bg-gray-100 py-3">
         <div className="mx-auto max-w-7xl px-4 text-xs text-gray-500">
           {breadcrumbs.map((item, index) => (
             <span key={`${item.label}-${index}`}>

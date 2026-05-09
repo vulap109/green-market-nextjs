@@ -155,7 +155,7 @@ export default function NewsArticleClient({ article, contentHtml }: NewsArticleC
         </div>
       ) : null}
 
-      <div className="border-b border-gray-100 bg-gray-50 py-3">
+      <div className="border-b border-gray-100 py-3">
         <div className="mx-auto max-w-7xl px-4 text-xs text-gray-500">
           <Link href={HOME_ROUTE} className="transition hover:text-primary">
             Trang chủ
@@ -182,7 +182,7 @@ export default function NewsArticleClient({ article, contentHtml }: NewsArticleC
             </div>
           </header>
 
-          <figure className="relative mb-10 w-full overflow-hidden rounded-xl bg-gray-50">
+          <figure className="relative mb-10 w-full overflow-hidden rounded-xl">
             <div className="relative aspect-[16/9] w-full">
               <Image
                 src={heroImagePath}

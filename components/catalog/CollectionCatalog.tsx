@@ -160,7 +160,7 @@ export default function CollectionCatalog({
   }
 
   return (
-    <div className="bg-gray-50 pb-20">
+    <div className="pb-20">
       <div className="mx-auto flex max-w-7xl flex-col px-4 lg:flex-row lg:gap-8">
         <div className="w-full flex-shrink-0 pt-4 lg:w-64">
           <div className="overflow-hidden rounded-xl border border-gray-100 bg-white shadow-sm lg:sticky lg:top-32">

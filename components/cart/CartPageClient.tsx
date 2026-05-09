@@ -142,7 +142,7 @@ export default function CartPageClient({ products }: CartPageClientProps) {
         </div>
       ) : null}
 
-      <div className="border-b border-gray-200 bg-gray-50 py-3">
+      <div className="border-b border-gray-200 py-3">
         <div className="mx-auto max-w-7xl px-4 text-xs text-gray-500">
           <Link href={HOME_ROUTE} className="transition hover:text-primary">
             Trang Chủ
@@ -265,7 +265,7 @@ export default function CartPageClient({ products }: CartPageClientProps) {
               <span className="select-none text-sm font-medium text-gray-700">Xuất hóa đơn cho đơn hàng</span>
             </div>
 
-            <div className="rounded-lg border border-gray-100 bg-gray-50/50 p-4">
+            <div className="rounded-lg border border-gray-100 bg-white p-4">
               <label className="mb-2 block text-sm font-semibold text-gray-800">Ghi chú đơn hàng</label>
               <textarea
                 rows={4}

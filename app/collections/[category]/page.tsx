@@ -119,7 +119,7 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
 
   return (
     <>
-      <div className="bg-gray-50 py-3">
+      <div className="py-3">
         <div className="mx-auto max-w-7xl px-4 text-xs text-gray-500">
           <Link href={HOME_ROUTE} className="transition hover:text-primary">
             Trang Chủ
