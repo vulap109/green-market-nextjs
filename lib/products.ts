@@ -17,6 +17,10 @@ export function getProductSlug(product?: ProductRecord | null): string {
     .replace(/^-+|-+$/g, "");
 }
 
+export function getProductCollectionCategory(product?: ProductRecord | null): string {
+  return String(product?.parentCategory || product?.category || "").trim();
+}
+
 export function getProductPrice(product?: ProductRecord | null): number {
   return Number(product?.price ?? 0);
 }

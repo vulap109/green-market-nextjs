@@ -8,8 +8,8 @@
     "discount": 0.09,
     "finalprice": 500000,
     "img": "images/gio-trai-cay-tk181.jpg",
-    "category": "fruit-basket",
-    "subcategory": "fresh"
+    "category": "fresh",
+    "parentCategory": "fruit-basket"
   },
   {
     "id": 2,
@@ -20,8 +20,8 @@
     "discount": 0.07,
     "finalprice": 790000,
     "img": "images/hop-qua-trai-cay-tk183.jpg",
-    "category": "fruit-basket",
-    "subcategory": "box"
+    "category": "box",
+    "parentCategory": "fruit-basket"
   },
   {
     "id": 3,
@@ -32,8 +32,8 @@
     "discount": 0.1,
     "finalprice": 900000,
     "img": "images/gio-trai-cay-tk227.jpg",
-    "category": "fruit-basket",
-    "subcategory": "fresh"
+    "category": "fresh",
+    "parentCategory": "fruit-basket"
   },
   {
     "id": 4,
@@ -44,8 +44,8 @@
     "discount": 0.06,
     "finalprice": 3000000,
     "img": "images/gio-trai-cay-cat-tuong-tk233.jpg",
-    "category": "fruit-basket",
-    "subcategory": "fresh"
+    "category": "fresh",
+    "parentCategory": "fruit-basket"
   },
   {
     "id": 5,
@@ -56,8 +56,8 @@
     "discount": 0.09,
     "finalprice": 1000000,
     "img": "images/gio-trai-cay-kinh-vieng-tk248.jpg",
-    "category": "fruit-basket",
-    "subcategory": "funeral"
+    "category": "funeral",
+    "parentCategory": "fruit-basket"
   },
   {
     "id": 6,
@@ -68,8 +68,8 @@
     "discount": 0.125,
     "finalprice": 1400000,
     "img": "images/gio-trai-cay-kem-hoa-tuoi-tk235.jpg",
-    "category": "fruit-basket",
-    "subcategory": "fresh"
+    "category": "fresh",
+    "parentCategory": "fruit-basket"
   },
   {
     "id": 7,
@@ -80,8 +80,8 @@
     "discount": 0.03,
     "finalprice": 3000000,
     "img": "images/gio-trai-cay-kem-hoa-tuoi-size-dai-tk217.jpg",
-    "category": "fruit-basket",
-    "subcategory": "fresh"
+    "category": "fresh",
+    "parentCategory": "fruit-basket"
   },
   {
     "id": 8,
@@ -92,8 +92,8 @@
     "discount": 0,
     "finalprice": 850000,
     "img": "images/hoa-qua-vieng-vh8.jpg",
-    "category": "fruit-basket",
-    "subcategory": "funeral"
+    "category": "funeral",
+    "parentCategory": "fruit-basket"
   },
   {
     "id": 9,
@@ -104,8 +104,8 @@
     "discount": 0.08,
     "finalprice": 1100000,
     "img": "images/gio-trai-cay-kem-hoa-tuoi-tk218.jpg",
-    "category": "fruit-basket",
-    "subcategory": "fresh"
+    "category": "fresh",
+    "parentCategory": "fruit-basket"
   },
   {
     "id": 10,
@@ -116,8 +116,8 @@
     "discount": 0.03,
     "finalprice": 2500000,
     "img": "images/mam-ngu-qua-tk255.jpg",
-    "category": "fruit-basket",
-    "subcategory": "fresh"
+    "category": "fresh",
+    "parentCategory": "fruit-basket"
   },
   {
     "id": 11,
@@ -128,8 +128,8 @@
     "discount": 0.07,
     "finalprice": 6000000,
     "img": "images/gio-trai-cay-thuong-hang-tika-230.jpg",
-    "category": "fruit-basket",
-    "subcategory": "fresh"
+    "category": "fresh",
+    "parentCategory": "fruit-basket"
   },
   {
     "id": 12,
@@ -140,8 +140,8 @@
     "discount": 0.105,
     "finalprice": 1700000,
     "img": "images/gio-trai-cay-kem-hoa-tuoi-tk249.jpg",
-    "category": "fruit-basket",
-    "subcategory": "fresh"
+    "category": "fresh",
+    "parentCategory": "fruit-basket"
   },
   {
     "id": 13,
@@ -152,8 +152,8 @@
     "discount": 0.125,
     "finalprice": 350000,
     "img": "images/hop-qua-nho-sua-tk222.jpg",
-    "category": "fruit-basket",
-    "subcategory": "box"
+    "category": "box",
+    "parentCategory": "fruit-basket"
   },
   {
     "id": 14,
@@ -164,8 +164,8 @@
     "discount": 0,
     "finalprice": 1990000,
     "img": "images/hoa-qua-vieng-vh1.jpg",
-    "category": "fruit-basket",
-    "subcategory": "funeral"
+    "category": "funeral",
+    "parentCategory": "fruit-basket"
   },
   {
     "id": 15,
@@ -176,8 +176,8 @@
     "discount": 0,
     "finalprice": 850000,
     "img": "images/hoa-qua-vieng-vh4.jpg",
-    "category": "fruit-basket",
-    "subcategory": "funeral"
+    "category": "funeral",
+    "parentCategory": "fruit-basket"
   },
   {
     "id": 16,
@@ -188,8 +188,8 @@
     "discount": 0.08,
     "finalprice": 1100000,
     "img": "images/gio-trai-cay-kem-hoa-tuoi-tk119.jpg",
-    "category": "fruit-basket",
-    "subcategory": "fresh"
+    "category": "fresh",
+    "parentCategory": "fruit-basket"
   },
   {
     "id": 17,
@@ -200,8 +200,8 @@
     "discount": 0.05,
     "finalprice": 900000,
     "img": "images/gio-tao-envy-tk82.jpg",
-    "category": "fruit-basket",
-    "subcategory": "fresh"
+    "category": "fresh",
+    "parentCategory": "fruit-basket"
   },
   {
     "id": 18,
@@ -212,8 +212,8 @@
     "discount": 0.08,
     "finalprice": 1650000,
     "img": "images/gio-trai-cay-tk251.jpg",
-    "category": "fruit-basket",
-    "subcategory": "fresh"
+    "category": "fresh",
+    "parentCategory": "fruit-basket"
   },
   {
     "id": 19,
@@ -224,8 +224,8 @@
     "discount": 0.09,
     "finalprice": 1000000,
     "img": "images/gio-trai-cay-kinh-vieng-tk224.jpg",
-    "category": "fruit-basket",
-    "subcategory": "funeral"
+    "category": "funeral",
+    "parentCategory": "fruit-basket"
   },
   {
     "id": 20,
@@ -236,8 +236,8 @@
     "discount": 0,
     "finalprice": 1200000,
     "img": "images/hoa-qua-vieng-vh3.jpg",
-    "category": "fruit-basket",
-    "subcategory": "funeral"
+    "category": "funeral",
+    "parentCategory": "fruit-basket"
   },
   {
     "id": 21,
@@ -248,8 +248,8 @@
     "discount": 0,
     "finalprice": 2500000,
     "img": "images/hoa-qua-vieng-vh6.jpg",
-    "category": "fruit-basket",
-    "subcategory": "funeral"
+    "category": "funeral",
+    "parentCategory": "fruit-basket"
   },
   {
     "id": 22,
@@ -260,8 +260,8 @@
     "discount": 0.06,
     "finalprice": 1400000,
     "img": "images/gio-trai-cay-kem-hoa-tuoi-tk216.jpg",
-    "category": "fruit-basket",
-    "subcategory": "fresh"
+    "category": "fresh",
+    "parentCategory": "fruit-basket"
   },
   {
     "id": 23,
@@ -272,8 +272,8 @@
     "discount": 0.1,
     "finalprice": 900000,
     "img": "images/hop-qua-cherry-tk252.jpg",
-    "category": "fruit-basket",
-    "subcategory": "box"
+    "category": "box",
+    "parentCategory": "fruit-basket"
   },
   {
     "id": 24,
@@ -284,8 +284,8 @@
     "discount": 0.09,
     "finalprice": 1000000,
     "img": "images/gio-trai-cay-tk240.jpg",
-    "category": "fruit-basket",
-    "subcategory": "fresh"
+    "category": "fresh",
+    "parentCategory": "fruit-basket"
   },
   {
     "id": 25,
@@ -296,8 +296,8 @@
     "discount": 0.07,
     "finalprice": 1200000,
     "img": "images/gio-trai-cay-kem-hoa-tuoi-tk241.jpg",
-    "category": "fruit-basket",
-    "subcategory": "fresh"
+    "category": "fresh",
+    "parentCategory": "fruit-basket"
   },
   {
     "id": 26,
@@ -308,8 +308,8 @@
     "discount": 0.05,
     "finalprice": 1800000,
     "img": "images/gio-trai-cay-kem-hoa-tuoi-tk238.jpg",
-    "category": "fruit-basket",
-    "subcategory": "fresh"
+    "category": "fresh",
+    "parentCategory": "fruit-basket"
   },
   {
     "id": 27,
@@ -320,8 +320,8 @@
     "discount": 0.08,
     "finalprice": 2100000,
     "img": "images/gio-trai-cay-cao-cap-tk236.jpg",
-    "category": "fruit-basket",
-    "subcategory": "fresh"
+    "category": "fresh",
+    "parentCategory": "fruit-basket"
   },
   {
     "id": 28,
@@ -332,8 +332,8 @@
     "discount": 0,
     "finalprice": 999000,
     "img": "images/hoa-qua-vieng-vh7.jpg",
-    "category": "fruit-basket",
-    "subcategory": "funeral"
+    "category": "funeral",
+    "parentCategory": "fruit-basket"
   },
   {
     "id": 29,
@@ -344,8 +344,8 @@
     "discount": 0.08,
     "finalprice": 1100000,
     "img": "images/gio-trai-cay-kem-hoa-tuoi-tk225.jpg",
-    "category": "fruit-basket",
-    "subcategory": "fresh"
+    "category": "fresh",
+    "parentCategory": "fruit-basket"
   },
   {
     "id": 30,
@@ -356,8 +356,8 @@
     "discount": 0.09,
     "finalprice": 2000000,
     "img": "images/gio-trai-cay-kem-hoa-tuoi-tk250.jpg",
-    "category": "fruit-basket",
-    "subcategory": "fresh"
+    "category": "fresh",
+    "parentCategory": "fruit-basket"
   },
   {
     "id": 31,
@@ -368,8 +368,7 @@
     "discount": 0.15,
     "finalprice": 190000,
     "img": "images/le-han-quoc-evergood.jpg",
-    "category": "imported-fruits",
-    "subcategory": "imported-fruits"
+    "category": "imported-fruits"
   },
   {
     "id": 32,
@@ -380,8 +379,7 @@
     "discount": 0.22,
     "finalprice": 149000,
     "img": "images/tao-sunrise-my.jpg",
-    "category": "imported-fruits",
-    "subcategory": "imported-fruits"
+    "category": "imported-fruits"
   },
   {
     "id": 33,
@@ -392,8 +390,7 @@
     "discount": 0,
     "finalprice": 230000,
     "img": "images/dau-joy-joy.jpg",
-    "category": "imported-fruits",
-    "subcategory": "imported-fruits"
+    "category": "imported-fruits"
   },
   {
     "id": 34,
@@ -404,8 +401,7 @@
     "discount": 0.21,
     "finalprice": 199000,
     "img": "images/tao-dazzle.jpg",
-    "category": "imported-fruits",
-    "subcategory": "imported-fruits"
+    "category": "imported-fruits"
   },
   {
     "id": 35,
@@ -416,8 +412,7 @@
     "discount": 0,
     "finalprice": 450000,
     "img": "images/cherry-uc.jpg",
-    "category": "imported-fruits",
-    "subcategory": "imported-fruits"
+    "category": "imported-fruits"
   },
   {
     "id": 36,
@@ -428,8 +423,7 @@
     "discount": 0,
     "finalprice": 279000,
     "img": "images/kiwi-vang-dai-loan.jpg",
-    "category": "imported-fruits",
-    "subcategory": "imported-fruits"
+    "category": "imported-fruits"
   },
   {
     "id": 37,
@@ -440,8 +434,7 @@
     "discount": 0,
     "finalprice": 149000,
     "img": "images/cam-kieng.jpg",
-    "category": "imported-fruits",
-    "subcategory": "imported-fruits"
+    "category": "imported-fruits"
   },
   {
     "id": 38,
@@ -452,8 +445,7 @@
     "discount": 0,
     "finalprice": 199000,
     "img": "images/quyt-2ph.jpg",
-    "category": "imported-fruits",
-    "subcategory": "imported-fruits"
+    "category": "imported-fruits"
   },
   {
     "id": 39,
@@ -464,8 +456,7 @@
     "discount": 0,
     "finalprice": 299000,
     "img": "images/tao-envy-my.jpg",
-    "category": "imported-fruits",
-    "subcategory": "imported-fruits"
+    "category": "imported-fruits"
   },
   {
     "id": 40,
@@ -476,8 +467,7 @@
     "discount": 0,
     "finalprice": 139000,
     "img": "images/le-nam-phi.jpg",
-    "category": "imported-fruits",
-    "subcategory": "imported-fruits"
+    "category": "imported-fruits"
   },
   {
     "id": 41,
@@ -488,8 +478,7 @@
     "discount": 0,
     "finalprice": 129000,
     "img": "images/le-sua.jpg",
-    "category": "imported-fruits",
-    "subcategory": "imported-fruits"
+    "category": "imported-fruits"
   },
   {
     "id": 42,
@@ -500,8 +489,7 @@
     "discount": 0,
     "finalprice": 129000,
     "img": "images/dua-luoi-aladin-1.jpg",
-    "category": "imported-fruits",
-    "subcategory": "imported-fruits"
+    "category": "imported-fruits"
   },
   {
     "id": 43,
@@ -512,8 +500,7 @@
     "discount": 0,
     "finalprice": 369000,
     "img": "images/nho-xanh.jpg",
-    "category": "imported-fruits",
-    "subcategory": "imported-fruits"
+    "category": "imported-fruits"
   },
   {
     "id": 44,
@@ -524,8 +511,7 @@
     "discount": 0,
     "finalprice": 299000,
     "img": "images/nho-den.jpg",
-    "category": "imported-fruits",
-    "subcategory": "imported-fruits"
+    "category": "imported-fruits"
   },
   {
     "id": 45,
@@ -536,8 +522,7 @@
     "discount": 0,
     "finalprice": 299000,
     "img": "images/nho-do.jpg",
-    "category": "imported-fruits",
-    "subcategory": "imported-fruits"
+    "category": "imported-fruits"
   },
   {
     "id": 46,
@@ -548,8 +533,7 @@
     "discount": 0,
     "finalprice": 350000,
     "img": "images/nho-sua-dai-loan.jpg",
-    "category": "imported-fruits",
-    "subcategory": "imported-fruits"
+    "category": "imported-fruits"
   },
   {
     "id": 47,
@@ -560,8 +544,7 @@
     "discount": 0,
     "finalprice": 850000,
     "img": "images/nho-sua-han-quoc.jpg",
-    "category": "imported-fruits",
-    "subcategory": "imported-fruits"
+    "category": "imported-fruits"
   },
   {
     "id": 48,
@@ -572,8 +555,7 @@
     "discount": 0,
     "finalprice": 289000,
     "img": "images/kiwi-vang-new-zealand.jpg",
-    "category": "imported-fruits",
-    "subcategory": "imported-fruits"
+    "category": "imported-fruits"
   },
   {
     "id": 49,
@@ -584,8 +566,7 @@
     "discount": 0.09,
     "finalprice": 819000,
     "img": "images/flowers.jpg",
-    "category": "flowers",
-    "subcategory": "flowers"
+    "category": "flowers"
   },
   {
     "id": 50,
@@ -596,8 +577,7 @@
     "discount": 0.1,
     "finalprice": 711000,
     "img": "images/flowers.jpg",
-    "category": "flowers",
-    "subcategory": "flowers"
+    "category": "flowers"
   },
   {
     "id": 51,
@@ -608,8 +588,8 @@
     "discount": 0.08,
     "finalprice": 2200000,
     "img": "images/gio-trai-cay-kem-hoa-tuoi-tk254.jpg",
-    "category": "fruit-basket",
-    "subcategory": "fresh"
+    "category": "fresh",
+    "parentCategory": "fruit-basket"
   },
   {
     "id": 52,
@@ -620,8 +600,8 @@
     "discount": 0.05,
     "finalprice": 800000,
     "img": "images/gio-trai-cay-kem-hoa-tuoi-tk239.jpg",
-    "category": "fruit-basket",
-    "subcategory": "fresh"
+    "category": "fresh",
+    "parentCategory": "fruit-basket"
   },
   {
     "id": 53,
@@ -632,8 +612,8 @@
     "discount": 0.1,
     "finalprice": 1900000,
     "img": "images/thap-cam-dang-huong-tk172.jpg",
-    "category": "fruit-basket",
-    "subcategory": "funeral"
+    "category": "funeral",
+    "parentCategory": "fruit-basket"
   },
   {
     "id": 54,
@@ -644,8 +624,8 @@
     "discount": 0.06,
     "finalprice": 1500000,
     "img": "images/mam-le-tk01.jpg",
-    "category": "fruit-basket",
-    "subcategory": "funeral"
+    "category": "funeral",
+    "parentCategory": "fruit-basket"
   },
   {
     "id": 55,
@@ -656,8 +636,8 @@
     "discount": 0,
     "finalprice": 2900000,
     "img": "images/hoa-qua-vieng-vh2.jpg",
-    "category": "fruit-basket",
-    "subcategory": "funeral"
+    "category": "funeral",
+    "parentCategory": "fruit-basket"
   },
   {
     "id": 56,
@@ -668,8 +648,8 @@
     "discount": 0,
     "finalprice": 1500000,
     "img": "images/hoa-qua-vieng-vh10.jpg",
-    "category": "fruit-basket",
-    "subcategory": "funeral"
+    "category": "funeral",
+    "parentCategory": "fruit-basket"
   },
   {
     "id": 57,
@@ -680,8 +660,8 @@
     "discount": 0.06,
     "finalprice": 3000000,
     "img": "images/thap-tao-dang-huong-tk223.jpg",
-    "category": "fruit-basket",
-    "subcategory": "funeral"
+    "category": "funeral",
+    "parentCategory": "fruit-basket"
   },
   {
     "id": 58,
@@ -692,8 +672,8 @@
     "discount": 0,
     "finalprice": 4500000,
     "img": "images/hoa-qua-vieng-vh9.jpg",
-    "category": "fruit-basket",
-    "subcategory": "funeral"
+    "category": "funeral",
+    "parentCategory": "fruit-basket"
   },
   {
     "id": 59,
@@ -704,8 +684,8 @@
     "discount": 0.125,
     "finalprice": 350000,
     "img": "images/hop-qua-trai-cay-tk221.jpg",
-    "category": "fruit-basket",
-    "subcategory": "box"
+    "category": "box",
+    "parentCategory": "fruit-basket"
   },
   {
     "id": 60,
@@ -716,8 +696,8 @@
     "discount": 0.07,
     "finalprice": 1300000,
     "img": "images/gio-cherry-kem-hoa-tuoi-tk247.jpg",
-    "category": "fruit-basket",
-    "subcategory": "fresh"
+    "category": "fresh",
+    "parentCategory": "fruit-basket"
   },
   {
     "id": 61,
@@ -728,8 +708,8 @@
     "discount": 0,
     "finalprice": 1500000,
     "img": "images/hoa-qua-vieng-vh5.jpg",
-    "category": "fruit-basket",
-    "subcategory": "funeral"
+    "category": "funeral",
+    "parentCategory": "fruit-basket"
   },
   {
     "id": 62,
@@ -740,8 +720,8 @@
     "discount": 0.14,
     "finalprice": 600000,
     "img": "images/gio-trai-cay-tk219.jpg",
-    "category": "fruit-basket",
-    "subcategory": "fresh"
+    "category": "fresh",
+    "parentCategory": "fruit-basket"
   },
   {
     "id": 63,
@@ -752,8 +732,8 @@
     "discount": 0,
     "finalprice": 129000,
     "img": "images/cake/banh-kem-ll20.jpg",
-    "category": "cream-cake",
-    "subcategory": "ll"
+    "category": "ll",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 64,
@@ -764,8 +744,8 @@
     "discount": 0,
     "finalprice": 129000,
     "img": "images/cake/banh-kem-ll17.jpg",
-    "category": "cream-cake",
-    "subcategory": "ll"
+    "category": "ll",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 65,
@@ -776,8 +756,8 @@
     "discount": 0,
     "finalprice": 310000,
     "img": "images/cake/banh-kem-ht4.jpg",
-    "category": "cream-cake",
-    "subcategory": "ht"
+    "category": "ht",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 66,
@@ -788,8 +768,8 @@
     "discount": 0,
     "finalprice": 330000,
     "img": "images/cake/banh-kem-lq3.jpg",
-    "category": "cream-cake",
-    "subcategory": "lq"
+    "category": "lq",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 67,
@@ -800,8 +780,8 @@
     "discount": 0,
     "finalprice": 310000,
     "img": "images/cake/banh-kem-ht20.jpg",
-    "category": "cream-cake",
-    "subcategory": "ht"
+    "category": "ht",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 68,
@@ -812,8 +792,8 @@
     "discount": 0,
     "finalprice": 330000,
     "img": "images/cake/banh-kem-lq7.jpg",
-    "category": "cream-cake",
-    "subcategory": "lq"
+    "category": "lq",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 69,
@@ -824,8 +804,8 @@
     "discount": 0,
     "finalprice": 129000,
     "img": "images/cake/banh-kem-ll4.jpg",
-    "category": "cream-cake",
-    "subcategory": "ll"
+    "category": "ll",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 70,
@@ -836,8 +816,8 @@
     "discount": 0,
     "finalprice": 129000,
     "img": "images/cake/banh-kem-ll21.jpg",
-    "category": "cream-cake",
-    "subcategory": "ll"
+    "category": "ll",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 71,
@@ -848,8 +828,8 @@
     "discount": 0,
     "finalprice": 129000,
     "img": "images/cake/banh-kem-ll2.jpg",
-    "category": "cream-cake",
-    "subcategory": "ll"
+    "category": "ll",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 72,
@@ -860,8 +840,8 @@
     "discount": 0,
     "finalprice": 330000,
     "img": "images/cake/banh-kem-lq14.jpg",
-    "category": "cream-cake",
-    "subcategory": "lq"
+    "category": "lq",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 73,
@@ -872,8 +852,8 @@
     "discount": 0,
     "finalprice": 310000,
     "img": "images/cake/banh-kem-ht18.jpg",
-    "category": "cream-cake",
-    "subcategory": "ht"
+    "category": "ht",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 74,
@@ -884,8 +864,8 @@
     "discount": 0,
     "finalprice": 310000,
     "img": "images/cake/banh-kem-ht13.jpg",
-    "category": "cream-cake",
-    "subcategory": "ht"
+    "category": "ht",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 75,
@@ -896,8 +876,8 @@
     "discount": 0,
     "finalprice": 129000,
     "img": "images/cake/banh-kem-ll5.jpg",
-    "category": "cream-cake",
-    "subcategory": "ll"
+    "category": "ll",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 76,
@@ -908,8 +888,8 @@
     "discount": 0,
     "finalprice": 330000,
     "img": "images/cake/banh-kem-lq17.jpg",
-    "category": "cream-cake",
-    "subcategory": "lq"
+    "category": "lq",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 77,
@@ -920,8 +900,8 @@
     "discount": 0,
     "finalprice": 129000,
     "img": "images/cake/banh-kem-ll9.jpg",
-    "category": "cream-cake",
-    "subcategory": "ll"
+    "category": "ll",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 78,
@@ -932,8 +912,8 @@
     "discount": 0,
     "finalprice": 310000,
     "img": "images/cake/banh-kem-ht2.jpg",
-    "category": "cream-cake",
-    "subcategory": "ht"
+    "category": "ht",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 79,
@@ -944,8 +924,8 @@
     "discount": 0,
     "finalprice": 330000,
     "img": "images/cake/banh-kem-lq10.jpg",
-    "category": "cream-cake",
-    "subcategory": "lq"
+    "category": "lq",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 80,
@@ -956,8 +936,8 @@
     "discount": 0,
     "finalprice": 129000,
     "img": "images/cake/banh-kem-ll8.jpg",
-    "category": "cream-cake",
-    "subcategory": "ll"
+    "category": "ll",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 81,
@@ -968,8 +948,8 @@
     "discount": 0,
     "finalprice": 310000,
     "img": "images/cake/banh-kem-ht8.jpg",
-    "category": "cream-cake",
-    "subcategory": "ht"
+    "category": "ht",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 82,
@@ -980,8 +960,8 @@
     "discount": 0,
     "finalprice": 330000,
     "img": "images/cake/banh-kem-lq15.jpg",
-    "category": "cream-cake",
-    "subcategory": "lq"
+    "category": "lq",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 83,
@@ -992,8 +972,8 @@
     "discount": 0,
     "finalprice": 330000,
     "img": "images/cake/banh-kem-lq11.jpg",
-    "category": "cream-cake",
-    "subcategory": "lq"
+    "category": "lq",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 84,
@@ -1004,8 +984,8 @@
     "discount": 0,
     "finalprice": 310000,
     "img": "images/cake/banh-kem-ht3.jpg",
-    "category": "cream-cake",
-    "subcategory": "ht"
+    "category": "ht",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 85,
@@ -1016,8 +996,8 @@
     "discount": 0,
     "finalprice": 310000,
     "img": "images/cake/banh-kem-ht5.jpg",
-    "category": "cream-cake",
-    "subcategory": "ht"
+    "category": "ht",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 86,
@@ -1028,8 +1008,8 @@
     "discount": 0,
     "finalprice": 330000,
     "img": "images/cake/banh-kem-lq18.jpg",
-    "category": "cream-cake",
-    "subcategory": "lq"
+    "category": "lq",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 87,
@@ -1040,8 +1020,8 @@
     "discount": 0,
     "finalprice": 350000,
     "img": "images/cake/banh-kem-qd2.jpg",
-    "category": "cream-cake",
-    "subcategory": "qd"
+    "category": "qd",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 88,
@@ -1052,8 +1032,8 @@
     "discount": 0,
     "finalprice": 330000,
     "img": "images/cake/banh-kem-lq8.jpg",
-    "category": "cream-cake",
-    "subcategory": "lq"
+    "category": "lq",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 89,
@@ -1064,8 +1044,8 @@
     "discount": 0,
     "finalprice": 330000,
     "img": "images/cake/banh-kem-lq20.jpg",
-    "category": "cream-cake",
-    "subcategory": "lq"
+    "category": "lq",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 90,
@@ -1076,8 +1056,8 @@
     "discount": 0,
     "finalprice": 330000,
     "img": "images/cake/banh-kem-lq2.jpg",
-    "category": "cream-cake",
-    "subcategory": "lq"
+    "category": "lq",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 91,
@@ -1088,8 +1068,8 @@
     "discount": 0,
     "finalprice": 350000,
     "img": "images/cake/banh-kem-qd6.jpg",
-    "category": "cream-cake",
-    "subcategory": "qd"
+    "category": "qd",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 92,
@@ -1100,8 +1080,8 @@
     "discount": 0,
     "finalprice": 330000,
     "img": "images/cake/banh-kem-lq22.jpg",
-    "category": "cream-cake",
-    "subcategory": "lq"
+    "category": "lq",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 93,
@@ -1112,8 +1092,8 @@
     "discount": 0,
     "finalprice": 129000,
     "img": "images/cake/banh-kem-ll14.jpg",
-    "category": "cream-cake",
-    "subcategory": "ll"
+    "category": "ll",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 94,
@@ -1124,8 +1104,8 @@
     "discount": 0,
     "finalprice": 310000,
     "img": "images/cake/banh-kem-ht12.jpg",
-    "category": "cream-cake",
-    "subcategory": "ht"
+    "category": "ht",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 95,
@@ -1136,8 +1116,8 @@
     "discount": 0,
     "finalprice": 330000,
     "img": "images/cake/banh-kem-lq16.jpg",
-    "category": "cream-cake",
-    "subcategory": "lq"
+    "category": "lq",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 96,
@@ -1148,8 +1128,8 @@
     "discount": 0,
     "finalprice": 330000,
     "img": "images/cake/banh-kem-lq6.jpg",
-    "category": "cream-cake",
-    "subcategory": "lq"
+    "category": "lq",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 97,
@@ -1160,8 +1140,8 @@
     "discount": 0,
     "finalprice": 310000,
     "img": "images/cake/banh-kem-ht17.jpg",
-    "category": "cream-cake",
-    "subcategory": "ht"
+    "category": "ht",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 98,
@@ -1172,8 +1152,8 @@
     "discount": 0,
     "finalprice": 330000,
     "img": "images/cake/banh-kem-lq13.jpg",
-    "category": "cream-cake",
-    "subcategory": "lq"
+    "category": "lq",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 99,
@@ -1184,8 +1164,8 @@
     "discount": 0,
     "finalprice": 129000,
     "img": "images/cake/banh-kem-ll19.jpg",
-    "category": "cream-cake",
-    "subcategory": "ll"
+    "category": "ll",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 100,
@@ -1196,8 +1176,8 @@
     "discount": 0,
     "finalprice": 350000,
     "img": "images/cake/banh-kem-qd5.jpg",
-    "category": "cream-cake",
-    "subcategory": "qd"
+    "category": "qd",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 101,
@@ -1208,8 +1188,8 @@
     "discount": 0,
     "finalprice": 330000,
     "img": "images/cake/banh-kem-lq9.jpg",
-    "category": "cream-cake",
-    "subcategory": "lq"
+    "category": "lq",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 102,
@@ -1220,8 +1200,8 @@
     "discount": 0,
     "finalprice": 330000,
     "img": "images/cake/banh-kem-lq12.jpg",
-    "category": "cream-cake",
-    "subcategory": "lq"
+    "category": "lq",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 103,
@@ -1232,8 +1212,8 @@
     "discount": 0,
     "finalprice": 129000,
     "img": "images/cake/banh-kem-ll6.jpg",
-    "category": "cream-cake",
-    "subcategory": "ll"
+    "category": "ll",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 104,
@@ -1244,8 +1224,8 @@
     "discount": 0,
     "finalprice": 129000,
     "img": "images/cake/banh-kem-ll13.jpg",
-    "category": "cream-cake",
-    "subcategory": "ll"
+    "category": "ll",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 105,
@@ -1256,8 +1236,8 @@
     "discount": 0,
     "finalprice": 350000,
     "img": "images/cake/banh-kem-qd3.jpg",
-    "category": "cream-cake",
-    "subcategory": "qd"
+    "category": "qd",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 106,
@@ -1268,8 +1248,8 @@
     "discount": 0,
     "finalprice": 310000,
     "img": "images/cake/banh-kem-ht15.jpg",
-    "category": "cream-cake",
-    "subcategory": "ht"
+    "category": "ht",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 107,
@@ -1280,8 +1260,8 @@
     "discount": 0,
     "finalprice": 310000,
     "img": "images/cake/banh-kem-ht11.jpg",
-    "category": "cream-cake",
-    "subcategory": "ht"
+    "category": "ht",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 108,
@@ -1292,8 +1272,8 @@
     "discount": 0,
     "finalprice": 310000,
     "img": "images/cake/banh-kem-ht16.jpg",
-    "category": "cream-cake",
-    "subcategory": "ht"
+    "category": "ht",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 109,
@@ -1304,8 +1284,8 @@
     "discount": 0,
     "finalprice": 129000,
     "img": "images/cake/banh-kem-ll11.jpg",
-    "category": "cream-cake",
-    "subcategory": "ll"
+    "category": "ll",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 110,
@@ -1316,8 +1296,8 @@
     "discount": 0,
     "finalprice": 330000,
     "img": "images/cake/banh-kem-lq19.jpg",
-    "category": "cream-cake",
-    "subcategory": "lq"
+    "category": "lq",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 111,
@@ -1328,8 +1308,8 @@
     "discount": 0,
     "finalprice": 330000,
     "img": "images/cake/banh-kem-lq23.jpg",
-    "category": "cream-cake",
-    "subcategory": "lq"
+    "category": "lq",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 112,
@@ -1340,8 +1320,8 @@
     "discount": 0,
     "finalprice": 310000,
     "img": "images/cake/banh-kem-ht9.jpg",
-    "category": "cream-cake",
-    "subcategory": "ht"
+    "category": "ht",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 113,
@@ -1352,8 +1332,8 @@
     "discount": 0,
     "finalprice": 310000,
     "img": "images/cake/banh-kem-ht14.jpg",
-    "category": "cream-cake",
-    "subcategory": "ht"
+    "category": "ht",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 114,
@@ -1364,8 +1344,8 @@
     "discount": 0,
     "finalprice": 350000,
     "img": "images/cake/banh-kem-qd1.jpg",
-    "category": "cream-cake",
-    "subcategory": "qd"
+    "category": "qd",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 115,
@@ -1376,8 +1356,8 @@
     "discount": 0,
     "finalprice": 129000,
     "img": "images/cake/banh-kem-ll18.jpg",
-    "category": "cream-cake",
-    "subcategory": "ll"
+    "category": "ll",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 116,
@@ -1388,8 +1368,8 @@
     "discount": 0,
     "finalprice": 129000,
     "img": "images/cake/banh-kem-ll3.jpg",
-    "category": "cream-cake",
-    "subcategory": "ll"
+    "category": "ll",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 117,
@@ -1400,8 +1380,8 @@
     "discount": 0,
     "finalprice": 129000,
     "img": "images/cake/banh-kem-ll7.jpg",
-    "category": "cream-cake",
-    "subcategory": "ll"
+    "category": "ll",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 118,
@@ -1412,8 +1392,8 @@
     "discount": 0,
     "finalprice": 330000,
     "img": "images/cake/banh-kem-lq4.jpg",
-    "category": "cream-cake",
-    "subcategory": "lq"
+    "category": "lq",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 119,
@@ -1424,8 +1404,8 @@
     "discount": 0,
     "finalprice": 129000,
     "img": "images/cake/banh-kem-ll15.jpg",
-    "category": "cream-cake",
-    "subcategory": "ll"
+    "category": "ll",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 120,
@@ -1436,8 +1416,8 @@
     "discount": 0,
     "finalprice": 129000,
     "img": "images/cake/banh-kem-ll1.jpg",
-    "category": "cream-cake",
-    "subcategory": "ll"
+    "category": "ll",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 121,
@@ -1448,8 +1428,8 @@
     "discount": 0,
     "finalprice": 310000,
     "img": "images/cake/banh-kem-ht6.jpg",
-    "category": "cream-cake",
-    "subcategory": "ht"
+    "category": "ht",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 122,
@@ -1460,8 +1440,8 @@
     "discount": 0,
     "finalprice": 129000,
     "img": "images/cake/banh-kem-ll16.jpg",
-    "category": "cream-cake",
-    "subcategory": "ll"
+    "category": "ll",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 123,
@@ -1472,8 +1452,8 @@
     "discount": 0,
     "finalprice": 330000,
     "img": "images/cake/banh-kem-lq21.jpg",
-    "category": "cream-cake",
-    "subcategory": "lq"
+    "category": "lq",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 124,
@@ -1484,8 +1464,8 @@
     "discount": 0,
     "finalprice": 350000,
     "img": "images/cake/banh-kem-qd4.jpg",
-    "category": "cream-cake",
-    "subcategory": "qd"
+    "category": "qd",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 125,
@@ -1496,8 +1476,8 @@
     "discount": 0,
     "finalprice": 310000,
     "img": "images/cake/banh-kem-ht1.jpg",
-    "category": "cream-cake",
-    "subcategory": "ht"
+    "category": "ht",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 126,
@@ -1508,8 +1488,8 @@
     "discount": 0,
     "finalprice": 310000,
     "img": "images/cake/banh-kem-ht10.jpg",
-    "category": "cream-cake",
-    "subcategory": "ht"
+    "category": "ht",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 127,
@@ -1520,8 +1500,8 @@
     "discount": 0,
     "finalprice": 330000,
     "img": "images/cake/banh-kem-lq1.jpg",
-    "category": "cream-cake",
-    "subcategory": "lq"
+    "category": "lq",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 128,
@@ -1532,8 +1512,8 @@
     "discount": 0,
     "finalprice": 350000,
     "img": "images/cake/banh-kem-qd7.jpg",
-    "category": "cream-cake",
-    "subcategory": "qd"
+    "category": "qd",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 129,
@@ -1544,8 +1524,8 @@
     "discount": 0,
     "finalprice": 129000,
     "img": "images/cake/banh-kem-ll10.jpg",
-    "category": "cream-cake",
-    "subcategory": "ll"
+    "category": "ll",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 130,
@@ -1556,8 +1536,8 @@
     "discount": 0,
     "finalprice": 330000,
     "img": "images/cake/banh-kem-lq5.jpg",
-    "category": "cream-cake",
-    "subcategory": "lq"
+    "category": "lq",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 131,
@@ -1568,8 +1548,8 @@
     "discount": 0,
     "finalprice": 310000,
     "img": "images/cake/banh-kem-ht7.jpg",
-    "category": "cream-cake",
-    "subcategory": "ht"
+    "category": "ht",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 132,
@@ -1580,8 +1560,8 @@
     "discount": 0,
     "finalprice": 129000,
     "img": "images/cake/banh-kem-ll12.jpg",
-    "category": "cream-cake",
-    "subcategory": "ll"
+    "category": "ll",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 133,
@@ -1592,8 +1572,8 @@
     "discount": 0,
     "finalprice": 310000,
     "img": "images/cake/banh-kem-ht19.jpg",
-    "category": "cream-cake",
-    "subcategory": "ht"
+    "category": "ht",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 134,
@@ -1604,8 +1584,8 @@
     "discount": 0,
     "finalprice": 650000,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-tn1.jpg",
-    "category": "fruit-basket",
-    "subcategory": "fresh"
+    "category": "fresh",
+    "parentCategory": "fruit-basket"
   },
   {
     "id": 135,
@@ -1616,8 +1596,8 @@
     "discount": 0,
     "finalprice": 750000,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-tn2.jpg",
-    "category": "fruit-basket",
-    "subcategory": "fresh"
+    "category": "fresh",
+    "parentCategory": "fruit-basket"
   },
   {
     "id": 136,
@@ -1628,8 +1608,8 @@
     "discount": 0,
     "finalprice": 700000,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-tn3.jpg",
-    "category": "fruit-basket",
-    "subcategory": "fresh"
+    "category": "fresh",
+    "parentCategory": "fruit-basket"
   },
   {
     "id": 137,
@@ -1640,8 +1620,8 @@
     "discount": 0,
     "finalprice": 750000,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-tn4.jpg",
-    "category": "fruit-basket",
-    "subcategory": "fresh"
+    "category": "fresh",
+    "parentCategory": "fruit-basket"
   },
   {
     "id": 138,
@@ -1652,8 +1632,8 @@
     "discount": 0,
     "finalprice": 850000,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-tn5.jpg",
-    "category": "fruit-basket",
-    "subcategory": "fresh"
+    "category": "fresh",
+    "parentCategory": "fruit-basket"
   },
   {
     "id": 139,
@@ -1664,8 +1644,8 @@
     "discount": 0,
     "finalprice": 899000,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-tn6.jpg",
-    "category": "fruit-basket",
-    "subcategory": "fresh"
+    "category": "fresh",
+    "parentCategory": "fruit-basket"
   },
   {
     "id": 140,
@@ -1676,8 +1656,8 @@
     "discount": 0,
     "finalprice": 899000,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-tn8.jpg",
-    "category": "fruit-basket",
-    "subcategory": "fresh"
+    "category": "fresh",
+    "parentCategory": "fruit-basket"
   },
   {
     "id": 141,
@@ -1688,8 +1668,8 @@
     "discount": 0,
     "finalprice": 950000,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-tn9.jpg",
-    "category": "fruit-basket",
-    "subcategory": "fresh"
+    "category": "fresh",
+    "parentCategory": "fruit-basket"
   },
   {
     "id": 142,
@@ -1700,8 +1680,8 @@
     "discount": 0,
     "finalprice": 500000,
     "img": "images/fruit-basket/gio-trai-cay-tn10.jpg",
-    "category": "fruit-basket",
-    "subcategory": "fresh"
+    "category": "fresh",
+    "parentCategory": "fruit-basket"
   },
   {
     "id": 143,
@@ -1712,8 +1692,8 @@
     "discount": 0,
     "finalprice": 600000,
     "img": "images/fruit-basket/gio-trai-cay-tn11.jpg",
-    "category": "fruit-basket",
-    "subcategory": "fresh"
+    "category": "fresh",
+    "parentCategory": "fruit-basket"
   },
   {
     "id": 144,
@@ -1724,8 +1704,8 @@
     "discount": 0,
     "finalprice": 600000,
     "img": "images/fruit-basket/gio-trai-cay-tn12.jpg",
-    "category": "fruit-basket",
-    "subcategory": "fresh"
+    "category": "fresh",
+    "parentCategory": "fruit-basket"
   },
   {
     "id": 145,
@@ -1736,8 +1716,8 @@
     "discount": 0,
     "finalprice": 600000,
     "img": "images/fruit-basket/gio-trai-cay-tn13.jpg",
-    "category": "fruit-basket",
-    "subcategory": "fresh"
+    "category": "fresh",
+    "parentCategory": "fruit-basket"
   },
   {
     "id": 146,
@@ -1748,8 +1728,8 @@
     "discount": 0,
     "finalprice": 600000,
     "img": "images/fruit-basket/gio-trai-cay-tn14.jpg",
-    "category": "fruit-basket",
-    "subcategory": "fresh"
+    "category": "fresh",
+    "parentCategory": "fruit-basket"
   },
   {
     "id": 147,
@@ -1760,8 +1740,8 @@
     "discount": 0,
     "finalprice": 600000,
     "img": "images/fruit-basket/gio-trai-cay-tn15.jpg",
-    "category": "fruit-basket",
-    "subcategory": "fresh"
+    "category": "fresh",
+    "parentCategory": "fruit-basket"
   },
   {
     "id": 148,
@@ -1772,8 +1752,8 @@
     "discount": 0,
     "finalprice": 650000,
     "img": "images/fruit-basket/gio-trai-cay-tn16.jpg",
-    "category": "fruit-basket",
-    "subcategory": "fresh"
+    "category": "fresh",
+    "parentCategory": "fruit-basket"
   },
   {
     "id": 149,
@@ -1784,8 +1764,8 @@
     "discount": 0,
     "finalprice": 550000,
     "img": "images/fruit-basket/gio-trai-cay-tn17.jpg",
-    "category": "fruit-basket",
-    "subcategory": "fresh"
+    "category": "fresh",
+    "parentCategory": "fruit-basket"
   },
   {
     "id": 150,
@@ -1796,8 +1776,8 @@
     "discount": 0,
     "finalprice": 600000,
     "img": "images/fruit-basket/gio-trai-cay-tn18.jpg",
-    "category": "fruit-basket",
-    "subcategory": "fresh"
+    "category": "fresh",
+    "parentCategory": "fruit-basket"
   },
   {
     "id": 151,
@@ -1808,8 +1788,8 @@
     "discount": 0,
     "finalprice": 500000,
     "img": "images/fruit-basket/gio-trai-cay-tn25.jpg",
-    "category": "fruit-basket",
-    "subcategory": "fresh"
+    "category": "fresh",
+    "parentCategory": "fruit-basket"
   },
   {
     "id": 152,
@@ -1820,8 +1800,8 @@
     "discount": 0,
     "finalprice": 600000,
     "img": "images/fruit-basket/gio-trai-cay-tn26.jpg",
-    "category": "fruit-basket",
-    "subcategory": "fresh"
+    "category": "fresh",
+    "parentCategory": "fruit-basket"
   },
   {
     "id": 153,
@@ -1832,8 +1812,8 @@
     "discount": 0,
     "finalprice": 600000,
     "img": "images/fruit-basket/gio-trai-cay-tn27.jpg",
-    "category": "fruit-basket",
-    "subcategory": "fresh"
+    "category": "fresh",
+    "parentCategory": "fruit-basket"
   },
   {
     "id": 154,
@@ -1844,8 +1824,8 @@
     "discount": 0,
     "finalprice": 600000,
     "img": "images/fruit-basket/gio-trai-cay-tn28.jpg",
-    "category": "fruit-basket",
-    "subcategory": "fresh"
+    "category": "fresh",
+    "parentCategory": "fruit-basket"
   },
   {
     "id": 155,
@@ -1856,8 +1836,8 @@
     "discount": 0,
     "finalprice": 600000,
     "img": "images/fruit-basket/gio-trai-cay-tn30.jpg",
-    "category": "fruit-basket",
-    "subcategory": "fresh"
+    "category": "fresh",
+    "parentCategory": "fruit-basket"
   },
   {
     "id": 156,
@@ -1868,8 +1848,8 @@
     "discount": 0,
     "finalprice": 500000,
     "img": "images/fruit-basket/hop-qua-trai-cay-tn19.jpg",
-    "category": "fruit-basket",
-    "subcategory": "box"
+    "category": "box",
+    "parentCategory": "fruit-basket"
   },
   {
     "id": 157,
@@ -1880,8 +1860,8 @@
     "discount": 0,
     "finalprice": 450000,
     "img": "images/fruit-basket/hop-qua-trai-cay-tn20.jpg",
-    "category": "fruit-basket",
-    "subcategory": "box"
+    "category": "box",
+    "parentCategory": "fruit-basket"
   },
   {
     "id": 158,
@@ -1892,8 +1872,8 @@
     "discount": 0,
     "finalprice": 699000,
     "img": "images/fruit-basket/hop-qua-trai-cay-tn21.jpg",
-    "category": "fruit-basket",
-    "subcategory": "box"
+    "category": "box",
+    "parentCategory": "fruit-basket"
   },
   {
     "id": 159,
@@ -1904,8 +1884,8 @@
     "discount": 0,
     "finalprice": 1200000,
     "img": "images/fruit-basket/hop-qua-trai-cay-tn22.jpg",
-    "category": "fruit-basket",
-    "subcategory": "box"
+    "category": "box",
+    "parentCategory": "fruit-basket"
   },
   {
     "id": 160,
@@ -1916,8 +1896,8 @@
     "discount": 0,
     "finalprice": 999000,
     "img": "images/fruit-basket/hop-qua-trai-cay-tn23.jpg",
-    "category": "fruit-basket",
-    "subcategory": "box"
+    "category": "box",
+    "parentCategory": "fruit-basket"
   },
   {
     "id": 161,
@@ -1928,8 +1908,8 @@
     "discount": 0,
     "finalprice": 750000,
     "img": "images/fruit-basket/hop-qua-trai-cay-tn24.jpg",
-    "category": "fruit-basket",
-    "subcategory": "box"
+    "category": "box",
+    "parentCategory": "fruit-basket"
   },
   {
     "id": 162,
@@ -1940,8 +1920,8 @@
     "discount": 0,
     "finalprice": 450000,
     "img": "images/fruit-basket/hop-qua-trai-cay-tn29.jpg",
-    "category": "fruit-basket",
-    "subcategory": "box"
+    "category": "box",
+    "parentCategory": "fruit-basket"
   },
   {
     "id": 163,
@@ -1952,8 +1932,8 @@
     "discount": 0,
     "finalprice": 600000,
     "img": "images/fruit-basket/hop-qua-trai-cay-tn31.jpg",
-    "category": "fruit-basket",
-    "subcategory": "box"
+    "category": "box",
+    "parentCategory": "fruit-basket"
   },
   {
     "id": 164,
@@ -1964,8 +1944,8 @@
     "discount": 0,
     "finalprice": 899000,
     "img": "images/fruit-basket/hop-qua-trai-cay-tn7.jpg",
-    "category": "fruit-basket",
-    "subcategory": "box"
+    "category": "box",
+    "parentCategory": "fruit-basket"
   },
   {
     "id": 165,
@@ -1976,8 +1956,8 @@
     "discount": 0,
     "finalprice": 129000,
     "img": "images/cake/banh-kem-tot-nghiep-yv1.jpg",
-    "category": "cream-cake",
-    "subcategory": "yv"
+    "category": "yv",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 166,
@@ -1988,8 +1968,8 @@
     "discount": 0,
     "finalprice": 129000,
     "img": "images/cake/banh-kem-tot-nghiep-yv2.jpg",
-    "category": "cream-cake",
-    "subcategory": "yv"
+    "category": "yv",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 167,
@@ -2000,8 +1980,8 @@
     "discount": 0,
     "finalprice": 129000,
     "img": "images/cake/banh-kem-tot-nghiep-yv3.jpg",
-    "category": "cream-cake",
-    "subcategory": "yv"
+    "category": "yv",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 168,
@@ -2012,8 +1992,8 @@
     "discount": 0,
     "finalprice": 129000,
     "img": "images/cake/banh-kem-tot-nghiep-yv4.jpg",
-    "category": "cream-cake",
-    "subcategory": "yv"
+    "category": "yv",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 169,
@@ -2024,8 +2004,8 @@
     "discount": 0,
     "finalprice": 129000,
     "img": "images/cake/banh-kem-tot-nghiep-yv5.jpg",
-    "category": "cream-cake",
-    "subcategory": "yv"
+    "category": "yv",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 170,
@@ -2036,8 +2016,8 @@
     "discount": 0,
     "finalprice": 129000,
     "img": "images/cake/banh-kem-tot-nghiep-yv6.jpg",
-    "category": "cream-cake",
-    "subcategory": "yv"
+    "category": "yv",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 171,
@@ -2048,8 +2028,8 @@
     "discount": 0,
     "finalprice": 129000,
     "img": "images/cake/banh-kem-tot-nghiep-yv7.jpg",
-    "category": "cream-cake",
-    "subcategory": "yv"
+    "category": "yv",
+    "parentCategory": "cream-cake"
   },
   {
     "id": 172,
@@ -2060,7 +2040,7 @@
     "discount": 0,
     "finalprice": 129000,
     "img": "images/cake/banh-kem-tot-nghiep-yv8.jpg",
-    "category": "cream-cake",
-    "subcategory": "yv"
+    "category": "yv",
+    "parentCategory": "cream-cake"
   }
 ]

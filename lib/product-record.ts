@@ -73,9 +73,10 @@ export function mapProductRecord(
   product: ProductRecordSource,
   options: MapProductRecordOptions = {}
 ): ProductRecord {
-  const category = product.category?.parent?.slug || product.category?.slug;
-  const categoryName = product.category?.parent?.name || product.category?.name;
-  const subcategory = product.category?.slug;
+  const category = product.category?.slug;
+  const categoryName = product.category?.name;
+  const parentCategory = product.category?.parent?.slug;
+  const parentCategoryName = product.category?.parent?.name;
   const price = Number(product.price ?? 0);
   const finalprice = Number(product.salePrice ?? product.price ?? 0);
   const image = product.thumbnail || product.images?.[0]?.imageUrl;
@@ -90,7 +91,8 @@ export function mapProductRecord(
     img: image || undefined,
     category: category || undefined,
     ...(options.includeCategoryName ? { categoryName: categoryName || undefined } : {}),
-    subcategory: subcategory || undefined,
+    parentCategory: parentCategory || undefined,
+    ...(options.includeCategoryName ? { parentCategoryName: parentCategoryName || undefined } : {}),
     ...(options.includeDescription ? { description: product.description || undefined } : {})
   };
 }

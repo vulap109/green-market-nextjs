@@ -11,6 +11,7 @@ import {
   findProductBySlug,
   getSimilarProducts
 } from "@/lib/product-detail";
+import { getProductCollectionCategory } from "@/lib/products";
 import { HOME_ROUTE } from "@/lib/routes";
 
 type ProductPageProps = Readonly<{
@@ -68,8 +69,8 @@ export default async function ProductPage({ params }: ProductPageProps) {
   const descriptionHtml = product.description?.trim() || "<p>Đang cập nhật mô tả sản phẩm.</p>";
   const similarProducts = await getSimilarProducts(product, 5);
   const categoryCatalogLink = {
-    href: buildCollectionUrl({ category: product.category }),
-    title: product.categoryName || "Sản phẩm"
+    href: buildCollectionUrl({ category: getProductCollectionCategory(product) }),
+    title: product.parentCategoryName || product.categoryName || "Sản phẩm"
   };
 
   return (

@@ -1,7 +1,7 @@
 import { cache } from "react";
 import { prisma } from "@/lib/prisma";
 import { getProductRecordSelect, mapProductRecord } from "@/lib/product-record";
-import { getProductDiscount, getProductId } from "@/lib/products";
+import { getProductCollectionCategory, getProductDiscount, getProductId } from "@/lib/products";
 import type { Prisma } from "@/generated/prisma/client";
 import type { ProductCatalogResult, ProductRecord } from "@/lib/types";
 
@@ -18,9 +18,9 @@ type ProductCatalogQueryOptions = Readonly<{
   category?: string | null;
   featured?: string | null;
   page?: number | null;
+  parentCategory?: string | null;
   pageSize?: number | null;
   priceRange?: string | null;
-  subcategory?: string | null;
 }>;
 
 function sanitizeProductTake(limit?: number | null): number | undefined {
@@ -39,35 +39,35 @@ function normalizeCatalogValue(value?: string | null): string {
 
 function applyProductCategoryWhere(
   where: Prisma.ProductWhereInput,
-  category?: string | null,
-  subcategory?: string | null
+  parentCategory?: string | null,
+  category?: string | null
 ) {
+  const productParentCategory = normalizeCatalogValue(parentCategory);
   const productCategory = normalizeCatalogValue(category);
-  const productSubcategory = normalizeCatalogValue(subcategory);
 
-  if (productSubcategory) {
-    where.category = productCategory
+  if (productCategory) {
+    where.category = productParentCategory
       ? {
           parent: {
-            slug: productCategory
+            slug: productParentCategory
           },
-          slug: productSubcategory
+          slug: productCategory
         }
       : {
-          slug: productSubcategory
+          slug: productCategory
         };
     return;
   }
 
-  if (productCategory) {
+  if (productParentCategory) {
     where.category = {
       OR: [
         {
-          slug: productCategory
+          slug: productParentCategory
         },
         {
           parent: {
-            slug: productCategory
+            slug: productParentCategory
           }
         }
       ]
@@ -130,7 +130,7 @@ function buildProductCatalogWhere(options: ProductCatalogQueryOptions): Prisma.P
     where.featured = productFeatured;
   }
 
-  applyProductCategoryWhere(where, options.category, options.subcategory);
+  applyProductCategoryWhere(where, options.parentCategory, options.category);
 
   if (priceRangeWhere) {
     where.AND = [priceRangeWhere];
@@ -296,7 +296,7 @@ export const findProductsByFeatured = cache(
 );
 
 export const getSimilarProducts = cache(async (product: ProductRecord | null, limit = 5): Promise<ProductRecord[]> => {
-  const category = String(product?.category || "").trim();
+  const category = getProductCollectionCategory(product);
   const take = Math.max(Math.floor(Number(limit) || 0), 0);
 
   if (!product || !category || take === 0) {

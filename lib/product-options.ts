@@ -37,7 +37,7 @@ const CREAM_CAKE_SIZES: Record<string, CakeSizeOption[]> = {
 };
 
 export function getCreamCakeSizeOptions(product?: ProductRecord | null): CakeSizeOption[] {
-  if (!product || product.category !== "cream-cake") {
+  if (!product || (product.parentCategory || product.category) !== "cream-cake") {
     return [];
   }
 

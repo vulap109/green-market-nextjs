@@ -7,10 +7,11 @@ export type ProductRecord = {
   id?: number | string;
   img?: string;
   name?: string;
+  parentCategory?: string;
+  parentCategoryName?: string;
   price?: number;
   sku?: string;
   slug?: string;
-  subcategory?: string;
 };
 
 export type CakeSizeOption = {

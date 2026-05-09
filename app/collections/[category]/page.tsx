@@ -102,12 +102,12 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
   const initialPriceRange = sanitizeCatalogPriceRange(getSearchParamValue(paramsValue.price));
   const initialPage = sanitizeCatalogPage(getSearchParamValue(paramsValue.page));
   const catalogResult = await findProductCatalog({
-    category: catalogContext.productCategory,
+    category: initialSubcategory,
     featured: catalogContext.productFeatured,
     page: initialPage,
+    parentCategory: catalogContext.productCategory,
     pageSize: CATALOG_PAGE_SIZE,
-    priceRange: initialPriceRange,
-    subcategory: initialSubcategory
+    priceRange: initialPriceRange
   });
   const catalogStateKey = [
     catalogContext.routeCategory,
