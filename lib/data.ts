@@ -7,7 +7,7 @@ import type {
   ProvinceRecord
 } from "@/lib/types";
 import { prisma } from "@/lib/prisma";
-import { getProductRecordSelect, mapProductRecord } from "@/lib/product-record";
+import { getProductRecordSelect, mapProductRecord, productRecordOrderBy } from "@/lib/product-record";
 
 async function readPublicJson<T>(relativePath: string): Promise<T> {
   const absolutePath = path.join(process.cwd(), "public", relativePath);
@@ -21,9 +21,7 @@ export const getProductsData = cache(async (): Promise<ProductRecord[]> => {
       status: "active"
     },
     select: getProductRecordSelect(),
-    orderBy: {
-      id: "asc"
-    }
+    orderBy: productRecordOrderBy
   });
 
   return products.map((product) => mapProductRecord(product));

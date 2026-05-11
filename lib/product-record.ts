@@ -20,6 +20,7 @@ type ProductRecordSource = Readonly<{
   salePrice?: unknown;
   sku?: string | null;
   slug?: string | null;
+  sortOrder?: number | null;
   thumbnail?: string | null;
 }>;
 
@@ -27,6 +28,15 @@ type MapProductRecordOptions = Readonly<{
   includeCategoryName?: boolean;
   includeDescription?: boolean;
 }>;
+
+export const productRecordOrderBy = [
+  {
+    sortOrder: "asc" as const
+  },
+  {
+    id: "asc" as const
+  }
+] satisfies Prisma.ProductOrderByWithRelationInput[];
 
 export function getProductRecordSelect(options: MapProductRecordOptions = {}) {
   return {
@@ -36,6 +46,7 @@ export function getProductRecordSelect(options: MapProductRecordOptions = {}) {
     name: true,
     price: true,
     salePrice: true,
+    sortOrder: true,
     thumbnail: true,
     ...(options.includeDescription ? { description: true } : {}),
     category: {
@@ -88,6 +99,7 @@ export function mapProductRecord(
     name: product.name || undefined,
     price,
     finalprice,
+    sortOrder: product.sortOrder ?? undefined,
     img: image || undefined,
     category: category || undefined,
     ...(options.includeCategoryName ? { categoryName: categoryName || undefined } : {}),

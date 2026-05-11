@@ -68,6 +68,7 @@ model Product {
   metaTitle        String?        @map("meta_title") @db.VarChar(255)
   metaDescription  String?        @map("meta_description") @db.Text
   featured         String         @default("") @db.VarChar(30)
+  sortOrder        Int            @default(0) @map("sort_order")
   status           String         @default("draft") @db.VarChar(30)
   publishedAt      DateTime?      @map("published_at") @db.Timestamptz(6)
   createdAt        DateTime       @default(now()) @map("created_at") @db.Timestamptz(6)

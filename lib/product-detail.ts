@@ -1,6 +1,6 @@
 import { cache } from "react";
 import { prisma } from "@/lib/prisma";
-import { getProductRecordSelect, mapProductRecord } from "@/lib/product-record";
+import { getProductRecordSelect, mapProductRecord, productRecordOrderBy } from "@/lib/product-record";
 import { getProductCollectionCategory, getProductDiscount, getProductId } from "@/lib/products";
 import type { Prisma } from "@/generated/prisma/client";
 import type { ProductCatalogResult, ProductRecord } from "@/lib/types";
@@ -226,9 +226,7 @@ export const findProductByCategory = cache(
     const products = await prisma.product.findMany({
       where,
       select: getProductRecordSelect(),
-      orderBy: {
-        id: "asc"
-      },
+      orderBy: productRecordOrderBy,
       ...(take ? { take } : {})
     });
 
@@ -245,9 +243,7 @@ export const findProductCatalog = cache(
       ? await prisma.product.findMany({
           where,
           select: getProductRecordSelect(),
-          orderBy: {
-            id: "asc"
-          },
+          orderBy: productRecordOrderBy,
           ...(pageInfo.pageSize > 0
             ? {
                 skip: (pageInfo.currentPage - 1) * pageInfo.pageSize,
@@ -285,9 +281,7 @@ export const findProductsByFeatured = cache(
         status: "active"
       },
       select: getProductRecordSelect(),
-      orderBy: {
-        id: "asc"
-      },
+      orderBy: productRecordOrderBy,
       ...(take ? { take } : {})
     });
 
@@ -325,9 +319,7 @@ export const getSimilarProducts = cache(async (product: ProductRecord | null, li
   const products = await prisma.product.findMany({
     where,
     select: getProductRecordSelect(),
-    orderBy: {
-      id: "asc"
-    },
+    orderBy: productRecordOrderBy,
     take
   });
 

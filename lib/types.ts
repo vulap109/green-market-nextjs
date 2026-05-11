@@ -12,6 +12,7 @@ export type ProductRecord = {
   price?: number;
   sku?: string;
   slug?: string;
+  sortOrder?: number;
 };
 
 export type CakeSizeOption = {

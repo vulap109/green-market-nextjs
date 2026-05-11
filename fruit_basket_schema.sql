@@ -79,6 +79,7 @@ CREATE TABLE IF NOT EXISTS product (
     meta_title          VARCHAR(255),
     meta_description    TEXT,
     featured            VARCHAR(30) NOT NULL DEFAULT '',
+    sort_order          INTEGER NOT NULL DEFAULT 0,
     status              VARCHAR(30) NOT NULL DEFAULT 'draft' CHECK (status IN ('draft', 'active', 'out_of_stock', 'hidden')),
     published_at        TIMESTAMPTZ,
     created_at          TIMESTAMPTZ NOT NULL DEFAULT NOW(),
