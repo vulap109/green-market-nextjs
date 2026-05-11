@@ -7,6 +7,7 @@ export const ORDER_SUCCESS_UPDATED_EVENT = "order:success-updated";
 export const EMAILJS_PUBLIC_KEY = "pRg2xzuGVPHOs4IN-";
 export const EMAILJS_SERVICE_ID = "service_fresh_fruit";
 export const EMAILJS_TEMPLATE_ID = "template_tygr3dw";
+export const EMAILJS_CONSULTATION_TEMPLATE_ID = "template_1cv4a91";
 
 export const BANK_TRANSFER_INFO = {
   accountName: "LY VAN HUNG",
@@ -128,6 +129,20 @@ export function buildVietQrImageUrl(order?: Partial<CheckoutOrder> | null): stri
   });
 
   return `https://img.vietqr.io/image/${BANK_TRANSFER_INFO.bankId}-${BANK_TRANSFER_INFO.accountNumber}-${BANK_TRANSFER_INFO.qrTemplate}.png?${params.toString()}`;
+}
+
+type ConsultationEmailRequest = {
+  message: string;
+  name: string;
+  phone: string;
+};
+
+export function buildConsultationEmailTemplateParams(request: ConsultationEmailRequest) {
+  return {
+    message: request.message,
+    name: request.name,
+    phone: request.phone
+  };
 }
 
 export function buildOrderEmailTemplateParams(order: CheckoutOrder) {

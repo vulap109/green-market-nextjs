@@ -23,12 +23,12 @@ import { formatProductMoney } from "@/lib/format";
 import {
   buildOrderEmailTemplateParams,
   buildOrderSuccessUrl,
-  EMAILJS_PUBLIC_KEY,
   EMAILJS_SERVICE_ID,
   EMAILJS_TEMPLATE_ID,
   generateOrderCode,
   saveSuccessfulOrder
 } from "@/lib/order";
+import { getEmailJsBrowser } from "@/lib/emailjs-browser";
 import { CART_ROUTE, HOME_ROUTE } from "@/lib/routes";
 import type {
   CartItem,
@@ -67,23 +67,6 @@ type FeedbackState = {
   text: string;
 };
 
-type EmailJsBrowser = {
-  init: (options: { publicKey: string }) => void;
-  send: (
-    serviceId: string,
-    templateId: string,
-    templateParams: Record<string, unknown>
-  ) => Promise<unknown>;
-};
-
-declare global {
-  interface Window {
-    emailjs?: EmailJsBrowser;
-  }
-}
-
-const EMAILJS_SCRIPT_ID = "emailjs-browser-sdk";
-
 const defaultFormState: CheckoutFormState = {
   address: "",
   districtId: "",
@@ -96,9 +79,6 @@ const defaultFormState: CheckoutFormState = {
   wardId: ""
 };
 
-let emailJsLoadPromise: Promise<EmailJsBrowser> | null = null;
-let isEmailJsInitialized = false;
-
 function parseCartSnapshot(snapshot: string): CartItem[] {
   try {
     const parsed = JSON.parse(snapshot || "[]");
@@ -107,65 +87,6 @@ function parseCartSnapshot(snapshot: string): CartItem[] {
     console.error("Invalid cart snapshot:", error);
     return [];
   }
-}
-
-function loadEmailJsBrowser(): Promise<EmailJsBrowser> {
-  if (typeof window === "undefined") {
-    return Promise.reject(new Error("EmailJS is only available in the browser."));
-  }
-
-  if (window.emailjs) {
-    return Promise.resolve(window.emailjs);
-  }
-
-  if (emailJsLoadPromise) {
-    return emailJsLoadPromise;
-  }
-
-  emailJsLoadPromise = new Promise((resolve, reject) => {
-    function handleReady() {
-      if (window.emailjs) {
-        resolve(window.emailjs);
-        return;
-      }
-
-      reject(new Error("EmailJS SDK loaded but window.emailjs is unavailable."));
-    }
-
-    function handleError() {
-      emailJsLoadPromise = null;
-      reject(new Error("Can not load EmailJS SDK."));
-    }
-
-    const existingScript = document.getElementById(EMAILJS_SCRIPT_ID) as HTMLScriptElement | null;
-    if (existingScript) {
-      existingScript.addEventListener("load", handleReady, { once: true });
-      existingScript.addEventListener("error", handleError, { once: true });
-      return;
-    }
-
-    const script = document.createElement("script");
-    script.id = EMAILJS_SCRIPT_ID;
-    script.async = true;
-    script.src = "https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js";
-    script.addEventListener("load", handleReady, { once: true });
-    script.addEventListener("error", handleError, { once: true });
-    document.head.appendChild(script);
-  });
-
-  return emailJsLoadPromise;
-}
-
-async function getEmailJsBrowser(): Promise<EmailJsBrowser> {
-  const emailjs = await loadEmailJsBrowser();
-  if (!isEmailJsInitialized) {
-    emailjs.init({
-      publicKey: EMAILJS_PUBLIC_KEY
-    });
-    isEmailJsInitialized = true;
-  }
-
-  return emailjs;
 }
 
 function SelectChevron() {

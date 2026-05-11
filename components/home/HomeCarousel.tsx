@@ -3,6 +3,12 @@
 import Image from "next/image";
 import type { FormEvent, TouchEvent } from "react";
 import { useEffect, useState } from "react";
+import { getEmailJsBrowser } from "@/lib/emailjs-browser";
+import {
+  buildConsultationEmailTemplateParams,
+  EMAILJS_CONSULTATION_TEMPLATE_ID,
+  EMAILJS_SERVICE_ID
+} from "@/lib/order";
 
 type Slide = {
   desktopSrc: string;
@@ -62,7 +68,9 @@ function getNextIndex(currentIndex: number, direction: 1 | -1): number {
 export default function HomeCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isSubmittingConsultation, setIsSubmittingConsultation] = useState(false);
   const [isSubmitSuccess, setIsSubmitSuccess] = useState(false);
+  const [consultationError, setConsultationError] = useState("");
   const [consultation, setConsultation] = useState<ConsultationState>(defaultConsultationState);
   const [touchStartX, setTouchStartX] = useState<number | null>(null);
 
@@ -103,6 +111,7 @@ export default function HomeCarousel() {
       ...defaultConsultationState,
       message: getConsultationMessage(productName)
     });
+    setConsultationError("");
     setIsSubmitSuccess(false);
     setIsModalOpen(true);
   }
@@ -119,22 +128,49 @@ export default function HomeCarousel() {
     setCurrentIndex((value) => getNextIndex(value, direction));
   }
 
-  function handleConsultationSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleConsultationSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    if (!consultation.name.trim() || !consultation.phone.trim()) {
+    const name = consultation.name.trim();
+    const phone = consultation.phone.trim();
+    const message = consultation.message.trim();
+
+    if (!name || !phone) {
       return;
     }
 
-    setConsultation((currentValue) => ({
-      ...currentValue,
-      submittedName: currentValue.name.trim(),
-      submittedPhone: currentValue.phone.trim(),
-      name: "",
-      phone: "",
-      message: currentValue.message.trim()
-    }));
-    setIsSubmitSuccess(true);
+    try {
+      setIsSubmittingConsultation(true);
+      setConsultationError("");
+
+      const emailjs = await getEmailJsBrowser();
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_CONSULTATION_TEMPLATE_ID,
+        buildConsultationEmailTemplateParams({
+          message,
+          name,
+          phone
+        })
+      );
+
+      setConsultation((currentValue) => ({
+        ...currentValue,
+        submittedName: name,
+        submittedPhone: phone,
+        name: "",
+        phone: "",
+        message
+      }));
+      setIsSubmitSuccess(true);
+    } catch (error) {
+      console.error("consultation submit error:", error);
+      setConsultationError(
+        "Gửi thông tin thất bại. Vui lòng thử lại sau ít phút hoặc liên hệ hotline để được hỗ trợ."
+      );
+    } finally {
+      setIsSubmittingConsultation(false);
+    }
   }
 
   function handleTouchStart(event: TouchEvent<HTMLDivElement>) {
@@ -278,12 +314,18 @@ export default function HomeCarousel() {
                 </button>
               </div>
             ) : (
-              <form className="space-y-5 p-8" onSubmit={handleConsultationSubmit}>
+              <form className="space-y-5 p-8" onSubmit={handleConsultationSubmit} aria-busy={isSubmittingConsultation}>
+                {consultationError ? (
+                  <p className="rounded-xl border border-red-100 bg-red-50 px-4 py-3 text-sm font-semibold leading-6 text-red-700">
+                    {consultationError}
+                  </p>
+                ) : null}
                 <div>
                   <label className="mb-1.5 block text-xs font-bold text-gray-700">Họ và tên *</label>
                   <input
                     type="text"
                     required
+                    disabled={isSubmittingConsultation}
                     value={consultation.name}
                     onChange={(event) =>
                       setConsultation((currentValue) => ({
@@ -303,6 +345,7 @@ export default function HomeCarousel() {
                     type="tel"
                     required
                     pattern="[0-9]{10,11}"
+                    disabled={isSubmittingConsultation}
                     value={consultation.phone}
                     onChange={(event) =>
                       setConsultation((currentValue) => ({
@@ -320,6 +363,7 @@ export default function HomeCarousel() {
                   </label>
                   <textarea
                     rows={3}
+                    disabled={isSubmittingConsultation}
                     value={consultation.message}
                     onChange={(event) =>
                       setConsultation((currentValue) => ({
@@ -333,9 +377,10 @@ export default function HomeCarousel() {
                 </div>
                 <button
                   type="submit"
-                  className="mt-4 w-full rounded-xl bg-[#c48e58] py-4 text-sm font-black uppercase tracking-[0.24em] text-white transition hover:bg-black"
+                  disabled={isSubmittingConsultation}
+                  className="mt-4 w-full rounded-xl bg-[#c48e58] py-4 text-sm font-black uppercase tracking-[0.24em] text-white transition hover:bg-black disabled:cursor-not-allowed disabled:opacity-60"
                 >
-                  Gửi thông tin
+                  {isSubmittingConsultation ? "Đang gửi..." : "Gửi thông tin"}
                 </button>
               </form>
             )}
