@@ -1,15 +1,13 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 
-type BreadcrumbItem = {
+export type BreadcrumbItem = {
   href?: string;
   label: string;
 };
 
-type StaticPageShellProps = Readonly<{
-  breadcrumbs: BreadcrumbItem[];
-  children: ReactNode;
-  maxWidth?: "4xl" | "7xl";
+type BreadcrumbsProps = Readonly<{
+  items: BreadcrumbItem[];
 }>;
 
 type StaticContentCardProps = Readonly<{
@@ -57,11 +55,6 @@ type NumberedStepsProps = Readonly<{
   steps: StepItem[];
 }>;
 
-const maxWidthClassNames = {
-  "4xl": "max-w-4xl",
-  "7xl": "max-w-7xl"
-} as const;
-
 const noticeToneClassNames = {
   green: "border-green-200 bg-[#f0fdf4] text-gray-700",
   orange: "border-orange-200 bg-orange-50 text-orange-900",
@@ -72,34 +65,29 @@ function joinClassNames(...classNames: Array<string | undefined>): string {
   return classNames.filter(Boolean).join(" ");
 }
 
-export default function StaticPageShell({
-  breadcrumbs,
-  children,
-  maxWidth = "4xl"
-}: StaticPageShellProps) {
+export function Breadcrumbs({ items }: BreadcrumbsProps) {
   return (
-    <>
-      <div className="border-b border-gray-200 bg-gray-100 py-3">
-        <div className="mx-auto max-w-7xl px-4 text-xs text-gray-500">
-          {breadcrumbs.map((item, index) => (
-            <span key={`${item.label}-${index}`}>
-              {index > 0 ? <span className="mx-2">/</span> : null}
-              {item.href ? (
-                <Link href={item.href} className="transition hover:text-primary">
-                  {item.label}
-                </Link>
-              ) : (
-                <span className="font-medium text-gray-800">{item.label}</span>
-              )}
-            </span>
-          ))}
-        </div>
-      </div>
-
-      <main className={joinClassNames("mx-auto w-full px-4 py-10", maxWidthClassNames[maxWidth])}>
-        {children}
-      </main>
-    </>
+    <div className="border-b border-gray-200 bg-gray-100 py-3">
+      <nav aria-label="Breadcrumb" className="mx-auto max-w-7xl px-4 text-xs text-gray-500">
+        {items.map((item, index) => (
+          <span key={`${item.label}-${index}`}>
+            {index > 0 ? <span className="mx-2">/</span> : null}
+            {item.href ? (
+              <Link href={item.href} className="transition hover:text-primary">
+                {item.label}
+              </Link>
+            ) : (
+              <span
+                className="font-medium text-gray-800"
+                aria-current={index === items.length - 1 ? "page" : undefined}
+              >
+                {item.label}
+              </span>
+            )}
+          </span>
+        ))}
+      </nav>
+    </div>
   );
 }
 

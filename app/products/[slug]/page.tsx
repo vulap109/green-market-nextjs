@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import ProductCard from "@/components/catalog/ProductCard";
 import ProductDescription from "@/components/product/ProductDescription";
 import ProductPurchasePanel from "@/components/product/ProductPurchasePanel";
+import { Breadcrumbs } from "@/components/static/StaticPageShell";
 import { resolveAssetPath } from "@/lib/assets";
 import { buildCollectionUrl } from "@/lib/catalog";
 import {
@@ -75,19 +76,13 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
   return (
     <>
-      <div className="py-3">
-        <div className="mx-auto max-w-7xl px-4 text-xs text-gray-500">
-          <Link href={HOME_ROUTE} className="transition hover:text-primary">
-            Trang Chủ
-          </Link>
-          <span className="mx-2">/</span>
-          <Link href={categoryCatalogLink.href} className="transition hover:text-primary">
-            {categoryCatalogLink.title}
-          </Link>
-          <span className="mx-2">/</span>
-          <span className="font-medium text-gray-800">{product.name || "Chi tiết sản phẩm"}</span>
-        </div>
-      </div>
+      <Breadcrumbs
+        items={[
+          { href: HOME_ROUTE, label: "Trang Chủ" },
+          { href: categoryCatalogLink.href, label: categoryCatalogLink.title },
+          { label: product.name || "Chi tiết sản phẩm" }
+        ]}
+      />
 
       <main className="mx-auto flex w-full max-w-7xl flex-1 flex-col px-4 pb-8">
         <div className="relative flex flex-col gap-10 rounded-xl border border-gray-100 bg-white p-6 shadow-sm md:flex-row md:p-8">

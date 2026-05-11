@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState, useSyncExternalStore } from "react";
+import { Breadcrumbs } from "@/components/static/StaticPageShell";
 import {
   CART_KEY,
   CART_UPDATED_EVENT,
@@ -407,19 +408,13 @@ export default function CheckoutPageClient({ addressData, products }: CheckoutPa
         </div>
       ) : null}
 
-      <div className="border-b border-gray-200 bg-gray-100 py-3">
-        <div className="mx-auto max-w-7xl px-4 text-xs text-gray-500">
-          <Link href={HOME_ROUTE} className="transition hover:text-primary">
-            Trang Chủ
-          </Link>
-          <span className="mx-2">|</span>
-          <Link href={CART_ROUTE} className="transition hover:text-primary">
-            Giỏ Hàng
-          </Link>
-          <span className="mx-2">|</span>
-          <span className="font-medium text-gray-800">Thanh Toán</span>
-        </div>
-      </div>
+      <Breadcrumbs
+        items={[
+          { href: HOME_ROUTE, label: "Trang Chủ" },
+          { href: CART_ROUTE, label: "Giỏ Hàng" },
+          { label: "Thanh Toán" }
+        ]}
+      />
 
       <div className="mx-auto mt-8 max-w-7xl px-4">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-12">

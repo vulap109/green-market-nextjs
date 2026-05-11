@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { Breadcrumbs } from "@/components/static/StaticPageShell";
 import { getNewsData } from "@/lib/data";
 import {
   buildNewsDetailUrl,
@@ -67,15 +68,12 @@ export default async function NewsPage() {
 
   return (
     <>
-      <div className="border-b border-gray-100 bg-gray-50 py-3">
-        <div className="mx-auto max-w-7xl px-4 text-xs text-gray-500">
-          <Link href={HOME_ROUTE} className="transition hover:text-primary">
-            Trang chủ
-          </Link>
-          <span className="mx-2">/</span>
-          <span className="font-medium text-gray-800">Tin tức</span>
-        </div>
-      </div>
+      <Breadcrumbs
+        items={[
+          { href: HOME_ROUTE, label: "Trang chủ" },
+          { label: "Tin tức" }
+        ]}
+      />
 
       <main className="mx-auto w-full max-w-7xl px-4 py-12">
         <h1 className="mb-6 text-3xl font-semibold tracking-tight text-gray-900">tin tức</h1>

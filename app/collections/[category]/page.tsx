@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import CollectionCatalog from "@/components/catalog/CollectionCatalog";
+import { Breadcrumbs } from "@/components/static/StaticPageShell";
 import {
   CATALOG_PAGE_SIZE,
   type CatalogFilterOption,
@@ -119,15 +119,12 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
 
   return (
     <>
-      <div className="py-3">
-        <div className="mx-auto max-w-7xl px-4 text-xs text-gray-500">
-          <Link href={HOME_ROUTE} className="transition hover:text-primary">
-            Trang Chủ
-          </Link>
-          <span className="mx-2">/</span>
-          <span className="font-medium text-gray-800">{catalogContext.title}</span>
-        </div>
-      </div>
+      <Breadcrumbs
+        items={[
+          { href: HOME_ROUTE, label: "Trang Chủ" },
+          { label: catalogContext.title }
+        ]}
+      />
 
       <section className="relative mx-auto w-full max-w-7xl overflow-hidden px-4">
         <picture className="block">

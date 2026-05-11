@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import {
+  Breadcrumbs,
   ContactSupportCard,
   NoticeBox,
   PageTitleBlock,
   StaticContentCard
 } from "@/components/static/StaticPageShell";
-import StaticPageShell from "@/components/static/StaticPageShell";
 
 export const metadata: Metadata = {
   title: "Chi Nhánh Hà Nội"
@@ -38,19 +38,21 @@ function StoreLocationCard({
 
 export default function AddressPage() {
   return (
-    <StaticPageShell
-      maxWidth="7xl"
-      breadcrumbs={[
-        { href: "/", label: "Trang chủ" },
-        { href: "/", label: "Hệ thống cửa hàng" },
-        { label: "Chi nhánh Hà Nội" }
-      ]}
-    >
-      <StaticContentCard className="p-6 md:p-10">
-        <PageTitleBlock
-          title="Chi Nhánh Hà Nội"
-          description="Hệ thống trái cây nhập khẩu và quà tặng cao cấp Green Market tại Hà Nội."
-        />
+    <>
+      <Breadcrumbs
+        items={[
+          { href: "/", label: "Trang chủ" },
+          { href: "/", label: "Hệ thống cửa hàng" },
+          { label: "Chi nhánh Hà Nội" }
+        ]}
+      />
+
+      <main className="mx-auto w-full max-w-7xl px-4 py-10">
+        <StaticContentCard className="p-6 md:p-10">
+          <PageTitleBlock
+            title="Chi Nhánh Hà Nội"
+            description="Hệ thống trái cây nhập khẩu và quà tặng cao cấp Green Market tại Hà Nội."
+          />
 
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-5">
           <div className="flex flex-col gap-6 lg:col-span-2">
@@ -97,7 +99,8 @@ export default function AddressPage() {
             </div>
           </div>
         </div>
-      </StaticContentCard>
-    </StaticPageShell>
+        </StaticContentCard>
+      </main>
+    </>
   );
 }

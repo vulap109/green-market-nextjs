@@ -1,9 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { Breadcrumbs } from "@/components/static/StaticPageShell";
 import { resolveNewsAssetPath } from "@/lib/assets";
 import { buildCollectionUrl } from "@/lib/catalog";
 import { HOME_ROUTE, NEWS_ROUTE } from "@/lib/routes";
@@ -155,19 +155,13 @@ export default function NewsArticleClient({ article, contentHtml }: NewsArticleC
         </div>
       ) : null}
 
-      <div className="border-b border-gray-100 py-3">
-        <div className="mx-auto max-w-7xl px-4 text-xs text-gray-500">
-          <Link href={HOME_ROUTE} className="transition hover:text-primary">
-            Trang chủ
-          </Link>
-          <span className="mx-2">/</span>
-          <Link href={NEWS_ROUTE} className="transition hover:text-primary">
-            Tin tức
-          </Link>
-          <span className="mx-2">/</span>
-          <span className="font-medium text-gray-800">{articleTitle}</span>
-        </div>
-      </div>
+      <Breadcrumbs
+        items={[
+          { href: HOME_ROUTE, label: "Trang chủ" },
+          { href: NEWS_ROUTE, label: "Tin tức" },
+          { label: articleTitle }
+        ]}
+      />
 
       <main className="mx-auto w-full max-w-4xl px-4 py-10">
         <article>

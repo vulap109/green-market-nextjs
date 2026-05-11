@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState, useSyncExternalStore } from "react";
+import { Breadcrumbs } from "@/components/static/StaticPageShell";
 import {
   CART_KEY,
   CART_UPDATED_EVENT,
@@ -142,15 +143,12 @@ export default function CartPageClient({ products }: CartPageClientProps) {
         </div>
       ) : null}
 
-      <div className="border-b border-gray-200 py-3">
-        <div className="mx-auto max-w-7xl px-4 text-xs text-gray-500">
-          <Link href={HOME_ROUTE} className="transition hover:text-primary">
-            Trang Chủ
-          </Link>
-          <span className="mx-2">|</span>
-          <span className="font-medium text-gray-800">Giỏ Hàng</span>
-        </div>
-      </div>
+      <Breadcrumbs
+        items={[
+          { href: HOME_ROUTE, label: "Trang Chủ" },
+          { label: "Giỏ Hàng" }
+        ]}
+      />
 
       <main className="mx-auto flex w-full max-w-7xl flex-1 flex-col px-4 py-8">
         <div className="mb-6 flex flex-col items-end justify-between gap-2 border-b border-gray-200 pb-4 md:flex-row md:items-center">

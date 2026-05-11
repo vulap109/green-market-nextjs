@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import {
+  Breadcrumbs,
   BulletList,
   ContactSupportCard,
   NoticeBox,
@@ -7,7 +8,6 @@ import {
   PolicySection,
   StaticContentCard
 } from "@/components/static/StaticPageShell";
-import StaticPageShell from "@/components/static/StaticPageShell";
 import { BANK_TRANSFER_INFO } from "@/lib/order";
 
 export const metadata: Metadata = {
@@ -16,14 +16,17 @@ export const metadata: Metadata = {
 
 export default function PaymentPolicyPage() {
   return (
-    <StaticPageShell
-      breadcrumbs={[
-        { href: "/", label: "Trang chủ" },
-        { label: "Chính sách thanh toán" }
-      ]}
-    >
-      <StaticContentCard>
-        <PageTitleBlock title="Chính Sách Thanh Toán" />
+    <>
+      <Breadcrumbs
+        items={[
+          { href: "/", label: "Trang chủ" },
+          { label: "Chính sách thanh toán" }
+        ]}
+      />
+
+      <main className="mx-auto w-full max-w-7xl px-4 py-10">
+        <StaticContentCard>
+          <PageTitleBlock title="Chính Sách Thanh Toán" />
 
         <div className="space-y-6 text-sm leading-relaxed text-gray-600">
           <p>
@@ -99,7 +102,8 @@ export default function PaymentPolicyPage() {
             </p>
           </NoticeBox>
         </div>
-      </StaticContentCard>
-    </StaticPageShell>
+        </StaticContentCard>
+      </main>
+    </>
   );
 }

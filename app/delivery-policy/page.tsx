@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import {
+  Breadcrumbs,
   BulletList,
   ContactSupportCard,
   NoticeBox,
@@ -7,7 +8,6 @@ import {
   PolicySection,
   StaticContentCard
 } from "@/components/static/StaticPageShell";
-import StaticPageShell from "@/components/static/StaticPageShell";
 
 export const metadata: Metadata = {
   title: "Chính Sách Giao Hàng"
@@ -15,14 +15,17 @@ export const metadata: Metadata = {
 
 export default function DeliveryPolicyPage() {
   return (
-    <StaticPageShell
-      breadcrumbs={[
-        { href: "/", label: "Trang chủ" },
-        { label: "Chính sách giao hàng" }
-      ]}
-    >
-      <StaticContentCard>
-        <PageTitleBlock title="Chính Sách Giao Hàng" />
+    <>
+      <Breadcrumbs
+        items={[
+          { href: "/", label: "Trang chủ" },
+          { label: "Chính sách giao hàng" }
+        ]}
+      />
+
+      <main className="mx-auto w-full max-w-7xl px-4 py-10">
+        <StaticContentCard>
+          <PageTitleBlock title="Chính Sách Giao Hàng" />
 
         <div className="space-y-6 text-sm leading-relaxed text-gray-600">
           <p>
@@ -92,7 +95,8 @@ export default function DeliveryPolicyPage() {
             <p className="italic">Green Market trân trọng cảm ơn quý khách hàng đã tin tưởng và ủng hộ.</p>
           </NoticeBox>
         </div>
-      </StaticContentCard>
-    </StaticPageShell>
+        </StaticContentCard>
+      </main>
+    </>
   );
 }
