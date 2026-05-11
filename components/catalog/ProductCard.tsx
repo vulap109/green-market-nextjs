@@ -40,9 +40,9 @@ export default function ProductCard({ product }: ProductCardProps) {
           <Image
             src="/images/icon_flash_sale.png"
             alt="Flash sale"
-            width={80}
-            height={30}
-            className="absolute right-2 top-0 object-contain"
+            width={152}
+            height={63}
+            className="absolute right-2 top-0 h-auto w-20 object-contain"
           />
         ) : null}
       </Link>
