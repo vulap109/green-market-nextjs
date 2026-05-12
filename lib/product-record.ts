@@ -22,11 +22,20 @@ type ProductRecordSource = Readonly<{
   slug?: string | null;
   sortOrder?: number | null;
   thumbnail?: string | null;
+  variants?: ReadonlyArray<{
+    id?: bigint | number | string | null;
+    price?: unknown;
+    salePrice?: unknown;
+    sku?: string | null;
+    stockQuantity?: number | null;
+    variantName?: string | null;
+  }> | null;
 }>;
 
 type MapProductRecordOptions = Readonly<{
   includeCategoryName?: boolean;
   includeDescription?: boolean;
+  includeVariants?: boolean;
 }>;
 
 export const productRecordOrderBy = [
@@ -76,8 +85,53 @@ export function getProductRecordSelect(options: MapProductRecordOptions = {}) {
           id: "asc" as const
         }
       ]
-    }
+    },
+    ...(options.includeVariants
+      ? {
+          variants: {
+            where: {
+              status: "active"
+            },
+            select: {
+              id: true,
+              price: true,
+              salePrice: true,
+              sku: true,
+              stockQuantity: true,
+              variantName: true
+            },
+            orderBy: [
+              {
+                price: "asc" as const
+              },
+              {
+                id: "asc" as const
+              }
+            ]
+          }
+        }
+      : {})
   } satisfies Prisma.ProductSelect;
+}
+
+function mapProductVariantOptions(product: ProductRecordSource): ProductRecord["variantOptions"] {
+  return (product.variants || [])
+    .map((variant) => {
+      const label = String(variant.variantName || "").trim();
+      const price = Number(variant.salePrice ?? variant.price ?? 0);
+
+      return {
+        ...(variant.id === undefined || variant.id === null ? {} : { id: Number(variant.id) }),
+        label,
+        price: Number.isFinite(price) ? price : 0,
+        ...(variant.sku ? { sku: variant.sku } : {}),
+        ...(variant.stockQuantity === undefined || variant.stockQuantity === null
+          ? {}
+          : { stockQuantity: variant.stockQuantity }),
+        value: variant.id === undefined || variant.id === null ? label : String(variant.id)
+      };
+    })
+    .filter((option) => option.label);
 }
 
 export function mapProductRecord(
@@ -105,6 +159,7 @@ export function mapProductRecord(
     ...(options.includeCategoryName ? { categoryName: categoryName || undefined } : {}),
     parentCategory: parentCategory || undefined,
     ...(options.includeCategoryName ? { parentCategoryName: parentCategoryName || undefined } : {}),
-    ...(options.includeDescription ? { description: product.description || undefined } : {})
+    ...(options.includeDescription ? { description: product.description || undefined } : {}),
+    ...(options.includeVariants ? { variantOptions: mapProductVariantOptions(product) } : {})
   };
 }

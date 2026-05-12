@@ -206,11 +206,19 @@ export const findProductBySlug = cache(async (slug?: string | null): Promise<Pro
       slug: productSlug,
       status: "active"
     },
-    select: getProductRecordSelect({ includeCategoryName: true, includeDescription: true })
+    select: getProductRecordSelect({
+      includeCategoryName: true,
+      includeDescription: true,
+      includeVariants: true
+    })
   });
 
   return product
-    ? mapProductRecord(product, { includeCategoryName: true, includeDescription: true })
+    ? mapProductRecord(product, {
+        includeCategoryName: true,
+        includeDescription: true,
+        includeVariants: true
+      })
     : null;
 });
 

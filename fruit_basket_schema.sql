@@ -109,20 +109,18 @@ CREATE TABLE IF NOT EXISTS product_image (
 --);
 
 -- Optional: use this when products have variants such as size/box type/combo.
---CREATE TABLE IF NOT EXISTS product_variants (
---    id                  BIGSERIAL PRIMARY KEY,
---    product_id          BIGINT NOT NULL REFERENCES products(id) ON DELETE CASCADE,
---    name                VARCHAR(150) NOT NULL,
---    sku                 VARCHAR(100) NOT NULL UNIQUE,
---    price               NUMERIC(12,0) NOT NULL DEFAULT 0,
---    sale_price          NUMERIC(12,0),
---    stock_quantity      INTEGER NOT NULL DEFAULT 0,
---    image_url           TEXT,
---    is_default          BOOLEAN NOT NULL DEFAULT FALSE,
---    status              VARCHAR(30) NOT NULL DEFAULT 'active' CHECK (status IN ('active', 'inactive')),
---    created_at          TIMESTAMPTZ NOT NULL DEFAULT NOW(),
---    updated_at          TIMESTAMPTZ NOT NULL DEFAULT NOW()
---);
+CREATE TABLE IF NOT EXISTS product_variants (
+    id                  BIGSERIAL PRIMARY KEY,
+    product_id          BIGINT NOT NULL REFERENCES product(id) ON DELETE CASCADE,
+    variant_name        VARCHAR(150) NOT NULL,
+    sku                 VARCHAR(100) NOT NULL UNIQUE,
+    price               NUMERIC(12,0) NOT NULL DEFAULT 0,
+    sale_price          NUMERIC(12,0),
+    stock_quantity      INTEGER NOT NULL DEFAULT 0,
+    status              VARCHAR(30) NOT NULL DEFAULT 'active' CHECK (status IN ('active', 'inactive')),
+    created_at          TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    updated_at          TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
 
 --CREATE TABLE IF NOT EXISTS product_reviews (
 --    id                  BIGSERIAL PRIMARY KEY,

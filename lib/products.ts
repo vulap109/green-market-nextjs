@@ -22,12 +22,17 @@ export function getProductCollectionCategory(product?: ProductRecord | null): st
 }
 
 export function getProductPrice(product?: ProductRecord | null): number {
-  return Number(product?.price ?? 0);
+  const price = Number(product?.price ?? 0);
+  return Number.isFinite(price) ? price : 0;
 }
 
 export function getProductSalePrice(product?: ProductRecord | null): number {
-  const nextPrice = Number(product?.salePrice ?? getProductPrice(product));
-  return Number.isFinite(nextPrice) ? nextPrice : 0;
+  const salePrice = Number(product?.salePrice ?? 0);
+  if (Number.isFinite(salePrice) && salePrice > 0) {
+    return salePrice;
+  }
+
+  return getProductPrice(product);
 }
 
 export function getProductDiscount(product?: ProductRecord | null): number {

@@ -20,11 +20,11 @@ export const getProductsData = cache(async (): Promise<ProductRecord[]> => {
     where: {
       status: "active"
     },
-    select: getProductRecordSelect(),
+    select: getProductRecordSelect({ includeVariants: true }),
     orderBy: productRecordOrderBy
   });
 
-  return products.map((product) => mapProductRecord(product));
+  return products.map((product) => mapProductRecord(product, { includeVariants: true }));
 });
 
 export const getNewsData = cache(async (): Promise<NewsArticle[]> => {

@@ -161,7 +161,7 @@ export function buildOrderEmailTemplateParams(order: CheckoutOrder) {
         [
           `${index + 1}. ${item.name}`,
           `SKU: ${item.sku}`,
-          item.size ? `Kích thước: ${item.size}` : "",
+          item.size ? `Phân loại: ${item.size}` : "",
           `Số lượng: ${item.qty}`,
           `Đơn giá: ${Number(item.unitPrice || 0).toLocaleString("vi-VN")} ₫`,
           `Thành tiền: ${Number(item.lineTotal || 0).toLocaleString("vi-VN")} ₫`

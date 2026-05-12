@@ -13,11 +13,15 @@ export type ProductRecord = {
   sku?: string;
   slug?: string;
   sortOrder?: number;
+  variantOptions?: ProductVariantOption[];
 };
 
-export type CakeSizeOption = {
+export type ProductVariantOption = {
+  id?: number | string;
   label: string;
   price: number;
+  sku?: string;
+  stockQuantity?: number;
   value: string;
 };
 

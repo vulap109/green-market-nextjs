@@ -18,8 +18,9 @@ export default function ProductCard({ product }: ProductCardProps) {
   const originalPrice = getProductPrice(product);
   const discount = getProductDiscount(product);
   const imageSrc = resolveAssetPath(product.img) || "/images/sp1.jpg";
+  const showContactPrice = originalPrice <= 0 && salePrice <= 0;
   const showOriginalPrice = originalPrice > salePrice;
-  const showFlashSale = discount >= 11;
+  const showFlashSale = !showContactPrice && discount >= 11;
 
   return (
     <article className="product-card group flex flex-col overflow-hidden rounded-xl border border-gray-100 bg-white shadow-sm transition-all hover:shadow-xl">
@@ -31,7 +32,7 @@ export default function ProductCard({ product }: ProductCardProps) {
           sizes="(min-width: 1280px) 20vw, (min-width: 768px) 25vw, 50vw"
           className="object-cover transition-all duration-500 group-hover:scale-105"
         />
-        {discount > 0 ? (
+        {!showContactPrice && discount > 0 ? (
           <span className="absolute left-2 top-2 rounded bg-red-600 px-2 py-1 text-xs font-medium text-white">
             -{discount}%
           </span>
@@ -57,8 +58,10 @@ export default function ProductCard({ product }: ProductCardProps) {
 
         <div className="mt-auto">
           <div className="flex flex-wrap items-center justify-center gap-2">
-            <span className="text-base font-black text-red-600">{formatProductMoney(salePrice)}</span>
-            {showOriginalPrice ? (
+            <span className="text-base font-black text-red-600">
+              {showContactPrice ? "Liên Hệ" : formatProductMoney(salePrice)}
+            </span>
+            {!showContactPrice && showOriginalPrice ? (
               <span className="text-xs font-medium text-gray-400 line-through">
                 {formatProductMoney(originalPrice)}
               </span>

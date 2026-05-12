@@ -5,9 +5,8 @@ import { useEffect, useMemo, useState } from "react";
 import { addToCart } from "@/lib/cart";
 import { formatProductMoney } from "@/lib/format";
 import {
-  getCreamCakeSizeOptions,
   getProductDisplayPricing,
-  getSelectedCakeSizeOption
+  getSelectedProductVariantOption
 } from "@/lib/product-options";
 import { CART_ROUTE } from "@/lib/routes";
 import type { ProductRecord } from "@/lib/types";
@@ -18,16 +17,17 @@ type ProductPurchasePanelProps = Readonly<{
 
 export default function ProductPurchasePanel({ product }: ProductPurchasePanelProps) {
   const router = useRouter();
-  const cakeSizeOptions = getCreamCakeSizeOptions(product);
-  const defaultCakeSize = cakeSizeOptions[0] || null;
+  const variantOptions = product.variantOptions || [];
+  const defaultVariant = variantOptions[0] || null;
   const [qty, setQty] = useState(1);
-  const [selectedCakeSizeValue, setSelectedCakeSizeValue] = useState(defaultCakeSize?.value || "");
+  const [selectedVariantValue, setSelectedVariantValue] = useState(defaultVariant?.value || "");
   const [feedbackMessage, setFeedbackMessage] = useState("");
-  const selectedCakeSize = getSelectedCakeSizeOption(product, selectedCakeSizeValue);
+  const selectedVariant = getSelectedProductVariantOption(product, selectedVariantValue);
   const pricing = useMemo(
-    () => getProductDisplayPricing(product, selectedCakeSizeValue),
-    [product, selectedCakeSizeValue]
+    () => getProductDisplayPricing(product, selectedVariantValue),
+    [product, selectedVariantValue]
   );
+  const showContactPrice = pricing.currentPrice <= 0 && pricing.originalPrice <= 0;
 
   useEffect(() => {
     if (!feedbackMessage) {
@@ -65,7 +65,7 @@ export default function ProductPurchasePanel({ product }: ProductPurchasePanelPr
       id: productId,
       priceSnapshot: pricing.currentPrice,
       qty,
-      ...(selectedCakeSize ? { size: selectedCakeSize.label } : {})
+      ...(selectedVariant ? { size: selectedVariant.label } : {})
     });
     setFeedbackMessage(`Đã thêm ${qty} sản phẩm vào giỏ hàng.`);
     return true;
@@ -102,36 +102,38 @@ export default function ProductPurchasePanel({ product }: ProductPurchasePanelPr
         <div className="mb-6 rounded-lg bg-gray-50 p-4">
           <div className="mb-1 flex items-end gap-3">
             <span className="text-3xl font-black text-red-600">
-              {formatProductMoney(pricing.currentPrice)}
+              {showContactPrice ? "Liên Hệ" : formatProductMoney(pricing.currentPrice)}
             </span>
-            {pricing.showOriginalPrice ? (
+            {!showContactPrice && pricing.showOriginalPrice ? (
               <span className="mb-1 text-lg font-medium text-gray-400 line-through">
                 {formatProductMoney(pricing.originalPrice)}
               </span>
             ) : null}
           </div>
-          <div className="mt-2 flex items-center gap-1 text-xs font-bold text-red-500">
-            <i className="fa-solid fa-fire text-orange-500"></i>
-            <span>SẢN PHẨM FLASH SALE</span>
-          </div>
+          {!showContactPrice ? (
+            <div className="mt-2 flex items-center gap-1 text-xs font-bold text-red-500">
+              <i className="fa-solid fa-fire text-orange-500"></i>
+              <span>SẢN PHẨM FLASH SALE</span>
+            </div>
+          ) : null}
         </div>
 
-        {cakeSizeOptions.length ? (
+        {variantOptions.length ? (
           <div className="mb-6">
-            <p className="mb-3 text-sm font-bold text-gray-700">Kích thước:</p>
+            <p className="mb-3 text-sm font-bold text-gray-700">Phân loại:</p>
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-5">
-              {cakeSizeOptions.map((size) => (
-                <label key={size.value} className="cursor-pointer">
+              {variantOptions.map((variant) => (
+                <label key={variant.value} className="cursor-pointer">
                   <input
                     type="radio"
-                    name="cake-size"
-                    value={size.value}
-                    checked={selectedCakeSizeValue === size.value}
-                    onChange={() => setSelectedCakeSizeValue(size.value)}
+                    name="product-variant"
+                    value={variant.value}
+                    checked={selectedVariantValue === variant.value}
+                    onChange={() => setSelectedVariantValue(variant.value)}
                     className="peer sr-only"
                   />
                   <span className="flex h-11 items-center justify-center rounded-lg border border-gray-300 bg-white text-sm font-semibold text-gray-700 transition-all peer-checked:border-orange-600">
-                    {size.label}
+                    {variant.label}
                   </span>
                 </label>
               ))}

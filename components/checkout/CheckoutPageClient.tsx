@@ -521,7 +521,7 @@ export default function CheckoutPageClient({ addressData, products }: CheckoutPa
                         <div className="min-w-0">
                           <p className="line-clamp-2 text-sm font-medium text-gray-800">{item.name}</p>
                           {item.size ? (
-                            <p className="mt-1 text-xs text-primary">Kích thước: {item.size}</p>
+                            <p className="mt-1 text-xs text-primary">Phân loại: {item.size}</p>
                           ) : null}
                         </div>
                       </div>

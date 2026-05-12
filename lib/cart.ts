@@ -1,7 +1,7 @@
 import { resolveAssetPath } from "@/lib/assets";
 import { getProductSalePrice, getProductSlug } from "@/lib/products";
 import { buildProductDetailUrl } from "@/lib/routes";
-import type { CartItem, ProductRecord, ResolvedCartItem } from "@/lib/types";
+import type { CartItem, ProductRecord, ProductVariantOption, ResolvedCartItem } from "@/lib/types";
 
 export const CART_KEY = "cart_v1";
 export const CART_UPDATED_EVENT = "cart:updated";
@@ -40,6 +40,28 @@ export function getCartItemSize(item?: Partial<CartItem> | null): string {
 
 export function getCartItemKey(item?: Partial<CartItem> | null): string {
   return `${String(item?.id || "")}::${getCartItemSize(item)}`;
+}
+
+function normalizeCartVariantValue(value?: string | null): string {
+  return String(value || "").trim().toLowerCase();
+}
+
+function getCartItemVariantOption(
+  product: ProductRecord | undefined,
+  cartItem: CartItem
+): ProductVariantOption | null {
+  const requestedVariant = normalizeCartVariantValue(cartItem.size);
+  if (!requestedVariant || !product?.variantOptions?.length) {
+    return null;
+  }
+
+  const selectedVariant = product.variantOptions.find(
+    (option) =>
+      normalizeCartVariantValue(option.label) === requestedVariant ||
+      normalizeCartVariantValue(option.value) === requestedVariant
+  );
+
+  return selectedVariant || null;
 }
 
 export function getCart(storage?: StorageLike | null): CartItem[] {
@@ -142,6 +164,11 @@ export function getCartCount(cart: CartItem[] = getCart()): number {
 }
 
 function getCartItemPrice(product: ProductRecord | undefined, cartItem: CartItem): number {
+  const variantOption = getCartItemVariantOption(product, cartItem);
+  if (variantOption) {
+    return variantOption.price;
+  }
+
   if (cartItem.priceSnapshot !== undefined) {
     return Number(cartItem.priceSnapshot) || 0;
   }
@@ -167,14 +194,6 @@ export function getCartItemUnitPrice(
   }
 
   return getCartItemPrice(product, cartItem as CartItem);
-}
-
-export function getCartLineTotal(
-  product: ProductRecord | undefined,
-  cartItem?: Partial<CartItem> | null
-): number {
-  const qty = Number(cartItem?.qty) || 0;
-  return getCartItemUnitPrice(product, cartItem) * qty;
 }
 
 export function resolveCartItems(

@@ -201,7 +201,7 @@ export default function CartPageClient({ products }: CartPageClientProps) {
                           </Link>
                           <p className="mt-1 text-xs text-gray-500">{item.sku}</p>
                           {item.size ? (
-                            <p className="mt-1 text-xs font-medium text-primary">Kích thước: {item.size}</p>
+                            <p className="mt-1 text-xs font-medium text-primary">Phân loại: {item.size}</p>
                           ) : null}
                           <p className="mt-1 text-xs font-medium text-gray-500">
                             {formatProductMoney(item.unitPrice)}
