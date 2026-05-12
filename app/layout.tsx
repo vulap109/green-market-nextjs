@@ -1,8 +1,5 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import AppFooter from "@/components/layout/AppFooter";
-import AppHeader from "@/components/layout/AppHeader";
-import ContactPopup from "@/components/layout/ContactPopup";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -49,12 +46,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         />
       </head>
       <body className="font-sans antialiased bg-gray-50">
-        <div className="flex min-h-screen flex-col">
-          <AppHeader />
-          {children}
-          <AppFooter />
-          <ContactPopup />
-        </div>
+        {children}
       </body>
     </html>
   );
