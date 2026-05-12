@@ -2,6 +2,7 @@ import { cache } from "react";
 import { prisma } from "@/lib/prisma";
 import { getProductRecordSelect, mapProductRecord, productRecordOrderBy } from "@/lib/product-record";
 import { getProductCollectionCategory, getProductDiscount, getProductId } from "@/lib/products";
+import { normalizeSearchText } from "@/lib/search";
 import type { Prisma } from "@/generated/prisma/client";
 import type { ProductCatalogResult, ProductRecord } from "@/lib/types";
 
@@ -17,6 +18,7 @@ export type CategoryCatalogRecord = {
 type ProductCatalogQueryOptions = Readonly<{
   category?: string | null;
   featured?: string | null;
+  keyword?: string | null;
   page?: number | null;
   parentCategory?: string | null;
   pageSize?: number | null;
@@ -119,12 +121,52 @@ function buildFinalPriceRangeWhere(priceRange?: string | null): Prisma.ProductWh
   }
 }
 
+function buildProductKeywordWhere(keyword?: string | null): Prisma.ProductWhereInput | null {
+  const searchKeyword = String(keyword || "").trim();
+  const normalizedKeyword = normalizeSearchText(searchKeyword);
+  const slugKeyword = normalizedKeyword.replace(/\s+/g, "-");
+
+  if (!searchKeyword || !normalizedKeyword) {
+    return null;
+  }
+
+  const productSearchConditions: Prisma.ProductWhereInput[] = [
+    {
+      name: {
+        contains: searchKeyword,
+        mode: "insensitive"
+      }
+    },
+    {
+      sku: {
+        contains: searchKeyword,
+        mode: "insensitive"
+      }
+    }
+  ];
+
+  if (slugKeyword) {
+    productSearchConditions.push({
+      slug: {
+        contains: slugKeyword,
+        mode: "insensitive"
+      }
+    });
+  }
+
+  return {
+    OR: productSearchConditions
+  };
+}
+
 function buildProductCatalogWhere(options: ProductCatalogQueryOptions): Prisma.ProductWhereInput {
   const where: Prisma.ProductWhereInput = {
     status: "active"
   };
   const productFeatured = normalizeCatalogValue(options.featured);
+  const keywordWhere = buildProductKeywordWhere(options.keyword);
   const priceRangeWhere = buildFinalPriceRangeWhere(options.priceRange);
+  const productFilters = [keywordWhere, priceRangeWhere].filter(Boolean) as Prisma.ProductWhereInput[];
 
   if (productFeatured) {
     where.featured = productFeatured;
@@ -132,8 +174,8 @@ function buildProductCatalogWhere(options: ProductCatalogQueryOptions): Prisma.P
 
   applyProductCategoryWhere(where, options.parentCategory, options.category);
 
-  if (priceRangeWhere) {
-    where.AND = [priceRangeWhere];
+  if (productFilters.length) {
+    where.AND = productFilters;
   }
 
   return where;
@@ -233,6 +275,29 @@ export const findProductByCategory = cache(
 
     const products = await prisma.product.findMany({
       where,
+      select: getProductRecordSelect(),
+      orderBy: productRecordOrderBy,
+      ...(take ? { take } : {})
+    });
+
+    return products.map((product) => mapProductRecord(product));
+  }
+);
+
+export const findProductsByKeyword = cache(
+  async (keyword?: string | null, limit?: number | null): Promise<ProductRecord[]> => {
+    const keywordWhere = buildProductKeywordWhere(keyword);
+    const take = sanitizeProductTake(limit);
+
+    if (!keywordWhere) {
+      return [];
+    }
+
+    const products = await prisma.product.findMany({
+      where: {
+        status: "active",
+        AND: [keywordWhere]
+      },
       select: getProductRecordSelect(),
       orderBy: productRecordOrderBy,
       ...(take ? { take } : {})

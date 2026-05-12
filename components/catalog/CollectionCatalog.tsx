@@ -8,14 +8,17 @@ import {
   catalogPriceFilters,
   type CatalogFilterOption
 } from "@/lib/catalog";
+import { buildProductSearchUrl } from "@/lib/search";
 import type { ProductCatalogResult } from "@/lib/types";
 
 type CollectionCatalogProps = Readonly<{
+  catalogMode?: "collection" | "search";
   catalogResult: ProductCatalogResult;
   initialPage: number;
   initialPriceRange: string;
   initialSubcategory: string;
   routeCategory: string;
+  searchKeyword?: string;
   subcategoryOptions: CatalogFilterOption[];
   title: string;
 }>;
@@ -74,11 +77,13 @@ function buildVisiblePages(currentPage: number, totalPages: number): number[] {
 }
 
 export default function CollectionCatalog({
+  catalogMode = "collection",
   catalogResult,
   initialPage,
   initialPriceRange,
   initialSubcategory,
   routeCategory,
+  searchKeyword,
   subcategoryOptions,
   title
 }: CollectionCatalogProps) {
@@ -102,6 +107,23 @@ export default function CollectionCatalog({
         catalogResult.pageInfo.totalProducts
       )
     : 0;
+  const showSubcategoryFilters = subcategoryOptions.length > 0;
+
+  function buildCatalogStateUrl(state: CatalogUrlState): string {
+    if (catalogMode === "search") {
+      return buildProductSearchUrl(searchKeyword, {
+        page: state.page,
+        priceRange: state.priceRange
+      });
+    }
+
+    return buildCollectionUrl({
+      category: routeCategory,
+      page: state.page,
+      priceRange: state.priceRange,
+      subcategory: state.subcategory
+    });
+  }
 
   function updateCatalogState(
     nextState: Partial<CatalogUrlState>,
@@ -113,14 +135,8 @@ export default function CollectionCatalog({
       subcategory,
       ...nextState
     };
-    const nextUrl = buildCollectionUrl({
-      category: routeCategory,
-      page: resolvedState.page,
-      priceRange: resolvedState.priceRange,
-      subcategory: resolvedState.subcategory
-    });
-    const currentUrl = buildCollectionUrl({
-      category: routeCategory,
+    const nextUrl = buildCatalogStateUrl(resolvedState);
+    const currentUrl = buildCatalogStateUrl({
       page,
       priceRange,
       subcategory
@@ -191,17 +207,19 @@ export default function CollectionCatalog({
               }`}
             >
               <div className="overflow-hidden px-6 lg:overflow-visible">
-                <ul className="space-y-3 pb-2 pt-2 text-xs font-bold text-gray-600">
-                  {subcategoryOptions.map((option) => (
-                    <li key={option.value || "all-subcategories"}>
-                      <FilterOptionButton
-                        active={subcategory === option.value}
-                        label={option.label}
-                        onClick={() => updateCatalogState({ page: 1, subcategory: option.value })}
-                      />
-                    </li>
-                  ))}
-                </ul>
+                {showSubcategoryFilters ? (
+                  <ul className="space-y-3 pb-2 pt-2 text-xs font-bold text-gray-600">
+                    {subcategoryOptions.map((option) => (
+                      <li key={option.value || "all-subcategories"}>
+                        <FilterOptionButton
+                          active={subcategory === option.value}
+                          label={option.label}
+                          onClick={() => updateCatalogState({ page: 1, subcategory: option.value })}
+                        />
+                      </li>
+                    ))}
+                  </ul>
+                ) : null}
 
                 <h2 className="border-b border-gray-100 pb-2 pt-4 text-sm font-semibold uppercase tracking-[0.24em] text-gray-900">
                   Khoảng giá

@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState, type FormEvent } from "react";
-import productsData from "@/public/data/products.json";
 import { resolveAssetPath } from "@/lib/assets";
 import { CART_UPDATED_EVENT, getCart, getCartCount } from "@/lib/cart";
 import { buildCollectionUrl } from "@/lib/catalog";
@@ -15,8 +14,18 @@ import {
   HOME_ROUTE
 } from "@/lib/routes";
 import { getProductSalePrice, getProductId } from "@/lib/products";
-import { buildProductSearchUrl, filterProductsByKeyword } from "@/lib/search";
+import { buildProductSearchUrl, HEADER_SEARCH_DEBOUNCE_MS } from "@/lib/search";
 import type { ProductRecord } from "@/lib/types";
+
+type ProductSearchResponse = {
+  items?: ProductRecord[];
+};
+
+type ProductSearchState = {
+  isLoading: boolean;
+  items: ProductRecord[];
+  keyword: string;
+};
 
 type HeaderMenuItem = {
   href: string;
@@ -72,17 +81,23 @@ const headerMenuItems: HeaderMenuItem[] = [
   }
 ];
 
-const productSearchData = productsData as ProductRecord[];
-
 export default function AppHeader() {
   const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchKeyword, setSearchKeyword] = useState("");
   const [cartCount, setCartCount] = useState(0);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [productSearchState, setProductSearchState] = useState<ProductSearchState>({
+    isLoading: false,
+    items: [],
+    keyword: ""
+  });
   const searchWrapperRef = useRef<HTMLDivElement | null>(null);
-  const searchResults = filterProductsByKeyword(productSearchData, searchKeyword, 4);
-  const hasKeyword = searchKeyword.trim().length > 0;
+  const trimmedSearchKeyword = searchKeyword.trim();
+  const hasKeyword = trimmedSearchKeyword.length > 0;
+  const searchResults = productSearchState.keyword === trimmedSearchKeyword ? productSearchState.items : [];
+  const isSearchLoading =
+    hasKeyword && (productSearchState.isLoading || productSearchState.keyword !== trimmedSearchKeyword);
 
   useEffect(() => {
     function syncCartCount() {
@@ -139,6 +154,60 @@ export default function AppHeader() {
       document.documentElement.style.overflow = previousDocumentOverflow;
     };
   }, [isMenuOpen]);
+
+  useEffect(() => {
+    const keyword = searchKeyword.trim();
+
+    if (!keyword) {
+      return;
+    }
+
+    const controller = new AbortController();
+    const searchParams = new URLSearchParams({ keyword });
+
+    const timeoutId = window.setTimeout(() => {
+      setProductSearchState({
+        isLoading: true,
+        items: [],
+        keyword
+      });
+
+      void fetch(`/api/products/search?${searchParams.toString()}`, {
+        signal: controller.signal
+      })
+        .then(async (response) => {
+          if (!response.ok) {
+            throw new Error("Product search request failed.");
+          }
+
+          return (await response.json()) as ProductSearchResponse;
+        })
+        .then((data) => {
+          setProductSearchState({
+            isLoading: false,
+            items: Array.isArray(data.items) ? data.items : [],
+            keyword
+          });
+        })
+        .catch((error: unknown) => {
+          if (controller.signal.aborted) {
+            return;
+          }
+
+          console.error(error);
+          setProductSearchState({
+            isLoading: false,
+            items: [],
+            keyword
+          });
+        });
+    }, HEADER_SEARCH_DEBOUNCE_MS);
+
+    return () => {
+      controller.abort();
+      window.clearTimeout(timeoutId);
+    };
+  }, [searchKeyword]);
 
   function handleSearchSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -282,7 +351,11 @@ export default function AppHeader() {
                 className="absolute left-0 right-0 top-[calc(100%+0.75rem)] z-40 overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-2xl shadow-black/10"
               >
                 <div id="header-product-search-results" className="max-h-[320px] overflow-y-auto">
-                  {searchResults.length ? (
+                  {isSearchLoading ? (
+                    <p id="header-product-search-loading" className="px-4 py-5 text-sm text-gray-500">
+                      Đang tìm kiếm sản phẩm...
+                    </p>
+                  ) : searchResults.length ? (
                     searchResults.map((product) => {
                       const imageSrc = resolveAssetPath(product.img) || "/images/sp1.jpg";
                       const productName = product.name || "Sản phẩm";

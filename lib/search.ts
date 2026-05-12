@@ -33,12 +33,30 @@ export function filterProductsByKeyword(
   return matches;
 }
 
-export function buildProductSearchUrl(keyword?: string | null): string {
+type ProductSearchUrlOptions = Readonly<{
+  page?: number | null;
+  priceRange?: string | null;
+}>;
+
+export function buildProductSearchUrl(
+  keyword?: string | null,
+  options: ProductSearchUrlOptions = {}
+): string {
   const trimmedKeyword = String(keyword || "").trim();
+  const requestedPriceRange = String(options.priceRange || "").trim();
+  const requestedPage = Math.floor(Number(options.page) || 1);
   const params = new URLSearchParams();
 
   if (trimmedKeyword) {
     params.set("keyword", trimmedKeyword);
+  }
+
+  if (requestedPriceRange) {
+    params.set("price", requestedPriceRange);
+  }
+
+  if (Number.isFinite(requestedPage) && requestedPage > 1) {
+    params.set("page", String(requestedPage));
   }
 
   const queryString = params.toString();
