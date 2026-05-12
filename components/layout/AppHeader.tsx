@@ -14,7 +14,7 @@ import {
   CART_ROUTE,
   HOME_ROUTE
 } from "@/lib/routes";
-import { getProductFinalPrice, getProductId } from "@/lib/products";
+import { getProductSalePrice, getProductId } from "@/lib/products";
 import { buildProductSearchUrl, filterProductsByKeyword } from "@/lib/search";
 import type { ProductRecord } from "@/lib/types";
 
@@ -286,7 +286,7 @@ export default function AppHeader() {
                     searchResults.map((product) => {
                       const imageSrc = resolveAssetPath(product.img) || "/images/sp1.jpg";
                       const productName = product.name || "Sản phẩm";
-                      const price = formatProductMoney(getProductFinalPrice(product));
+                      const price = formatProductMoney(getProductSalePrice(product));
                       const productId = getProductId(product);
 
                       return (

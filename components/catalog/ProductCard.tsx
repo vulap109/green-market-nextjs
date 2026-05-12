@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { resolveAssetPath } from "@/lib/assets";
 import { formatProductMoney } from "@/lib/format";
-import { getProductDiscount, getProductFinalPrice, getProductPrice, getProductSlug } from "@/lib/products";
+import { getProductDiscount, getProductSalePrice, getProductPrice, getProductSlug } from "@/lib/products";
 import { buildProductDetailUrl } from "@/lib/routes";
 import type { ProductRecord } from "@/lib/types";
 
@@ -14,11 +14,11 @@ export default function ProductCard({ product }: ProductCardProps) {
   const productName = product.name || "Sản phẩm";
   const productSlug = getProductSlug(product);
   const productHref = buildProductDetailUrl({ slug: productSlug });
-  const finalPrice = getProductFinalPrice(product);
+  const salePrice = getProductSalePrice(product);
   const originalPrice = getProductPrice(product);
   const discount = getProductDiscount(product);
   const imageSrc = resolveAssetPath(product.img) || "/images/sp1.jpg";
-  const showOriginalPrice = originalPrice > finalPrice;
+  const showOriginalPrice = originalPrice > salePrice;
   const showFlashSale = discount >= 11;
 
   return (
@@ -57,7 +57,7 @@ export default function ProductCard({ product }: ProductCardProps) {
 
         <div className="mt-auto">
           <div className="flex flex-wrap items-center justify-center gap-2">
-            <span className="text-base font-black text-red-600">{formatProductMoney(finalPrice)}</span>
+            <span className="text-base font-black text-red-600">{formatProductMoney(salePrice)}</span>
             {showOriginalPrice ? (
               <span className="text-xs font-medium text-gray-400 line-through">
                 {formatProductMoney(originalPrice)}

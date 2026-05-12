@@ -3,13 +3,13 @@ export type ProductRecord = {
   categoryName?: string;
   description?: string;
   discount?: number | string;
-  finalprice?: number;
   id?: number | string;
   img?: string;
   name?: string;
   parentCategory?: string;
   parentCategoryName?: string;
   price?: number;
+  salePrice?: number;
   sku?: string;
   slug?: string;
   sortOrder?: number;

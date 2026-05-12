@@ -1,5 +1,5 @@
 import { resolveAssetPath } from "@/lib/assets";
-import { getProductFinalPrice, getProductSlug } from "@/lib/products";
+import { getProductSalePrice, getProductSlug } from "@/lib/products";
 import { buildProductDetailUrl } from "@/lib/routes";
 import type { CartItem, ProductRecord, ResolvedCartItem } from "@/lib/types";
 
@@ -146,7 +146,7 @@ function getCartItemPrice(product: ProductRecord | undefined, cartItem: CartItem
     return Number(cartItem.priceSnapshot) || 0;
   }
 
-  return getProductFinalPrice(product);
+  return getProductSalePrice(product);
 }
 
 export function findCartProduct(

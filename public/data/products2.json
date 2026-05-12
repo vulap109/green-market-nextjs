@@ -6,7 +6,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi YN32",
     "price": 1300000,
     "discount": 0,
-    "finalprice": 1300000,
+    "salePrice": 1300000,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-yn32.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -18,7 +18,7 @@
     "name": "Hoa Quả Viếng VH07",
     "price": 999000,
     "discount": 0,
-    "finalprice": 999000,
+    "salePrice": 999000,
     "img": "images/hoa-qua-vieng-vh7.jpg",
     "category": "fruit-basket",
     "subcategory": "funeral"
@@ -30,7 +30,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi YN73",
     "price": 0,
     "discount": 0,
-    "finalprice": 0,
+    "salePrice": 0,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-yn73.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -42,7 +42,7 @@
     "name": "Giỏ Trái Cây TN14",
     "price": 600000,
     "discount": 0,
-    "finalprice": 600000,
+    "salePrice": 600000,
     "img": "images/fruit-basket/gio-trai-cay-tn14.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -54,7 +54,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi TN4",
     "price": 750000,
     "discount": 0,
-    "finalprice": 750000,
+    "salePrice": 750000,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-tn4.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -66,7 +66,7 @@
     "name": "Giỏ Trái Cây YN6",
     "price": 1300000,
     "discount": 0,
-    "finalprice": 1300000,
+    "salePrice": 1300000,
     "img": "images/fruit-basket/gio-trai-cay-yn6.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -78,7 +78,7 @@
     "name": "Giỏ Trái Cây TK251",
     "price": 1800000,
     "discount": 0.08,
-    "finalprice": 1650000,
+    "salePrice": 1650000,
     "img": "images/gio-trai-cay-tk251.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -90,7 +90,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi YN77",
     "price": 0,
     "discount": 0,
-    "finalprice": 0,
+    "salePrice": 0,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-yn77.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -102,7 +102,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi YN78",
     "price": 0,
     "discount": 0,
-    "finalprice": 0,
+    "salePrice": 0,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-yn78.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -114,7 +114,7 @@
     "name": "Giỏ Trái Cây TN25",
     "price": 500000,
     "discount": 0,
-    "finalprice": 500000,
+    "salePrice": 500000,
     "img": "images/fruit-basket/gio-trai-cay-tn25.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -126,7 +126,7 @@
     "name": "Hộp Quà Trái Cây TN20",
     "price": 450000,
     "discount": 0,
-    "finalprice": 450000,
+    "salePrice": 450000,
     "img": "images/fruit-basket/hop-qua-trai-cay-tn20.jpg",
     "category": "fruit-basket",
     "subcategory": "box"
@@ -138,7 +138,7 @@
     "name": "Giỏ Trái Cây YN3",
     "price": 850000,
     "discount": 0,
-    "finalprice": 850000,
+    "salePrice": 850000,
     "img": "images/fruit-basket/gio-trai-cay-yn3.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -150,7 +150,7 @@
     "name": "Giỏ Trái Cây YN8",
     "price": 1300000,
     "discount": 0,
-    "finalprice": 1300000,
+    "salePrice": 1300000,
     "img": "images/fruit-basket/gio-trai-cay-yn8.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -162,7 +162,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi YN28",
     "price": 2500000,
     "discount": 0,
-    "finalprice": 2500000,
+    "salePrice": 2500000,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-yn28.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -174,7 +174,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi YN49",
     "price": 999000,
     "discount": 0,
-    "finalprice": 999000,
+    "salePrice": 999000,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-yn49.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -186,7 +186,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi TK249",
     "price": 1900000,
     "discount": 0.105,
-    "finalprice": 1700000,
+    "salePrice": 1700000,
     "img": "images/gio-trai-cay-kem-hoa-tuoi-tk249.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -198,7 +198,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi YN37",
     "price": 1200000,
     "discount": 0,
-    "finalprice": 1200000,
+    "salePrice": 1200000,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-yn37.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -210,7 +210,7 @@
     "name": "Thập Cẩm Dâng Hương TK172",
     "price": 2100000,
     "discount": 0.1,
-    "finalprice": 1900000,
+    "salePrice": 1900000,
     "img": "images/thap-cam-dang-huong-tk172.jpg",
     "category": "fruit-basket",
     "subcategory": "funeral"
@@ -222,7 +222,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi YN63",
     "price": 0,
     "discount": 0,
-    "finalprice": 0,
+    "salePrice": 0,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-yn63.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -234,7 +234,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi TN2",
     "price": 750000,
     "discount": 0,
-    "finalprice": 750000,
+    "salePrice": 750000,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-tn2.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -246,7 +246,7 @@
     "name": "Giỏ Trái Cây TN18",
     "price": 600000,
     "discount": 0,
-    "finalprice": 600000,
+    "salePrice": 600000,
     "img": "images/fruit-basket/gio-trai-cay-tn18.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -258,7 +258,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi YN42",
     "price": 1900000,
     "discount": 0,
-    "finalprice": 1900000,
+    "salePrice": 1900000,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-yn42.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -270,7 +270,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi YN74",
     "price": 0,
     "discount": 0,
-    "finalprice": 0,
+    "salePrice": 0,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-yn74.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -282,7 +282,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi YN34",
     "price": 900000,
     "discount": 0,
-    "finalprice": 900000,
+    "salePrice": 900000,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-yn34.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -294,7 +294,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi TN1",
     "price": 650000,
     "discount": 0,
-    "finalprice": 650000,
+    "salePrice": 650000,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-tn1.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -306,7 +306,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi YN70",
     "price": 0,
     "discount": 0,
-    "finalprice": 0,
+    "salePrice": 0,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-yn70.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -318,7 +318,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi YN23",
     "price": 2650000,
     "discount": 0,
-    "finalprice": 2650000,
+    "salePrice": 2650000,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-yn23.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -330,7 +330,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi YN31",
     "price": 1200000,
     "discount": 0,
-    "finalprice": 1200000,
+    "salePrice": 1200000,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-yn31.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -342,7 +342,7 @@
     "name": "Giỏ Trái Cây YN4",
     "price": 750000,
     "discount": 0,
-    "finalprice": 750000,
+    "salePrice": 750000,
     "img": "images/fruit-basket/gio-trai-cay-yn4.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -354,7 +354,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi TK225",
     "price": 1200000,
     "discount": 0.08,
-    "finalprice": 1100000,
+    "salePrice": 1100000,
     "img": "images/gio-trai-cay-kem-hoa-tuoi-tk225.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -366,7 +366,7 @@
     "name": "Giỏ Trái Cây TK235",
     "price": 1600000,
     "discount": 0.125,
-    "finalprice": 1400000,
+    "salePrice": 1400000,
     "img": "images/gio-trai-cay-kem-hoa-tuoi-tk235.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -378,7 +378,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi YN67",
     "price": 0,
     "discount": 0,
-    "finalprice": 0,
+    "salePrice": 0,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-yn67.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -390,7 +390,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi YN40",
     "price": 1300000,
     "discount": 0,
-    "finalprice": 1300000,
+    "salePrice": 1300000,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-yn40.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -402,7 +402,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi TK216",
     "price": 1500000,
     "discount": 0.06,
-    "finalprice": 1400000,
+    "salePrice": 1400000,
     "img": "images/gio-trai-cay-kem-hoa-tuoi-tk216.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -414,7 +414,7 @@
     "name": "Hộp Quà Trái Cây YN9",
     "price": 1050000,
     "discount": 0,
-    "finalprice": 1050000,
+    "salePrice": 1050000,
     "img": "images/fruit-basket/hop-qua-trai-cay-yn9.jpg",
     "category": "fruit-basket",
     "subcategory": "box"
@@ -426,7 +426,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi YN71",
     "price": 0,
     "discount": 0,
-    "finalprice": 0,
+    "salePrice": 0,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-yn71.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -438,7 +438,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi YN62",
     "price": 0,
     "discount": 0,
-    "finalprice": 0,
+    "salePrice": 0,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-yn62.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -450,7 +450,7 @@
     "name": "Hộp Quà Trái Cây YN38",
     "price": 600000,
     "discount": 0,
-    "finalprice": 600000,
+    "salePrice": 600000,
     "img": "images/fruit-basket/hop-qua-trai-cay-yn38.jpg",
     "category": "fruit-basket",
     "subcategory": "box"
@@ -462,7 +462,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi YN43",
     "price": 1200000,
     "discount": 0,
-    "finalprice": 1200000,
+    "salePrice": 1200000,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-yn43.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -474,7 +474,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi YN81",
     "price": 0,
     "discount": 0,
-    "finalprice": 0,
+    "salePrice": 0,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-yn81.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -486,7 +486,7 @@
     "name": "Giỏ Trái Cây Kính Viếng TK248",
     "price": 1100000,
     "discount": 0.09,
-    "finalprice": 1000000,
+    "salePrice": 1000000,
     "img": "images/gio-trai-cay-kinh-vieng-tk248.jpg",
     "category": "fruit-basket",
     "subcategory": "funeral"
@@ -498,7 +498,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi YN16",
     "price": 1300000,
     "discount": 0,
-    "finalprice": 1300000,
+    "salePrice": 1300000,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-yn16.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -510,7 +510,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi TK218",
     "price": 1200000,
     "discount": 0.08,
-    "finalprice": 1100000,
+    "salePrice": 1100000,
     "img": "images/gio-trai-cay-kem-hoa-tuoi-tk218.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -522,7 +522,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi TK250",
     "price": 2200000,
     "discount": 0.09,
-    "finalprice": 2000000,
+    "salePrice": 2000000,
     "img": "images/gio-trai-cay-kem-hoa-tuoi-tk250.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -534,7 +534,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi YN14",
     "price": 1900000,
     "discount": 0,
-    "finalprice": 1900000,
+    "salePrice": 1900000,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-yn14.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -546,7 +546,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi TN9",
     "price": 950000,
     "discount": 0,
-    "finalprice": 950000,
+    "salePrice": 950000,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-tn9.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -558,7 +558,7 @@
     "name": "Hộp Quà Trái Cây TN23",
     "price": 999000,
     "discount": 0,
-    "finalprice": 999000,
+    "salePrice": 999000,
     "img": "images/fruit-basket/hop-qua-trai-cay-tn23.jpg",
     "category": "fruit-basket",
     "subcategory": "box"
@@ -570,7 +570,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi YN21",
     "price": 1600000,
     "discount": 0,
-    "finalprice": 1600000,
+    "salePrice": 1600000,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-yn21.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -582,7 +582,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi YN60",
     "price": 900000,
     "discount": 0,
-    "finalprice": 900000,
+    "salePrice": 900000,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-yn60.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -594,7 +594,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi YN41",
     "price": 1350000,
     "discount": 0,
-    "finalprice": 1350000,
+    "salePrice": 1350000,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-yn41.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -606,7 +606,7 @@
     "name": "Giỏ Táo Envy TK82",
     "price": 950000,
     "discount": 0.05,
-    "finalprice": 900000,
+    "salePrice": 900000,
     "img": "images/gio-tao-envy-tk82.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -618,7 +618,7 @@
     "name": "Hoa Quả Viếng VH03",
     "price": 1200000,
     "discount": 0,
-    "finalprice": 1200000,
+    "salePrice": 1200000,
     "img": "images/hoa-qua-vieng-vh3.jpg",
     "category": "fruit-basket",
     "subcategory": "funeral"
@@ -630,7 +630,7 @@
     "name": "Giỏ Trái Cây Cát Tường TK233",
     "price": 3200000,
     "discount": 0.06,
-    "finalprice": 3000000,
+    "salePrice": 3000000,
     "img": "images/gio-trai-cay-cat-tuong-tk233.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -642,7 +642,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi YN35",
     "price": 1200000,
     "discount": 0,
-    "finalprice": 1200000,
+    "salePrice": 1200000,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-yn35.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -654,7 +654,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi TK119",
     "price": 1200000,
     "discount": 0.08,
-    "finalprice": 1100000,
+    "salePrice": 1100000,
     "img": "images/gio-trai-cay-kem-hoa-tuoi-tk119.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -666,7 +666,7 @@
     "name": "Hoa Quả Viếng VH04",
     "price": 850000,
     "discount": 0,
-    "finalprice": 850000,
+    "salePrice": 850000,
     "img": "images/hoa-qua-vieng-vh4.jpg",
     "category": "fruit-basket",
     "subcategory": "funeral"
@@ -678,7 +678,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi YN22",
     "price": 1500000,
     "discount": 0,
-    "finalprice": 1500000,
+    "salePrice": 1500000,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-yn22.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -690,7 +690,7 @@
     "name": "Giỏ Trái Cây TK240",
     "price": 1100000,
     "discount": 0.09,
-    "finalprice": 1000000,
+    "salePrice": 1000000,
     "img": "images/gio-trai-cay-tk240.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -702,7 +702,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi YN54",
     "price": 1350000,
     "discount": 0,
-    "finalprice": 1350000,
+    "salePrice": 1350000,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-yn54.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -714,7 +714,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi YN61",
     "price": 1300000,
     "discount": 0,
-    "finalprice": 1300000,
+    "salePrice": 1300000,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-yn61.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -726,7 +726,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi YN56",
     "price": 1100000,
     "discount": 0,
-    "finalprice": 1100000,
+    "salePrice": 1100000,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-yn56.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -738,7 +738,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi YN46",
     "price": 1200000,
     "discount": 0,
-    "finalprice": 1200000,
+    "salePrice": 1200000,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-yn46.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -750,7 +750,7 @@
     "name": "Hộp Quà Trái Cây TN21",
     "price": 699000,
     "discount": 0,
-    "finalprice": 699000,
+    "salePrice": 699000,
     "img": "images/fruit-basket/hop-qua-trai-cay-tn21.jpg",
     "category": "fruit-basket",
     "subcategory": "box"
@@ -762,7 +762,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi YN59",
     "price": 1350000,
     "discount": 0,
-    "finalprice": 1350000,
+    "salePrice": 1350000,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-yn59.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -774,7 +774,7 @@
     "name": "Hộp Quà Trái Cây TK221",
     "price": 400000,
     "discount": 0.125,
-    "finalprice": 350000,
+    "salePrice": 350000,
     "img": "images/hop-qua-trai-cay-tk221.jpg",
     "category": "fruit-basket",
     "subcategory": "box"
@@ -786,7 +786,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi YN44",
     "price": 999000,
     "discount": 0,
-    "finalprice": 999000,
+    "salePrice": 999000,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-yn44.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -798,7 +798,7 @@
     "name": "Hoa Quả Viếng VH01",
     "price": 1990000,
     "discount": 0,
-    "finalprice": 1990000,
+    "salePrice": 1990000,
     "img": "images/hoa-qua-vieng-vh1.jpg",
     "category": "fruit-basket",
     "subcategory": "funeral"
@@ -810,7 +810,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi YN26",
     "price": 1200000,
     "discount": 0,
-    "finalprice": 1200000,
+    "salePrice": 1200000,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-yn26.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -822,7 +822,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi YN24",
     "price": 1200000,
     "discount": 0,
-    "finalprice": 1200000,
+    "salePrice": 1200000,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-yn24.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -834,7 +834,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi YN27",
     "price": 1650000,
     "discount": 0,
-    "finalprice": 1650000,
+    "salePrice": 1650000,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-yn27.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -846,7 +846,7 @@
     "name": "Hộp Quà Nho Sữa TK222",
     "price": 400000,
     "discount": 0.125,
-    "finalprice": 350000,
+    "salePrice": 350000,
     "img": "images/hop-qua-nho-sua-tk222.jpg",
     "category": "fruit-basket",
     "subcategory": "box"
@@ -858,7 +858,7 @@
     "name": "Hộp Quà Trái Cây YN10",
     "price": 450000,
     "discount": 0,
-    "finalprice": 450000,
+    "salePrice": 450000,
     "img": "images/fruit-basket/hop-qua-trai-cay-yn10.jpg",
     "category": "fruit-basket",
     "subcategory": "box"
@@ -870,7 +870,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi YN39",
     "price": 1200000,
     "discount": 0,
-    "finalprice": 1200000,
+    "salePrice": 1200000,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-yn39.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -882,7 +882,7 @@
     "name": "Hoa Quả Viếng VH09",
     "price": 4500000,
     "discount": 0,
-    "finalprice": 4500000,
+    "salePrice": 4500000,
     "img": "images/hoa-qua-vieng-vh9.jpg",
     "category": "fruit-basket",
     "subcategory": "funeral"
@@ -894,7 +894,7 @@
     "name": "Giỏ Trái Cây TK181",
     "price": 550000,
     "discount": 0.09,
-    "finalprice": 500000,
+    "salePrice": 500000,
     "img": "images/gio-trai-cay-tk181.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -906,7 +906,7 @@
     "name": "Hoa Quả Viếng VH02",
     "price": 2900000,
     "discount": 0,
-    "finalprice": 2900000,
+    "salePrice": 2900000,
     "img": "images/hoa-qua-vieng-vh2.jpg",
     "category": "fruit-basket",
     "subcategory": "funeral"
@@ -918,7 +918,7 @@
     "name": "Giỏ Trái Cây YN15",
     "price": 1200000,
     "discount": 0,
-    "finalprice": 1200000,
+    "salePrice": 1200000,
     "img": "images/fruit-basket/gio-trai-cay-yn15.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -930,7 +930,7 @@
     "name": "Giỏ Trái Cây TN30",
     "price": 600000,
     "discount": 0,
-    "finalprice": 600000,
+    "salePrice": 600000,
     "img": "images/fruit-basket/gio-trai-cay-tn30.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -942,7 +942,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi YN50",
     "price": 1600000,
     "discount": 0,
-    "finalprice": 1600000,
+    "salePrice": 1600000,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-yn50.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -954,7 +954,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi YN18",
     "price": 1650000,
     "discount": 0,
-    "finalprice": 1650000,
+    "salePrice": 1650000,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-yn18.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -966,7 +966,7 @@
     "name": "Giỏ Trái Cây Cao Cấp TK236",
     "price": 2300000,
     "discount": 0.08,
-    "finalprice": 2100000,
+    "salePrice": 2100000,
     "img": "images/gio-trai-cay-cao-cap-tk236.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -978,7 +978,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi YN52",
     "price": 2600000,
     "discount": 0,
-    "finalprice": 2600000,
+    "salePrice": 2600000,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-yn52.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -990,7 +990,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi YN12",
     "price": 799000,
     "discount": 0,
-    "finalprice": 799000,
+    "salePrice": 799000,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-yn12.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -1002,7 +1002,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi YN80",
     "price": 0,
     "discount": 0,
-    "finalprice": 0,
+    "salePrice": 0,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-yn80.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -1014,7 +1014,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi TN5",
     "price": 850000,
     "discount": 0,
-    "finalprice": 850000,
+    "salePrice": 850000,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-tn5.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -1026,7 +1026,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi YN64",
     "price": 0,
     "discount": 0,
-    "finalprice": 0,
+    "salePrice": 0,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-yn64.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -1038,7 +1038,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi YN72",
     "price": 0,
     "discount": 0,
-    "finalprice": 0,
+    "salePrice": 0,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-yn72.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -1050,7 +1050,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi TN3",
     "price": 700000,
     "discount": 0,
-    "finalprice": 700000,
+    "salePrice": 700000,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-tn3.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -1062,7 +1062,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi YN25",
     "price": 2200000,
     "discount": 0,
-    "finalprice": 2200000,
+    "salePrice": 2200000,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-yn25.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -1074,7 +1074,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi YN45",
     "price": 1350000,
     "discount": 0,
-    "finalprice": 1350000,
+    "salePrice": 1350000,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-yn45.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -1086,7 +1086,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi TK241",
     "price": 1300000,
     "discount": 0.07,
-    "finalprice": 1200000,
+    "salePrice": 1200000,
     "img": "images/gio-trai-cay-kem-hoa-tuoi-tk241.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -1098,7 +1098,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi YN69",
     "price": 0,
     "discount": 0,
-    "finalprice": 0,
+    "salePrice": 0,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-yn69.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -1110,7 +1110,7 @@
     "name": "Giỏ Trái Cây TN15",
     "price": 600000,
     "discount": 0,
-    "finalprice": 600000,
+    "salePrice": 600000,
     "img": "images/fruit-basket/gio-trai-cay-tn15.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -1122,7 +1122,7 @@
     "name": "Giỏ Trái Cây TK227",
     "price": 1000000,
     "discount": 0.1,
-    "finalprice": 900000,
+    "salePrice": 900000,
     "img": "images/gio-trai-cay-tk227.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -1134,7 +1134,7 @@
     "name": "Giỏ Trái Cây YN20",
     "price": 2300000,
     "discount": 0,
-    "finalprice": 2300000,
+    "salePrice": 2300000,
     "img": "images/fruit-basket/gio-trai-cay-yn20.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -1146,7 +1146,7 @@
     "name": "Mâm Lễ TK01",
     "price": 1600000,
     "discount": 0.06,
-    "finalprice": 1500000,
+    "salePrice": 1500000,
     "img": "images/mam-le-tk01.jpg",
     "category": "fruit-basket",
     "subcategory": "funeral"
@@ -1158,7 +1158,7 @@
     "name": "Giỏ Trái Cây TN13",
     "price": 600000,
     "discount": 0,
-    "finalprice": 600000,
+    "salePrice": 600000,
     "img": "images/fruit-basket/gio-trai-cay-tn13.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -1170,7 +1170,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi YN68",
     "price": 0,
     "discount": 0,
-    "finalprice": 0,
+    "salePrice": 0,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-yn68.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -1182,7 +1182,7 @@
     "name": "Giỏ Trái Cây TN16",
     "price": 650000,
     "discount": 0,
-    "finalprice": 650000,
+    "salePrice": 650000,
     "img": "images/fruit-basket/gio-trai-cay-tn16.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -1194,7 +1194,7 @@
     "name": "Giỏ Cherry Kèm Hoa Tươi TK247",
     "price": 1400000,
     "discount": 0.07,
-    "finalprice": 1300000,
+    "salePrice": 1300000,
     "img": "images/gio-cherry-kem-hoa-tuoi-tk247.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -1206,7 +1206,7 @@
     "name": "Hộp Quà Trái Cây YN11",
     "price": 750000,
     "discount": 0,
-    "finalprice": 750000,
+    "salePrice": 750000,
     "img": "images/fruit-basket/hop-qua-trai-cay-yn11.jpg",
     "category": "fruit-basket",
     "subcategory": "box"
@@ -1218,7 +1218,7 @@
     "name": "Giỏ Trái Cây Kính Viếng TK224",
     "price": 1100000,
     "discount": 0.09,
-    "finalprice": 1000000,
+    "salePrice": 1000000,
     "img": "images/gio-trai-cay-kinh-vieng-tk224.jpg",
     "category": "fruit-basket",
     "subcategory": "funeral"
@@ -1230,7 +1230,7 @@
     "name": "Giỏ Trái Cây YN5",
     "price": 500000,
     "discount": 0,
-    "finalprice": 500000,
+    "salePrice": 500000,
     "img": "images/fruit-basket/gio-trai-cay-yn5.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -1242,7 +1242,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi Size Dài TK217",
     "price": 3100000,
     "discount": 0.03,
-    "finalprice": 3000000,
+    "salePrice": 3000000,
     "img": "images/gio-trai-cay-kem-hoa-tuoi-size-dai-tk217.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -1254,7 +1254,7 @@
     "name": "Hoa Quả Viếng VH06",
     "price": 2500000,
     "discount": 0,
-    "finalprice": 2500000,
+    "salePrice": 2500000,
     "img": "images/hoa-qua-vieng-vh6.jpg",
     "category": "fruit-basket",
     "subcategory": "funeral"
@@ -1266,7 +1266,7 @@
     "name": "Tháp Táo Dâng Hương TK223",
     "price": 3200000,
     "discount": 0.06,
-    "finalprice": 3000000,
+    "salePrice": 3000000,
     "img": "images/thap-tao-dang-huong-tk223.jpg",
     "category": "fruit-basket",
     "subcategory": "funeral"
@@ -1278,7 +1278,7 @@
     "name": "Giỏ Trái Cây TN28",
     "price": 600000,
     "discount": 0,
-    "finalprice": 600000,
+    "salePrice": 600000,
     "img": "images/fruit-basket/gio-trai-cay-tn28.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -1290,7 +1290,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi YN57",
     "price": 900000,
     "discount": 0,
-    "finalprice": 900000,
+    "salePrice": 900000,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-yn57.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -1302,7 +1302,7 @@
     "name": "Giỏ Cherry Kèm Hoa Tươi TK239",
     "price": 850000,
     "discount": 0.05,
-    "finalprice": 800000,
+    "salePrice": 800000,
     "img": "images/gio-trai-cay-kem-hoa-tuoi-tk239.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -1314,7 +1314,7 @@
     "name": "Mâm Ngũ Quả TK255",
     "price": 2600000,
     "discount": 0.03,
-    "finalprice": 2500000,
+    "salePrice": 2500000,
     "img": "images/mam-ngu-qua-tk255.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -1326,7 +1326,7 @@
     "name": "Hộp Quà Trái Cây TK183",
     "price": 850000,
     "discount": 0.07,
-    "finalprice": 790000,
+    "salePrice": 790000,
     "img": "images/hop-qua-trai-cay-tk183.jpg",
     "category": "fruit-basket",
     "subcategory": "box"
@@ -1338,7 +1338,7 @@
     "name": "Lê Hàn Quốc EverGood",
     "price": 220000,
     "discount": 0.15,
-    "finalprice": 190000,
+    "salePrice": 190000,
     "img": "images/le-han-quoc-evergood.jpg",
     "category": "imported-fruits",
     "subcategory": "imported-fruits"
@@ -1350,7 +1350,7 @@
     "name": "Táo Sunrise Mỹ",
     "price": 189000,
     "discount": 0.22,
-    "finalprice": 149000,
+    "salePrice": 149000,
     "img": "images/tao-sunrise-my.jpg",
     "category": "imported-fruits",
     "subcategory": "imported-fruits"
@@ -1362,7 +1362,7 @@
     "name": "Dâu Hàn Joy Joy",
     "price": 230000,
     "discount": 0,
-    "finalprice": 230000,
+    "salePrice": 230000,
     "img": "images/dau-joy-joy.jpg",
     "category": "imported-fruits",
     "subcategory": "imported-fruits"
@@ -1374,7 +1374,7 @@
     "name": "Táo Dazzle",
     "price": 250000,
     "discount": 0.21,
-    "finalprice": 199000,
+    "salePrice": 199000,
     "img": "images/tao-dazzle.jpg",
     "category": "imported-fruits",
     "subcategory": "imported-fruits"
@@ -1386,7 +1386,7 @@
     "name": "Cherry Úc",
     "price": 450000,
     "discount": 0,
-    "finalprice": 450000,
+    "salePrice": 450000,
     "img": "images/cherry-uc.jpg",
     "category": "imported-fruits",
     "subcategory": "imported-fruits"
@@ -1398,7 +1398,7 @@
     "name": "Kiwi Vàng Đài Loan",
     "price": 279000,
     "discount": 0,
-    "finalprice": 279000,
+    "salePrice": 279000,
     "img": "images/kiwi-vang-dai-loan.jpg",
     "category": "imported-fruits",
     "subcategory": "imported-fruits"
@@ -1410,7 +1410,7 @@
     "name": "Cam Kiếng",
     "price": 149000,
     "discount": 0,
-    "finalprice": 149000,
+    "salePrice": 149000,
     "img": "images/cam-kieng.jpg",
     "category": "imported-fruits",
     "subcategory": "imported-fruits"
@@ -1422,7 +1422,7 @@
     "name": "Quýt 2ph",
     "price": 199000,
     "discount": 0,
-    "finalprice": 199000,
+    "salePrice": 199000,
     "img": "images/quyt-2ph.jpg",
     "category": "imported-fruits",
     "subcategory": "imported-fruits"
@@ -1434,7 +1434,7 @@
     "name": "Táo Envy",
     "price": 299000,
     "discount": 0,
-    "finalprice": 299000,
+    "salePrice": 299000,
     "img": "images/tao-envy-my.jpg",
     "category": "imported-fruits",
     "subcategory": "imported-fruits"
@@ -1446,7 +1446,7 @@
     "name": "Lê Nam Phi",
     "price": 139000,
     "discount": 0,
-    "finalprice": 139000,
+    "salePrice": 139000,
     "img": "images/le-nam-phi.jpg",
     "category": "imported-fruits",
     "subcategory": "imported-fruits"
@@ -1458,7 +1458,7 @@
     "name": "Lê Sữa",
     "price": 129000,
     "discount": 0,
-    "finalprice": 129000,
+    "salePrice": 129000,
     "img": "images/le-sua.jpg",
     "category": "imported-fruits",
     "subcategory": "imported-fruits"
@@ -1470,7 +1470,7 @@
     "name": "Dưa Lưới Aladin",
     "price": 129000,
     "discount": 0,
-    "finalprice": 129000,
+    "salePrice": 129000,
     "img": "images/dua-luoi-aladin-1.jpg",
     "category": "imported-fruits",
     "subcategory": "imported-fruits"
@@ -1482,7 +1482,7 @@
     "name": "Nho Xanh",
     "price": 369000,
     "discount": 0,
-    "finalprice": 369000,
+    "salePrice": 369000,
     "img": "images/nho-xanh.jpg",
     "category": "imported-fruits",
     "subcategory": "imported-fruits"
@@ -1494,7 +1494,7 @@
     "name": "Nho Đen",
     "price": 299000,
     "discount": 0,
-    "finalprice": 299000,
+    "salePrice": 299000,
     "img": "images/nho-den.jpg",
     "category": "imported-fruits",
     "subcategory": "imported-fruits"
@@ -1506,7 +1506,7 @@
     "name": "Nho Đỏ",
     "price": 299000,
     "discount": 0,
-    "finalprice": 299000,
+    "salePrice": 299000,
     "img": "images/nho-do.jpg",
     "category": "imported-fruits",
     "subcategory": "imported-fruits"
@@ -1518,7 +1518,7 @@
     "name": "Nho Sữa Đài Loan",
     "price": 350000,
     "discount": 0,
-    "finalprice": 350000,
+    "salePrice": 350000,
     "img": "images/nho-sua-dai-loan.jpg",
     "category": "imported-fruits",
     "subcategory": "imported-fruits"
@@ -1530,7 +1530,7 @@
     "name": "Nho Sữa Hàn Quốc",
     "price": 850000,
     "discount": 0,
-    "finalprice": 850000,
+    "salePrice": 850000,
     "img": "images/nho-sua-han-quoc.jpg",
     "category": "imported-fruits",
     "subcategory": "imported-fruits"
@@ -1542,7 +1542,7 @@
     "name": "Kiwi Vàng New Zealand",
     "price": 289000,
     "discount": 0,
-    "finalprice": 289000,
+    "salePrice": 289000,
     "img": "images/kiwi-vang-new-zealand.jpg",
     "category": "imported-fruits",
     "subcategory": "imported-fruits"
@@ -1554,7 +1554,7 @@
     "name": "Bó Hoa TK026",
     "price": 900000,
     "discount": 0.09,
-    "finalprice": 819000,
+    "salePrice": 819000,
     "img": "images/flowers.jpg",
     "category": "flowers",
     "subcategory": "flowers"
@@ -1566,7 +1566,7 @@
     "name": "Bó Hoa TK027",
     "price": 790000,
     "discount": 0.1,
-    "finalprice": 711000,
+    "salePrice": 711000,
     "img": "images/flowers.jpg",
     "category": "flowers",
     "subcategory": "flowers"
@@ -1578,7 +1578,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi YN17",
     "price": 1700000,
     "discount": 0,
-    "finalprice": 1700000,
+    "salePrice": 1700000,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-yn17.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -1590,7 +1590,7 @@
     "name": "Hoa Quả Viếng VH10",
     "price": 1500000,
     "discount": 0,
-    "finalprice": 1500000,
+    "salePrice": 1500000,
     "img": "images/hoa-qua-vieng-vh10.jpg",
     "category": "fruit-basket",
     "subcategory": "funeral"
@@ -1602,7 +1602,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi YN51",
     "price": 1300000,
     "discount": 0,
-    "finalprice": 1300000,
+    "salePrice": 1300000,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-yn51.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -1614,7 +1614,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi YN47",
     "price": 1600000,
     "discount": 0,
-    "finalprice": 1600000,
+    "salePrice": 1600000,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-yn47.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -1626,7 +1626,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi YN29",
     "price": 1650000,
     "discount": 0,
-    "finalprice": 1650000,
+    "salePrice": 1650000,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-yn29.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -1638,7 +1638,7 @@
     "name": "Giỏ Trái Cây TN26",
     "price": 600000,
     "discount": 0,
-    "finalprice": 600000,
+    "salePrice": 600000,
     "img": "images/fruit-basket/gio-trai-cay-tn26.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -1650,7 +1650,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi YN2",
     "price": 1400000,
     "discount": 0,
-    "finalprice": 1400000,
+    "salePrice": 1400000,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-yn2.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -1662,7 +1662,7 @@
     "name": "Hộp Quà Trái Cây TN29",
     "price": 450000,
     "discount": 0,
-    "finalprice": 450000,
+    "salePrice": 450000,
     "img": "images/fruit-basket/hop-qua-trai-cay-tn29.jpg",
     "category": "fruit-basket",
     "subcategory": "box"
@@ -1674,7 +1674,7 @@
     "name": "Hộp Quà Cherry TK252",
     "price": 1000000,
     "discount": 0.1,
-    "finalprice": 900000,
+    "salePrice": 900000,
     "img": "images/hop-qua-cherry-tk252.jpg",
     "category": "fruit-basket",
     "subcategory": "box"
@@ -1686,7 +1686,7 @@
     "name": "Hộp Quà Trái Cây TN22",
     "price": 1200000,
     "discount": 0,
-    "finalprice": 1200000,
+    "salePrice": 1200000,
     "img": "images/fruit-basket/hop-qua-trai-cay-tn22.jpg",
     "category": "fruit-basket",
     "subcategory": "box"
@@ -1698,7 +1698,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi YN76",
     "price": 0,
     "discount": 0,
-    "finalprice": 0,
+    "salePrice": 0,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-yn76.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -1710,7 +1710,7 @@
     "name": "Giỏ Trái Cây TN17",
     "price": 550000,
     "discount": 0,
-    "finalprice": 550000,
+    "salePrice": 550000,
     "img": "images/fruit-basket/gio-trai-cay-tn17.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -1722,7 +1722,7 @@
     "name": "Bánh Kem LL20",
     "price": 129000,
     "discount": 0,
-    "finalprice": 129000,
+    "salePrice": 129000,
     "img": "images/cake/banh-kem-ll20.jpg",
     "category": "cream-cake",
     "subcategory": "ll"
@@ -1734,7 +1734,7 @@
     "name": "Bánh Kem LL17",
     "price": 129000,
     "discount": 0,
-    "finalprice": 129000,
+    "salePrice": 129000,
     "img": "images/cake/banh-kem-ll17.jpg",
     "category": "cream-cake",
     "subcategory": "ll"
@@ -1746,7 +1746,7 @@
     "name": "Bánh Kem HT04",
     "price": 310000,
     "discount": 0,
-    "finalprice": 310000,
+    "salePrice": 310000,
     "img": "images/cake/banh-kem-ht4.jpg",
     "category": "cream-cake",
     "subcategory": "ht"
@@ -1758,7 +1758,7 @@
     "name": "Bánh Kem LQ03",
     "price": 330000,
     "discount": 0,
-    "finalprice": 330000,
+    "salePrice": 330000,
     "img": "images/cake/banh-kem-lq3.jpg",
     "category": "cream-cake",
     "subcategory": "lq"
@@ -1770,7 +1770,7 @@
     "name": "Bánh Kem HT20",
     "price": 310000,
     "discount": 0,
-    "finalprice": 310000,
+    "salePrice": 310000,
     "img": "images/cake/banh-kem-ht20.jpg",
     "category": "cream-cake",
     "subcategory": "ht"
@@ -1782,7 +1782,7 @@
     "name": "Bánh Kem LQ07",
     "price": 330000,
     "discount": 0,
-    "finalprice": 330000,
+    "salePrice": 330000,
     "img": "images/cake/banh-kem-lq7.jpg",
     "category": "cream-cake",
     "subcategory": "lq"
@@ -1794,7 +1794,7 @@
     "name": "Bánh Kem LL04",
     "price": 129000,
     "discount": 0,
-    "finalprice": 129000,
+    "salePrice": 129000,
     "img": "images/cake/banh-kem-ll4.jpg",
     "category": "cream-cake",
     "subcategory": "ll"
@@ -1806,7 +1806,7 @@
     "name": "Bánh Kem LL21",
     "price": 129000,
     "discount": 0,
-    "finalprice": 129000,
+    "salePrice": 129000,
     "img": "images/cake/banh-kem-ll21.jpg",
     "category": "cream-cake",
     "subcategory": "ll"
@@ -1818,7 +1818,7 @@
     "name": "Bánh Kem LL02",
     "price": 129000,
     "discount": 0,
-    "finalprice": 129000,
+    "salePrice": 129000,
     "img": "images/cake/banh-kem-ll2.jpg",
     "category": "cream-cake",
     "subcategory": "ll"
@@ -1830,7 +1830,7 @@
     "name": "Bánh Kem LQ14",
     "price": 330000,
     "discount": 0,
-    "finalprice": 330000,
+    "salePrice": 330000,
     "img": "images/cake/banh-kem-lq14.jpg",
     "category": "cream-cake",
     "subcategory": "lq"
@@ -1842,7 +1842,7 @@
     "name": "Bánh Kem HT18",
     "price": 310000,
     "discount": 0,
-    "finalprice": 310000,
+    "salePrice": 310000,
     "img": "images/cake/banh-kem-ht18.jpg",
     "category": "cream-cake",
     "subcategory": "ht"
@@ -1854,7 +1854,7 @@
     "name": "Bánh Kem HT13",
     "price": 310000,
     "discount": 0,
-    "finalprice": 310000,
+    "salePrice": 310000,
     "img": "images/cake/banh-kem-ht13.jpg",
     "category": "cream-cake",
     "subcategory": "ht"
@@ -1866,7 +1866,7 @@
     "name": "Bánh Kem LL05",
     "price": 129000,
     "discount": 0,
-    "finalprice": 129000,
+    "salePrice": 129000,
     "img": "images/cake/banh-kem-ll5.jpg",
     "category": "cream-cake",
     "subcategory": "ll"
@@ -1878,7 +1878,7 @@
     "name": "Bánh Kem LQ17",
     "price": 330000,
     "discount": 0,
-    "finalprice": 330000,
+    "salePrice": 330000,
     "img": "images/cake/banh-kem-lq17.jpg",
     "category": "cream-cake",
     "subcategory": "lq"
@@ -1890,7 +1890,7 @@
     "name": "Bánh Kem LL09",
     "price": 129000,
     "discount": 0,
-    "finalprice": 129000,
+    "salePrice": 129000,
     "img": "images/cake/banh-kem-ll9.jpg",
     "category": "cream-cake",
     "subcategory": "ll"
@@ -1902,7 +1902,7 @@
     "name": "Bánh Kem HT02",
     "price": 310000,
     "discount": 0,
-    "finalprice": 310000,
+    "salePrice": 310000,
     "img": "images/cake/banh-kem-ht2.jpg",
     "category": "cream-cake",
     "subcategory": "ht"
@@ -1914,7 +1914,7 @@
     "name": "Bánh Kem LQ10",
     "price": 330000,
     "discount": 0,
-    "finalprice": 330000,
+    "salePrice": 330000,
     "img": "images/cake/banh-kem-lq10.jpg",
     "category": "cream-cake",
     "subcategory": "lq"
@@ -1926,7 +1926,7 @@
     "name": "Bánh Kem LL08",
     "price": 129000,
     "discount": 0,
-    "finalprice": 129000,
+    "salePrice": 129000,
     "img": "images/cake/banh-kem-ll8.jpg",
     "category": "cream-cake",
     "subcategory": "ll"
@@ -1938,7 +1938,7 @@
     "name": "Bánh Kem HT08",
     "price": 310000,
     "discount": 0,
-    "finalprice": 310000,
+    "salePrice": 310000,
     "img": "images/cake/banh-kem-ht8.jpg",
     "category": "cream-cake",
     "subcategory": "ht"
@@ -1950,7 +1950,7 @@
     "name": "Bánh Kem LQ15",
     "price": 330000,
     "discount": 0,
-    "finalprice": 330000,
+    "salePrice": 330000,
     "img": "images/cake/banh-kem-lq15.jpg",
     "category": "cream-cake",
     "subcategory": "lq"
@@ -1962,7 +1962,7 @@
     "name": "Bánh Kem LQ11",
     "price": 330000,
     "discount": 0,
-    "finalprice": 330000,
+    "salePrice": 330000,
     "img": "images/cake/banh-kem-lq11.jpg",
     "category": "cream-cake",
     "subcategory": "lq"
@@ -1974,7 +1974,7 @@
     "name": "Bánh Kem HT03",
     "price": 310000,
     "discount": 0,
-    "finalprice": 310000,
+    "salePrice": 310000,
     "img": "images/cake/banh-kem-ht3.jpg",
     "category": "cream-cake",
     "subcategory": "ht"
@@ -1986,7 +1986,7 @@
     "name": "Bánh Kem HT05",
     "price": 310000,
     "discount": 0,
-    "finalprice": 310000,
+    "salePrice": 310000,
     "img": "images/cake/banh-kem-ht5.jpg",
     "category": "cream-cake",
     "subcategory": "ht"
@@ -1998,7 +1998,7 @@
     "name": "Bánh Kem LQ18",
     "price": 330000,
     "discount": 0,
-    "finalprice": 330000,
+    "salePrice": 330000,
     "img": "images/cake/banh-kem-lq18.jpg",
     "category": "cream-cake",
     "subcategory": "lq"
@@ -2010,7 +2010,7 @@
     "name": "Bánh Kem QD02",
     "price": 350000,
     "discount": 0,
-    "finalprice": 350000,
+    "salePrice": 350000,
     "img": "images/cake/banh-kem-qd2.jpg",
     "category": "cream-cake",
     "subcategory": "qd"
@@ -2022,7 +2022,7 @@
     "name": "Bánh Kem LQ08",
     "price": 330000,
     "discount": 0,
-    "finalprice": 330000,
+    "salePrice": 330000,
     "img": "images/cake/banh-kem-lq8.jpg",
     "category": "cream-cake",
     "subcategory": "lq"
@@ -2034,7 +2034,7 @@
     "name": "Bánh Kem LQ20",
     "price": 330000,
     "discount": 0,
-    "finalprice": 330000,
+    "salePrice": 330000,
     "img": "images/cake/banh-kem-lq20.jpg",
     "category": "cream-cake",
     "subcategory": "lq"
@@ -2046,7 +2046,7 @@
     "name": "Bánh Kem LQ02",
     "price": 330000,
     "discount": 0,
-    "finalprice": 330000,
+    "salePrice": 330000,
     "img": "images/cake/banh-kem-lq2.jpg",
     "category": "cream-cake",
     "subcategory": "lq"
@@ -2058,7 +2058,7 @@
     "name": "Bánh Kem QD06",
     "price": 350000,
     "discount": 0,
-    "finalprice": 350000,
+    "salePrice": 350000,
     "img": "images/cake/banh-kem-qd6.jpg",
     "category": "cream-cake",
     "subcategory": "qd"
@@ -2070,7 +2070,7 @@
     "name": "Bánh Kem LQ22",
     "price": 330000,
     "discount": 0,
-    "finalprice": 330000,
+    "salePrice": 330000,
     "img": "images/cake/banh-kem-lq22.jpg",
     "category": "cream-cake",
     "subcategory": "lq"
@@ -2082,7 +2082,7 @@
     "name": "Bánh Kem LL14",
     "price": 129000,
     "discount": 0,
-    "finalprice": 129000,
+    "salePrice": 129000,
     "img": "images/cake/banh-kem-ll14.jpg",
     "category": "cream-cake",
     "subcategory": "ll"
@@ -2094,7 +2094,7 @@
     "name": "Bánh Kem HT12",
     "price": 310000,
     "discount": 0,
-    "finalprice": 310000,
+    "salePrice": 310000,
     "img": "images/cake/banh-kem-ht12.jpg",
     "category": "cream-cake",
     "subcategory": "ht"
@@ -2106,7 +2106,7 @@
     "name": "Bánh Kem LQ16",
     "price": 330000,
     "discount": 0,
-    "finalprice": 330000,
+    "salePrice": 330000,
     "img": "images/cake/banh-kem-lq16.jpg",
     "category": "cream-cake",
     "subcategory": "lq"
@@ -2118,7 +2118,7 @@
     "name": "Bánh Kem LQ06",
     "price": 330000,
     "discount": 0,
-    "finalprice": 330000,
+    "salePrice": 330000,
     "img": "images/cake/banh-kem-lq6.jpg",
     "category": "cream-cake",
     "subcategory": "lq"
@@ -2130,7 +2130,7 @@
     "name": "Bánh Kem HT17",
     "price": 310000,
     "discount": 0,
-    "finalprice": 310000,
+    "salePrice": 310000,
     "img": "images/cake/banh-kem-ht17.jpg",
     "category": "cream-cake",
     "subcategory": "ht"
@@ -2142,7 +2142,7 @@
     "name": "Bánh Kem LQ13",
     "price": 330000,
     "discount": 0,
-    "finalprice": 330000,
+    "salePrice": 330000,
     "img": "images/cake/banh-kem-lq13.jpg",
     "category": "cream-cake",
     "subcategory": "lq"
@@ -2154,7 +2154,7 @@
     "name": "Bánh Kem LL19",
     "price": 129000,
     "discount": 0,
-    "finalprice": 129000,
+    "salePrice": 129000,
     "img": "images/cake/banh-kem-ll19.jpg",
     "category": "cream-cake",
     "subcategory": "ll"
@@ -2166,7 +2166,7 @@
     "name": "Bánh Kem QD05",
     "price": 350000,
     "discount": 0,
-    "finalprice": 350000,
+    "salePrice": 350000,
     "img": "images/cake/banh-kem-qd5.jpg",
     "category": "cream-cake",
     "subcategory": "qd"
@@ -2178,7 +2178,7 @@
     "name": "Bánh Kem LQ09",
     "price": 330000,
     "discount": 0,
-    "finalprice": 330000,
+    "salePrice": 330000,
     "img": "images/cake/banh-kem-lq9.jpg",
     "category": "cream-cake",
     "subcategory": "lq"
@@ -2190,7 +2190,7 @@
     "name": "Bánh Kem LQ12",
     "price": 330000,
     "discount": 0,
-    "finalprice": 330000,
+    "salePrice": 330000,
     "img": "images/cake/banh-kem-lq12.jpg",
     "category": "cream-cake",
     "subcategory": "lq"
@@ -2202,7 +2202,7 @@
     "name": "Bánh Kem LL06",
     "price": 129000,
     "discount": 0,
-    "finalprice": 129000,
+    "salePrice": 129000,
     "img": "images/cake/banh-kem-ll6.jpg",
     "category": "cream-cake",
     "subcategory": "ll"
@@ -2214,7 +2214,7 @@
     "name": "Bánh Kem LL13",
     "price": 129000,
     "discount": 0,
-    "finalprice": 129000,
+    "salePrice": 129000,
     "img": "images/cake/banh-kem-ll13.jpg",
     "category": "cream-cake",
     "subcategory": "ll"
@@ -2226,7 +2226,7 @@
     "name": "Bánh Kem QD03",
     "price": 350000,
     "discount": 0,
-    "finalprice": 350000,
+    "salePrice": 350000,
     "img": "images/cake/banh-kem-qd3.jpg",
     "category": "cream-cake",
     "subcategory": "qd"
@@ -2238,7 +2238,7 @@
     "name": "Bánh Kem HT15",
     "price": 310000,
     "discount": 0,
-    "finalprice": 310000,
+    "salePrice": 310000,
     "img": "images/cake/banh-kem-ht15.jpg",
     "category": "cream-cake",
     "subcategory": "ht"
@@ -2250,7 +2250,7 @@
     "name": "Bánh Kem HT11",
     "price": 310000,
     "discount": 0,
-    "finalprice": 310000,
+    "salePrice": 310000,
     "img": "images/cake/banh-kem-ht11.jpg",
     "category": "cream-cake",
     "subcategory": "ht"
@@ -2262,7 +2262,7 @@
     "name": "Bánh Kem HT16",
     "price": 310000,
     "discount": 0,
-    "finalprice": 310000,
+    "salePrice": 310000,
     "img": "images/cake/banh-kem-ht16.jpg",
     "category": "cream-cake",
     "subcategory": "ht"
@@ -2274,7 +2274,7 @@
     "name": "Bánh Kem LL11",
     "price": 129000,
     "discount": 0,
-    "finalprice": 129000,
+    "salePrice": 129000,
     "img": "images/cake/banh-kem-ll11.jpg",
     "category": "cream-cake",
     "subcategory": "ll"
@@ -2286,7 +2286,7 @@
     "name": "Bánh Kem LQ19",
     "price": 330000,
     "discount": 0,
-    "finalprice": 330000,
+    "salePrice": 330000,
     "img": "images/cake/banh-kem-lq19.jpg",
     "category": "cream-cake",
     "subcategory": "lq"
@@ -2298,7 +2298,7 @@
     "name": "Bánh Kem LQ23",
     "price": 330000,
     "discount": 0,
-    "finalprice": 330000,
+    "salePrice": 330000,
     "img": "images/cake/banh-kem-lq23.jpg",
     "category": "cream-cake",
     "subcategory": "lq"
@@ -2310,7 +2310,7 @@
     "name": "Bánh Kem HT09",
     "price": 310000,
     "discount": 0,
-    "finalprice": 310000,
+    "salePrice": 310000,
     "img": "images/cake/banh-kem-ht9.jpg",
     "category": "cream-cake",
     "subcategory": "ht"
@@ -2322,7 +2322,7 @@
     "name": "Bánh Kem HT14",
     "price": 310000,
     "discount": 0,
-    "finalprice": 310000,
+    "salePrice": 310000,
     "img": "images/cake/banh-kem-ht14.jpg",
     "category": "cream-cake",
     "subcategory": "ht"
@@ -2334,7 +2334,7 @@
     "name": "Bánh Kem QD01",
     "price": 350000,
     "discount": 0,
-    "finalprice": 350000,
+    "salePrice": 350000,
     "img": "images/cake/banh-kem-qd1.jpg",
     "category": "cream-cake",
     "subcategory": "qd"
@@ -2346,7 +2346,7 @@
     "name": "Bánh Kem LL18",
     "price": 129000,
     "discount": 0,
-    "finalprice": 129000,
+    "salePrice": 129000,
     "img": "images/cake/banh-kem-ll18.jpg",
     "category": "cream-cake",
     "subcategory": "ll"
@@ -2358,7 +2358,7 @@
     "name": "Bánh Kem LL03",
     "price": 129000,
     "discount": 0,
-    "finalprice": 129000,
+    "salePrice": 129000,
     "img": "images/cake/banh-kem-ll3.jpg",
     "category": "cream-cake",
     "subcategory": "ll"
@@ -2370,7 +2370,7 @@
     "name": "Bánh Kem LL07",
     "price": 129000,
     "discount": 0,
-    "finalprice": 129000,
+    "salePrice": 129000,
     "img": "images/cake/banh-kem-ll7.jpg",
     "category": "cream-cake",
     "subcategory": "ll"
@@ -2382,7 +2382,7 @@
     "name": "Bánh Kem LQ04",
     "price": 330000,
     "discount": 0,
-    "finalprice": 330000,
+    "salePrice": 330000,
     "img": "images/cake/banh-kem-lq4.jpg",
     "category": "cream-cake",
     "subcategory": "lq"
@@ -2394,7 +2394,7 @@
     "name": "Bánh Kem LL15",
     "price": 129000,
     "discount": 0,
-    "finalprice": 129000,
+    "salePrice": 129000,
     "img": "images/cake/banh-kem-ll15.jpg",
     "category": "cream-cake",
     "subcategory": "ll"
@@ -2406,7 +2406,7 @@
     "name": "Bánh Kem LL01",
     "price": 129000,
     "discount": 0,
-    "finalprice": 129000,
+    "salePrice": 129000,
     "img": "images/cake/banh-kem-ll1.jpg",
     "category": "cream-cake",
     "subcategory": "ll"
@@ -2418,7 +2418,7 @@
     "name": "Bánh Kem HT06",
     "price": 310000,
     "discount": 0,
-    "finalprice": 310000,
+    "salePrice": 310000,
     "img": "images/cake/banh-kem-ht6.jpg",
     "category": "cream-cake",
     "subcategory": "ht"
@@ -2430,7 +2430,7 @@
     "name": "Bánh Kem LL16",
     "price": 129000,
     "discount": 0,
-    "finalprice": 129000,
+    "salePrice": 129000,
     "img": "images/cake/banh-kem-ll16.jpg",
     "category": "cream-cake",
     "subcategory": "ll"
@@ -2442,7 +2442,7 @@
     "name": "Bánh Kem LQ21",
     "price": 330000,
     "discount": 0,
-    "finalprice": 330000,
+    "salePrice": 330000,
     "img": "images/cake/banh-kem-lq21.jpg",
     "category": "cream-cake",
     "subcategory": "lq"
@@ -2454,7 +2454,7 @@
     "name": "Bánh Kem QD04",
     "price": 350000,
     "discount": 0,
-    "finalprice": 350000,
+    "salePrice": 350000,
     "img": "images/cake/banh-kem-qd4.jpg",
     "category": "cream-cake",
     "subcategory": "qd"
@@ -2466,7 +2466,7 @@
     "name": "Bánh Kem HT01",
     "price": 310000,
     "discount": 0,
-    "finalprice": 310000,
+    "salePrice": 310000,
     "img": "images/cake/banh-kem-ht1.jpg",
     "category": "cream-cake",
     "subcategory": "ht"
@@ -2478,7 +2478,7 @@
     "name": "Bánh Kem HT10",
     "price": 310000,
     "discount": 0,
-    "finalprice": 310000,
+    "salePrice": 310000,
     "img": "images/cake/banh-kem-ht10.jpg",
     "category": "cream-cake",
     "subcategory": "ht"
@@ -2490,7 +2490,7 @@
     "name": "Bánh Kem LQ01",
     "price": 330000,
     "discount": 0,
-    "finalprice": 330000,
+    "salePrice": 330000,
     "img": "images/cake/banh-kem-lq1.jpg",
     "category": "cream-cake",
     "subcategory": "lq"
@@ -2502,7 +2502,7 @@
     "name": "Bánh Kem QD07",
     "price": 350000,
     "discount": 0,
-    "finalprice": 350000,
+    "salePrice": 350000,
     "img": "images/cake/banh-kem-qd7.jpg",
     "category": "cream-cake",
     "subcategory": "qd"
@@ -2514,7 +2514,7 @@
     "name": "Bánh Kem LL10",
     "price": 129000,
     "discount": 0,
-    "finalprice": 129000,
+    "salePrice": 129000,
     "img": "images/cake/banh-kem-ll10.jpg",
     "category": "cream-cake",
     "subcategory": "ll"
@@ -2526,7 +2526,7 @@
     "name": "Bánh Kem LQ05",
     "price": 330000,
     "discount": 0,
-    "finalprice": 330000,
+    "salePrice": 330000,
     "img": "images/cake/banh-kem-lq5.jpg",
     "category": "cream-cake",
     "subcategory": "lq"
@@ -2538,7 +2538,7 @@
     "name": "Bánh Kem HT07",
     "price": 310000,
     "discount": 0,
-    "finalprice": 310000,
+    "salePrice": 310000,
     "img": "images/cake/banh-kem-ht7.jpg",
     "category": "cream-cake",
     "subcategory": "ht"
@@ -2550,7 +2550,7 @@
     "name": "Bánh Kem LL12",
     "price": 129000,
     "discount": 0,
-    "finalprice": 129000,
+    "salePrice": 129000,
     "img": "images/cake/banh-kem-ll12.jpg",
     "category": "cream-cake",
     "subcategory": "ll"
@@ -2562,7 +2562,7 @@
     "name": "Bánh Kem HT19",
     "price": 310000,
     "discount": 0,
-    "finalprice": 310000,
+    "salePrice": 310000,
     "img": "images/cake/banh-kem-ht19.jpg",
     "category": "cream-cake",
     "subcategory": "ht"
@@ -2574,7 +2574,7 @@
     "name": "Giỏ Trái Cây TK219",
     "price": 700000,
     "discount": 0.14,
-    "finalprice": 600000,
+    "salePrice": 600000,
     "img": "images/gio-trai-cay-tk219.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -2586,7 +2586,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi YN79",
     "price": 0,
     "discount": 0,
-    "finalprice": 0,
+    "salePrice": 0,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-yn79.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -2598,7 +2598,7 @@
     "name": "Hộp Quà Trái Cây TN19",
     "price": 500000,
     "discount": 0,
-    "finalprice": 500000,
+    "salePrice": 500000,
     "img": "images/fruit-basket/hop-qua-trai-cay-tn19.jpg",
     "category": "fruit-basket",
     "subcategory": "box"
@@ -2610,7 +2610,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi TN6",
     "price": 899000,
     "discount": 0,
-    "finalprice": 899000,
+    "salePrice": 899000,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-tn6.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -2622,7 +2622,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi TK238",
     "price": 1900000,
     "discount": 0.05,
-    "finalprice": 1800000,
+    "salePrice": 1800000,
     "img": "images/gio-trai-cay-kem-hoa-tuoi-tk238.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -2634,7 +2634,7 @@
     "name": "Giỏ Trái Cây Thượng Hạng TK230",
     "price": 6500000,
     "discount": 0.07,
-    "finalprice": 6000000,
+    "salePrice": 6000000,
     "img": "images/gio-trai-cay-thuong-hang-tika-230.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -2646,7 +2646,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi YN66",
     "price": 0,
     "discount": 0,
-    "finalprice": 0,
+    "salePrice": 0,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-yn66.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -2658,7 +2658,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi YN19",
     "price": 2500000,
     "discount": 0,
-    "finalprice": 2500000,
+    "salePrice": 2500000,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-yn19.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -2670,7 +2670,7 @@
     "name": "Hộp Quà Trái Cây TN24",
     "price": 750000,
     "discount": 0,
-    "finalprice": 750000,
+    "salePrice": 750000,
     "img": "images/fruit-basket/hop-qua-trai-cay-tn24.jpg",
     "category": "fruit-basket",
     "subcategory": "box"
@@ -2682,7 +2682,7 @@
     "name": "Hoa Quả Viếng VH08",
     "price": 850000,
     "discount": 0,
-    "finalprice": 850000,
+    "salePrice": 850000,
     "img": "images/hoa-qua-vieng-vh8.jpg",
     "category": "fruit-basket",
     "subcategory": "funeral"
@@ -2694,7 +2694,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi YN1",
     "price": 1500000,
     "discount": 0,
-    "finalprice": 1500000,
+    "salePrice": 1500000,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-yn1.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -2706,7 +2706,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi YN53",
     "price": 2200000,
     "discount": 0,
-    "finalprice": 2200000,
+    "salePrice": 2200000,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-yn53.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -2718,7 +2718,7 @@
     "name": "Giỏ Trái Cây TN27",
     "price": 600000,
     "discount": 0,
-    "finalprice": 600000,
+    "salePrice": 600000,
     "img": "images/fruit-basket/gio-trai-cay-tn27.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -2730,7 +2730,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi TK254",
     "price": 2400000,
     "discount": 0.08,
-    "finalprice": 2200000,
+    "salePrice": 2200000,
     "img": "images/gio-trai-cay-kem-hoa-tuoi-tk254.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -2742,7 +2742,7 @@
     "name": "Giỏ Trái Cây YN7",
     "price": 750000,
     "discount": 0,
-    "finalprice": 750000,
+    "salePrice": 750000,
     "img": "images/fruit-basket/gio-trai-cay-yn7.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -2754,7 +2754,7 @@
     "name": "Hộp Quà Trái Cây TN7",
     "price": 899000,
     "discount": 0,
-    "finalprice": 899000,
+    "salePrice": 899000,
     "img": "images/fruit-basket/hop-qua-trai-cay-tn7.jpg",
     "category": "fruit-basket",
     "subcategory": "box"
@@ -2766,7 +2766,7 @@
     "name": "Giỏ Trái Cây TN11",
     "price": 600000,
     "discount": 0,
-    "finalprice": 600000,
+    "salePrice": 600000,
     "img": "images/fruit-basket/gio-trai-cay-tn11.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -2778,7 +2778,7 @@
     "name": "Hoa Quả Viếng VH05",
     "price": 1500000,
     "discount": 0,
-    "finalprice": 1500000,
+    "salePrice": 1500000,
     "img": "images/hoa-qua-vieng-vh5.jpg",
     "category": "fruit-basket",
     "subcategory": "funeral"
@@ -2790,7 +2790,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi YN75",
     "price": 0,
     "discount": 0,
-    "finalprice": 0,
+    "salePrice": 0,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-yn75.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -2802,7 +2802,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi YN48",
     "price": 1600000,
     "discount": 0,
-    "finalprice": 1600000,
+    "salePrice": 1600000,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-yn48.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -2814,7 +2814,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi YN65",
     "price": 0,
     "discount": 0,
-    "finalprice": 0,
+    "salePrice": 0,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-yn65.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -2826,7 +2826,7 @@
     "name": "Giỏ Trái Cây TN12",
     "price": 600000,
     "discount": 0,
-    "finalprice": 600000,
+    "salePrice": 600000,
     "img": "images/fruit-basket/gio-trai-cay-tn12.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -2838,7 +2838,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi YN13",
     "price": 899000,
     "discount": 0,
-    "finalprice": 899000,
+    "salePrice": 899000,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-yn13.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -2850,7 +2850,7 @@
     "name": "Hộp Quà Trái Cây TN31",
     "price": 600000,
     "discount": 0,
-    "finalprice": 600000,
+    "salePrice": 600000,
     "img": "images/fruit-basket/hop-qua-trai-cay-tn31.jpg",
     "category": "fruit-basket",
     "subcategory": "box"
@@ -2862,7 +2862,7 @@
     "name": "Hộp Quà Trái Cây YN36",
     "price": 1100000,
     "discount": 0,
-    "finalprice": 1100000,
+    "salePrice": 1100000,
     "img": "images/fruit-basket/hop-qua-trai-cay-yn36.jpg",
     "category": "fruit-basket",
     "subcategory": "box"
@@ -2874,7 +2874,7 @@
     "name": "Giỏ Trái Cây TN10",
     "price": 500000,
     "discount": 0,
-    "finalprice": 500000,
+    "salePrice": 500000,
     "img": "images/fruit-basket/gio-trai-cay-tn10.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -2886,7 +2886,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi YN55",
     "price": 1200000,
     "discount": 0,
-    "finalprice": 1200000,
+    "salePrice": 1200000,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-yn55.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -2898,7 +2898,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi YN33",
     "price": 1350000,
     "discount": 0,
-    "finalprice": 1350000,
+    "salePrice": 1350000,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-yn33.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -2910,7 +2910,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi YN58",
     "price": 900000,
     "discount": 0,
-    "finalprice": 900000,
+    "salePrice": 900000,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-yn58.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -2922,7 +2922,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi YN30",
     "price": 1899000,
     "discount": 0,
-    "finalprice": 1899000,
+    "salePrice": 1899000,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-yn30.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -2934,7 +2934,7 @@
     "name": "Giỏ Trái Cây Kèm Hoa Tươi TN8",
     "price": 899000,
     "discount": 0,
-    "finalprice": 899000,
+    "salePrice": 899000,
     "img": "images/fruit-basket/gio-trai-cay-kem-hoa-tuoi-tn8.jpg",
     "category": "fruit-basket",
     "subcategory": "fresh"
@@ -2946,7 +2946,7 @@
     "name": "Bánh Kem Tốt Nghiệp YV1",
     "price": 129000,
     "discount": 0,
-    "finalprice": 129000,
+    "salePrice": 129000,
     "img": "images/cake/banh-kem-tot-nghiep-yv1.jpg",
     "category": "cream-cake",
     "subcategory": "yv"
@@ -2958,7 +2958,7 @@
     "name": "Bánh Kem Tốt Nghiệp YV2",
     "price": 129000,
     "discount": 0,
-    "finalprice": 129000,
+    "salePrice": 129000,
     "img": "images/cake/banh-kem-tot-nghiep-yv2.jpg",
     "category": "cream-cake",
     "subcategory": "yv"
@@ -2970,7 +2970,7 @@
     "name": "Bánh Kem Tốt Nghiệp YV3",
     "price": 129000,
     "discount": 0,
-    "finalprice": 129000,
+    "salePrice": 129000,
     "img": "images/cake/banh-kem-tot-nghiep-yv3.jpg",
     "category": "cream-cake",
     "subcategory": "yv"
@@ -2982,7 +2982,7 @@
     "name": "Bánh Kem Tốt Nghiệp YV4",
     "price": 129000,
     "discount": 0,
-    "finalprice": 129000,
+    "salePrice": 129000,
     "img": "images/cake/banh-kem-tot-nghiep-yv4.jpg",
     "category": "cream-cake",
     "subcategory": "yv"
@@ -2994,7 +2994,7 @@
     "name": "Bánh Kem Tốt Nghiệp YV5",
     "price": 129000,
     "discount": 0,
-    "finalprice": 129000,
+    "salePrice": 129000,
     "img": "images/cake/banh-kem-tot-nghiep-yv5.jpg",
     "category": "cream-cake",
     "subcategory": "yv"
@@ -3006,7 +3006,7 @@
     "name": "Bánh Kem Tốt Nghiệp YV6",
     "price": 129000,
     "discount": 0,
-    "finalprice": 129000,
+    "salePrice": 129000,
     "img": "images/cake/banh-kem-tot-nghiep-yv6.jpg",
     "category": "cream-cake",
     "subcategory": "yv"
@@ -3018,7 +3018,7 @@
     "name": "Bánh Kem Tốt Nghiệp YV7",
     "price": 129000,
     "discount": 0,
-    "finalprice": 129000,
+    "salePrice": 129000,
     "img": "images/cake/banh-kem-tot-nghiep-yv7.jpg",
     "category": "cream-cake",
     "subcategory": "yv"
@@ -3030,7 +3030,7 @@
     "name": "Bánh Kem Tốt Nghiệp YV8",
     "price": 129000,
     "discount": 0,
-    "finalprice": 129000,
+    "salePrice": 129000,
     "img": "images/cake/banh-kem-tot-nghiep-yv8.jpg",
     "category": "cream-cake",
     "subcategory": "yv"

@@ -1,4 +1,4 @@
-import { getProductFinalPrice, getProductPrice } from "@/lib/products";
+import { getProductSalePrice, getProductPrice } from "@/lib/products";
 import type { CakeSizeOption, ProductRecord } from "@/lib/types";
 
 const CREAM_CAKE_SIZES: Record<string, CakeSizeOption[]> = {
@@ -76,7 +76,7 @@ export function getProductDisplayPricing(product?: ProductRecord | null, selecte
     };
   }
 
-  const currentPrice = getProductFinalPrice(product);
+  const currentPrice = getProductSalePrice(product);
   const originalPrice = getProductPrice(product);
 
   return {

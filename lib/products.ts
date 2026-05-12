@@ -25,19 +25,19 @@ export function getProductPrice(product?: ProductRecord | null): number {
   return Number(product?.price ?? 0);
 }
 
-export function getProductFinalPrice(product?: ProductRecord | null): number {
-  const nextPrice = Number(product?.finalprice ?? getProductPrice(product));
+export function getProductSalePrice(product?: ProductRecord | null): number {
+  const nextPrice = Number(product?.salePrice ?? getProductPrice(product));
   return Number.isFinite(nextPrice) ? nextPrice : 0;
 }
 
 export function getProductDiscount(product?: ProductRecord | null): number {
   const originalPrice = getProductPrice(product);
-  const finalPrice = getProductFinalPrice(product);
+  const salePrice = getProductSalePrice(product);
 
-  if (!originalPrice || finalPrice >= originalPrice) {
+  if (!originalPrice || salePrice >= originalPrice) {
     return 0;
   }
 
-  const percent = ((originalPrice - finalPrice) / originalPrice) * 100;
+  const percent = ((originalPrice - salePrice) / originalPrice) * 100;
   return Math.floor(percent * 2) / 2;
 }

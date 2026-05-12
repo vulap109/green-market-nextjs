@@ -89,7 +89,7 @@ export function mapProductRecord(
   const parentCategory = product.category?.parent?.slug;
   const parentCategoryName = product.category?.parent?.name;
   const price = Number(product.price ?? 0);
-  const finalprice = Number(product.salePrice ?? product.price ?? 0);
+  const salePrice = Number(product.salePrice ?? 0);
   const image = product.thumbnail || product.images?.[0]?.imageUrl;
 
   return {
@@ -98,7 +98,7 @@ export function mapProductRecord(
     slug: product.slug || undefined,
     name: product.name || undefined,
     price,
-    finalprice,
+    salePrice,
     sortOrder: product.sortOrder ?? undefined,
     img: image || undefined,
     category: category || undefined,
