@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import type { Metadata } from "next";
 import { put } from "@vercel/blob";
 import AdminProductForm, { type AdminProductFormState } from "../_components/AdminProductForm";
+import AdminProductVariantFields from "../_components/AdminProductVariantFields";
 import {
   type AdminProductImageInput,
   type AdminCreateProductInput,
@@ -27,7 +28,7 @@ export const metadata: Metadata = {
   title: "Thêm sản phẩm"
 };
 
-type AdminCreateProductField = Exclude<keyof AdminCreateProductInput, "images">;
+type AdminCreateProductField = Exclude<keyof AdminCreateProductInput, "images" | "variants">;
 
 function createFormError(message: string): AdminProductFormState {
   return {
@@ -68,6 +69,12 @@ function getFormString(formData: FormData, key: AdminCreateProductField): string
 function getFormNumber(formData: FormData, key: AdminCreateProductField): number {
   const value = Number(getFormString(formData, key));
   return Number.isFinite(value) ? value : 0;
+}
+
+function getNumberFromFormValue(value: FormDataEntryValue | undefined): number {
+  const numberValue = Number(String(value || "").trim());
+
+  return Number.isFinite(numberValue) ? numberValue : 0;
 }
 
 function getProductImageFiles(formData: FormData): File[] {
@@ -156,6 +163,24 @@ async function uploadProductImages(files: File[]): Promise<AdminCreateProductInp
   return uploadedImages;
 }
 
+function getProductVariants(formData: FormData): AdminCreateProductInput["variants"] {
+  const variantNames = formData.getAll("productVariantName");
+  const variantPrices = formData.getAll("productVariantPrice");
+  const variantSalePrices = formData.getAll("productVariantSalePrice");
+  const variantStatuses = formData.getAll("productVariantStatus");
+  const variantStockQuantities = formData.getAll("productVariantStockQuantity");
+
+  return variantNames
+    .map((variantName, index) => ({
+      price: getNumberFromFormValue(variantPrices[index]),
+      salePrice: getNumberFromFormValue(variantSalePrices[index]),
+      status: String(variantStatuses[index] || "active").trim(),
+      stockQuantity: getNumberFromFormValue(variantStockQuantities[index]),
+      variantName: String(variantName || "").trim()
+    }))
+    .filter((variant) => variant.variantName);
+}
+
 async function createProductAction(
   _state: AdminProductFormState,
   formData: FormData
@@ -188,7 +213,8 @@ async function createProductAction(
       sortOrder: getFormNumber(formData, "sortOrder"),
       status: getFormString(formData, "status"),
       stockQuantity: getFormNumber(formData, "stockQuantity"),
-      thumbnail: getFormString(formData, "thumbnail")
+      thumbnail: getFormString(formData, "thumbnail"),
+      variants: getProductVariants(formData)
     });
   } catch (error) {
     return createFormError(getCreateProductErrorMessage(error));
@@ -394,6 +420,8 @@ export default async function AdminNewProductPage() {
             </label>
           </div>
         </section>
+
+        <AdminProductVariantFields />
 
         <section className="rounded-lg border border-slate-200 bg-white shadow-sm">
           <div className="border-b border-slate-200 px-5 py-4">

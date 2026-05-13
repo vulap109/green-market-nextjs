@@ -41,6 +41,14 @@ export type AdminProductImageInput = Readonly<{
   storageKey: string;
 }>;
 
+export type AdminProductVariantInput = Readonly<{
+  price: number;
+  salePrice: number;
+  status: string;
+  stockQuantity: number;
+  variantName: string;
+}>;
+
 export type AdminCreateProductInput = Readonly<{
   category: string;
   costPrice: number;
@@ -57,10 +65,33 @@ export type AdminCreateProductInput = Readonly<{
   status: string;
   stockQuantity: number;
   thumbnail: string;
+  variants: ReadonlyArray<AdminProductVariantInput>;
 }>;
 
 function normalizeAdminFilterValue(value?: string | null): string {
   return String(value || "").trim();
+}
+
+function normalizeProductVariantStatus(value: string): string {
+  return value === "inactive" ? "inactive" : "active";
+}
+
+function normalizeProductVariantSkuSegment(value: string, fallback: string): string {
+  return (
+    normalizeAdminFilterValue(value)
+      .toUpperCase()
+      .replace(/[^A-Z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "")
+      .slice(0, 30) || fallback
+  );
+}
+
+function createProductVariantSku(productSKU: string, variantName: string, index: number): string {
+  const productSegment = normalizeProductVariantSkuSegment(productSKU.toString(), "PRODUCT");
+  const variantSegment = normalizeProductVariantSkuSegment(variantName, "VARIANT");
+  const variantIndex = String(index + 1).padStart(2, "0");
+
+  return `${productSegment}-${variantIndex}-${variantSegment}`.slice(0, 100);
 }
 
 function buildAdminProductWhere(filters: AdminProductFilters): Prisma.ProductWhereInput {
@@ -280,6 +311,15 @@ export async function createAdminProduct(input: AdminCreateProductInput): Promis
       storageKey: normalizeAdminFilterValue(image.storageKey)
     }))
     .filter((image) => image.imageUrl);
+  const productVariants = input.variants
+    .map((variant) => ({
+      price: variant.price,
+      salePrice: variant.salePrice,
+      status: normalizeProductVariantStatus(variant.status),
+      stockQuantity: variant.stockQuantity,
+      variantName: normalizeAdminFilterValue(variant.variantName).slice(0, 150)
+    }))
+    .filter((variant) => variant.variantName);
   const category = input.category
     ? await prisma.category.findUnique({
         where: {
@@ -322,6 +362,20 @@ export async function createAdminProduct(input: AdminCreateProductInput): Promis
         productId: product.id,
         sortOrder: index,
         storageKey: image.storageKey || null
+      }
+    });
+  }
+
+  for (const [index, variant] of productVariants.entries()) {
+    await prisma.productVariant.create({
+      data: {
+        price: variant.price,
+        productId: product.id,
+        salePrice: variant.salePrice > 0 ? variant.salePrice : null,
+        sku: createProductVariantSku(input.sku, variant.variantName, index),
+        status: variant.status,
+        stockQuantity: variant.stockQuantity,
+        variantName: variant.variantName
       }
     });
   }
