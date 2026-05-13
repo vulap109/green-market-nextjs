@@ -1,12 +1,12 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import {
+  ADMIN_PRODUCT_STATUS_OPTIONS,
   ADMIN_PRODUCTS_LIMIT,
   type AdminProductFilters,
   type AdminProductListItem,
   findAdminProducts,
-  getAdminProductCategoryOptions,
-  getAdminProductStatusOptions
+  getAdminProductCategoryOptions
 } from "@/lib/admin-products";
 import { getSearchParamValue } from "@/lib/catalog";
 import { formatMoney } from "@/lib/format";
@@ -54,9 +54,8 @@ function formatOptionalMoney(amount: number): string {
 export default async function AdminProductsPage({ searchParams }: AdminProductsPageProps) {
   const paramsValue = await searchParams;
   const filters = resolveAdminProductFilters(paramsValue);
-  const [categoryOptions, statusOptions, productResult] = await Promise.all([
+  const [categoryOptions, productResult] = await Promise.all([
     getAdminProductCategoryOptions(),
-    getAdminProductStatusOptions(),
     findAdminProducts(filters)
   ]);
   const hasMoreProducts = productResult.totalProducts > productResult.items.length;
@@ -99,7 +98,7 @@ export default async function AdminProductsPage({ searchParams }: AdminProductsP
               className="h-10 w-full rounded-lg border border-slate-200 bg-white px-3 text-sm text-slate-900 outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/10"
             >
               <option value="">Tất cả trạng thái</option>
-              {statusOptions.map((status) => (
+              {ADMIN_PRODUCT_STATUS_OPTIONS.map((status) => (
                 <option key={status} value={status}>
                   {status}
                 </option>
@@ -154,7 +153,7 @@ export default async function AdminProductsPage({ searchParams }: AdminProductsP
         </div>
 
         <div className="overflow-x-auto">
-          <table className="w-full min-w-[1120px] border-collapse text-left text-sm">
+          <table className="w-full min-w-[1220px] border-collapse text-left text-sm">
             <thead className="bg-slate-50 text-xs font-bold uppercase tracking-[0.08em] text-slate-500">
               <tr>
                 <th className="px-4 py-3">Sản phẩm</th>
@@ -165,6 +164,7 @@ export default async function AdminProductsPage({ searchParams }: AdminProductsP
                 <th className="px-4 py-3 text-right">Giá gốc</th>
                 <th className="px-4 py-3 text-right">Thứ tự</th>
                 <th className="px-4 py-3">Cập nhật</th>
+                <th className="px-4 py-3 text-right">Thao tác</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100">
@@ -205,11 +205,20 @@ export default async function AdminProductsPage({ searchParams }: AdminProductsP
                     <td className="px-4 py-3 text-slate-500">
                       {product.updatedAt.toLocaleDateString("vi-VN")}
                     </td>
+                    <td className="px-4 py-3 text-right">
+                      <Link
+                        href={`/admin/products/${product.id}/edit`}
+                        className="inline-flex h-9 items-center justify-center gap-2 rounded-lg border border-slate-200 bg-white px-3 text-sm font-bold text-slate-700 transition hover:border-primary hover:text-primary"
+                      >
+                        <i className="fa-solid fa-pen-to-square text-xs" aria-hidden="true" />
+                        <span>Sửa</span>
+                      </Link>
+                    </td>
                   </tr>
                 ))
               ) : (
                 <tr>
-                  <td colSpan={8} className="px-4 py-12 text-center text-sm text-slate-500">
+                  <td colSpan={9} className="px-4 py-12 text-center text-sm text-slate-500">
                     Không tìm thấy sản phẩm phù hợp với bộ lọc hiện tại.
                   </td>
                 </tr>

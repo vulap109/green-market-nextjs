@@ -2,20 +2,57 @@
 
 import { useRef, useState } from "react";
 
-export default function AdminProductVariantFields() {
-  const nextVariantIdRef = useRef(1);
-  const [variantIds, setVariantIds] = useState<number[]>([0]);
+export type AdminProductVariantFieldValue = Readonly<{
+  price: number;
+  salePrice: number;
+  status: string;
+  stockQuantity: number;
+  variantName: string;
+}>;
+
+type AdminProductVariantFieldsProps = Readonly<{
+  variants?: ReadonlyArray<AdminProductVariantFieldValue>;
+}>;
+
+type VariantRow = AdminProductVariantFieldValue & Readonly<{ fieldId: number }>;
+
+const emptyVariantValue: AdminProductVariantFieldValue = {
+  price: 0,
+  salePrice: 0,
+  status: "active",
+  stockQuantity: 1,
+  variantName: ""
+};
+
+function createInitialVariantRows(variants: ReadonlyArray<AdminProductVariantFieldValue>): VariantRow[] {
+  return variants.map((variant, index) => ({
+    ...variant,
+    fieldId: index
+  }));
+}
+
+export default function AdminProductVariantFields({
+  variants = []
+}: AdminProductVariantFieldsProps) {
+  const [variantRows, setVariantRows] = useState<VariantRow[]>(() => createInitialVariantRows(variants));
+  const nextVariantIdRef = useRef(variantRows.length);
 
   function addVariant() {
     const nextVariantId = nextVariantIdRef.current;
 
     nextVariantIdRef.current += 1;
-    setVariantIds((currentVariantIds) => [...currentVariantIds, nextVariantId]);
+    setVariantRows((currentVariantRows) => [
+      ...currentVariantRows,
+      {
+        ...emptyVariantValue,
+        fieldId: nextVariantId
+      }
+    ]);
   }
 
   function removeVariant(variantId: number) {
-    setVariantIds((currentVariantIds) =>
-      currentVariantIds.filter((currentVariantId) => currentVariantId !== variantId)
+    setVariantRows((currentVariantRows) =>
+      currentVariantRows.filter((currentVariantRow) => currentVariantRow.fieldId !== variantId)
     );
   }
 
@@ -34,10 +71,10 @@ export default function AdminProductVariantFields() {
       </div>
 
       <div className="grid gap-3 p-5">
-        {variantIds.length ? (
-          variantIds.map((variantId, index) => (
+        {variantRows.length ? (
+          variantRows.map((variant, index) => (
             <div
-              key={variantId}
+              key={variant.fieldId}
               className="grid gap-3 rounded-lg border border-slate-200 bg-slate-50 p-3 md:grid-cols-[minmax(180px,1.5fr)_minmax(110px,1fr)_minmax(110px,1fr)_minmax(100px,0.8fr)_minmax(100px,0.8fr)_2.5rem]"
             >
               <label className="space-y-1.5">
@@ -47,6 +84,7 @@ export default function AdminProductVariantFields() {
                 <input
                   name="productVariantName"
                   placeholder="12cm"
+                  defaultValue={variant.variantName}
                   className="h-10 w-full rounded-lg border border-slate-200 bg-white px-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-primary focus:ring-2 focus:ring-primary/10"
                 />
               </label>
@@ -58,7 +96,7 @@ export default function AdminProductVariantFields() {
                   type="number"
                   min="0"
                   step="1000"
-                  defaultValue="0"
+                  defaultValue={variant.price}
                   className="h-10 w-full rounded-lg border border-slate-200 bg-white px-3 text-sm text-slate-900 outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/10"
                 />
               </label>
@@ -72,7 +110,7 @@ export default function AdminProductVariantFields() {
                   type="number"
                   min="0"
                   step="1000"
-                  defaultValue="0"
+                  defaultValue={variant.salePrice}
                   className="h-10 w-full rounded-lg border border-slate-200 bg-white px-3 text-sm text-slate-900 outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/10"
                 />
               </label>
@@ -81,7 +119,7 @@ export default function AdminProductVariantFields() {
                 <span className="text-xs font-bold uppercase tracking-[0.12em] text-slate-500">Status</span>
                 <select
                   name="productVariantStatus"
-                  defaultValue="active"
+                  defaultValue={variant.status || "active"}
                   className="h-10 w-full rounded-lg border border-slate-200 bg-white px-3 text-sm text-slate-900 outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/10"
                 >
                   <option value="active">active</option>
@@ -95,7 +133,7 @@ export default function AdminProductVariantFields() {
                   name="productVariantStockQuantity"
                   type="number"
                   min="0"
-                  defaultValue="1"
+                  defaultValue={variant.stockQuantity}
                   className="h-10 w-full rounded-lg border border-slate-200 bg-white px-3 text-sm text-slate-900 outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/10"
                 />
               </label>
@@ -103,8 +141,8 @@ export default function AdminProductVariantFields() {
               <div className="flex items-end">
                 <button
                   type="button"
-                  onClick={() => removeVariant(variantId)}
-                  aria-label="Xóa variant"
+                  onClick={() => removeVariant(variant.fieldId)}
+                  aria-label={`Xóa variant ${index + 1}`}
                   className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-slate-200 bg-white text-sm text-slate-500 transition hover:border-red-200 hover:text-red-600"
                 >
                   <i className="fa-solid fa-trash-can text-xs" aria-hidden="true" />

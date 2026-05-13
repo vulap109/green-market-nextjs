@@ -1,61 +1,88 @@
 import Link from "next/link";
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import type { Metadata } from "next";
-import AdminProductForm, { type AdminProductFormState } from "../_components/AdminProductForm";
-import AdminProductFormFields from "../_components/AdminProductFormFields";
+import AdminProductForm, { type AdminProductFormState } from "../../_components/AdminProductForm";
+import AdminProductFormFields from "../../_components/AdminProductFormFields";
 import {
-  createAdminProduct,
   findAdminProductIdentityConflict,
-  getAdminProductCategoryOptions
+  getAdminProductCategoryOptions,
+  getAdminProductForEdit,
+  updateAdminProduct
 } from "@/lib/admin-products";
 import {
   createAdminProductFormError,
+  deleteAdminProductImagesFromBlob,
   getAdminProductIdentityFromFormData,
   getAdminProductInputFromFormData,
   getAdminProductMutationErrorMessage,
   getDuplicateProductMessage
-} from "../_lib/product-form";
+} from "../../_lib/product-form";
 
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Thêm sản phẩm"
+  title: "Sửa sản phẩm"
 };
 
-async function createProductAction(
+type AdminEditProductPageProps = Readonly<{
+  params: Promise<{
+    productId: string;
+  }>;
+}>;
+
+async function updateProductAction(
   _state: AdminProductFormState,
   formData: FormData
 ): Promise<AdminProductFormState> {
   "use server";
 
+  const productId = String(formData.get("productId") || "").trim();
+
   try {
     const identity = getAdminProductIdentityFromFormData(formData);
-    const conflict = await findAdminProductIdentityConflict(identity);
+    const conflict = await findAdminProductIdentityConflict({
+      ...identity,
+      excludeProductId: productId
+    });
 
     if (conflict) {
       return createAdminProductFormError(getDuplicateProductMessage(conflict));
     }
 
-    await createAdminProduct(await getAdminProductInputFromFormData(formData));
+    const productInput = await getAdminProductInputFromFormData(formData);
+    const replacedImages =
+      productInput.images.length > 0 ? (await getAdminProductForEdit(productId))?.images || [] : [];
+
+    await updateAdminProduct(productId, productInput);
+    await deleteAdminProductImagesFromBlob(replacedImages);
   } catch (error) {
     return createAdminProductFormError(getAdminProductMutationErrorMessage(error));
   }
 
   revalidatePath("/admin/products");
+  revalidatePath(`/admin/products/${productId}/edit`);
   redirect("/admin/products");
 }
 
-export default async function AdminNewProductPage() {
-  const categoryOptions = await getAdminProductCategoryOptions();
+export default async function AdminEditProductPage({ params }: AdminEditProductPageProps) {
+  const { productId } = await params;
+  const [categoryOptions, product] = await Promise.all([
+    getAdminProductCategoryOptions(),
+    getAdminProductForEdit(productId)
+  ]);
+
+  if (!product) {
+    notFound();
+  }
 
   return (
     <div className="space-y-6">
       <section className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <h2 className="text-xl font-bold text-slate-950">Thêm sản phẩm</h2>
+          <h2 className="text-xl font-bold text-slate-950">Sửa sản phẩm</h2>
           <p className="mt-1 text-sm text-slate-600">
-            Tạo sản phẩm mới trong hệ thống quản trị.
+            Cập nhật thông tin, ảnh và variant cho {product.name}.
           </p>
         </div>
         <Link
@@ -67,8 +94,14 @@ export default async function AdminNewProductPage() {
         </Link>
       </section>
 
-      <AdminProductForm action={createProductAction}>
-        <AdminProductFormFields categoryOptions={categoryOptions} />
+      <AdminProductForm action={updateProductAction}>
+        <input type="hidden" name="productId" value={product.id} />
+        <AdminProductFormFields
+          categoryOptions={categoryOptions}
+          existingImages={product.images}
+          values={product}
+          variants={product.variants}
+        />
 
         <div className="flex justify-end gap-3">
           <Link
@@ -82,7 +115,7 @@ export default async function AdminNewProductPage() {
             className="inline-flex h-10 items-center justify-center gap-2 rounded-lg bg-primary px-4 text-sm font-bold text-white transition hover:bg-[#004e29]"
           >
             <i className="fa-solid fa-floppy-disk text-xs" aria-hidden="true" />
-            <span>Lưu sản phẩm</span>
+            <span>Cập nhật sản phẩm</span>
           </button>
         </div>
       </AdminProductForm>

@@ -7,12 +7,30 @@ import {
   PRODUCT_IMAGE_UPLOAD_LIMIT
 } from "@/lib/product-image-upload";
 
-export default function AdminProductImageFields() {
-  const [previewUrls, setPreviewUrls] = useState<string[]>([]);
+export type AdminProductImageFieldValue = Readonly<{
+  id: string;
+  imageUrl: string;
+  isMain: boolean;
+  sortOrder: number;
+}>;
 
-  useEffect(() => () => {
-    previewUrls.forEach((previewUrl) => URL.revokeObjectURL(previewUrl));
-  }, [previewUrls]);
+type AdminProductImageFieldsProps = Readonly<{
+  existingImages?: ReadonlyArray<AdminProductImageFieldValue>;
+}>;
+
+export default function AdminProductImageFields({
+  existingImages = []
+}: AdminProductImageFieldsProps) {
+  const [previewUrls, setPreviewUrls] = useState<string[]>([]);
+  const hasExistingImages = existingImages.length > 0;
+  const hasPreviewImages = previewUrls.length > 0;
+
+  useEffect(
+    () => () => {
+      previewUrls.forEach((previewUrl) => URL.revokeObjectURL(previewUrl));
+    },
+    [previewUrls]
+  );
 
   function handleImageChange(event: ChangeEvent<HTMLInputElement>) {
     const files = Array.from(event.currentTarget.files || []);
@@ -50,25 +68,53 @@ export default function AdminProductImageFields() {
           </span>
         </div>
 
-        {previewUrls.length > 0 ? (
-          <div className="flex flex-wrap gap-3">
-            {previewUrls.map((previewUrl, index) => (
-              <div
-                key={previewUrl}
-                className="relative h-24 w-24 overflow-hidden rounded-lg border border-slate-200 bg-slate-100"
-              >
-                <img
-                  src={previewUrl}
-                  alt={`Ảnh sản phẩm ${index + 1}`}
-                  className="h-full w-full object-cover"
-                />
-                {index === 0 ? (
-                  <span className="absolute left-2 top-2 rounded-md bg-primary px-2 py-1 text-xs font-bold text-white">
-                    Ảnh chính
-                  </span>
-                ) : null}
-              </div>
-            ))}
+        {hasExistingImages ? (
+          <div className="space-y-2">
+            <p className="text-xs font-bold uppercase tracking-[0.12em] text-slate-500">Ảnh hiện tại</p>
+            <div className="flex flex-wrap gap-3">
+              {existingImages.map((image, index) => (
+                <div
+                  key={image.id}
+                  className="relative h-24 w-24 overflow-hidden rounded-lg border border-slate-200 bg-slate-100"
+                >
+                  <img
+                    src={image.imageUrl}
+                    alt={`Ảnh sản phẩm ${index + 1}`}
+                    className="h-full w-full object-cover"
+                  />
+                  {image.isMain || index === 0 ? (
+                    <span className="absolute left-2 top-2 rounded-md bg-primary px-2 py-1 text-xs font-bold text-white">
+                      Ảnh chính
+                    </span>
+                  ) : null}
+                </div>
+              ))}
+            </div>
+          </div>
+        ) : null}
+
+        {hasPreviewImages ? (
+          <div className="space-y-2">
+            <p className="text-xs font-bold uppercase tracking-[0.12em] text-slate-500">Ảnh mới</p>
+            <div className="flex flex-wrap gap-3">
+              {previewUrls.map((previewUrl, index) => (
+                <div
+                  key={previewUrl}
+                  className="relative h-24 w-24 overflow-hidden rounded-lg border border-slate-200 bg-slate-100"
+                >
+                  <img
+                    src={previewUrl}
+                    alt={`Ảnh sản phẩm ${index + 1}`}
+                    className="h-full w-full object-cover"
+                  />
+                  {index === 0 ? (
+                    <span className="absolute left-2 top-2 rounded-md bg-primary px-2 py-1 text-xs font-bold text-white">
+                      Ảnh chính
+                    </span>
+                  ) : null}
+                </div>
+              ))}
+            </div>
           </div>
         ) : null}
       </div>

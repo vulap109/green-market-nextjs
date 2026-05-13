@@ -3,6 +3,7 @@ import { PRODUCT_IMAGE_UPLOAD_LIMIT } from "@/lib/product-image-upload";
 import type { Prisma } from "@/generated/prisma/client";
 
 export const ADMIN_PRODUCTS_LIMIT = 50;
+export const ADMIN_PRODUCT_STATUS_OPTIONS = ["draft", "active", "inactive"] as const;
 
 export type AdminProductFilters = Readonly<{
   category: string;
@@ -68,8 +69,43 @@ export type AdminCreateProductInput = Readonly<{
   variants: ReadonlyArray<AdminProductVariantInput>;
 }>;
 
+export type AdminProductEditImage = Readonly<{
+  id: string;
+  imageUrl: string;
+  isMain: boolean;
+  sortOrder: number;
+  storageKey: string;
+}>;
+
+export type AdminProductEditVariant = Readonly<
+  AdminProductVariantInput & {
+    id: string;
+    sku: string;
+  }
+>;
+
+export type AdminProductEditDetails = Readonly<
+  Omit<AdminCreateProductInput, "images" | "variants"> & {
+    id: string;
+    images: ReadonlyArray<AdminProductEditImage>;
+    variants: ReadonlyArray<AdminProductEditVariant>;
+  }
+>;
+
 function normalizeAdminFilterValue(value?: string | null): string {
   return String(value || "").trim();
+}
+
+function parseProductId(productId: string): bigint | null {
+  const normalizedProductId = normalizeAdminFilterValue(productId);
+
+  if (!/^\d+$/.test(normalizedProductId)) {
+    return null;
+  }
+
+  const parsedProductId = BigInt(normalizedProductId);
+
+  return parsedProductId > BigInt(0) ? parsedProductId : null;
 }
 
 function normalizeProductVariantStatus(value: string): string {
@@ -184,24 +220,6 @@ export async function getAdminProductCategoryOptions(): Promise<AdminProductCate
   }));
 }
 
-export async function getAdminProductStatusOptions(): Promise<string[]> {
-  const productStatuses = await prisma.product.findMany({
-    distinct: ["status"],
-    select: {
-      status: true
-    },
-    orderBy: [
-      {
-        status: "asc"
-      }
-    ]
-  });
-
-  return productStatuses
-    .map((productStatus) => normalizeAdminFilterValue(productStatus.status))
-    .filter(Boolean);
-}
-
 export async function findAdminProducts(
   filters: AdminProductFilters
 ): Promise<AdminProductListResult> {
@@ -265,15 +283,133 @@ export async function findAdminProducts(
   };
 }
 
+export async function getAdminProductForEdit(productId: string): Promise<AdminProductEditDetails | null> {
+  const parsedProductId = parseProductId(productId);
+
+  if (!parsedProductId) {
+    return null;
+  }
+
+  const product = await prisma.product.findUnique({
+    where: {
+      id: parsedProductId
+    },
+    select: {
+      category: {
+        select: {
+          slug: true
+        }
+      },
+      costPrice: true,
+      description: true,
+      featured: true,
+      id: true,
+      images: {
+        orderBy: [
+          {
+            sortOrder: "asc"
+          },
+          {
+            id: "asc"
+          }
+        ],
+        select: {
+          id: true,
+          imageUrl: true,
+          isMain: true,
+          sortOrder: true,
+          storageKey: true
+        }
+      },
+      name: true,
+      price: true,
+      salePrice: true,
+      shortDescription: true,
+      sku: true,
+      slug: true,
+      sortOrder: true,
+      status: true,
+      stockQuantity: true,
+      thumbnail: true,
+      variants: {
+        orderBy: [
+          {
+            createdAt: "asc"
+          },
+          {
+            id: "asc"
+          }
+        ],
+        select: {
+          id: true,
+          price: true,
+          salePrice: true,
+          sku: true,
+          status: true,
+          stockQuantity: true,
+          variantName: true
+        }
+      }
+    }
+  });
+
+  if (!product) {
+    return null;
+  }
+
+  return {
+    category: product.category?.slug || "",
+    costPrice: Number(product.costPrice || 0),
+    description: product.description || "",
+    featured: product.featured || "",
+    id: product.id.toString(),
+    images: product.images.map((image) => ({
+      id: image.id.toString(),
+      imageUrl: image.imageUrl,
+      isMain: image.isMain,
+      sortOrder: image.sortOrder,
+      storageKey: image.storageKey || ""
+    })),
+    name: product.name,
+    price: Number(product.price || 0),
+    salePrice: Number(product.salePrice || 0),
+    shortDescription: product.shortDescription || "",
+    sku: product.sku,
+    slug: product.slug,
+    sortOrder: product.sortOrder,
+    status: product.status,
+    stockQuantity: product.stockQuantity,
+    thumbnail: product.thumbnail || "",
+    variants: product.variants.map((variant) => ({
+      id: variant.id.toString(),
+      price: Number(variant.price || 0),
+      salePrice: Number(variant.salePrice || 0),
+      sku: variant.sku,
+      status: variant.status,
+      stockQuantity: variant.stockQuantity,
+      variantName: variant.variantName
+    }))
+  };
+}
+
 export async function findAdminProductIdentityConflict(
-  input: Pick<AdminCreateProductInput, "sku" | "slug">
+  input: Pick<AdminCreateProductInput, "sku" | "slug"> & Readonly<{ excludeProductId?: string }>
 ): Promise<"sku" | "slug" | null> {
   const sku = normalizeAdminFilterValue(input.sku);
   const slug = normalizeAdminFilterValue(input.slug);
+  const excludedProductId = input.excludeProductId ? parseProductId(input.excludeProductId) : null;
+  const excludeCurrentProductWhere = excludedProductId
+    ? {
+        id: {
+          not: excludedProductId
+        }
+      }
+    : {};
   const productWithSlug = slug
-    ? await prisma.product.findUnique({
+    ? await prisma.product.findFirst({
         where: {
-          slug
+          slug,
+          ...excludeCurrentProductWhere
         },
         select: {
           id: true
@@ -286,9 +422,10 @@ export async function findAdminProductIdentityConflict(
   }
 
   const productWithSku = sku
-    ? await prisma.product.findUnique({
+    ? await prisma.product.findFirst({
         where: {
-          sku
+          sku,
+          ...excludeCurrentProductWhere
         },
         select: {
           id: true
@@ -303,15 +440,22 @@ export async function findAdminProductIdentityConflict(
   return null;
 }
 
-export async function createAdminProduct(input: AdminCreateProductInput): Promise<void> {
-  const productImages = input.images
+function normalizeProductImages(
+  images: ReadonlyArray<AdminProductImageInput>
+): AdminProductImageInput[] {
+  return images
     .slice(0, PRODUCT_IMAGE_UPLOAD_LIMIT)
     .map((image) => ({
       imageUrl: normalizeAdminFilterValue(image.imageUrl),
       storageKey: normalizeAdminFilterValue(image.storageKey)
     }))
     .filter((image) => image.imageUrl);
-  const productVariants = input.variants
+}
+
+function normalizeProductVariants(
+  variants: ReadonlyArray<AdminProductVariantInput>
+): AdminProductVariantInput[] {
+  return variants
     .map((variant) => ({
       price: variant.price,
       salePrice: variant.salePrice,
@@ -320,6 +464,11 @@ export async function createAdminProduct(input: AdminCreateProductInput): Promis
       variantName: normalizeAdminFilterValue(variant.variantName).slice(0, 150)
     }))
     .filter((variant) => variant.variantName);
+}
+
+export async function createAdminProduct(input: AdminCreateProductInput): Promise<void> {
+  const productImages = normalizeProductImages(input.images);
+  const productVariants = normalizeProductVariants(input.variants);
   const category = input.category
     ? await prisma.category.findUnique({
         where: {
@@ -371,6 +520,108 @@ export async function createAdminProduct(input: AdminCreateProductInput): Promis
       data: {
         price: variant.price,
         productId: product.id,
+        salePrice: variant.salePrice > 0 ? variant.salePrice : null,
+        sku: createProductVariantSku(input.sku, variant.variantName, index),
+        status: variant.status,
+        stockQuantity: variant.stockQuantity,
+        variantName: variant.variantName
+      }
+    });
+  }
+}
+
+export async function updateAdminProduct(
+  productId: string,
+  input: AdminCreateProductInput
+): Promise<void> {
+  const parsedProductId = parseProductId(productId);
+
+  if (!parsedProductId) {
+    throw new Error("Khong tim thay san pham.");
+  }
+
+  const productImages = normalizeProductImages(input.images);
+  const productVariants = normalizeProductVariants(input.variants);
+  const category = input.category
+    ? await prisma.category.findUnique({
+        where: {
+          slug: input.category
+        },
+        select: {
+          id: true
+        }
+      })
+    : null;
+  const updatedAt = new Date();
+
+  const existingProduct = await prisma.product.findUnique({
+    where: {
+      id: parsedProductId
+    },
+    select: {
+      id: true
+    }
+  });
+
+  if (!existingProduct) {
+    throw new Error("Khong tim thay san pham.");
+  }
+
+  await prisma.product.update({
+    where: {
+      id: parsedProductId
+    },
+    data: {
+      categoryId: category?.id ?? null,
+      costPrice: input.costPrice > 0 ? input.costPrice : null,
+      description: input.description || null,
+      featured: input.featured,
+      name: input.name,
+      price: input.price,
+      salePrice: input.salePrice > 0 ? input.salePrice : null,
+      shortDescription: input.shortDescription || null,
+      sku: input.sku,
+      slug: input.slug,
+      sortOrder: input.sortOrder,
+      status: input.status || "draft",
+      stockQuantity: input.stockQuantity,
+      thumbnail: input.thumbnail || null,
+      updatedAt
+    }
+  });
+
+  if (productImages.length > 0) {
+    await prisma.productImage.deleteMany({
+      where: {
+        productId: parsedProductId
+      }
+    });
+
+    for (const [index, image] of productImages.entries()) {
+      await prisma.productImage.create({
+        data: {
+          altText: input.name || null,
+          imageUrl: image.imageUrl,
+          isMain: index === 0,
+          productId: parsedProductId,
+          sortOrder: index,
+          storageKey: image.storageKey || null
+        }
+      });
+    }
+  }
+
+  await prisma.productVariant.deleteMany({
+    where: {
+      productId: parsedProductId
+    }
+  });
+
+  for (const [index, variant] of productVariants.entries()) {
+    await prisma.productVariant.create({
+      data: {
+        price: variant.price,
+        productId: parsedProductId,
         salePrice: variant.salePrice > 0 ? variant.salePrice : null,
         sku: createProductVariantSku(input.sku, variant.variantName, index),
         status: variant.status,
