@@ -90,6 +90,7 @@ CREATE TABLE IF NOT EXISTS product_image (
     id                  BIGSERIAL PRIMARY KEY,
     product_id          BIGINT NOT NULL REFERENCES product(id) ON DELETE CASCADE,
     image_url           TEXT NOT NULL,
+    storage_key         TEXT,
     alt_text            VARCHAR(255),
     sort_order          INTEGER NOT NULL DEFAULT 0,
     is_main             BOOLEAN NOT NULL DEFAULT FALSE,

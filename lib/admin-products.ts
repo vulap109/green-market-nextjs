@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import { PRODUCT_IMAGE_UPLOAD_LIMIT } from "@/lib/product-image-upload";
 import type { Prisma } from "@/generated/prisma/client";
 
 export const ADMIN_PRODUCTS_LIMIT = 50;
@@ -35,11 +36,17 @@ export type AdminProductListResult = Readonly<{
   totalProducts: number;
 }>;
 
+export type AdminProductImageInput = Readonly<{
+  imageUrl: string;
+  storageKey: string;
+}>;
+
 export type AdminCreateProductInput = Readonly<{
   category: string;
   costPrice: number;
   description: string;
   featured: string;
+  images: ReadonlyArray<AdminProductImageInput>;
   name: string;
   price: number;
   salePrice: number;
@@ -227,20 +234,68 @@ export async function findAdminProducts(
   };
 }
 
+export async function findAdminProductIdentityConflict(
+  input: Pick<AdminCreateProductInput, "sku" | "slug">
+): Promise<"sku" | "slug" | null> {
+  const sku = normalizeAdminFilterValue(input.sku);
+  const slug = normalizeAdminFilterValue(input.slug);
+  const productWithSlug = slug
+    ? await prisma.product.findUnique({
+        where: {
+          slug
+        },
+        select: {
+          id: true
+        }
+      })
+    : null;
+
+  if (productWithSlug) {
+    return "slug";
+  }
+
+  const productWithSku = sku
+    ? await prisma.product.findUnique({
+        where: {
+          sku
+        },
+        select: {
+          id: true
+        }
+      })
+    : null;
+
+  if (productWithSku) {
+    return "sku";
+  }
+
+  return null;
+}
+
 export async function createAdminProduct(input: AdminCreateProductInput): Promise<void> {
-  await prisma.product.create({
+  const productImages = input.images
+    .slice(0, PRODUCT_IMAGE_UPLOAD_LIMIT)
+    .map((image) => ({
+      imageUrl: normalizeAdminFilterValue(image.imageUrl),
+      storageKey: normalizeAdminFilterValue(image.storageKey)
+    }))
+    .filter((image) => image.imageUrl);
+  const category = input.category
+    ? await prisma.category.findUnique({
+        where: {
+          slug: input.category
+        },
+        select: {
+          id: true
+        }
+      })
+    : null;
+
+  const product = await prisma.product.create({
     data: {
+      categoryId: category?.id ?? null,
       description: input.description || null,
       featured: input.featured,
-      ...(input.category
-        ? {
-            category: {
-              connect: {
-                slug: input.category
-              }
-            }
-          }
-        : {}),
       costPrice: input.costPrice > 0 ? input.costPrice : null,
       name: input.name,
       price: input.price,
@@ -252,6 +307,22 @@ export async function createAdminProduct(input: AdminCreateProductInput): Promis
       status: input.status || "draft",
       stockQuantity: input.stockQuantity,
       thumbnail: input.thumbnail || null
+    },
+    select: {
+      id: true
     }
   });
+
+  for (const [index, image] of productImages.entries()) {
+    await prisma.productImage.create({
+      data: {
+        altText: input.name || null,
+        imageUrl: image.imageUrl,
+        isMain: index === 0,
+        productId: product.id,
+        sortOrder: index,
+        storageKey: image.storageKey || null
+      }
+    });
+  }
 }

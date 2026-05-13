@@ -9,17 +9,25 @@ const nextConfig = {
         protocol: "https",
         hostname: "img.vietqr.io",
         pathname: "/image/**"
+      },
+      {
+        protocol: "https",
+        hostname: "**.public.blob.vercel-storage.com",
+        pathname: "/**"
       }
     ]
   },
-  ...(buildCpus
-    ? {
-        experimental: {
+  experimental: {
+    serverActions: {
+      bodySizeLimit: "4.5mb"
+    },
+    ...(buildCpus
+      ? {
           cpus: buildCpus,
           staticGenerationMaxConcurrency: buildCpus
         }
-      }
-    : {})
+      : {})
+  }
 };
 
 export default nextConfig;
