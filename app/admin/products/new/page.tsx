@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import type { Metadata } from "next";
 import { put } from "@vercel/blob";
 import AdminProductForm, { type AdminProductFormState } from "../_components/AdminProductForm";
+import AdminProductImageFields from "../_components/AdminProductImageFields";
 import AdminProductVariantFields from "../_components/AdminProductVariantFields";
 import {
   type AdminProductImageInput,
@@ -15,7 +16,6 @@ import {
 } from "@/lib/admin-products";
 import { Prisma } from "@/generated/prisma/client";
 import {
-  PRODUCT_IMAGE_ACCEPT,
   PRODUCT_IMAGE_ALLOWED_TYPES,
   PRODUCT_IMAGE_TOTAL_MAX_BYTES,
   PRODUCT_IMAGE_TOTAL_MAX_LABEL,
@@ -332,29 +332,7 @@ export default async function AdminNewProductPage() {
           </div>
         </section>
 
-        <section className="rounded-lg border border-slate-200 bg-white shadow-sm">
-          <div className="border-b border-slate-200 px-5 py-4">
-            <h3 className="text-sm font-bold text-slate-950">Ảnh sản phẩm</h3>
-          </div>
-
-          <div className="grid gap-4 p-5">
-            <label className="space-y-1.5">
-              <span className="text-xs font-bold uppercase tracking-[0.12em] text-slate-500">
-                Upload ảnh
-              </span>
-              <input
-                type="file"
-                name="productImages"
-                accept={PRODUCT_IMAGE_ACCEPT}
-                multiple
-                className="block w-full rounded-lg border border-dashed border-slate-300 bg-white px-3 py-3 text-sm text-slate-700 file:mr-4 file:rounded-md file:border-0 file:bg-primary file:px-3 file:py-2 file:text-sm file:font-bold file:text-white hover:border-primary focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/10"
-              />
-              <span className="block text-xs font-medium text-slate-500">
-                Tối đa 5 ảnh, tổng dung lượng tối đa 4.5MB. Ảnh đầu tiên sẽ là ảnh chính.
-              </span>
-            </label>
-          </div>
-        </section>
+        <AdminProductImageFields />
 
         <section className="rounded-lg border border-slate-200 bg-white shadow-sm">
           <div className="border-b border-slate-200 px-5 py-4">
