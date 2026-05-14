@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState, useSyncExternalStore } from "react";
+import { useCartProducts } from "@/components/cart/useCartProducts";
 import { Breadcrumbs } from "@/components/static/StaticPageShell";
 import {
   CART_KEY,
@@ -30,7 +31,6 @@ import {
 } from "@/lib/order";
 import { getEmailJsBrowser } from "@/lib/emailjs-browser";
 import { CART_ROUTE, HOME_ROUTE } from "@/lib/routes";
-import type { ProductRecord } from "@/lib/product-types";
 import type {
   CartItem,
   CheckoutOrder,
@@ -43,7 +43,6 @@ import type {
 
 type CheckoutPageClientProps = Readonly<{
   addressData: ProvinceRecord[];
-  products: ProductRecord[];
 }>;
 
 type CheckoutFormState = {
@@ -154,7 +153,7 @@ function buildOrderPayload(
   };
 }
 
-export default function CheckoutPageClient({ addressData, products }: CheckoutPageClientProps) {
+export default function CheckoutPageClient({ addressData }: CheckoutPageClientProps) {
   const router = useRouter();
   const [formState, setFormState] = useState<CheckoutFormState>(defaultFormState);
   const [fieldErrors, setFieldErrors] = useState<CheckoutFieldErrors>({});
@@ -167,8 +166,10 @@ export default function CheckoutPageClient({ addressData, products }: CheckoutPa
     () => "[]"
   );
   const cart = useMemo(() => parseCartSnapshot(cartSnapshot), [cartSnapshot]);
+  const { isLoading: isProductsLoading, loadError: productLoadError, products } = useCartProducts(cart, isHydrated);
   const resolvedItems = useMemo(() => resolveCartItems(products, cart), [cart, products]);
   const subtotal = resolvedItems.reduce((sum, item) => sum + item.lineTotal, 0);
+  const isCartLoading = !isHydrated || isProductsLoading;
   const selectedProvince = addressData.find((province) => province.Id === formState.provinceId);
   const districts = selectedProvince?.Districts || [];
   const selectedDistrict = districts.find((district) => district.Id === formState.districtId);
@@ -279,6 +280,14 @@ export default function CheckoutPageClient({ addressData, products }: CheckoutPa
     if (getCartCount(cart) <= 0) {
       window.alert("Giỏ hàng trống. Vui lòng thêm sản phẩm trước khi đặt hàng.");
       router.push(CART_ROUTE);
+      return;
+    }
+
+    if (isProductsLoading || productLoadError) {
+      setFeedback({
+        text: productLoadError || "Dang tai san pham trong gio hang. Vui long thu lai sau giay lat.",
+        tone: "error"
+      });
       return;
     }
 
@@ -496,9 +505,21 @@ export default function CheckoutPageClient({ addressData, products }: CheckoutPa
               </div>
 
               <div className="mb-6 space-y-4 border-b border-gray-100 pb-6">
-                {!isHydrated ? (
+                {isCartLoading ? (
                   <div className="py-4 text-center">
                     <p className="text-sm text-gray-400">Đang tải đơn hàng...</p>
+                  </div>
+                ) : productLoadError ? (
+                  <div className="py-4 text-center">
+                    <i className="fa-solid fa-triangle-exclamation mb-3 text-3xl text-red-300" aria-hidden="true" />
+                    <p className="text-sm font-semibold text-gray-700">{productLoadError}</p>
+                    <Link
+                      href={CART_ROUTE}
+                      className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-red-600 transition-colors hover:text-red-700"
+                    >
+                      <i className="fa-solid fa-arrow-left" aria-hidden="true" />
+                      Quay láº¡i giá» hÃ ng
+                    </Link>
                   </div>
                 ) : resolvedItems.length ? (
                   resolvedItems.map((item) => (
@@ -588,7 +609,7 @@ export default function CheckoutPageClient({ addressData, products }: CheckoutPa
               <button
                 type="button"
                 onClick={handleSubmit}
-                disabled={!isHydrated || !resolvedItems.length || isSubmitting}
+                disabled={isCartLoading || Boolean(productLoadError) || !resolvedItems.length || isSubmitting}
                 className="w-full rounded-lg bg-red-600 py-4 text-sm font-bold uppercase tracking-wide text-white transition-colors shadow-md hover:bg-red-700 active:bg-red-800 disabled:cursor-not-allowed disabled:opacity-50"
               >
                 {isSubmitting ? "Đang gửi đơn hàng..." : "Đặt hàng"}

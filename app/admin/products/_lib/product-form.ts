@@ -1,16 +1,16 @@
 import { del, put } from "@vercel/blob";
 import { Prisma } from "@/generated/prisma/client";
 import {
-  type AdminCreateProductInput,
-  type AdminProductEditImage,
-  type AdminProductImageInput
-} from "@/lib/admin-products";
-import {
   PRODUCT_IMAGE_ALLOWED_TYPES,
   PRODUCT_IMAGE_TOTAL_MAX_BYTES,
   PRODUCT_IMAGE_TOTAL_MAX_LABEL,
   PRODUCT_IMAGE_UPLOAD_LIMIT
 } from "@/lib/product-utils";
+import type {
+  AdminCreateProductInput,
+  AdminProductEditImage,
+  AdminProductImageInput
+} from "@/lib/product-types";
 import { formatSlugString, formatString } from "@/lib/utils";
 import type { AdminProductFormState } from "../_components/AdminProductForm";
 

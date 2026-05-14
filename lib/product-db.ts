@@ -22,6 +22,16 @@ import type {
   ProductRecord
 } from "@/lib/product-types";
 
+function sanitizeProductIds(ids: ReadonlyArray<bigint | number | string>): bigint[] {
+  const productIds = ids
+    .map((id) => String(id).trim())
+    .filter((id) => /^\d+$/.test(id))
+    .map((id) => BigInt(id))
+    .filter((id) => id > BigInt(0));
+
+  return Array.from(new Set(productIds));
+}
+
 export const findCategoryBySlug = cache(async (slug?: string | null): Promise<CategoryCatalogRecord | null> => {
   const categorySlug = formatLowercaseString(slug);
 
@@ -131,6 +141,29 @@ export const findProductsByKeyword = cache(
   }
 );
 
+export const findProductsByIds = cache(
+  async (ids: ReadonlyArray<bigint | number | string>): Promise<ProductRecord[]> => {
+    const productIds = sanitizeProductIds(ids);
+
+    if (!productIds.length) {
+      return [];
+    }
+
+    const products = await prisma.product.findMany({
+      where: {
+        id: {
+          in: productIds
+        },
+        status: "active"
+      },
+      select: getProductRecordSelect({ includeVariants: true }),
+      orderBy: productRecordOrderBy
+    });
+
+    return products.map((product) => mapProductRecord(product, { includeVariants: true }));
+  }
+);
+
 export const findProductCatalog = cache(
   async (options: ProductCatalogQueryOptions = {}): Promise<ProductCatalogResult> => {
     const where = buildProductCatalogWhere(options);
@@ -221,16 +254,4 @@ export const getSimilarProducts = cache(async (product: ProductRecord | null, li
   });
 
   return products.map((similarProduct) => mapProductRecord(similarProduct));
-});
-
-export const getProductsData = cache(async (): Promise<ProductRecord[]> => {
-  const products = await prisma.product.findMany({
-    where: {
-      status: "active"
-    },
-    select: getProductRecordSelect({ includeVariants: true }),
-    orderBy: productRecordOrderBy
-  });
-
-  return products.map((product) => mapProductRecord(product, { includeVariants: true }));
 });

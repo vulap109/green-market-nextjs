@@ -2,11 +2,8 @@ import AdminProductImageFields, { type AdminProductImageFieldValue } from "./Adm
 import AdminProductVariantFields, {
   type AdminProductVariantFieldValue
 } from "./AdminProductVariantFields";
-import {
-  ADMIN_PRODUCT_STATUS_OPTIONS,
-  type AdminCreateProductInput,
-  type AdminProductCategoryOption
-} from "@/lib/admin-products";
+import { ADMIN_PRODUCT_STATUS_OPTIONS } from "@/lib/admin-products";
+import type { AdminCreateProductInput, AdminProductCategoryOption } from "@/lib/product-types";
 
 export type AdminProductFormValues = Omit<AdminCreateProductInput, "images" | "variants">;
 

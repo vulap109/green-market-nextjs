@@ -3,11 +3,10 @@ import type { Metadata } from "next";
 import {
   ADMIN_PRODUCT_STATUS_OPTIONS,
   ADMIN_PRODUCTS_LIMIT,
-  type AdminProductFilters,
-  type AdminProductListItem,
   findAdminProducts,
   getAdminProductCategoryOptions
 } from "@/lib/admin-products";
+import type { AdminProductFilters, AdminProductListItem } from "@/lib/product-types";
 import { formatMoney, formatParamString } from "@/lib/utils";
 
 export const dynamic = "force-dynamic";

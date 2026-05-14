@@ -2,96 +2,18 @@ import { prisma } from "@/lib/prisma";
 import { PRODUCT_IMAGE_UPLOAD_LIMIT } from "@/lib/product-utils";
 import { formatString } from "@/lib/utils";
 import type { Prisma } from "@/generated/prisma/client";
+import type {
+  AdminCreateProductInput,
+  AdminProductCategoryOption,
+  AdminProductEditDetails,
+  AdminProductFilters,
+  AdminProductImageInput,
+  AdminProductListResult,
+  AdminProductVariantInput
+} from "@/lib/product-types";
 
 export const ADMIN_PRODUCTS_LIMIT = 50;
 export const ADMIN_PRODUCT_STATUS_OPTIONS = ["draft", "active", "inactive"] as const;
-
-export type AdminProductFilters = Readonly<{
-  category: string;
-  keyword: string;
-  status: string;
-}>;
-
-export type AdminProductCategoryOption = Readonly<{
-  label: string;
-  value: string;
-}>;
-
-export type AdminProductListItem = Readonly<{
-  categoryName: string;
-  categorySlug: string;
-  costPrice: number;
-  id: string;
-  name: string;
-  parentCategoryName: string;
-  price: number;
-  salePrice: number;
-  sortOrder: number;
-  sku: string;
-  slug: string;
-  status: string;
-  updatedAt: Date;
-}>;
-
-export type AdminProductListResult = Readonly<{
-  items: AdminProductListItem[];
-  totalProducts: number;
-}>;
-
-export type AdminProductImageInput = Readonly<{
-  imageUrl: string;
-  storageKey: string;
-}>;
-
-export type AdminProductVariantInput = Readonly<{
-  price: number;
-  salePrice: number;
-  status: string;
-  stockQuantity: number;
-  variantName: string;
-}>;
-
-export type AdminCreateProductInput = Readonly<{
-  category: string;
-  costPrice: number;
-  description: string;
-  featured: string;
-  images: ReadonlyArray<AdminProductImageInput>;
-  name: string;
-  price: number;
-  salePrice: number;
-  shortDescription: string;
-  sku: string;
-  slug: string;
-  sortOrder: number;
-  status: string;
-  stockQuantity: number;
-  thumbnail: string;
-  variants: ReadonlyArray<AdminProductVariantInput>;
-}>;
-
-export type AdminProductEditImage = Readonly<{
-  id: string;
-  imageUrl: string;
-  isMain: boolean;
-  sortOrder: number;
-  storageKey: string;
-}>;
-
-export type AdminProductEditVariant = Readonly<
-  AdminProductVariantInput & {
-    id: string;
-    sku: string;
-  }
->;
-
-export type AdminProductEditDetails = Readonly<
-  Omit<AdminCreateProductInput, "images" | "variants"> & {
-    id: string;
-    images: ReadonlyArray<AdminProductEditImage>;
-    variants: ReadonlyArray<AdminProductEditVariant>;
-  }
->;
 
 function parseProductId(productId: string): bigint | null {
   const normalizedProductId = formatString(productId);

@@ -173,12 +173,11 @@ function getCartItemPrice(product: ProductRecord | undefined, cartItem: CartItem
   return getProductSalePrice(product);
 }
 
-export function findCartProduct(
-  productsData: ProductRecord[] = [],
-  cartItem?: Partial<CartItem> | null
-): ProductRecord | undefined {
-  return productsData.find(
-    (productItem) => String(productItem.id ?? "") === String(cartItem?.id || "")
+function getCartProductMap(productsData: ProductRecord[] = []): Map<string, ProductRecord> {
+  return new Map(
+    productsData
+      .filter((product) => product.id !== undefined && product.id !== null)
+      .map((product) => [String(product.id), product])
   );
 }
 
@@ -197,8 +196,10 @@ export function resolveCartItems(
   productsData: ProductRecord[] = [],
   cart: CartItem[] = getCart()
 ): ResolvedCartItem[] {
+  const productById = getCartProductMap(productsData);
+
   return cart.map((cartItem) => {
-    const product = findCartProduct(productsData, cartItem);
+    const product = productById.get(String(cartItem.id || ""));
     const id = String(cartItem.id);
     const size = getCartItemSize(cartItem);
     const qty = Number(cartItem.qty) || 0;
@@ -227,8 +228,10 @@ export function resolveCartItems(
 }
 
 export function getCartTotal(productsData: ProductRecord[] = [], storage?: StorageLike | null): number {
+  const productById = getCartProductMap(productsData);
+
   return getCart(storage).reduce((sum, cartItem) => {
-    const product = findCartProduct(productsData, cartItem);
+    const product = productById.get(String(cartItem.id || ""));
 
     return sum + getCartItemPrice(product, cartItem) * (Number(cartItem.qty) || 0);
   }, 0);

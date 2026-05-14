@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState, useSyncExternalStore } from "react";
 import { Breadcrumbs } from "@/components/static/StaticPageShell";
+import { useCartProducts } from "@/components/cart/useCartProducts";
 import {
   CART_KEY,
   CART_UPDATED_EVENT,
@@ -22,12 +23,7 @@ import {
 } from "@/lib/browser-store";
 import { formatMoney } from "@/lib/utils";
 import { CHECKOUT_ROUTE, HOME_ROUTE } from "@/lib/routes";
-import type { ProductRecord } from "@/lib/product-types";
 import type { CartItem } from "@/lib/types";
-
-type CartPageClientProps = Readonly<{
-  products: ProductRecord[];
-}>;
 
 type FeedbackState = {
   tone: "error" | "success";
@@ -44,7 +40,7 @@ function parseCartSnapshot(snapshot: string): CartItem[] {
   }
 }
 
-export default function CartPageClient({ products }: CartPageClientProps) {
+export default function CartPageClient() {
   const router = useRouter();
   const [feedback, setFeedback] = useState<FeedbackState | null>(null);
   const isHydrated = useSyncExternalStore(subscribeNoop, getBrowserReadySnapshot, getServerReadySnapshot);
@@ -54,9 +50,11 @@ export default function CartPageClient({ products }: CartPageClientProps) {
     () => "[]"
   );
   const cart = useMemo(() => parseCartSnapshot(cartSnapshot), [cartSnapshot]);
+  const { isLoading: isProductsLoading, loadError: productLoadError, products } = useCartProducts(cart, isHydrated);
   const resolvedItems = useMemo(() => resolveCartItems(products, cart), [cart, products]);
   const itemCount = getCartCount(cart);
   const orderTotal = resolvedItems.reduce((sum, item) => sum + item.lineTotal, 0);
+  const isCartLoading = !isHydrated || isProductsLoading;
 
   useEffect(() => {
     if (!feedback) {
@@ -162,12 +160,20 @@ export default function CartPageClient({ products }: CartPageClientProps) {
         <div className="flex flex-col gap-8 lg:flex-row">
           <div className="w-full space-y-6 lg:w-2/3">
             <div className="overflow-hidden rounded-lg border border-gray-200 bg-white">
-              {!isHydrated ? (
+              {isCartLoading ? (
                 <div className="p-10 text-center text-gray-400">
                   <div className="mb-3 inline-flex justify-center">
                     <i className="fa-solid fa-spinner animate-spin text-2xl" aria-hidden="true" />
                   </div>
                   <p className="text-sm">Đang tải giỏ hàng...</p>
+                </div>
+              ) : productLoadError ? (
+                <div className="p-10 text-center text-gray-500">
+                  <div className="mb-3 inline-flex justify-center">
+                    <i className="fa-solid fa-triangle-exclamation text-3xl text-red-400" aria-hidden="true" />
+                  </div>
+                  <p className="font-semibold text-gray-700">{productLoadError}</p>
+                  <p className="mt-1 text-sm">Vui lÃ²ng táº£i láº¡i trang hoáº·c thá»­ láº¡i sau.</p>
                 </div>
               ) : resolvedItems.length ? (
                 resolvedItems.map((item) => (

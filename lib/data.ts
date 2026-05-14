@@ -6,8 +6,6 @@ import type {
   ProvinceRecord
 } from "@/lib/types";
 
-export { getProductsData } from "@/lib/product-db";
-
 async function readPublicJson<T>(relativePath: string): Promise<T> {
   const absolutePath = path.join(process.cwd(), "public", relativePath);
   const rawData = await readFile(absolutePath, "utf8");
