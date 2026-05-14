@@ -5,7 +5,7 @@ import {
   PRODUCT_IMAGE_ACCEPT,
   PRODUCT_IMAGE_TOTAL_MAX_LABEL,
   PRODUCT_IMAGE_UPLOAD_LIMIT
-} from "@/lib/product-image-upload";
+} from "@/lib/product-utils";
 
 export type AdminProductImageFieldValue = Readonly<{
   id: string;

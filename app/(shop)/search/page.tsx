@@ -3,12 +3,12 @@ import CollectionCatalog from "@/components/catalog/CollectionCatalog";
 import { Breadcrumbs } from "@/components/static/StaticPageShell";
 import {
   CATALOG_PAGE_SIZE,
-  getSearchParamValue,
   sanitizeCatalogPage,
   sanitizeCatalogPriceRange
 } from "@/lib/catalog";
-import { findProductCatalog } from "@/lib/product-detail";
+import { findProductCatalog } from "@/lib/product-db";
 import { HOME_ROUTE } from "@/lib/routes";
+import { formatParamString } from "@/lib/utils";
 
 type SearchPageProps = Readonly<{
   searchParams: Promise<Record<string, string | string[] | undefined>>;
@@ -20,7 +20,7 @@ function getSearchTitle(keyword: string): string {
 
 export async function generateMetadata({ searchParams }: SearchPageProps): Promise<Metadata> {
   const paramsValue = await searchParams;
-  const keyword = getSearchParamValue(paramsValue.keyword);
+  const keyword = formatParamString(paramsValue.keyword);
 
   return {
     title: getSearchTitle(keyword)
@@ -29,9 +29,9 @@ export async function generateMetadata({ searchParams }: SearchPageProps): Promi
 
 export default async function SearchPage({ searchParams }: SearchPageProps) {
   const paramsValue = await searchParams;
-  const keyword = getSearchParamValue(paramsValue.keyword);
-  const initialPriceRange = sanitizeCatalogPriceRange(getSearchParamValue(paramsValue.price));
-  const initialPage = sanitizeCatalogPage(getSearchParamValue(paramsValue.page));
+  const keyword = formatParamString(paramsValue.keyword);
+  const initialPriceRange = sanitizeCatalogPriceRange(formatParamString(paramsValue.price));
+  const initialPage = sanitizeCatalogPage(formatParamString(paramsValue.page));
   const catalogResult = await findProductCatalog({
     keyword,
     page: initialPage,

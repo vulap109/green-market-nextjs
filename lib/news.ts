@@ -1,15 +1,11 @@
-import { resolveAssetPath } from "@/lib/assets";
 import { NEWS_ROUTE } from "@/lib/routes";
+import { formatLowercaseString, formatString } from "@/lib/utils";
 import type { NewsArticle } from "@/lib/types";
 
 export const NEWS_DATA_URL = "/data/news.json";
 
-export function resolveNewsAssetPath(assetPath?: string | null): string {
-  return resolveAssetPath(assetPath);
-}
-
 export function buildNewsDetailUrl(slug?: string | null): string {
-  const nextSlug = String(slug || "").trim();
+  const nextSlug = formatString(slug);
   return nextSlug ? `${NEWS_ROUTE}/${encodeURIComponent(nextSlug)}` : NEWS_ROUTE;
 }
 
@@ -38,12 +34,12 @@ export function findNewsArticle(newsItems: NewsArticle[] = [], slug?: string | n
     return null;
   }
 
-  const requestedSlug = String(slug || "").trim().toLowerCase();
+  const requestedSlug = formatLowercaseString(slug);
   if (!requestedSlug) {
     return newsItems[0] ?? null;
   }
 
   return (
-    newsItems.find((item) => String(item?.slug || "").trim().toLowerCase() === requestedSlug) ?? null
+    newsItems.find((item) => formatLowercaseString(item?.slug) === requestedSlug) ?? null
   );
 }

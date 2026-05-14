@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { resolveNewsAssetPath } from "@/lib/assets";
 import { buildNewsDetailUrl } from "@/lib/news";
+import { resolveAssetPath } from "@/lib/utils";
 import type { NewsArticle } from "@/lib/types";
 
 type NewsCardProps = Readonly<{
@@ -10,7 +10,7 @@ type NewsCardProps = Readonly<{
 
 export default function NewsCard({ article }: NewsCardProps) {
   const articleUrl = buildNewsDetailUrl(article.slug);
-  const imageUrl = resolveNewsAssetPath(article.thumbnail || article.hero) || "/images/news-8-3-thumb.jpg";
+  const imageUrl = resolveAssetPath(article.thumbnail || article.hero) || "/images/news-8-3-thumb.jpg";
   const articleTitle = article.title || "Tin tức";
   const articleDescription = article.description || "";
   const imageAlt = article.thumbnailAlt || article.heroAlt || articleTitle;

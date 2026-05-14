@@ -5,10 +5,10 @@ import { Breadcrumbs } from "@/components/static/StaticPageShell";
 import { getNewsData } from "@/lib/data";
 import {
   buildNewsDetailUrl,
-  resolveNewsAssetPath,
   sortNewsByDateDesc
 } from "@/lib/news";
 import { HOME_ROUTE } from "@/lib/routes";
+import { resolveAssetPath } from "@/lib/utils";
 import type { NewsArticle } from "@/lib/types";
 
 export const metadata: Metadata = {
@@ -20,7 +20,7 @@ function NewsListItem({ article }: Readonly<{ article: NewsArticle }>) {
   const articleUrl = buildNewsDetailUrl(article.slug);
   const articleTitle = article.title || "Tin tức";
   const articleDescription = article.description || "";
-  const imageUrl = resolveNewsAssetPath(article.thumbnail || article.hero) || "/images/news-8-3-thumb.jpg";
+  const imageUrl = resolveAssetPath(article.thumbnail || article.hero) || "/images/news-8-3-thumb.jpg";
   const imageAlt = article.thumbnailAlt || article.heroAlt || articleTitle;
   const author = article.author || "Green Market";
   const dateLabel = article.dateLabel || article.date || "";

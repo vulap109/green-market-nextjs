@@ -1,7 +1,8 @@
-import { resolveAssetPath } from "@/lib/assets";
-import { getProductSalePrice, getProductSlug } from "@/lib/products";
+import { getProductSalePrice } from "@/lib/product-utils";
 import { buildProductDetailUrl } from "@/lib/routes";
-import type { CartItem, ProductRecord, ProductVariantOption, ResolvedCartItem } from "@/lib/types";
+import { formatLowercaseString, formatProductSlug, resolveAssetPath } from "@/lib/utils";
+import type { ProductRecord, ProductVariantOption } from "@/lib/product-types";
+import type { CartItem, ResolvedCartItem } from "@/lib/types";
 
 export const CART_KEY = "cart_v1";
 export const CART_UPDATED_EVENT = "cart:updated";
@@ -42,23 +43,19 @@ export function getCartItemKey(item?: Partial<CartItem> | null): string {
   return `${String(item?.id || "")}::${getCartItemSize(item)}`;
 }
 
-function normalizeCartVariantValue(value?: string | null): string {
-  return String(value || "").trim().toLowerCase();
-}
-
 function getCartItemVariantOption(
   product: ProductRecord | undefined,
   cartItem: CartItem
 ): ProductVariantOption | null {
-  const requestedVariant = normalizeCartVariantValue(cartItem.size);
+  const requestedVariant = formatLowercaseString(cartItem.size);
   if (!requestedVariant || !product?.variantOptions?.length) {
     return null;
   }
 
   const selectedVariant = product.variantOptions.find(
     (option) =>
-      normalizeCartVariantValue(option.label) === requestedVariant ||
-      normalizeCartVariantValue(option.value) === requestedVariant
+      formatLowercaseString(option.label) === requestedVariant ||
+      formatLowercaseString(option.value) === requestedVariant
   );
 
   return selectedVariant || null;
@@ -210,7 +207,7 @@ export function resolveCartItems(
     const name = product?.name || `Sản phẩm #${id}`;
     const sku = String(product?.sku ?? "N/A");
     const image = resolveAssetPath(product?.img) || "/images/sp1.jpg";
-    const productHref = product ? buildProductDetailUrl({ slug: getProductSlug(product) }) : "#";
+    const productHref = product ? buildProductDetailUrl({ slug: formatProductSlug(product) }) : "#";
 
     return {
       cartItem,

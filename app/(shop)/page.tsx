@@ -5,8 +5,8 @@ import NewsCard from "@/components/news/NewsCard";
 import { buildCollectionUrl } from "@/lib/catalog";
 import { getNewsData } from "@/lib/data";
 import { sortHighlightedNews } from "@/lib/news";
-import { findProductByCategory, findProductsByFeatured } from "@/lib/product-detail";
-import type { ProductRecord } from "@/lib/types";
+import { findProductByCategory, findProductsByFeatured } from "@/lib/product-db";
+import type { ProductRecord } from "@/lib/product-types";
 
 const HOME_SHELF_LIMIT = 8;
 

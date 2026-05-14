@@ -6,24 +6,20 @@ import ProductCard from "@/components/catalog/ProductCard";
 import ProductDescription from "@/components/product/ProductDescription";
 import ProductPurchasePanel from "@/components/product/ProductPurchasePanel";
 import { Breadcrumbs } from "@/components/static/StaticPageShell";
-import { resolveAssetPath } from "@/lib/assets";
 import { buildCollectionUrl } from "@/lib/catalog";
 import {
   findProductBySlug,
   getSimilarProducts
-} from "@/lib/product-detail";
-import { getProductCollectionCategory } from "@/lib/products";
+} from "@/lib/product-db";
+import { getProductCollectionCategory } from "@/lib/product-utils";
 import { HOME_ROUTE } from "@/lib/routes";
+import { formatLowercaseString, formatString, resolveAssetPath } from "@/lib/utils";
 
 type ProductPageProps = Readonly<{
   params: Promise<{
     slug: string;
   }>;
 }>;
-
-function getRouteParamValue(value?: string): string {
-  return String(value || "").trim();
-}
 
 function ServiceItem({
   iconClassName,
@@ -46,7 +42,7 @@ function ServiceItem({
 
 export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
   const routeParams = await params;
-  const product = await findProductBySlug(getRouteParamValue(routeParams.slug));
+  const product = await findProductBySlug(formatString(routeParams.slug));
 
   return {
     title: product?.name || "Thông Tin Sản Phẩm"
@@ -55,7 +51,7 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
 
 export default async function ProductPage({ params }: ProductPageProps) {
   const routeParams = await params;
-  const productSlug = getRouteParamValue(routeParams.slug).toLowerCase();
+  const productSlug = formatLowercaseString(routeParams.slug);
 
   if (!productSlug) {
     notFound();

@@ -9,7 +9,7 @@ import {
   type CatalogFilterOption
 } from "@/lib/catalog";
 import { buildProductSearchUrl } from "@/lib/search";
-import type { ProductCatalogResult } from "@/lib/types";
+import type { ProductCatalogResult } from "@/lib/product-types";
 
 type CollectionCatalogProps = Readonly<{
   catalogMode?: "collection" | "search";

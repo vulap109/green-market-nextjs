@@ -1,4 +1,5 @@
 import { COLLECTIONS_ROUTE } from "@/lib/routes";
+import { formatLowercaseString, formatString } from "@/lib/utils";
 
 export type CatalogBanner = {
   desktop: string;
@@ -72,14 +73,6 @@ const productFeaturedCatalogByRouteCategory: Record<string, ProductFeaturedCatal
   }
 };
 
-export function getSearchParamValue(value?: string | string[] | null): string {
-  if (Array.isArray(value)) {
-    return String(value[0] || "").trim();
-  }
-
-  return String(value || "").trim();
-}
-
 export function sanitizeCatalogPage(page?: string | number | null): number {
   const nextPage = Number(page);
   if (!Number.isFinite(nextPage) || nextPage < 1) {
@@ -91,7 +84,7 @@ export function sanitizeCatalogPage(page?: string | number | null): number {
 
 export function getCatalogSubcategoryOptions(category?: string | null): CatalogFilterOption[] {
   return [{ value: "", label: "Tất cả sản phẩm" }].concat(
-    subcategoryFilterByCategory[String(category || "").trim()] || []
+    subcategoryFilterByCategory[formatString(category)] || []
   );
 }
 
@@ -103,7 +96,7 @@ export function sanitizeCatalogSubcategoryValue(
   options: CatalogFilterOption[],
   subcategory?: string | null
 ): string {
-  const requestedSubcategory = String(subcategory || "").trim();
+  const requestedSubcategory = formatString(subcategory);
   if (!requestedSubcategory) {
     return "";
   }
@@ -112,7 +105,7 @@ export function sanitizeCatalogSubcategoryValue(
 }
 
 export function sanitizeCatalogPriceRange(priceRange?: string | null): string {
-  const requestedPriceRange = String(priceRange || "").trim();
+  const requestedPriceRange = formatString(priceRange);
   if (!requestedPriceRange) {
     return "";
   }
@@ -123,11 +116,11 @@ export function sanitizeCatalogPriceRange(priceRange?: string | null): string {
 }
 
 export function getCatalogRouteCategory(category?: string | null): string {
-  return String(category || "").trim().toLowerCase();
+  return formatLowercaseString(category);
 }
 
 export function getCatalogBanner(category?: string | null): CatalogBanner {
-  return bannerImageByCategory[String(category || "").trim()] || defaultBanner;
+  return bannerImageByCategory[formatString(category)] || defaultBanner;
 }
 
 export function getProductFeaturedCatalog(category?: string | null): ProductFeaturedCatalog | null {
@@ -139,8 +132,8 @@ export function getProductFeaturedCatalog(category?: string | null): ProductFeat
 export function buildCollectionUrl(options: CollectionUrlOptions = {}): string {
   const params = new URLSearchParams();
   const requestedCategory = getCatalogRouteCategory(options.category);
-  const requestedSubcategory = String(options.subcategory || "").trim();
-  const requestedPriceRange = String(options.priceRange || "").trim();
+  const requestedSubcategory = formatString(options.subcategory);
+  const requestedPriceRange = formatString(options.priceRange);
   const requestedPage = sanitizeCatalogPage(options.page);
 
   if (requestedSubcategory) {

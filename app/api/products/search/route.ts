@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { findProductsByKeyword } from "@/lib/product-detail";
+import { findProductsByKeyword } from "@/lib/product-db";
 
 const DEFAULT_SEARCH_LIMIT = 4;
 

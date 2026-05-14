@@ -19,7 +19,7 @@ import {
   subscribeNoop,
   subscribeWindowEvents
 } from "@/lib/browser-store";
-import { formatProductMoney } from "@/lib/format";
+import { formatMoney } from "@/lib/utils";
 import {
   buildOrderEmailTemplateParams,
   buildOrderSuccessUrl,
@@ -30,12 +30,12 @@ import {
 } from "@/lib/order";
 import { getEmailJsBrowser } from "@/lib/emailjs-browser";
 import { CART_ROUTE, HOME_ROUTE } from "@/lib/routes";
+import type { ProductRecord } from "@/lib/product-types";
 import type {
   CartItem,
   CheckoutOrder,
   DistrictRecord,
   PaymentMethod,
-  ProductRecord,
   ProvinceRecord,
   ResolvedCartItem,
   WardRecord
@@ -526,7 +526,7 @@ export default function CheckoutPageClient({ addressData, products }: CheckoutPa
                         </div>
                       </div>
                       <span className="whitespace-nowrap text-sm font-semibold text-gray-900">
-                        {formatProductMoney(item.lineTotal)}
+                        {formatMoney(item.lineTotal)}
                       </span>
                     </article>
                   ))
@@ -548,11 +548,11 @@ export default function CheckoutPageClient({ addressData, products }: CheckoutPa
               <div className="mb-6 space-y-3 border-b border-gray-100 pb-6">
                 <div className="flex justify-between text-sm">
                   <span className="font-medium text-gray-600">Tạm tính</span>
-                  <span className="font-semibold">{formatProductMoney(subtotal)}</span>
+                  <span className="font-semibold">{formatMoney(subtotal)}</span>
                 </div>
                 <div className="mt-2 flex items-end justify-between">
                   <span className="text-base font-bold text-gray-800">Tổng</span>
-                  <span className="text-xl font-bold text-red-600">{formatProductMoney(subtotal)}</span>
+                  <span className="text-xl font-bold text-red-600">{formatMoney(subtotal)}</span>
                 </div>
               </div>
 

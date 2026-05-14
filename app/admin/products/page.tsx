@@ -8,8 +8,7 @@ import {
   findAdminProducts,
   getAdminProductCategoryOptions
 } from "@/lib/admin-products";
-import { getSearchParamValue } from "@/lib/catalog";
-import { formatMoney } from "@/lib/format";
+import { formatMoney, formatParamString } from "@/lib/utils";
 
 export const dynamic = "force-dynamic";
 
@@ -31,9 +30,9 @@ function resolveAdminProductFilters(
   searchParams: Record<string, string | string[] | undefined>
 ): AdminProductFilters {
   return {
-    category: getSearchParamValue(searchParams.category),
-    keyword: getSearchParamValue(searchParams.keyword),
-    status: getSearchParamValue(searchParams.status)
+    category: formatParamString(searchParams.category),
+    keyword: formatParamString(searchParams.keyword),
+    status: formatParamString(searchParams.status)
   };
 }
 

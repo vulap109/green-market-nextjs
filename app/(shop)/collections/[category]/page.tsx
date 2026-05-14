@@ -8,17 +8,17 @@ import {
   getCatalogRouteCategory,
   getCatalogBanner,
   getProductFeaturedCatalog,
-  getSearchParamValue,
   sanitizeCatalogPage,
   sanitizeCatalogPriceRange,
   sanitizeCatalogSubcategoryValue
 } from "@/lib/catalog";
 import {
-  type CategoryCatalogRecord,
   findCategoryBySlug,
   findProductCatalog
-} from "@/lib/product-detail";
+} from "@/lib/product-db";
+import type { CategoryCatalogRecord } from "@/lib/product-types";
 import { HOME_ROUTE } from "@/lib/routes";
+import { formatParamString } from "@/lib/utils";
 
 type CategoryPageProps = Readonly<{
   params: Promise<{
@@ -97,10 +97,10 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
   const paramsValue = await searchParams;
   const initialSubcategory = sanitizeCatalogSubcategoryValue(
     catalogContext.subcategoryOptions,
-    getSearchParamValue(paramsValue.subcategory)
+    formatParamString(paramsValue.subcategory)
   );
-  const initialPriceRange = sanitizeCatalogPriceRange(getSearchParamValue(paramsValue.price));
-  const initialPage = sanitizeCatalogPage(getSearchParamValue(paramsValue.page));
+  const initialPriceRange = sanitizeCatalogPriceRange(formatParamString(paramsValue.price));
+  const initialPage = sanitizeCatalogPage(formatParamString(paramsValue.page));
   const catalogResult = await findProductCatalog({
     category: initialSubcategory,
     featured: catalogContext.productFeatured,

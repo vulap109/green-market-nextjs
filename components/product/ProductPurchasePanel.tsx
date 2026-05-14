@@ -3,13 +3,13 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { addToCart } from "@/lib/cart";
-import { formatProductMoney } from "@/lib/format";
+import { formatMoney } from "@/lib/utils";
 import {
   getProductDisplayPricing,
   getSelectedProductVariantOption
-} from "@/lib/product-options";
+} from "@/lib/product-utils";
 import { CART_ROUTE } from "@/lib/routes";
-import type { ProductRecord } from "@/lib/types";
+import type { ProductRecord } from "@/lib/product-types";
 
 type ProductPurchasePanelProps = Readonly<{
   product: ProductRecord;
@@ -102,11 +102,11 @@ export default function ProductPurchasePanel({ product }: ProductPurchasePanelPr
         <div className="mb-6 rounded-lg bg-gray-50 p-4">
           <div className="mb-1 flex items-end gap-3">
             <span className="text-3xl font-black text-red-600">
-              {showContactPrice ? "Liên Hệ" : formatProductMoney(pricing.currentPrice)}
+              {showContactPrice ? "Liên Hệ" : formatMoney(pricing.currentPrice)}
             </span>
             {!showContactPrice && pricing.showOriginalPrice ? (
               <span className="mb-1 text-lg font-medium text-gray-400 line-through">
-                {formatProductMoney(pricing.originalPrice)}
+                {formatMoney(pricing.originalPrice)}
               </span>
             ) : null}
           </div>

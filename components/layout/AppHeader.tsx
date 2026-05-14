@@ -4,18 +4,17 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState, type FormEvent } from "react";
-import { resolveAssetPath } from "@/lib/assets";
 import { CART_UPDATED_EVENT, getCart, getCartCount } from "@/lib/cart";
 import { buildCollectionUrl } from "@/lib/catalog";
-import { formatProductMoney } from "@/lib/format";
 import {
   buildProductDetailUrl,
   CART_ROUTE,
   HOME_ROUTE
 } from "@/lib/routes";
-import { getProductSalePrice, getProductId } from "@/lib/products";
+import { getProductSalePrice, getProductId } from "@/lib/product-utils";
 import { buildProductSearchUrl, HEADER_SEARCH_DEBOUNCE_MS } from "@/lib/search";
-import type { ProductRecord } from "@/lib/types";
+import { formatMoney, resolveAssetPath } from "@/lib/utils";
+import type { ProductRecord } from "@/lib/product-types";
 
 type ProductSearchResponse = {
   items?: ProductRecord[];
@@ -359,7 +358,7 @@ export default function AppHeader() {
                     searchResults.map((product) => {
                       const imageSrc = resolveAssetPath(product.img) || "/images/sp1.jpg";
                       const productName = product.name || "Sản phẩm";
-                      const price = formatProductMoney(getProductSalePrice(product));
+                      const price = formatMoney(getProductSalePrice(product));
                       const productId = getProductId(product);
 
                       return (

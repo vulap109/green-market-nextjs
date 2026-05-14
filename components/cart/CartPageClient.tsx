@@ -20,9 +20,10 @@ import {
   subscribeNoop,
   subscribeWindowEvents
 } from "@/lib/browser-store";
-import { formatProductMoney } from "@/lib/format";
+import { formatMoney } from "@/lib/utils";
 import { CHECKOUT_ROUTE, HOME_ROUTE } from "@/lib/routes";
-import type { CartItem, ProductRecord } from "@/lib/types";
+import type { ProductRecord } from "@/lib/product-types";
+import type { CartItem } from "@/lib/types";
 
 type CartPageClientProps = Readonly<{
   products: ProductRecord[];
@@ -204,12 +205,12 @@ export default function CartPageClient({ products }: CartPageClientProps) {
                             <p className="mt-1 text-xs font-medium text-primary">Phân loại: {item.size}</p>
                           ) : null}
                           <p className="mt-1 text-xs font-medium text-gray-500">
-                            {formatProductMoney(item.unitPrice)}
+                            {formatMoney(item.unitPrice)}
                           </p>
                         </div>
 
                         <div className="flex-shrink-0 text-right">
-                          <p className="font-bold text-gray-900">{formatProductMoney(item.lineTotal)}</p>
+                          <p className="font-bold text-gray-900">{formatMoney(item.lineTotal)}</p>
 
                           <div className="ml-auto mt-3 flex w-[110px] items-center overflow-hidden rounded border border-gray-200">
                             <button
@@ -281,7 +282,7 @@ export default function CartPageClient({ products }: CartPageClientProps) {
                 </h2>
                 <div className="mb-4 flex items-end justify-between border-b border-gray-100 pb-4">
                   <span className="text-sm font-semibold text-gray-700">Tổng tiền:</span>
-                  <span className="text-2xl font-bold text-[#ed1b24]">{formatProductMoney(orderTotal)}</span>
+                  <span className="text-2xl font-bold text-[#ed1b24]">{formatMoney(orderTotal)}</span>
                 </div>
                 <ul className="mb-6 list-disc space-y-1 pl-4 text-xs text-gray-500">
                   <li>Phí vận chuyển sẽ được tính ở trang thanh toán.</li>

@@ -1,6 +1,7 @@
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { cache } from "react";
+import { formatString } from "@/lib/utils";
 
 function createContentUnavailableMarkup(): string {
   return `
@@ -11,7 +12,7 @@ function createContentUnavailableMarkup(): string {
 }
 
 function resolveNewsContentPath(contentFile?: string | null): string | null {
-  const normalizedPath = String(contentFile || "").trim();
+  const normalizedPath = formatString(contentFile);
   if (!normalizedPath) {
     return null;
   }

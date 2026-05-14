@@ -10,6 +10,7 @@ import {
   getAdminProductForEdit,
   updateAdminProduct
 } from "@/lib/admin-products";
+import { formatString } from "@/lib/utils";
 import {
   createAdminProductFormError,
   deleteAdminProductImagesFromBlob,
@@ -37,7 +38,7 @@ async function updateProductAction(
 ): Promise<AdminProductFormState> {
   "use server";
 
-  const productId = String(formData.get("productId") || "").trim();
+  const productId = formatString(formData.get("productId"));
 
   try {
     const identity = getAdminProductIdentityFromFormData(formData);

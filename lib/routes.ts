@@ -1,3 +1,5 @@
+import { formatString } from "@/lib/utils";
+
 type QueryValue = string | number | null | undefined;
 
 export const HOME_ROUTE = "/";
@@ -19,7 +21,7 @@ export function buildUrlWithQuery(pathname: string, query: Record<string, QueryV
   const searchParams = new URLSearchParams();
 
   Object.entries(query).forEach(([key, value]) => {
-    const normalizedValue = String(value ?? "").trim();
+    const normalizedValue = formatString(value);
     if (!normalizedValue) {
       return;
     }
@@ -32,11 +34,11 @@ export function buildUrlWithQuery(pathname: string, query: Record<string, QueryV
 }
 
 export function buildProductDetailUrl(options: Readonly<{ id?: QueryValue; slug?: QueryValue }>): string {
-  const slug = String(options.slug ?? "").trim();
+  const slug = formatString(options.slug);
   if (slug) {
     return `${PRODUCT_ROUTE}/${encodeURIComponent(slug)}`;
   }
 
-  const id = String(options.id ?? "").trim();
+  const id = formatString(options.id);
   return id ? buildUrlWithQuery(PRODUCT_ROUTE, { id }) : PRODUCT_ROUTE;
 }

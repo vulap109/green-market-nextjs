@@ -4,9 +4,9 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { Breadcrumbs } from "@/components/static/StaticPageShell";
-import { resolveNewsAssetPath } from "@/lib/assets";
 import { buildCollectionUrl } from "@/lib/catalog";
 import { HOME_ROUTE, NEWS_ROUTE } from "@/lib/routes";
+import { formatString, resolveAssetPath } from "@/lib/utils";
 import type { NewsArticle } from "@/lib/types";
 
 type FeedbackState = {
@@ -31,7 +31,7 @@ export default function NewsArticleClient({ article, contentHtml }: NewsArticleC
   const articleAuthor = article.author || "Green Market";
   const dateLabel = article.dateLabel || article.date || "";
   const heroImagePath =
-    resolveNewsAssetPath(article.hero || article.thumbnail) || "/images/news-8-3-thumb.jpg";
+    resolveAssetPath(article.hero || article.thumbnail) || "/images/news-8-3-thumb.jpg";
   const heroImageAlt = article.heroAlt || article.thumbnailAlt || articleTitle;
 
   useEffect(() => {
@@ -74,7 +74,7 @@ export default function NewsArticleClient({ article, contentHtml }: NewsArticleC
       }
 
       if (action === "open-catalog") {
-        const category = String(actionElement.dataset.newsCategory || "").trim();
+        const category = formatString(actionElement.dataset.newsCategory);
         router.push(buildCollectionUrl({ category }));
       }
     }

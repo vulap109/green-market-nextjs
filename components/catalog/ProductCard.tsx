@@ -1,10 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
-import { resolveAssetPath } from "@/lib/assets";
-import { formatProductMoney } from "@/lib/format";
-import { getProductDiscount, getProductSalePrice, getProductPrice, getProductSlug } from "@/lib/products";
+import { getProductDiscount, getProductSalePrice, getProductPrice } from "@/lib/product-utils";
 import { buildProductDetailUrl } from "@/lib/routes";
-import type { ProductRecord } from "@/lib/types";
+import { formatMoney, formatProductSlug, resolveAssetPath } from "@/lib/utils";
+import type { ProductRecord } from "@/lib/product-types";
 
 type ProductCardProps = Readonly<{
   product: ProductRecord;
@@ -12,7 +11,7 @@ type ProductCardProps = Readonly<{
 
 export default function ProductCard({ product }: ProductCardProps) {
   const productName = product.name || "Sản phẩm";
-  const productSlug = getProductSlug(product);
+  const productSlug = formatProductSlug(product);
   const productHref = buildProductDetailUrl({ slug: productSlug });
   const salePrice = getProductSalePrice(product);
   const originalPrice = getProductPrice(product);
@@ -59,11 +58,11 @@ export default function ProductCard({ product }: ProductCardProps) {
         <div className="mt-auto">
           <div className="flex flex-wrap items-center justify-center gap-2">
             <span className="text-base font-black text-red-600">
-              {showContactPrice ? "Liên Hệ" : formatProductMoney(salePrice)}
+              {showContactPrice ? "Liên Hệ" : formatMoney(salePrice)}
             </span>
             {!showContactPrice && showOriginalPrice ? (
               <span className="text-xs font-medium text-gray-400 line-through">
-                {formatProductMoney(originalPrice)}
+                {formatMoney(originalPrice)}
               </span>
             ) : null}
           </div>

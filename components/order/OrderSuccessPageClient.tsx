@@ -10,13 +10,12 @@ import {
   subscribeNoop,
   subscribeWindowEvents
 } from "@/lib/browser-store";
-import { formatProductMoney, getPaymentMethodLabel } from "@/lib/format";
+import { formatMoney, getPaymentMethodLabel, getPaymentMethodNote } from "@/lib/utils";
 import {
   BANK_TRANSFER_INFO,
   buildBankTransferContent,
   buildVietQrImageUrl,
   formatOrderDate,
-  getPaymentMethodNote,
   ORDER_SUCCESS_STORAGE_KEY,
   ORDER_SUCCESS_UPDATED_EVENT
 } from "@/lib/order";
@@ -341,11 +340,11 @@ export default function OrderSuccessPageClient({ expectedCode }: OrderSuccessPag
                         <p className="mt-1 text-xs font-medium text-gray-500">Phân loại: {item.size}</p>
                       ) : null}
                       <p className="mt-2 text-sm text-gray-500">
-                        {formatProductMoney(item.unitPrice)} x {item.qty}
+                        {formatMoney(item.unitPrice)} x {item.qty}
                       </p>
                     </div>
                     <p className="shrink-0 text-sm font-bold text-gray-900">
-                      {formatProductMoney(item.lineTotal)}
+                      {formatMoney(item.lineTotal)}
                     </p>
                   </article>
                 ))}
@@ -354,11 +353,11 @@ export default function OrderSuccessPageClient({ expectedCode }: OrderSuccessPag
               <div className="space-y-4 px-6 py-5">
                 <div className="flex items-center justify-between text-sm text-gray-600">
                   <span>Tạm tính</span>
-                  <span className="font-semibold text-gray-900">{formatProductMoney(order.subtotal)}</span>
+                  <span className="font-semibold text-gray-900">{formatMoney(order.subtotal)}</span>
                 </div>
                 <div className="flex items-center justify-between text-sm text-gray-600">
                   <span>Phí vận chuyển</span>
-                  <span className="font-semibold text-gray-900">{formatProductMoney(order.shippingFee)}</span>
+                  <span className="font-semibold text-gray-900">{formatMoney(order.shippingFee)}</span>
                 </div>
                 <div className="border-t border-dashed border-gray-200 pt-4">
                   <div className="flex items-end justify-between gap-3">
@@ -369,7 +368,7 @@ export default function OrderSuccessPageClient({ expectedCode }: OrderSuccessPag
                       </p>
                     </div>
                     <p className="text-3xl font-black tracking-tight text-primary">
-                      {formatProductMoney(order.total)}
+                      {formatMoney(order.total)}
                     </p>
                   </div>
                 </div>
@@ -472,7 +471,7 @@ export default function OrderSuccessPageClient({ expectedCode }: OrderSuccessPag
                   <div className="flex flex-wrap pt-2">
                     <span className="w-[110px] text-sm text-gray-600">Số tiền:</span>
                     <strong className="min-w-[145px] break-all text-base text-gray-900">
-                      {formatProductMoney(order.total)}
+                      {formatMoney(order.total)}
                     </strong>
                     <button
                       type="button"

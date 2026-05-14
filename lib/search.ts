@@ -1,28 +1,18 @@
 import { SEARCH_ROUTE } from "@/lib/routes";
-import type { ProductRecord } from "@/lib/types";
+import { formatSearchText, formatString } from "@/lib/utils";
+import type { ProductRecord } from "@/lib/product-types";
 
 export const HEADER_SEARCH_DEBOUNCE_MS = 500;
-
-export function normalizeSearchText(value: unknown): string {
-  return String(value || "")
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/\u0111/g, "d")
-    .replace(/[^a-z0-9\s-]/g, " ")
-    .replace(/\s+/g, " ")
-    .trim();
-}
 
 export function filterProductsByKeyword(
   products: ProductRecord[] = [],
   keyword?: string | null,
   limit?: number | null
 ): ProductRecord[] {
-  const normalizedKeyword = normalizeSearchText(keyword);
+  const normalizedKeyword = formatSearchText(keyword);
 
   let matches = normalizedKeyword
-    ? products.filter((product) => normalizeSearchText(product?.name).includes(normalizedKeyword))
+    ? products.filter((product) => formatSearchText(product?.name).includes(normalizedKeyword))
     : products.slice();
 
   const maxItems = Number(limit);
@@ -42,8 +32,8 @@ export function buildProductSearchUrl(
   keyword?: string | null,
   options: ProductSearchUrlOptions = {}
 ): string {
-  const trimmedKeyword = String(keyword || "").trim();
-  const requestedPriceRange = String(options.priceRange || "").trim();
+  const trimmedKeyword = formatString(keyword);
+  const requestedPriceRange = formatString(options.priceRange);
   const requestedPage = Math.floor(Number(options.page) || 1);
   const params = new URLSearchParams();
 

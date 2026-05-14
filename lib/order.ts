@@ -1,6 +1,6 @@
-import { getPaymentMethodLabel } from "@/lib/format";
 import { ORDER_SUCCESS_ROUTE } from "@/lib/routes";
-import type { CheckoutOrder, PaymentMethod } from "@/lib/types";
+import { formatString, getPaymentMethodLabel } from "@/lib/utils";
+import type { CheckoutOrder } from "@/lib/types";
 
 export const ORDER_SUCCESS_STORAGE_KEY = "green_market_last_success_order_v1";
 export const ORDER_SUCCESS_UPDATED_EVENT = "order:success-updated";
@@ -63,7 +63,7 @@ export function generateOrderCode(now = new Date()): string {
 }
 
 export function buildOrderSuccessUrl(orderCode?: string | null): string {
-  const nextCode = String(orderCode || "").trim();
+  const nextCode = formatString(orderCode);
   return nextCode ? `${ORDER_SUCCESS_ROUTE}?code=${encodeURIComponent(nextCode)}` : ORDER_SUCCESS_ROUTE;
 }
 
@@ -111,14 +111,8 @@ export function formatOrderDate(value?: string | null): string {
   }).format(date);
 }
 
-export function getPaymentMethodNote(method: PaymentMethod | string): string {
-  return method === "cod"
-    ? "Khách thanh toán khi nhận hàng từ nhân viên giao nhận."
-    : "Vui lòng mở thông tin chuyển khoản và chuyển đúng số tiền, đúng nội dung để shop xác nhận nhanh.";
-}
-
 export function buildBankTransferContent(order?: Partial<CheckoutOrder> | null): string {
-  return String(order?.code || "").trim();
+  return formatString(order?.code);
 }
 
 export function buildVietQrImageUrl(order?: Partial<CheckoutOrder> | null): string {

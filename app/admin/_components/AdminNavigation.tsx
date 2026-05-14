@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { formatPathname } from "@/lib/utils";
 
 type AdminNavItem = Readonly<{
   exact?: boolean;
@@ -35,13 +36,9 @@ const adminNavItems: AdminNavItem[] = [
   }
 ];
 
-function normalizePathname(pathname: string): string {
-  return pathname.replace(/\/+$/, "") || "/";
-}
-
 function isNavItemActive(pathname: string, item: AdminNavItem): boolean {
-  const normalizedPathname = normalizePathname(pathname);
-  const normalizedHref = normalizePathname(item.href);
+  const normalizedPathname = formatPathname(pathname);
+  const normalizedHref = formatPathname(item.href);
 
   if (item.exact) {
     return normalizedPathname === normalizedHref;

@@ -4,6 +4,7 @@ import NewsArticleClient from "@/components/news/NewsArticleClient";
 import { getNewsData } from "@/lib/data";
 import { findNewsArticle } from "@/lib/news";
 import { getNewsArticleContent } from "@/lib/news-content";
+import { formatLowercaseString, formatString } from "@/lib/utils";
 
 type NewsArticlePageProps = Readonly<{
   params: Promise<{
@@ -11,12 +12,8 @@ type NewsArticlePageProps = Readonly<{
   }>;
 }>;
 
-function getRouteParamValue(value?: string): string {
-  return String(value || "").trim();
-}
-
 async function getNewsPageData(slug: string) {
-  const normalizedSlug = getRouteParamValue(slug).toLowerCase();
+  const normalizedSlug = formatLowercaseString(slug);
 
   if (!normalizedSlug) {
     return {
@@ -46,7 +43,7 @@ export async function generateStaticParams() {
   const newsItems = await getNewsData();
 
   return newsItems
-    .map((article) => String(article.slug || "").trim())
+    .map((article) => formatString(article.slug))
     .filter(Boolean)
     .map((slug) => ({ slug }));
 }

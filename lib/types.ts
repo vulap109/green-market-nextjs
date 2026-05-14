@@ -1,29 +1,4 @@
-export type ProductRecord = {
-  category?: string;
-  categoryName?: string;
-  description?: string;
-  discount?: number | string;
-  id?: number | string;
-  img?: string;
-  name?: string;
-  parentCategory?: string;
-  parentCategoryName?: string;
-  price?: number;
-  salePrice?: number;
-  sku?: string;
-  slug?: string;
-  sortOrder?: number;
-  variantOptions?: ProductVariantOption[];
-};
-
-export type ProductVariantOption = {
-  id?: number | string;
-  label: string;
-  price: number;
-  sku?: string;
-  stockQuantity?: number;
-  value: string;
-};
+import type { ProductRecord } from "@/lib/product-types";
 
 export type CartItem = {
   id: string;
@@ -112,14 +87,3 @@ export type ProvinceRecord = {
   Name: string;
 };
 
-export type PageInfo = {
-  currentPage: number;
-  pageSize: number;
-  totalPages: number;
-  totalProducts: number;
-};
-
-export type ProductCatalogResult = {
-  items: ProductRecord[];
-  pageInfo: PageInfo;
-};

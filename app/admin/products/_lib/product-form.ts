@@ -10,7 +10,8 @@ import {
   PRODUCT_IMAGE_TOTAL_MAX_BYTES,
   PRODUCT_IMAGE_TOTAL_MAX_LABEL,
   PRODUCT_IMAGE_UPLOAD_LIMIT
-} from "@/lib/product-image-upload";
+} from "@/lib/product-utils";
+import { formatSlugString, formatString } from "@/lib/utils";
 import type { AdminProductFormState } from "../_components/AdminProductForm";
 
 type AdminProductField = Exclude<keyof AdminCreateProductInput, "images" | "variants">;
@@ -105,7 +106,7 @@ export async function deleteAdminProductImagesFromBlob(
 }
 
 function getFormString(formData: FormData, key: AdminProductField): string {
-  return String(formData.get(key) || "").trim();
+  return formatString(formData.get(key));
 }
 
 function getFormNumber(formData: FormData, key: AdminProductField): number {
@@ -114,7 +115,7 @@ function getFormNumber(formData: FormData, key: AdminProductField): number {
 }
 
 function getNumberFromFormValue(value: FormDataEntryValue | undefined): number {
-  const numberValue = Number(String(value || "").trim());
+  const numberValue = Number(formatString(value));
 
   return Number.isFinite(numberValue) ? numberValue : 0;
 }
@@ -164,12 +165,7 @@ function getFileExtension(file: File): string {
 function getUploadPathname(file: File, index: number): string {
   const extension = getFileExtension(file);
   const fileStem = file.name.replace(/\.[^.]+$/, "");
-  const safeStem =
-    fileStem
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, "-")
-      .replace(/^-+|-+$/g, "")
-      .slice(0, 80) || "product-image";
+  const safeStem = formatSlugString(fileStem).slice(0, 80) || "product-image";
 
   return `products/${Date.now()}-${index + 1}-${safeStem}${extension}`;
 }
@@ -226,9 +222,9 @@ function getProductVariants(formData: FormData): AdminCreateProductInput["varian
     .map((variantName, index) => ({
       price: getNumberFromFormValue(variantPrices[index]),
       salePrice: getNumberFromFormValue(variantSalePrices[index]),
-      status: String(variantStatuses[index] || "active").trim(),
+      status: formatString(variantStatuses[index] || "active"),
       stockQuantity: getNumberFromFormValue(variantStockQuantities[index]),
-      variantName: String(variantName || "").trim()
+      variantName: formatString(variantName)
     }))
     .filter((variant) => variant.variantName);
 }

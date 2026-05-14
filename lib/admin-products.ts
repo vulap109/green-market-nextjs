@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma";
-import { PRODUCT_IMAGE_UPLOAD_LIMIT } from "@/lib/product-image-upload";
+import { PRODUCT_IMAGE_UPLOAD_LIMIT } from "@/lib/product-utils";
+import { formatString } from "@/lib/utils";
 import type { Prisma } from "@/generated/prisma/client";
 
 export const ADMIN_PRODUCTS_LIMIT = 50;
@@ -92,12 +93,8 @@ export type AdminProductEditDetails = Readonly<
   }
 >;
 
-function normalizeAdminFilterValue(value?: string | null): string {
-  return String(value || "").trim();
-}
-
 function parseProductId(productId: string): bigint | null {
-  const normalizedProductId = normalizeAdminFilterValue(productId);
+  const normalizedProductId = formatString(productId);
 
   if (!/^\d+$/.test(normalizedProductId)) {
     return null;
@@ -114,7 +111,7 @@ function normalizeProductVariantStatus(value: string): string {
 
 function normalizeProductVariantSkuSegment(value: string, fallback: string): string {
   return (
-    normalizeAdminFilterValue(value)
+    formatString(value)
       .toUpperCase()
       .replace(/[^A-Z0-9]+/g, "-")
       .replace(/^-+|-+$/g, "")
@@ -132,9 +129,9 @@ function createProductVariantSku(productSKU: string, variantName: string, index:
 
 function buildAdminProductWhere(filters: AdminProductFilters): Prisma.ProductWhereInput {
   const where: Prisma.ProductWhereInput = {};
-  const keyword = normalizeAdminFilterValue(filters.keyword);
-  const status = normalizeAdminFilterValue(filters.status);
-  const category = normalizeAdminFilterValue(filters.category);
+  const keyword = formatString(filters.keyword);
+  const status = formatString(filters.status);
+  const category = formatString(filters.category);
   const andFilters: Prisma.ProductWhereInput[] = [];
 
   if (keyword) {
@@ -395,8 +392,8 @@ export async function getAdminProductForEdit(productId: string): Promise<AdminPr
 export async function findAdminProductIdentityConflict(
   input: Pick<AdminCreateProductInput, "sku" | "slug"> & Readonly<{ excludeProductId?: string }>
 ): Promise<"sku" | "slug" | null> {
-  const sku = normalizeAdminFilterValue(input.sku);
-  const slug = normalizeAdminFilterValue(input.slug);
+  const sku = formatString(input.sku);
+  const slug = formatString(input.slug);
   const excludedProductId = input.excludeProductId ? parseProductId(input.excludeProductId) : null;
   const excludeCurrentProductWhere = excludedProductId
     ? {
@@ -446,8 +443,8 @@ function normalizeProductImages(
   return images
     .slice(0, PRODUCT_IMAGE_UPLOAD_LIMIT)
     .map((image) => ({
-      imageUrl: normalizeAdminFilterValue(image.imageUrl),
-      storageKey: normalizeAdminFilterValue(image.storageKey)
+      imageUrl: formatString(image.imageUrl),
+      storageKey: formatString(image.storageKey)
     }))
     .filter((image) => image.imageUrl);
 }
@@ -461,7 +458,7 @@ function normalizeProductVariants(
       salePrice: variant.salePrice,
       status: normalizeProductVariantStatus(variant.status),
       stockQuantity: variant.stockQuantity,
-      variantName: normalizeAdminFilterValue(variant.variantName).slice(0, 150)
+      variantName: formatString(variant.variantName).slice(0, 150)
     }))
     .filter((variant) => variant.variantName);
 }
