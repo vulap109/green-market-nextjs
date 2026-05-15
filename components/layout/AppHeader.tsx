@@ -412,7 +412,7 @@ export default function AppHeader() {
         <div className="flex shrink-0 items-center gap-4 md:gap-6">
           <button
             type="button"
-            onClick={() => window.alert("Mở tài khoản")}
+            onClick={() => router.push("/login")}
             className="flex items-center gap-2 transition hover:text-primary"
           >
             <i className="fa-regular fa-user text-xl"></i>
