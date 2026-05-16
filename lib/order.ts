@@ -2,8 +2,6 @@ import { ORDER_SUCCESS_ROUTE } from "@/lib/routes";
 import { formatString, getPaymentMethodLabel } from "@/lib/utils";
 import type { CheckoutOrder } from "@/lib/types";
 
-export const ORDER_SUCCESS_STORAGE_KEY = "green_market_last_success_order_v1";
-export const ORDER_SUCCESS_UPDATED_EVENT = "order:success-updated";
 export const EMAILJS_PUBLIC_KEY = "pRg2xzuGVPHOs4IN-";
 export const EMAILJS_SERVICE_ID = "service_fresh_fruit";
 export const EMAILJS_TEMPLATE_ID = "template_tygr3dw";
@@ -18,33 +16,9 @@ export const BANK_TRANSFER_INFO = {
   qrTemplate: "compact"
 } as const;
 
-type StorageLike = Pick<Storage, "getItem" | "setItem">;
-
-function getStorage(storage?: StorageLike | null): StorageLike | null {
-  if (storage) {
-    return storage;
-  }
-
-  if (typeof window === "undefined") {
-    return null;
-  }
-
-  return window.localStorage;
-}
-
-function dispatchOrderSuccessUpdated(order: CheckoutOrder): void {
-  if (typeof window === "undefined") {
-    return;
-  }
-
-  window.dispatchEvent(
-    new CustomEvent(ORDER_SUCCESS_UPDATED_EVENT, {
-      detail: {
-        code: order.code
-      }
-    })
-  );
-}
+type SubmitCheckoutOrderResponse = {
+  message?: string;
+};
 
 export function generateOrderCode(now = new Date()): string {
   const datePart = [
@@ -67,29 +41,29 @@ export function buildOrderSuccessUrl(orderCode?: string | null): string {
   return nextCode ? `${ORDER_SUCCESS_ROUTE}?code=${encodeURIComponent(nextCode)}` : ORDER_SUCCESS_ROUTE;
 }
 
-export function saveSuccessfulOrder(order: CheckoutOrder, storage?: StorageLike | null): void {
-  const targetStorage = getStorage(storage);
-  if (!targetStorage) {
+export async function submitCheckoutOrder(order: CheckoutOrder): Promise<void> {
+  const response = await fetch("/api/orders", {
+    body: JSON.stringify({ order }),
+    headers: {
+      "content-type": "application/json"
+    },
+    method: "POST"
+  });
+
+  if (response.ok) {
     return;
   }
 
-  targetStorage.setItem(ORDER_SUCCESS_STORAGE_KEY, JSON.stringify(order));
-  dispatchOrderSuccessUpdated(order);
-}
-
-export function getStoredSuccessfulOrder(storage?: StorageLike | null): CheckoutOrder | null {
-  const targetStorage = getStorage(storage);
-  if (!targetStorage) {
-    return null;
-  }
+  let message = "Khong luu duoc don hang. Vui long thu lai sau.";
 
   try {
-    const rawValue = targetStorage.getItem(ORDER_SUCCESS_STORAGE_KEY);
-    return rawValue ? (JSON.parse(rawValue) as CheckoutOrder) : null;
-  } catch (error) {
-    console.error("Can not parse success order:", error);
-    return null;
+    const data = (await response.json()) as SubmitCheckoutOrderResponse;
+    message = formatString(data.message) || message;
+  } catch {
+    // Use the default message when the API does not return JSON.
   }
+
+  throw new Error(message);
 }
 
 export function formatOrderDate(value?: string | null): string {

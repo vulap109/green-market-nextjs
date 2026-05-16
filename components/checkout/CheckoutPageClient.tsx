@@ -27,7 +27,7 @@ import {
   EMAILJS_SERVICE_ID,
   EMAILJS_TEMPLATE_ID,
   generateOrderCode,
-  saveSuccessfulOrder
+  submitCheckoutOrder
 } from "@/lib/order";
 import { getEmailJsBrowser } from "@/lib/emailjs-browser";
 import { CART_ROUTE, HOME_ROUTE } from "@/lib/routes";
@@ -303,14 +303,19 @@ export default function CheckoutPageClient({ addressData }: CheckoutPageClientPr
 
     try {
       setIsSubmitting(true);
-      const emailjs = await getEmailJsBrowser();
-      await emailjs.send(
-        EMAILJS_SERVICE_ID,
-        EMAILJS_TEMPLATE_ID,
-        buildOrderEmailTemplateParams(orderPayload)
-      );
+      await submitCheckoutOrder(orderPayload);
 
-      saveSuccessfulOrder(orderPayload);
+      try {
+        const emailjs = await getEmailJsBrowser();
+        await emailjs.send(
+          EMAILJS_SERVICE_ID,
+          EMAILJS_TEMPLATE_ID,
+          buildOrderEmailTemplateParams(orderPayload)
+        );
+      } catch (emailError) {
+        console.error("checkout email error:", emailError);
+      }
+
       clearCart();
       setFormState(defaultFormState);
       setFieldErrors({});
@@ -318,7 +323,10 @@ export default function CheckoutPageClient({ addressData }: CheckoutPageClientPr
     } catch (error) {
       console.error("checkout submit error:", error);
       setFeedback({
-        text: "Đặt hàng thất bại. Vui lòng thử lại sau ít phút hoặc liên hệ hotline để được hỗ trợ.",
+        text:
+          error instanceof Error && error.message
+            ? error.message
+            : "Đặt hàng thất bại. Vui lòng thử lại sau ít phút hoặc liên hệ hotline để được hỗ trợ.",
         tone: "error"
       });
     } finally {

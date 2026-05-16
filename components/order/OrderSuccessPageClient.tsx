@@ -2,22 +2,13 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useMemo, useState, useSyncExternalStore } from "react";
-import {
-  getBrowserReadySnapshot,
-  getLocalStorageSnapshot,
-  getServerReadySnapshot,
-  subscribeNoop,
-  subscribeWindowEvents
-} from "@/lib/browser-store";
+import { useEffect, useMemo, useState } from "react";
 import { formatMoney, getPaymentMethodLabel, getPaymentMethodNote } from "@/lib/utils";
 import {
   BANK_TRANSFER_INFO,
   buildBankTransferContent,
   buildVietQrImageUrl,
-  formatOrderDate,
-  ORDER_SUCCESS_STORAGE_KEY,
-  ORDER_SUCCESS_UPDATED_EVENT
+  formatOrderDate
 } from "@/lib/order";
 import { CART_ROUTE, HOME_ROUTE } from "@/lib/routes";
 import type { CheckoutOrder } from "@/lib/types";
@@ -28,45 +19,13 @@ type FeedbackState = {
 };
 
 type OrderSuccessPageClientProps = Readonly<{
-  expectedCode: string;
+  order: CheckoutOrder | null;
 }>;
 
-function parseOrderSnapshot(snapshot: string, expectedCode: string): CheckoutOrder | null {
-  if (!snapshot) {
-    return null;
-  }
-
-  try {
-    const parsed = JSON.parse(snapshot) as CheckoutOrder | null;
-    if (!parsed?.code) {
-      return null;
-    }
-
-    if (expectedCode && parsed.code !== expectedCode) {
-      return null;
-    }
-
-    return parsed;
-  } catch (error) {
-    console.error("Can not parse success order:", error);
-    return null;
-  }
-}
-
-export default function OrderSuccessPageClient({ expectedCode }: OrderSuccessPageClientProps) {
+export default function OrderSuccessPageClient({ order }: OrderSuccessPageClientProps) {
   const [feedback, setFeedback] = useState<FeedbackState | null>(null);
   const [dismissedBankOrderCode, setDismissedBankOrderCode] = useState("");
   const [isBankModalManuallyOpen, setIsBankModalManuallyOpen] = useState(false);
-  const isHydrated = useSyncExternalStore(subscribeNoop, getBrowserReadySnapshot, getServerReadySnapshot);
-  const orderSnapshot = useSyncExternalStore(
-    (callback) => subscribeWindowEvents([ORDER_SUCCESS_UPDATED_EVENT, "storage"], callback),
-    () => getLocalStorageSnapshot(ORDER_SUCCESS_STORAGE_KEY, ""),
-    () => ""
-  );
-  const order = useMemo(
-    () => parseOrderSnapshot(orderSnapshot, expectedCode),
-    [expectedCode, orderSnapshot]
-  );
   const itemCount = useMemo(
     () => (order?.items || []).reduce((sum, item) => sum + (Number(item.qty) || 0), 0),
     [order]
@@ -144,10 +103,6 @@ export default function OrderSuccessPageClient({ expectedCode }: OrderSuccessPag
 
   function handleOpenBankModal() {
     setIsBankModalManuallyOpen(true);
-  }
-
-  if (!isHydrated) {
-    return <main className="mx-auto max-w-7xl px-4 py-10 text-sm text-gray-500">Đang tải đơn hàng...</main>;
   }
 
   if (!order) {

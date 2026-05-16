@@ -272,6 +272,7 @@ CREATE TABLE IF NOT EXISTS order_item (
     product_name            VARCHAR(255) NOT NULL,
     product_sku             VARCHAR(100),
     unit_price              NUMERIC(12,0) NOT NULL DEFAULT 0,
+    variant                 VARCHAR(100) NOT NULL DEFAULT '',
     quantity                INTEGER NOT NULL CHECK (quantity > 0),
     line_total              NUMERIC(12,0) NOT NULL DEFAULT 0,
     created_at              TIMESTAMPTZ NOT NULL DEFAULT NOW()
